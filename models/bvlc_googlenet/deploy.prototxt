@@ -1,9 +1,28 @@
 name: "GoogleNet"
-input: "data"
-input_dim: 10
-input_dim: 3
-input_dim: 224
-input_dim: 224
+force_backward: true
+
+layer {
+  name: "data"
+  type: "MemoryData"
+  top: "data"
+  top: "label"
+
+  # memory_data_param added by yq
+  memory_data_param {
+    batch_size: 1
+    channels: 3
+    height: 224
+    width: 224
+  }
+}
+
+
+#input: "data"
+#input_dim: 1
+#input_dim: 3
+#input_dim: 224
+#input_dim: 224
+
 layer {
   name: "conv1/7x7_s2"
   type: "Convolution"
@@ -2153,4 +2172,11 @@ layer {
   type: "Softmax"
   bottom: "loss3/classifier"
   top: "prob"
+}
+layer {
+  name: "loss"
+  type: "SoftmaxWithLoss"
+  bottom: "loss3/classifier"
+  bottom: "label"
+  top: "loss"
 }

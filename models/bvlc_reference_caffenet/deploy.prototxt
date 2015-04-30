@@ -1,9 +1,28 @@
 name: "CaffeNet"
+
+force_backward: true
+
+#layer {
+#  name: "data"
+#  type: "Data"
+#  top: "data"
+#  top: "label"
+#}
+
+
 input: "data"
-input_dim: 10
+input_dim: 1
 input_dim: 3
 input_dim: 227
 input_dim: 227
+
+input: "label" # added
+input_dim: 1   # added
+input_dim: 1   # added
+input_dim: 1   # added
+input_dim: 1   # added
+
+
 layer {
   name: "conv1"
   type: "Convolution"
@@ -206,7 +225,9 @@ layer {
 }
 layer {
   name: "prob"
+  #type: "SoftmaxWithLoss"
   type: "Softmax"
   bottom: "fc8"
+  #bottom: "label"
   top: "prob"
 }

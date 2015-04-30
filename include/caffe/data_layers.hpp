@@ -244,6 +244,36 @@ class ImageDataLayer : public BasePrefetchingDataLayer<Dtype> {
   int lines_id_;
 };
 
+// HYQ
+template <typename Dtype>
+class ImageDataMultLabelLayer : public BasePrefetchingDataLayer<Dtype> {
+ public:
+  explicit ImageDataMultLabelLayer(const LayerParameter& param)
+      : BasePrefetchingDataLayer<Dtype>(param) {}
+  virtual ~ImageDataMultLabelLayer();
+  virtual void DataLayerSetUp(const vector<Blob<Dtype>*>& bottom,
+      const vector<Blob<Dtype>*>& top);
+
+  virtual inline const char* type() const { return "ImageDataMultLabel"; }
+  virtual inline int ExactNumBottomBlobs() const { return 0; }
+  //virtual inline int ExactNumTopBlobs() const { return 2; }
+
+  // HYQ
+  // we top to at least a data blob
+  // also a runtime-determined number of label blobs
+  virtual inline int MinTopBlobs() const { return 1; }
+  virtual inline int MaxTopBlobs() const { return 100; }
+  // end HYQ
+
+ protected:
+  shared_ptr<Caffe::RNG> prefetch_rng_;
+  virtual void ShuffleImages();
+  virtual void InternalThreadEntry();
+
+  vector<std::pair<std::string, int> > lines_;
+  int lines_id_;
+};
+
 /**
  * @brief Provides data to the Net from memory.
  *
