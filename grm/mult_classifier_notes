@@ -1,0 +1,75 @@
+
+What hasn't been done:
+- saree not added
+- class imbalance not adjusted
+- not much cleaning
+  - pattern: all the printed things
+  - occasion: I think the current values under the occasion attribute are
+    somewhat non-sensical
+
+What has been done 
+- a new multi-classifier network architecture
+- a new input data layer for the new arch
+
+
+The new arch exists in: models/yq_fk1/train_val.prototxt
+
+=======================================
+multi-classifier network arch
+=======================================
+The new network arch is like this:
+
+input layer
+-> layer 1 
+-> layer 2 
+-> l3 
+-> l4 
+-> l5 
+-> fc6 
+-> fc7 
+->   (fc8_category -> loss_category)
+     (fc8_pattern  -> loss_pattern)
+     (fc8_git      -> loss_fit)
+     (fc8_sleeve   -> loss_sleeve)
+     ... one per supported attribute
+
+=======================================
+new input layer
+=======================================
+The input layer is now ImageDataMultLabelLayer. It's similar to ImageDataLayer,
+but instead of accepting a single label per sample, it accepts a variable number
+of labels. 
+
+For example, below is the our input layer definition (in models/yq_fk1)
+
+layer {
+  name: "data"
+  type: "ImageDataMultLabel"
+  top: "data"
+  top: "label_category"
+  top: "label_pattern"
+  top: "label_neck"
+  top: "label_sleeve"
+  top: "label_fit"
+  top: "label_ideal_for"
+  top: "label_occasion"
+  include {
+    phase: TRAIN
+  }
+  transform_param {
+    mirror: true
+    crop_size: 227
+    mean_file: "data/ilsvrc12/imagenet_mean.binaryproto"
+  }
+  image_data_mult_label_param {
+    source: "/mnt/images/training/flipkart_yq2set/train.txt"
+    #source: "/home/noid/grm/data/flipkart/train.txt"
+    batch_size: 50
+    new_height: 256
+    new_width: 256
+  }
+}
+
+As you can see, it's one top per extra label. And here's an example line in
+train.txt:
+/mnt/images/training/flipkart_yq2set/all/nmjnra1033sapphire-numero-uno-32-400x400-imadr5yya8sxvzgc.jpeg 24 14 0 0 0 5 0
