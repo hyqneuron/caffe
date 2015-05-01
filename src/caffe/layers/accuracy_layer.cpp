@@ -19,6 +19,7 @@ void AccuracyLayer<Dtype>::LayerSetUp(
     this->layer_param_.accuracy_param().has_ignore_label();
   if (has_ignore_label_) {
     ignore_label_ = this->layer_param_.accuracy_param().ignore_label();
+    LOG(INFO)<<"accuracy has ignore_label: " << ignore_label_;//HYQ
   }
 }
 

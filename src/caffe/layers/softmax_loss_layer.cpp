@@ -26,6 +26,7 @@ void SoftmaxWithLossLayer<Dtype>::LayerSetUp(
     this->layer_param_.loss_param().has_ignore_label();
   if (has_ignore_label_) {
     ignore_label_ = this->layer_param_.loss_param().ignore_label();
+    LOG(INFO)<<"loss has ignore_label: " << ignore_label_;//HYQ
   }
   normalize_ = this->layer_param_.loss_param().normalize();
 }
