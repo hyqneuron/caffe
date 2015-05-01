@@ -19,8 +19,8 @@ layer {
     mean_file: "data/ilsvrc12/imagenet_mean.binaryproto"
   }
   image_data_mult_label_param {
-    #source: "/mnt/images/training/flipkart_yq2set/train.txt"
-    source: "/home/noid/grm/data/flipkart/train.txt"
+    source: "/mnt/images/training/flipkart_yq2set/train.txt"
+    #source: "/home/noid/grm/data/flipkart/train.txt"
     batch_size: 50
     new_height: 256
     new_width: 256
@@ -46,8 +46,8 @@ layer {
     mean_file: "data/ilsvrc12/imagenet_mean.binaryproto"
   }
   image_data_mult_label_param {
-    #source: "/mnt/images/training/flipkart_yq2set/test.txt"
-    source: "/home/noid/grm/data/flipkart/test.txt"
+    source: "/mnt/images/training/flipkart_yq2set/test.txt"
+    #source: "/home/noid/grm/data/flipkart/test.txt"
     batch_size: 50
     new_height: 256
     new_width: 256
@@ -373,7 +373,7 @@ layer {
     decay_mult: 0
   }
   inner_product_param {
-    num_output: 20
+    num_output: 26
     weight_filler {
       type: "gaussian"
       std: 0.01
@@ -459,7 +459,7 @@ layer {
     decay_mult: 0
   }
   inner_product_param {
-    num_output: 20
+    num_output: 23
     weight_filler {
       type: "gaussian"
       std: 0.01
@@ -502,7 +502,7 @@ layer {
     decay_mult: 0
   }
   inner_product_param {
-    num_output: 20
+    num_output: 9
     weight_filler {
       type: "gaussian"
       std: 0.01
@@ -545,7 +545,7 @@ layer {
     decay_mult: 0
   }
   inner_product_param {
-    num_output: 20
+    num_output: 26
     weight_filler {
       type: "gaussian"
       std: 0.01
@@ -588,7 +588,7 @@ layer {
     decay_mult: 0
   }
   inner_product_param {
-    num_output: 20
+    num_output: 7
     weight_filler {
       type: "gaussian"
       std: 0.01
@@ -631,7 +631,7 @@ layer {
     decay_mult: 0
   }
   inner_product_param {
-    num_output: 20
+    num_output: 38
     weight_filler {
       type: "gaussian"
       std: 0.01
