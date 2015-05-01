@@ -40,13 +40,12 @@ void ImageDataMultLabelLayer<Dtype>::DataLayerSetUp(const vector<Blob<Dtype>*>& 
   //int label;
   //while (infile >> filename >> label) {
   while (infile >> filename ) {
-    int label_id = 0;
     vector<int> labels;
     labels.resize(num_labels_);
-    while(label_id++ < num_labels_){
-        int label;
-        infile >> label;
-        labels.push_back(label);
+    for(int label_id = 0; label_id<num_labels_; label_id++){
+      int label;
+      infile >> label;
+      labels[label_id]=label;
     }
     lines_.push_back(std::make_pair(filename, labels));
   }
@@ -59,6 +58,9 @@ void ImageDataMultLabelLayer<Dtype>::DataLayerSetUp(const vector<Blob<Dtype>*>& 
     ShuffleImages();
   }
   LOG(INFO) << "A total of " << lines_.size() << " images.";
+  LOG(INFO) << "Last sample being: " << lines_.back().first;
+  for(int label_id = 0; label_id<num_labels_; label_id++)
+    LOG(INFO) << "Label: " << lines_.back().second[label_id];
 
   lines_id_ = 0;
   // Check if we would need to randomly skip a few data points
