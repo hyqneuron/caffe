@@ -24,6 +24,7 @@ void ImageDataMultLabelLayer<Dtype>::Forward_gpu(
       caffe_copy(prefetch_labels_[label_id]->count(), 
                  prefetch_labels_[label_id]->cpu_data(),
                  top[1+label_id]->mutable_gpu_data());
+    }
   }
   BasePrefetchingDataLayer<Dtype>::CreatePrefetchThread();
 }
