@@ -29,7 +29,7 @@ void ImageDataMultLabelLayer<Dtype>::Forward_gpu(
   BasePrefetchingDataLayer<Dtype>::CreatePrefetchThread();
 }
 
-INSTANTIATE_LAYER_GPU_FORWARD(BasePrefetchingDataLayer);
+INSTANTIATE_LAYER_GPU_FORWARD(ImageDataMultLabelLayer);
 
 }  // namespace caffe
 /*
