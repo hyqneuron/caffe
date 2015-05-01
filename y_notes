@@ -1,0 +1,87 @@
+
+TODO
+- get gradient with respect to pixel input
+  - we already have derivative wrt conv1's output
+  - how to get back to input?
+    that is, how to get conv1 to compute gradient for bottom?
+  - how is need_backward computed?
+    - if one of its bottom blobs have need_backward
+    - if one of its params blobs have non-zero lr
+  - who computes diff?
+    - a layer's Backward() gets top_diff
+    - computes 
+      - param_diff: depend on Layer.param_propagate_down[]
+      - bottom_diff: depend on Net.bottom_need_backward_[]
+        Net.bottom_need_backward_[bottom_layer_id] is set by AppendBottom, to
+        the same value as Net.blob_need_backward_[bottom_layer_id]
+            
+  - How to get data.diff from conv1?
+    - change conv1.propagate_down[0]=true
+      - it is actually net.bottom_need_backward_
+      - which is taken from blob_need_backward_
+      - We directly set net.bottom_need_backward_
+- try NIN
+
+footprint
+NIN
+- 900MB
+- accu: 198569701
+- 17.10 sec
+GoogLeNet
+- 4GB
+- accu: 1056115200
+- 44.43 sec
+CaffeNet
+- 700MB
+- accu: 104957201
+- 14.54 sec
+
+NIN
+- 60MB
+- accu: 1985698
+- 0.249 sec
+GoogLeNet
+- 100MB
+- accu: 10561152
+- 0.510 sec
+CaffeNet
+- 260MB
+- accu: 1049573
+- 0.291 sec
+
+Code structure
+
+python
+- _caffe.cpp: 
+  - Net, Blob, Layer, Solver, LayerParameter, misc
+  - Net
+    - _forward(), _backward(), reshape()
+    - copy_from(), share_with(), 
+    - _blobs, layers, _blob_names, _layer_names, _inputs, _outputs
+- pycaffe.py: 
+  - Decorates Net's interface
+    Both Net and SGDSolver are imported from _caffe.cpp
+  - Net
+    - blobs, params, inputs, outputs
+    - forward(), backward(), forward_all(), forward_backward_all()
+    - set_input_arrays()
+- classifier.py: Classifier
+- detector.py:   Detector
+
+cpp
+- caffe/net.cpp
+  - Init() creates a net, sets up blobs, connections and weights
+    AppendTop() is where all blobs are created.
+    They start with input blobs, then go through the layers one by one
+        when they go through a layer, the layer has already been created by
+        previous AppendTop, so they start with the layer's AppendBottom, then
+        the layer's AppendTop
+
+src
+
+include
+
+
+Question1: How does caffe figure out parameter size for each layer?
+Answer: Layer.LayerSetUp sets up layer.blobs_ and fills them
+
