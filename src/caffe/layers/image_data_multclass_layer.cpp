@@ -32,13 +32,23 @@ void ImageDataMultLabelLayer<Dtype>::DataLayerSetUp(const vector<Blob<Dtype>*>& 
       (new_height > 0 && new_width > 0)) << "Current implementation requires "
       "new_height and new_width to be set at the same time.";
   // Read the file with filenames and labels
+  num_labels_ = top.size()-1;
   const string& source = this->layer_param_.image_data_mult_label_param().source();
   LOG(INFO) << "Opening file " << source;
   std::ifstream infile(source.c_str());
   string filename;
-  int label;
-  while (infile >> filename >> label) {
-    lines_.push_back(std::make_pair(filename, label));
+  //int label;
+  //while (infile >> filename >> label) {
+  while (infile >> filename ) {
+    int label_id = 0;
+    vector<int> labels;
+    labels.resize(num_labels_);
+    while(label_id++ < num_labels_){
+        int label;
+        infile >> label;
+        labels.push_back(label);
+    }
+    lines_.push_back(std::make_pair(filename, labels));
   }
 
   if (this->layer_param_.image_data_mult_label_param().shuffle()) {
@@ -60,6 +70,9 @@ void ImageDataMultLabelLayer<Dtype>::DataLayerSetUp(const vector<Blob<Dtype>*>& 
     lines_id_ = skip;
   }
   // Read an image, and use it to initialize the top blob.
+  LOG(INFO) << "##############################################";
+  LOG(INFO) << "##############################################";
+  LOG(INFO) << "size of top: " << top.size();
   cv::Mat cv_img = ReadImageToCVMat(root_folder + lines_[lines_id_].first,
                                     new_height, new_width, is_color);
   const int channels = cv_img.channels();
@@ -81,8 +94,18 @@ void ImageDataMultLabelLayer<Dtype>::DataLayerSetUp(const vector<Blob<Dtype>*>& 
       << top[0]->channels() << "," << top[0]->height() << ","
       << top[0]->width();
   // label
+  LOG(INFO) << "number of labels: " << num_labels_;
   vector<int> label_shape(1, batch_size);
-  top[1]->Reshape(label_shape);
+  // we reshape each top blob
+  // also build one prefetch buffer in prefetch_labels_ for each label
+  prefetch_labels_.resize(num_labels_);
+  for(int label_id = 0; label_id < num_labels_; label_id++){
+    top[label_id+1]->Reshape(label_shape);
+    //Blob<Dtype> prefetch_label_blob;
+    prefetch_labels_[label_id].reset(new Blob<Dtype>());
+    prefetch_labels_[label_id]->Reshape(label_shape);
+  }
+  // prefetch_label is no used by us
   this->prefetch_label_.Reshape(label_shape);
 }
 
@@ -93,6 +116,56 @@ void ImageDataMultLabelLayer<Dtype>::ShuffleImages() {
   shuffle(lines_.begin(), lines_.end(), prefetch_rng);
 }
 
+// HYQ adapted from BasePrefetchingDataLayer
+template <typename Dtype>
+void ImageDataMultLabelLayer<Dtype>::LayerSetUp(
+    const vector<Blob<Dtype>*>& bottom, const vector<Blob<Dtype>*>& top) {
+  BaseDataLayer<Dtype>::LayerSetUp(bottom, top);
+  // Now, start the prefetch thread. Before calling prefetch, we make two
+  // cpu_data calls so that the prefetch thread does not accidentally make
+  // simultaneous cudaMalloc calls when the main thread is running. In some
+  // GPUs this seems to cause failures if we do not so.
+  this->prefetch_data_.mutable_cpu_data();
+  if (this->output_labels_) {
+    this->prefetch_label_.mutable_cpu_data();
+    // HYQ seems below is not absolutely necessary. added to be safe
+    for(int label_id = 0; label_id < num_labels_; label_id++)
+        prefetch_labels_[label_id]->mutable_cpu_data();
+  }
+  DLOG(INFO) << "Initializing prefetch";
+  this->CreatePrefetchThread();
+  DLOG(INFO) << "Prefetch initialized.";
+}
+
+// HYQ adapted from BasePrefetchingDataLayer
+template <typename Dtype>
+void ImageDataMultLabelLayer<Dtype>::Forward_cpu(
+    const vector<Blob<Dtype>*>& bottom, const vector<Blob<Dtype>*>& top) {
+  // First, join the thread
+  BasePrefetchingDataLayer<Dtype>::JoinPrefetchThread();
+  DLOG(INFO) << "Thread joined";
+  // Reshape to loaded data.
+  top[0]->Reshape(this->prefetch_data_.num(), this->prefetch_data_.channels(),
+      this->prefetch_data_.height(), this->prefetch_data_.width());
+  // Copy the data
+  caffe_copy(this->prefetch_data_.count(), this->prefetch_data_.cpu_data(),
+             top[0]->mutable_cpu_data());
+  DLOG(INFO) << "Prefetch copied";
+  if (this->output_labels_) {
+    // HYQ
+    //caffe_copy(prefetch_label_.count(), 
+    //           prefetch_label_.cpu_data(),
+    //           top[1]->mutable_cpu_data());
+    for(int label_id = 0; label_id < num_labels_; label_id++){
+      caffe_copy(prefetch_labels_[label_id]->count(), 
+                 prefetch_labels_[label_id]->cpu_data(),
+                 top[1+label_id]->mutable_cpu_data());
+    }
+  }
+  // Start a new prefetch thread
+  DLOG(INFO) << "CreatePrefetchThread";
+  BasePrefetchingDataLayer<Dtype>::CreatePrefetchThread();
+}
 // This function is used to create a thread that prefetches the data.
 template <typename Dtype>
 void ImageDataMultLabelLayer<Dtype>::InternalThreadEntry() {
@@ -122,7 +195,10 @@ void ImageDataMultLabelLayer<Dtype>::InternalThreadEntry() {
   }
 
   Dtype* prefetch_data = this->prefetch_data_.mutable_cpu_data();
-  Dtype* prefetch_label = this->prefetch_label_.mutable_cpu_data();
+  //Dtype* prefetch_label= this->prefetch_label_.mutable_cpu_data();
+  vector<Dtype*> prefetch_labels;
+  for(int label_id=0; label_id<num_labels_; label_id++)
+      prefetch_labels.push_back(this->prefetch_labels_[label_id]->mutable_cpu_data());
 
   // datum scales
   const int lines_size = lines_.size();
@@ -141,7 +217,10 @@ void ImageDataMultLabelLayer<Dtype>::InternalThreadEntry() {
     this->data_transformer_->Transform(cv_img, &(this->transformed_data_));
     trans_time += timer.MicroSeconds();
 
-    prefetch_label[item_id] = lines_[lines_id_].second;
+    //prefetch_label[item_id] = lines_[lines_id_].second;
+    vector<int> labels = lines_[lines_id_].second;
+    for(int label_id=0; label_id<num_labels_; label_id++)
+        prefetch_labels[label_id][item_id] = labels[label_id];
     // go to the next iter
     lines_id_++;
     if (lines_id_ >= lines_size) {

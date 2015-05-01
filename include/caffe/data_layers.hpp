@@ -62,7 +62,7 @@ class BasePrefetchingDataLayer :
   // LayerSetUp: implements common data layer setup functionality, and calls
   // DataLayerSetUp to do special data layer setup for individual layer types.
   // This method may not be overridden.
-  void LayerSetUp(const vector<Blob<Dtype>*>& bottom,
+  virtual void LayerSetUp(const vector<Blob<Dtype>*>& bottom,
       const vector<Blob<Dtype>*>& top);
 
   virtual void Forward_cpu(const vector<Blob<Dtype>*>& bottom,
@@ -256,13 +256,19 @@ class ImageDataMultLabelLayer : public BasePrefetchingDataLayer<Dtype> {
 
   virtual inline const char* type() const { return "ImageDataMultLabel"; }
   virtual inline int ExactNumBottomBlobs() const { return 0; }
-  //virtual inline int ExactNumTopBlobs() const { return 2; }
+  virtual inline int ExactNumTopBlobs() const { return -1; }
 
   // HYQ
   // we top to at least a data blob
   // also a runtime-determined number of label blobs
   virtual inline int MinTopBlobs() const { return 1; }
   virtual inline int MaxTopBlobs() const { return 100; }
+  virtual void LayerSetUp(
+      const vector<Blob<Dtype>*>& bottom,
+      const vector<Blob<Dtype>*>& top);
+  virtual void Forward_cpu(
+      const vector<Blob<Dtype>*>& bottom,
+      const vector<Blob<Dtype>*>& top);
   // end HYQ
 
  protected:
@@ -270,8 +276,10 @@ class ImageDataMultLabelLayer : public BasePrefetchingDataLayer<Dtype> {
   virtual void ShuffleImages();
   virtual void InternalThreadEntry();
 
-  vector<std::pair<std::string, int> > lines_;
+  vector<std::pair<std::string, vector<int> > > lines_;
   int lines_id_;
+  int num_labels_;
+  vector<shared_ptr<Blob<Dtype> > > prefetch_labels_;
 };
 
 /**
