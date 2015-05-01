@@ -56,7 +56,7 @@ void SoftmaxWithLossLayer<Dtype>::Forward_gpu(
     loss = count==0? 0 : loss / count;
     //loss /= count;
   } else {
-    loss = outer_num==0? 0 : loss / outer_num_;
+    loss = outer_num_==0? 0 : loss / outer_num_;
     //loss /= outer_num_;
   }
   top[0]->mutable_cpu_data()[0] = loss;
