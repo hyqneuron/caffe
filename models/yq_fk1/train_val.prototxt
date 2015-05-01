@@ -432,6 +432,9 @@ layer {
   type: "SoftmaxWithLoss"
   bottom: "fc8_pattern"
   bottom: "label_pattern"
+  loss_param {
+      ignore_label: 0
+  }
 }
 layer {
   name: "accuracy_pattern"
@@ -441,6 +444,9 @@ layer {
   top: "accuracy_pattern"
   include {
     phase: TEST
+  }
+  accuracy_param {
+      ignore_label: 0
   }
 }
 ####neck
@@ -475,6 +481,9 @@ layer {
   type: "SoftmaxWithLoss"
   bottom: "fc8_neck"
   bottom: "label_neck"
+  loss_param {
+      ignore_label: 0
+  }
 }
 layer {
   name: "accuracy_neck"
@@ -484,6 +493,9 @@ layer {
   top: "accuracy_neck"
   include {
     phase: TEST
+  }
+  accuracy_param {
+      ignore_label: 0
   }
 }
 ####sleeve
@@ -518,6 +530,9 @@ layer {
   type: "SoftmaxWithLoss"
   bottom: "fc8_sleeve"
   bottom: "label_sleeve"
+  loss_param {
+      ignore_label: 0
+  }
 }
 layer {
   name: "accuracy_sleeve"
@@ -527,6 +542,9 @@ layer {
   top: "accuracy_sleeve"
   include {
     phase: TEST
+  }
+  accuracy_param {
+      ignore_label: 0
   }
 }
 ####fit
@@ -561,6 +579,9 @@ layer {
   type: "SoftmaxWithLoss"
   bottom: "fc8_fit"
   bottom: "label_fit"
+  loss_param {
+      ignore_label: 0
+  }
 }
 layer {
   name: "accuracy_fit"
@@ -570,6 +591,9 @@ layer {
   top: "accuracy_fit"
   include {
     phase: TEST
+  }
+  accuracy_param {
+      ignore_label: 0
   }
 }
 ####idea_for
@@ -604,6 +628,9 @@ layer {
   type: "SoftmaxWithLoss"
   bottom: "fc8_ideal_for"
   bottom: "label_ideal_for"
+  loss_param {
+      ignore_label: 0
+  }
 }
 layer {
   name: "accuracy_ideal_for"
@@ -613,6 +640,9 @@ layer {
   top: "accuracy_ideal_for"
   include {
     phase: TEST
+  }
+  accuracy_param {
+      ignore_label: 0
   }
 }
 ####occasion
@@ -647,6 +677,9 @@ layer {
   type: "SoftmaxWithLoss"
   bottom: "fc8_occasion"
   bottom: "label_occasion"
+  loss_param {
+      ignore_label: 0
+  }
 }
 layer {
   name: "accuracy_occasion"
@@ -656,5 +689,8 @@ layer {
   top: "accuracy_occasion"
   include {
     phase: TEST
+  }
+  accuracy_param {
+      ignore_label: 0
   }
 }
