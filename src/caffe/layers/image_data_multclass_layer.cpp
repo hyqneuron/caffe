@@ -218,8 +218,8 @@ void ImageDataMultLabelLayer<Dtype>::InternalThreadEntry() {
     this->transformed_data_.set_cpu_data(prefetch_data + offset);
     this->data_transformer_->Transform(cv_img, &(this->transformed_data_));
     trans_time += timer.MicroSeconds();
-    LOG(INFO) << "lines_id_: "<< lines_id_;
-    LOG(INFO) << "file: "<< lines_[lines_id_].first;
+    //LOG(INFO) << "lines_id_: "<< lines_id_;
+    //LOG(INFO) << "file: "<< lines_[lines_id_].first;
 
     //prefetch_label[item_id] = lines_[lines_id_].second;
     vector<int> labels = lines_[lines_id_].second;
