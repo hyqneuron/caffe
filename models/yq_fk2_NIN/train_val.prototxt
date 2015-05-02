@@ -52,10 +52,14 @@ layer {
   type: "Convolution"
   bottom: "data"
   top: "conv1"
-  blobs_lr: 1
-  blobs_lr: 2
-  weight_decay: 1
-  weight_decay: 0
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
+  param {
+    lr_mult: 2
+    decay_mult: 0
+  }
   convolution_param {
     num_output: 96
     kernel_size: 11
@@ -82,10 +86,14 @@ layer {
   type: "Convolution"
   bottom: "conv1"
   top: "cccp1"
-  blobs_lr: 1
-  blobs_lr: 2
-  weight_decay: 1
-  weight_decay: 0
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
+  param {
+    lr_mult: 2
+    decay_mult: 0
+  }
   convolution_param {
     num_output: 96
     kernel_size: 1
@@ -112,10 +120,14 @@ layer {
   type: "Convolution"
   bottom: "cccp1"
   top: "cccp2"
-  blobs_lr: 1
-  blobs_lr: 2
-  weight_decay: 1
-  weight_decay: 0
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
+  param {
+    lr_mult: 2
+    decay_mult: 0
+  }
   convolution_param {
     num_output: 96
     kernel_size: 1
@@ -153,10 +165,14 @@ layer {
   type: "Convolution"
   bottom: "pool0"
   top: "conv2"
-  blobs_lr: 1
-  blobs_lr: 2
-  weight_decay: 1
-  weight_decay: 0
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
+  param {
+    lr_mult: 2
+    decay_mult: 0
+  }
   convolution_param {
     num_output: 256
     pad: 2
@@ -184,10 +200,14 @@ layer {
   type: "Convolution"
   bottom: "conv2"
   top: "cccp3"
-  blobs_lr: 1
-  blobs_lr: 2
-  weight_decay: 1
-  weight_decay: 0
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
+  param {
+    lr_mult: 2
+    decay_mult: 0
+  }
   convolution_param {
     num_output: 256
     kernel_size: 1
@@ -214,10 +234,14 @@ layer {
   type: "Convolution"
   bottom: "cccp3"
   top: "cccp4"
-  blobs_lr: 1
-  blobs_lr: 2
-  weight_decay: 1
-  weight_decay: 0
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
+  param {
+    lr_mult: 2
+    decay_mult: 0
+  }
   convolution_param {
     num_output: 256
     kernel_size: 1
@@ -255,10 +279,14 @@ layer {
   type: "Convolution"
   bottom: "pool2"
   top: "conv3"
-  blobs_lr: 1
-  blobs_lr: 2
-  weight_decay: 1
-  weight_decay: 0
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
+  param {
+    lr_mult: 2
+    decay_mult: 0
+  }
   convolution_param {
     num_output: 384
     pad: 1
@@ -286,10 +314,14 @@ layer {
   type: "Convolution"
   bottom: "conv3"
   top: "cccp5"
-  blobs_lr: 1
-  blobs_lr: 2
-  weight_decay: 1
-  weight_decay: 0
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
+  param {
+    lr_mult: 2
+    decay_mult: 0
+  }
   convolution_param {
     num_output: 384
     kernel_size: 1
@@ -316,10 +348,14 @@ layer {
   type: "Convolution"
   bottom: "cccp5"
   top: "cccp6"
-  blobs_lr: 1
-  blobs_lr: 2
-  weight_decay: 1
-  weight_decay: 0
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
+  param {
+    lr_mult: 2
+    decay_mult: 0
+  }
   convolution_param {
     num_output: 384
     kernel_size: 1
@@ -366,10 +402,14 @@ layer {
   type: "Convolution"
   bottom: "pool3"
   top: "conv4"
-  blobs_lr: 1
-  blobs_lr: 2
-  weight_decay: 1
-  weight_decay: 0
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
+  param {
+    lr_mult: 2
+    decay_mult: 0
+  }
   convolution_param {
     num_output: 1024
     pad: 1
@@ -397,10 +437,14 @@ layer {
   type: "Convolution"
   bottom: "conv4"
   top: "cccp7"
-  blobs_lr: 1
-  blobs_lr: 2
-  weight_decay: 1
-  weight_decay: 0
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
+  param {
+    lr_mult: 2
+    decay_mult: 0
+  }
   convolution_param {
     num_output: 1024
     kernel_size: 1
@@ -427,10 +471,14 @@ layer {
   type: "Convolution"
   bottom: "cccp7"
   top: "cccp8"
-  blobs_lr: 1
-  blobs_lr: 2
-  weight_decay: 1
-  weight_decay: 0
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
+  param {
+    lr_mult: 2
+    decay_mult: 0
+  }
   convolution_param {
     num_output: 1000
     kernel_size: 1
