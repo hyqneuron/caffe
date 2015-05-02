@@ -1,4 +1,4 @@
-name: "yq_fk1"
+name: "nin_imagenet"
 layer {
   name: "data"
   type: "ImageDataMultLabel"
@@ -10,20 +10,18 @@ layer {
   top: "label_fit"
   top: "label_ideal_for"
   top: "label_occasion"
-  include {
-    phase: TRAIN
-  }
   transform_param {
     mirror: true
-    crop_size: 227
+    crop_size: 224
     mean_file: "data/ilsvrc12/imagenet_mean.binaryproto"
   }
   image_data_mult_label_param {
     source: "/mnt/images/training/flipkart_yq2set/train.txt"
-    batch_size: 50
-    new_height: 256
-    new_width: 256
+    new_height: 240
+    new_width: 240
+    batch_size: 64
   }
+  include: { phase: TRAIN }
 }
 layer {
   name: "data"
@@ -36,41 +34,66 @@ layer {
   top: "label_fit"
   top: "label_ideal_for"
   top: "label_occasion"
-  include {
-    phase: TEST
-  }
   transform_param {
     mirror: false
-    crop_size: 227
+    crop_size: 224
     mean_file: "data/ilsvrc12/imagenet_mean.binaryproto"
   }
   image_data_mult_label_param {
     source: "/mnt/images/training/flipkart_yq2set/test.txt"
-    batch_size: 50
-    new_height: 256
-    new_width: 256
+    batch_size: 64
+    new_height: 240
+    new_width: 240
   }
+  include: { phase: TEST }
 }
 layer {
   name: "conv1"
   type: "Convolution"
   bottom: "data"
   top: "conv1"
-  param {
-    lr_mult: 1
-    decay_mult: 1
-  }
-  param {
-    lr_mult: 2
-    decay_mult: 0
-  }
+  blobs_lr: 1
+  blobs_lr: 2
+  weight_decay: 1
+  weight_decay: 0
   convolution_param {
     num_output: 96
     kernel_size: 11
     stride: 4
     weight_filler {
       type: "gaussian"
+      mean: 0
       std: 0.01
+    }
+    bias_filler {
+      type: "constant"
+      value: 0
+    }
+  }
+}
+layer {
+  name: "relu0"
+  type: "ReLU"
+  bottom: "conv1"
+  top: "conv1"
+}
+layer {
+  name: "cccp1"
+  type: "Convolution"
+  bottom: "conv1"
+  top: "cccp1"
+  blobs_lr: 1
+  blobs_lr: 2
+  weight_decay: 1
+  weight_decay: 0
+  convolution_param {
+    num_output: 96
+    kernel_size: 1
+    stride: 1
+    weight_filler {
+      type: "gaussian"
+      mean: 0
+      std: 0.05
     }
     bias_filler {
       type: "constant"
@@ -81,70 +104,44 @@ layer {
 layer {
   name: "relu1"
   type: "ReLU"
-  bottom: "conv1"
-  top: "conv1"
+  bottom: "cccp1"
+  top: "cccp1"
 }
 layer {
-  name: "pool1"
-  type: "Pooling"
-  bottom: "conv1"
-  top: "pool1"
-  pooling_param {
-    pool: MAX
-    kernel_size: 3
-    stride: 2
-  }
-}
-layer {
-  name: "norm1"
-  type: "LRN"
-  bottom: "pool1"
-  top: "norm1"
-  lrn_param {
-    local_size: 5
-    alpha: 0.0001
-    beta: 0.75
-  }
-}
-layer {
-  name: "conv2"
+  name: "cccp2"
   type: "Convolution"
-  bottom: "norm1"
-  top: "conv2"
-  param {
-    lr_mult: 1
-    decay_mult: 1
-  }
-  param {
-    lr_mult: 2
-    decay_mult: 0
-  }
+  bottom: "cccp1"
+  top: "cccp2"
+  blobs_lr: 1
+  blobs_lr: 2
+  weight_decay: 1
+  weight_decay: 0
   convolution_param {
-    num_output: 256
-    pad: 2
-    kernel_size: 5
-    group: 2
+    num_output: 96
+    kernel_size: 1
+    stride: 1
     weight_filler {
       type: "gaussian"
-      std: 0.01
+      mean: 0
+      std: 0.05
     }
     bias_filler {
       type: "constant"
-      value: 1
+      value: 0
     }
   }
 }
 layer {
   name: "relu2"
   type: "ReLU"
-  bottom: "conv2"
-  top: "conv2"
+  bottom: "cccp2"
+  top: "cccp2"
 }
 layer {
-  name: "pool2"
+  name: "pool0"
   type: "Pooling"
-  bottom: "conv2"
-  top: "pool2"
+  bottom: "cccp2"
+  top: "pool0"
   pooling_param {
     pool: MAX
     kernel_size: 3
@@ -152,36 +149,23 @@ layer {
   }
 }
 layer {
-  name: "norm2"
-  type: "LRN"
-  bottom: "pool2"
-  top: "norm2"
-  lrn_param {
-    local_size: 5
-    alpha: 0.0001
-    beta: 0.75
-  }
-}
-layer {
-  name: "conv3"
+  name: "conv2"
   type: "Convolution"
-  bottom: "norm2"
-  top: "conv3"
-  param {
-    lr_mult: 1
-    decay_mult: 1
-  }
-  param {
-    lr_mult: 2
-    decay_mult: 0
-  }
+  bottom: "pool0"
+  top: "conv2"
+  blobs_lr: 1
+  blobs_lr: 2
+  weight_decay: 1
+  weight_decay: 0
   convolution_param {
-    num_output: 384
-    pad: 1
-    kernel_size: 3
+    num_output: 256
+    pad: 2
+    kernel_size: 5
+    stride: 1
     weight_filler {
       type: "gaussian"
-      std: 0.01
+      mean: 0
+      std: 0.05
     }
     bias_filler {
       type: "constant"
@@ -192,82 +176,74 @@ layer {
 layer {
   name: "relu3"
   type: "ReLU"
-  bottom: "conv3"
-  top: "conv3"
+  bottom: "conv2"
+  top: "conv2"
 }
 layer {
-  name: "conv4"
+  name: "cccp3"
   type: "Convolution"
-  bottom: "conv3"
-  top: "conv4"
-  param {
-    lr_mult: 1
-    decay_mult: 1
-  }
-  param {
-    lr_mult: 2
-    decay_mult: 0
-  }
-  convolution_param {
-    num_output: 384
-    pad: 1
-    kernel_size: 3
-    group: 2
-    weight_filler {
-      type: "gaussian"
-      std: 0.01
-    }
-    bias_filler {
-      type: "constant"
-      value: 1
-    }
-  }
-}
-layer {
-  name: "relu4"
-  type: "ReLU"
-  bottom: "conv4"
-  top: "conv4"
-}
-layer {
-  name: "conv5"
-  type: "Convolution"
-  bottom: "conv4"
-  top: "conv5"
-  param {
-    lr_mult: 1
-    decay_mult: 1
-  }
-  param {
-    lr_mult: 2
-    decay_mult: 0
-  }
+  bottom: "conv2"
+  top: "cccp3"
+  blobs_lr: 1
+  blobs_lr: 2
+  weight_decay: 1
+  weight_decay: 0
   convolution_param {
     num_output: 256
-    pad: 1
-    kernel_size: 3
-    group: 2
+    kernel_size: 1
+    stride: 1
     weight_filler {
       type: "gaussian"
-      std: 0.01
+      mean: 0
+      std: 0.05
     }
     bias_filler {
       type: "constant"
-      value: 1
+      value: 0
     }
   }
 }
 layer {
   name: "relu5"
   type: "ReLU"
-  bottom: "conv5"
-  top: "conv5"
+  bottom: "cccp3"
+  top: "cccp3"
 }
 layer {
-  name: "pool5"
+  name: "cccp4"
+  type: "Convolution"
+  bottom: "cccp3"
+  top: "cccp4"
+  blobs_lr: 1
+  blobs_lr: 2
+  weight_decay: 1
+  weight_decay: 0
+  convolution_param {
+    num_output: 256
+    kernel_size: 1
+    stride: 1
+    weight_filler {
+      type: "gaussian"
+      mean: 0
+      std: 0.05
+    }
+    bias_filler {
+      type: "constant"
+      value: 0
+    }
+  }
+}
+layer {
+  name: "relu6"
+  type: "ReLU"
+  bottom: "cccp4"
+  top: "cccp4"
+}
+layer {
+  name: "pool2"
   type: "Pooling"
-  bottom: "conv5"
-  top: "pool5"
+  bottom: "cccp4"
+  top: "pool2"
   pooling_param {
     pool: MAX
     kernel_size: 3
@@ -275,92 +251,224 @@ layer {
   }
 }
 layer {
-  name: "fc6"
-  type: "InnerProduct"
-  bottom: "pool5"
-  top: "fc6"
-  param {
-    lr_mult: 1
-    decay_mult: 1
-  }
-  param {
-    lr_mult: 2
-    decay_mult: 0
-  }
-  inner_product_param {
-    num_output: 4096
+  name: "conv3"
+  type: "Convolution"
+  bottom: "pool2"
+  top: "conv3"
+  blobs_lr: 1
+  blobs_lr: 2
+  weight_decay: 1
+  weight_decay: 0
+  convolution_param {
+    num_output: 384
+    pad: 1
+    kernel_size: 3
+    stride: 1
     weight_filler {
       type: "gaussian"
-      std: 0.005
+      mean: 0
+      std: 0.01
     }
     bias_filler {
       type: "constant"
-      value: 1
-    }
-  }
-}
-layer {
-  name: "relu6"
-  type: "ReLU"
-  bottom: "fc6"
-  top: "fc6"
-}
-layer {
-  name: "drop6"
-  type: "Dropout"
-  bottom: "fc6"
-  top: "fc6"
-  dropout_param {
-    dropout_ratio: 0.5
-  }
-}
-layer {
-  name: "fc7"
-  type: "InnerProduct"
-  bottom: "fc6"
-  top: "fc7"
-  # Note that lr_mult can be set to 0 to disable any fine-tuning of this, and any other, layer
-  param {
-    lr_mult: 1
-    decay_mult: 1
-  }
-  param {
-    lr_mult: 2
-    decay_mult: 0
-  }
-  inner_product_param {
-    num_output: 4096
-    weight_filler {
-      type: "gaussian"
-      std: 0.005
-    }
-    bias_filler {
-      type: "constant"
-      value: 1
+      value: 0
     }
   }
 }
 layer {
   name: "relu7"
   type: "ReLU"
-  bottom: "fc7"
-  top: "fc7"
+  bottom: "conv3"
+  top: "conv3"
 }
 layer {
-  name: "drop7"
+  name: "cccp5"
+  type: "Convolution"
+  bottom: "conv3"
+  top: "cccp5"
+  blobs_lr: 1
+  blobs_lr: 2
+  weight_decay: 1
+  weight_decay: 0
+  convolution_param {
+    num_output: 384
+    kernel_size: 1
+    stride: 1
+    weight_filler {
+      type: "gaussian"
+      mean: 0
+      std: 0.05
+    }
+    bias_filler {
+      type: "constant"
+      value: 0
+    }
+  }
+}
+layer {
+  name: "relu8"
+  type: "ReLU"
+  bottom: "cccp5"
+  top: "cccp5"
+}
+layer {
+  name: "cccp6"
+  type: "Convolution"
+  bottom: "cccp5"
+  top: "cccp6"
+  blobs_lr: 1
+  blobs_lr: 2
+  weight_decay: 1
+  weight_decay: 0
+  convolution_param {
+    num_output: 384
+    kernel_size: 1
+    stride: 1
+    weight_filler {
+      type: "gaussian"
+      mean: 0
+      std: 0.05
+    }
+    bias_filler {
+      type: "constant"
+      value: 0
+    }
+  }
+}
+layer {
+  name: "relu9"
+  type: "ReLU"
+  bottom: "cccp6"
+  top: "cccp6"
+}
+layer {
+  name: "pool3"
+  type: "Pooling"
+  bottom: "cccp6"
+  top: "pool3"
+  pooling_param {
+    pool: MAX
+    kernel_size: 3
+    stride: 2
+  }
+}
+layer {
+  name: "drop"
   type: "Dropout"
-  bottom: "fc7"
-  top: "fc7"
+  bottom: "pool3"
+  top: "pool3"
   dropout_param {
     dropout_ratio: 0.5
   }
 }
+layer {
+  name: "conv4-1024"
+  type: "Convolution"
+  bottom: "pool3"
+  top: "conv4"
+  blobs_lr: 1
+  blobs_lr: 2
+  weight_decay: 1
+  weight_decay: 0
+  convolution_param {
+    num_output: 1024
+    pad: 1
+    kernel_size: 3
+    stride: 1
+    weight_filler {
+      type: "gaussian"
+      mean: 0
+      std: 0.05
+    }
+    bias_filler {
+      type: "constant"
+      value: 0
+    }
+  }
+}
+layer {
+  name: "relu10"
+  type: "ReLU"
+  bottom: "conv4"
+  top: "conv4"
+}
+layer {
+  name: "cccp7-1024"
+  type: "Convolution"
+  bottom: "conv4"
+  top: "cccp7"
+  blobs_lr: 1
+  blobs_lr: 2
+  weight_decay: 1
+  weight_decay: 0
+  convolution_param {
+    num_output: 1024
+    kernel_size: 1
+    stride: 1
+    weight_filler {
+      type: "gaussian"
+      mean: 0
+      std: 0.05
+    }
+    bias_filler {
+      type: "constant"
+      value: 0
+    }
+  }
+}
+layer {
+  name: "relu11"
+  type: "ReLU"
+  bottom: "cccp7"
+  top: "cccp7"
+}
+layer {
+  name: "cccp8-1024"
+  type: "Convolution"
+  bottom: "cccp7"
+  top: "cccp8"
+  blobs_lr: 1
+  blobs_lr: 2
+  weight_decay: 1
+  weight_decay: 0
+  convolution_param {
+    num_output: 1000
+    kernel_size: 1
+    stride: 1
+    weight_filler {
+      type: "gaussian"
+      mean: 0
+      std: 0.01
+    }
+    bias_filler {
+      type: "constant"
+      value: 0
+    }
+  }
+}
+layer {
+  name: "relu12"
+  type: "ReLU"
+  bottom: "cccp8"
+  top: "cccp8"
+}
+layer {
+  name: "pool4"
+  type: "Pooling"
+  bottom: "cccp8"
+  top: "pool4"
+  pooling_param {
+    pool: AVE
+    kernel_size: 6
+    stride: 1
+  }
+}
 ####category
 layer {
-  name: "fc8_category"
+  name: "fc5_category"
   type: "InnerProduct"
-  bottom: "fc7"
-  top: "fc8_category"
+  bottom: "pool4"
+  top: "fc5_category"
   # lr_mult is set to higher than for other layers, because this layer is starting from random while the others are already trained
   param {
     lr_mult: 10
@@ -385,13 +493,13 @@ layer {
 layer {
   name: "loss_category"
   type: "SoftmaxWithLoss"
-  bottom: "fc8_category"
+  bottom: "fc5_category"
   bottom: "label_category"
 }
 layer {
   name: "accuracy_category"
   type: "Accuracy"
-  bottom: "fc8_category"
+  bottom: "fc5_category"
   bottom: "label_category"
   top: "accuracy_category"
   include {
@@ -400,10 +508,10 @@ layer {
 }
 ####pattern
 layer {
-  name: "fc8_pattern"
+  name: "fc5_pattern"
   type: "InnerProduct"
-  bottom: "fc7"
-  top: "fc8_pattern"
+  bottom: "pool3"
+  top: "fc5_pattern"
   # lr_mult is set to higher than for other layers, because this layer is starting from random while the others are already trained
   param {
     lr_mult: 10
@@ -428,7 +536,7 @@ layer {
 layer {
   name: "loss_pattern"
   type: "SoftmaxWithLoss"
-  bottom: "fc8_pattern"
+  bottom: "fc5_pattern"
   bottom: "label_pattern"
   loss_param {
       ignore_label: 0
@@ -437,7 +545,7 @@ layer {
 layer {
   name: "accuracy_pattern"
   type: "Accuracy"
-  bottom: "fc8_pattern"
+  bottom: "fc5_pattern"
   bottom: "label_pattern"
   top: "accuracy_pattern"
   include {
@@ -449,10 +557,10 @@ layer {
 }
 ####neck
 layer {
-  name: "fc8_neck"
+  name: "fc5_neck"
   type: "InnerProduct"
-  bottom: "fc7"
-  top: "fc8_neck"
+  bottom: "pool3"
+  top: "fc5_neck"
   # lr_mult is set to higher than for other layers, because this layer is starting from random while the others are already trained
   param {
     lr_mult: 10
@@ -477,7 +585,7 @@ layer {
 layer {
   name: "loss_neck"
   type: "SoftmaxWithLoss"
-  bottom: "fc8_neck"
+  bottom: "fc5_neck"
   bottom: "label_neck"
   loss_param {
       ignore_label: 0
@@ -486,7 +594,7 @@ layer {
 layer {
   name: "accuracy_neck"
   type: "Accuracy"
-  bottom: "fc8_neck"
+  bottom: "fc5_neck"
   bottom: "label_neck"
   top: "accuracy_neck"
   include {
@@ -498,10 +606,10 @@ layer {
 }
 ####sleeve
 layer {
-  name: "fc8_sleeve"
+  name: "fc5_sleeve"
   type: "InnerProduct"
-  bottom: "fc7"
-  top: "fc8_sleeve"
+  bottom: "pool3"
+  top: "fc5_sleeve"
   # lr_mult is set to higher than for other layers, because this layer is starting from random while the others are already trained
   param {
     lr_mult: 10
@@ -526,7 +634,7 @@ layer {
 layer {
   name: "loss_sleeve"
   type: "SoftmaxWithLoss"
-  bottom: "fc8_sleeve"
+  bottom: "fc5_sleeve"
   bottom: "label_sleeve"
   loss_param {
       ignore_label: 0
@@ -535,7 +643,7 @@ layer {
 layer {
   name: "accuracy_sleeve"
   type: "Accuracy"
-  bottom: "fc8_sleeve"
+  bottom: "fc5_sleeve"
   bottom: "label_sleeve"
   top: "accuracy_sleeve"
   include {
@@ -547,10 +655,10 @@ layer {
 }
 ####fit
 layer {
-  name: "fc8_fit"
+  name: "fc5_fit"
   type: "InnerProduct"
-  bottom: "fc7"
-  top: "fc8_fit"
+  bottom: "pool4"
+  top: "fc5_fit"
   # lr_mult is set to higher than for other layers, because this layer is starting from random while the others are already trained
   param {
     lr_mult: 10
@@ -575,7 +683,7 @@ layer {
 layer {
   name: "loss_fit"
   type: "SoftmaxWithLoss"
-  bottom: "fc8_fit"
+  bottom: "fc5_fit"
   bottom: "label_fit"
   loss_param {
       ignore_label: 0
@@ -584,7 +692,7 @@ layer {
 layer {
   name: "accuracy_fit"
   type: "Accuracy"
-  bottom: "fc8_fit"
+  bottom: "fc5_fit"
   bottom: "label_fit"
   top: "accuracy_fit"
   include {
@@ -594,12 +702,12 @@ layer {
       ignore_label: 0
   }
 }
-####idea_for
+####ideal_for
 layer {
-  name: "fc8_ideal_for"
+  name: "fc5_ideal_for"
   type: "InnerProduct"
-  bottom: "fc7"
-  top: "fc8_ideal_for"
+  bottom: "pool4"
+  top: "fc5_ideal_for"
   # lr_mult is set to higher than for other layers, because this layer is starting from random while the others are already trained
   param {
     lr_mult: 10
@@ -624,7 +732,7 @@ layer {
 layer {
   name: "loss_ideal_for"
   type: "SoftmaxWithLoss"
-  bottom: "fc8_ideal_for"
+  bottom: "fc5_ideal_for"
   bottom: "label_ideal_for"
   loss_param {
       ignore_label: 0
@@ -633,7 +741,7 @@ layer {
 layer {
   name: "accuracy_ideal_for"
   type: "Accuracy"
-  bottom: "fc8_ideal_for"
+  bottom: "fc5_ideal_for"
   bottom: "label_ideal_for"
   top: "accuracy_ideal_for"
   include {
@@ -645,10 +753,10 @@ layer {
 }
 ####occasion
 layer {
-  name: "fc8_occasion"
+  name: "fc5_occasion"
   type: "InnerProduct"
-  bottom: "fc7"
-  top: "fc8_occasion"
+  bottom: "pool4"
+  top: "fc5_occasion"
   # lr_mult is set to higher than for other layers, because this layer is starting from random while the others are already trained
   param {
     lr_mult: 10
@@ -673,7 +781,7 @@ layer {
 layer {
   name: "loss_occasion"
   type: "SoftmaxWithLoss"
-  bottom: "fc8_occasion"
+  bottom: "fc5_occasion"
   bottom: "label_occasion"
   loss_param {
       ignore_label: 0
@@ -682,7 +790,7 @@ layer {
 layer {
   name: "accuracy_occasion"
   type: "Accuracy"
-  bottom: "fc8_occasion"
+  bottom: "fc5_occasion"
   bottom: "label_occasion"
   top: "accuracy_occasion"
   include {

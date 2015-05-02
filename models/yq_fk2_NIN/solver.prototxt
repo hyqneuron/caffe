@@ -1,0 +1,14 @@
+net: "models/yq_fk2_NIN/train_val.prototxt"
+test_iter: 100
+test_interval: 500
+base_lr: 0.01
+lr_policy: "step"
+gamma: 0.1
+stepsize: 200000
+display: 20
+max_iter: 1000000
+momentum: 0.9
+weight_decay: 0.0005
+snapshot: 1000
+snapshot_prefix: "models/yq_fk2_NIN/yq_fk2_NIN_train"
+solver_mode: GPU
