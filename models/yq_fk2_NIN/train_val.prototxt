@@ -388,100 +388,11 @@ layer {
     stride: 2
   }
 }
-layer {
-  name: "drop"
-  type: "Dropout"
-  bottom: "pool3"
-  top: "pool3"
-  dropout_param {
-    dropout_ratio: 0.5
-  }
-}
-layer {
-  name: "conv4-1024"
-  type: "Convolution"
-  bottom: "pool3"
-  top: "conv4"
-  param {
-    lr_mult: 1
-    decay_mult: 1
-  }
-  param {
-    lr_mult: 2
-    decay_mult: 0
-  }
-  convolution_param {
-    num_output: 1024
-    pad: 1
-    kernel_size: 3
-    stride: 1
-    weight_filler {
-      type: "gaussian"
-      mean: 0
-      std: 0.05
-    }
-    bias_filler {
-      type: "constant"
-      value: 0
-    }
-  }
-}
-layer {
-  name: "relu10"
-  type: "ReLU"
-  bottom: "conv4"
-  top: "conv4"
-}
-layer {
-  name: "cccp7-1024"
-  type: "Convolution"
-  bottom: "conv4"
-  top: "cccp7"
-  param {
-    lr_mult: 1
-    decay_mult: 1
-  }
-  param {
-    lr_mult: 2
-    decay_mult: 0
-  }
-  convolution_param {
-    num_output: 1024
-    kernel_size: 1
-    stride: 1
-    weight_filler {
-      type: "gaussian"
-      mean: 0
-      std: 0.05
-    }
-    bias_filler {
-      type: "constant"
-      value: 0
-    }
-  }
-}
-layer {
-  name: "relu11"
-  type: "ReLU"
-  bottom: "cccp7"
-  top: "cccp7"
-}
-layer {
-  name: "pool4"
-  type: "Pooling"
-  bottom: "cccp7"
-  top: "pool4"
-  pooling_param {
-    pool: MAX
-    kernel_size: 6
-    stride: 1
-  }
-}
 ####category
 layer {
   name: "fc5_category"
   type: "InnerProduct"
-  bottom: "pool4"
+  bottom: "pool3"
   top: "fc5_category"
   # lr_mult is set to higher than for other layers, because this layer is starting from random while the others are already trained
   param {
@@ -524,7 +435,7 @@ layer {
 layer {
   name: "fc5_pattern"
   type: "InnerProduct"
-  bottom: "pool4"
+  bottom: "pool3"
   top: "fc5_pattern"
   # lr_mult is set to higher than for other layers, because this layer is starting from random while the others are already trained
   param {
@@ -573,7 +484,7 @@ layer {
 layer {
   name: "fc5_neck"
   type: "InnerProduct"
-  bottom: "pool4"
+  bottom: "pool3"
   top: "fc5_neck"
   # lr_mult is set to higher than for other layers, because this layer is starting from random while the others are already trained
   param {
@@ -622,7 +533,7 @@ layer {
 layer {
   name: "fc5_sleeve"
   type: "InnerProduct"
-  bottom: "pool4"
+  bottom: "pool3"
   top: "fc5_sleeve"
   # lr_mult is set to higher than for other layers, because this layer is starting from random while the others are already trained
   param {
@@ -671,7 +582,7 @@ layer {
 layer {
   name: "fc5_fit"
   type: "InnerProduct"
-  bottom: "pool4"
+  bottom: "pool3"
   top: "fc5_fit"
   # lr_mult is set to higher than for other layers, because this layer is starting from random while the others are already trained
   param {
@@ -720,7 +631,7 @@ layer {
 layer {
   name: "fc5_ideal_for"
   type: "InnerProduct"
-  bottom: "pool4"
+  bottom: "pool3"
   top: "fc5_ideal_for"
   # lr_mult is set to higher than for other layers, because this layer is starting from random while the others are already trained
   param {
@@ -769,7 +680,7 @@ layer {
 layer {
   name: "fc5_occasion"
   type: "InnerProduct"
-  bottom: "pool4"
+  bottom: "pool3"
   top: "fc5_occasion"
   # lr_mult is set to higher than for other layers, because this layer is starting from random while the others are already trained
   param {
