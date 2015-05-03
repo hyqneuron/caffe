@@ -17,8 +17,8 @@ layer {
   }
   image_data_mult_label_param {
     source: "/mnt/images/training/flipkart_yq2set/train.txt"
-    new_height: 240
-    new_width: 240
+    new_height: 256
+    new_width: 256
     batch_size: 64
   }
   include: { phase: TRAIN }
@@ -42,8 +42,8 @@ layer {
   image_data_mult_label_param {
     source: "/mnt/images/training/flipkart_yq2set/test.txt"
     batch_size: 64
-    new_height: 240
-    new_width: 240
+    new_height: 256
+    new_width: 256
   }
   include: { phase: TEST }
 }
