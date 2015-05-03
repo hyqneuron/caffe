@@ -402,7 +402,7 @@ layer {
 layer {
   name: "fc8_pattern"
   type: "InnerProduct"
-  bottom: "conv4"
+  bottom: "fc7"
   top: "fc8_pattern"
   # lr_mult is set to higher than for other layers, because this layer is starting from random while the others are already trained
   param {
@@ -451,7 +451,7 @@ layer {
 layer {
   name: "fc8_neck"
   type: "InnerProduct"
-  bottom: "conv4"
+  bottom: "fc7"
   top: "fc8_neck"
   # lr_mult is set to higher than for other layers, because this layer is starting from random while the others are already trained
   param {
