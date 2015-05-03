@@ -506,7 +506,7 @@ layer {
   bottom: "cccp8"
   top: "pool4"
   pooling_param {
-    pool: AVE
+    pool: MAX
     kernel_size: 6
     stride: 1
   }
@@ -558,7 +558,7 @@ layer {
 layer {
   name: "fc5_pattern"
   type: "InnerProduct"
-  bottom: "pool3"
+  bottom: "pool4"
   top: "fc5_pattern"
   # lr_mult is set to higher than for other layers, because this layer is starting from random while the others are already trained
   param {
@@ -607,7 +607,7 @@ layer {
 layer {
   name: "fc5_neck"
   type: "InnerProduct"
-  bottom: "pool3"
+  bottom: "pool4"
   top: "fc5_neck"
   # lr_mult is set to higher than for other layers, because this layer is starting from random while the others are already trained
   param {
@@ -656,7 +656,7 @@ layer {
 layer {
   name: "fc5_sleeve"
   type: "InnerProduct"
-  bottom: "pool3"
+  bottom: "pool4"
   top: "fc5_sleeve"
   # lr_mult is set to higher than for other layers, because this layer is starting from random while the others are already trained
   param {
