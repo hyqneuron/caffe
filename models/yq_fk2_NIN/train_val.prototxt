@@ -467,40 +467,6 @@ layer {
   top: "cccp7"
 }
 layer {
-  name: "cccp8-1024"
-  type: "Convolution"
-  bottom: "cccp7"
-  top: "cccp8"
-  param {
-    lr_mult: 1
-    decay_mult: 1
-  }
-  param {
-    lr_mult: 2
-    decay_mult: 0
-  }
-  convolution_param {
-    num_output: 1000
-    kernel_size: 1
-    stride: 1
-    weight_filler {
-      type: "gaussian"
-      mean: 0
-      std: 0.01
-    }
-    bias_filler {
-      type: "constant"
-      value: 0
-    }
-  }
-}
-layer {
-  name: "relu12"
-  type: "ReLU"
-  bottom: "cccp8"
-  top: "cccp8"
-}
-layer {
   name: "pool4"
   type: "Pooling"
   bottom: "cccp7"
