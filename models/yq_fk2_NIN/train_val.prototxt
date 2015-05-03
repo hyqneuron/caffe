@@ -503,7 +503,7 @@ layer {
 layer {
   name: "pool4"
   type: "Pooling"
-  bottom: "cccp8"
+  bottom: "cccp7"
   top: "pool4"
   pooling_param {
     pool: MAX
