@@ -310,77 +310,9 @@ layer {
   top: "conv3"
 }
 layer {
-  name: "cccp5"
-  type: "Convolution"
-  bottom: "conv3"
-  top: "cccp5"
-  param {
-    lr_mult: 1
-    decay_mult: 1
-  }
-  param {
-    lr_mult: 2
-    decay_mult: 0
-  }
-  convolution_param {
-    num_output: 384
-    kernel_size: 1
-    stride: 1
-    weight_filler {
-      type: "gaussian"
-      mean: 0
-      std: 0.05
-    }
-    bias_filler {
-      type: "constant"
-      value: 0
-    }
-  }
-}
-layer {
-  name: "relu8"
-  type: "ReLU"
-  bottom: "cccp5"
-  top: "cccp5"
-}
-layer {
-  name: "cccp6"
-  type: "Convolution"
-  bottom: "cccp5"
-  top: "cccp6"
-  param {
-    lr_mult: 1
-    decay_mult: 1
-  }
-  param {
-    lr_mult: 2
-    decay_mult: 0
-  }
-  convolution_param {
-    num_output: 384
-    kernel_size: 1
-    stride: 1
-    weight_filler {
-      type: "gaussian"
-      mean: 0
-      std: 0.05
-    }
-    bias_filler {
-      type: "constant"
-      value: 0
-    }
-  }
-}
-layer {
-  name: "relu9"
-  type: "ReLU"
-  bottom: "cccp6"
-  top: "cccp6"
-}
-layer {
   name: "pool3"
   type: "Pooling"
-  bottom: "cccp6"
+  bottom: "conv3"
   top: "pool3"
   pooling_param {
     pool: MAX
