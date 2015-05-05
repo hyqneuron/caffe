@@ -1,9 +1,19 @@
-name: "FlickrStyleCaffeNet"
-input: "data"
-input_dim: 10
-input_dim: 3
-input_dim: 227
-input_dim: 227
+name: "yq_fk1"
+layer {
+  name: "data"
+  type: "Data"
+  top: "data"
+  transform_param {
+    mirror: false
+    crop_size: 227
+    mean_file: "data/ilsvrc12/imagenet_mean.binaryproto"
+  }
+  data_param {
+    batch_size: 50
+    height: 256
+    width: 256
+  }
+}
 layer {
   name: "conv1"
   type: "Convolution"
@@ -274,11 +284,11 @@ layer {
   top: "fc7"
   # Note that lr_mult can be set to 0 to disable any fine-tuning of this, and any other, layer
   param {
-    lr_mult: 1
+    lr_mult: 4
     decay_mult: 1
   }
   param {
-    lr_mult: 2
+    lr_mult: 8
     decay_mult: 0
   }
   inner_product_param {
@@ -308,11 +318,45 @@ layer {
     dropout_ratio: 0.5
   }
 }
+####category
 layer {
-  name: "fc8_flickr"
+  name: "fc8_category"
   type: "InnerProduct"
   bottom: "fc7"
-  top: "fc8_flickr"
+  top: "fc8_category"
+  # lr_mult is set to higher than for other layers, because this layer is starting from random while the others are already trained
+  param {
+    lr_mult: 10
+    decay_mult: 1
+  }
+  param {
+    lr_mult: 20
+    decay_mult: 0
+  }
+  inner_product_param {
+    num_output: 26
+    weight_filler {
+      type: "gaussian"
+      std: 0.01
+    }
+    bias_filler {
+      type: "constant"
+      value: 0
+    }
+  }
+}
+layer {
+  name: "prob_category"
+  type: "Softmax"
+  bottom: "fc8_category"
+  top: "prob_accuracy"
+}
+####pattern
+layer {
+  name: "fc8_pattern"
+  type: "InnerProduct"
+  bottom: "fc7"
+  top: "fc8_pattern"
   # lr_mult is set to higher than for other layers, because this layer is starting from random while the others are already trained
   param {
     lr_mult: 10
@@ -335,8 +379,173 @@ layer {
   }
 }
 layer {
-  name: "prob"
+  name: "prob_pattern"
   type: "Softmax"
-  bottom: "fc8_flickr"
-  top: "prob"
+  bottom: "fc8_pattern"
+  top: "prob_pattern"
+}
+####neck
+layer {
+  name: "fc8_neck"
+  type: "InnerProduct"
+  bottom: "fc7"
+  top: "fc8_neck"
+  # lr_mult is set to higher than for other layers, because this layer is starting from random while the others are already trained
+  param {
+    lr_mult: 10
+    decay_mult: 1
+  }
+  param {
+    lr_mult: 20
+    decay_mult: 0
+  }
+  inner_product_param {
+    num_output: 23
+    weight_filler {
+      type: "gaussian"
+      std: 0.01
+    }
+    bias_filler {
+      type: "constant"
+      value: 0
+    }
+  }
+}
+layer {
+  name: "prob_neck"
+  type: "Softmax"
+  bottom: "fc8_neck"
+  top: "prob_neck"
+}
+####sleeve
+layer {
+  name: "fc8_sleeve"
+  type: "InnerProduct"
+  bottom: "fc7"
+  top: "fc8_sleeve"
+  # lr_mult is set to higher than for other layers, because this layer is starting from random while the others are already trained
+  param {
+    lr_mult: 10
+    decay_mult: 1
+  }
+  param {
+    lr_mult: 20
+    decay_mult: 0
+  }
+  inner_product_param {
+    num_output: 9
+    weight_filler {
+      type: "gaussian"
+      std: 0.01
+    }
+    bias_filler {
+      type: "constant"
+      value: 0
+    }
+  }
+}
+layer {
+  name: "prob_sleeve"
+  type: "Softmax"
+  bottom: "fc8_sleeve"
+  top: "prob_sleeve"
+}
+####fit
+layer {
+  name: "fc8_fit"
+  type: "InnerProduct"
+  bottom: "fc7"
+  top: "fc8_fit"
+  # lr_mult is set to higher than for other layers, because this layer is starting from random while the others are already trained
+  param {
+    lr_mult: 10
+    decay_mult: 1
+  }
+  param {
+    lr_mult: 20
+    decay_mult: 0
+  }
+  inner_product_param {
+    num_output: 26
+    weight_filler {
+      type: "gaussian"
+      std: 0.01
+    }
+    bias_filler {
+      type: "constant"
+      value: 0
+    }
+  }
+}
+layer {
+  name: "prob_fit"
+  type: "Softmax"
+  bottom: "fc8_fit"
+  top: "prob_fit"
+}
+####idea_for
+layer {
+  name: "fc8_ideal_for"
+  type: "InnerProduct"
+  bottom: "fc7"
+  top: "fc8_ideal_for"
+  # lr_mult is set to higher than for other layers, because this layer is starting from random while the others are already trained
+  param {
+    lr_mult: 10
+    decay_mult: 1
+  }
+  param {
+    lr_mult: 20
+    decay_mult: 0
+  }
+  inner_product_param {
+    num_output: 7
+    weight_filler {
+      type: "gaussian"
+      std: 0.01
+    }
+    bias_filler {
+      type: "constant"
+      value: 0
+    }
+  }
+}
+layer {
+  name: "prob_ideal_for"
+  type: "Softmax"
+  bottom: "fc8_ideal_for"
+  top: "prob_ideal_for"
+}
+####occasion
+layer {
+  name: "fc8_occasion"
+  type: "InnerProduct"
+  bottom: "fc7"
+  top: "fc8_occasion"
+  # lr_mult is set to higher than for other layers, because this layer is starting from random while the others are already trained
+  param {
+    lr_mult: 10
+    decay_mult: 1
+  }
+  param {
+    lr_mult: 20
+    decay_mult: 0
+  }
+  inner_product_param {
+    num_output: 38
+    weight_filler {
+      type: "gaussian"
+      std: 0.01
+    }
+    bias_filler {
+      type: "constant"
+      value: 0
+    }
+  }
+}
+layer {
+  name: "prob_occasion"
+  type: "Softmax"
+  bottom: "fc8_occasion"
+  top: "prob_occasion"
 }
