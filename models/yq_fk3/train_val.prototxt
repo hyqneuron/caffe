@@ -21,7 +21,7 @@ layer {
     mean_file: "data/ilsvrc12/imagenet_mean.binaryproto"
   }
   image_data_mult_label_param {
-    source: "/mnt/images/training/flipkart_yq2set/train.txt"
+    source: "/home/ubuntu/images/fk_3sets/generated/train.txt"
     batch_size: 50
     new_height: 256
     new_width: 256
@@ -47,7 +47,7 @@ layer {
     mean_file: "data/ilsvrc12/imagenet_mean.binaryproto"
   }
   image_data_mult_label_param {
-    source: "/mnt/images/training/flipkart_yq2set/test.txt"
+    source: "/home/ubuntu/images/fk_3sets/generated/test.txt"
     batch_size: 50
     new_height: 256
     new_width: 256
