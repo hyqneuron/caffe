@@ -328,6 +328,19 @@ layer {
       classifier_info_file: "models/yq_fk3/info_category.txt"
   }
 }
+layer {
+  name: "simple_accuracy_category"
+  type: "Accuracy"
+  bottom: "fc8_category"
+  bottom: "label_category"
+  top: "simple_accuracy_category"
+  include {
+    phase: TEST
+  }
+  accuracy_param {
+      ignore_label: 0
+  }
+}
 ####pattern
 layer {
   name: "fc8_pattern"
@@ -376,6 +389,19 @@ layer {
   per_class_accuracy_param {
       ignore_label: 0
       classifier_info_file: "models/yq_fk3/info_pattern.txt"
+  }
+}
+layer {
+  name: "simple_accuracy_pattern"
+  type: "Accuracy"
+  bottom: "fc8_pattern"
+  bottom: "label_pattern"
+  top: "simple_accuracy_pattern"
+  include {
+    phase: TEST
+  }
+  accuracy_param {
+      ignore_label: 0
   }
 }
 ####neck
