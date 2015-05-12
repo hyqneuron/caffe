@@ -64,6 +64,7 @@ PerClassAccuracyLayer<Dtype>::PerClassAccuracyLayer(const LayerParameter& param)
 
 template <typename Dtype>
 void PerClassAccuracyLayer<Dtype>::custom_test_information() {
+  LOG(INFO) << "#############";
   LOG(INFO) << "Per-Class Information for "<< this->layer_param_.name();
   // start the print!
   for(int i = 0; i<num_classes_; i++){
