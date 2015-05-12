@@ -536,6 +536,19 @@ layer {
       classifier_info_file: "models/yq_fk3/info_neck.txt"
   }
 }
+layer {
+  name: "simple_accuracy_neck"
+  type: "Accuracy"
+  bottom: "fc8_neck"
+  bottom: "label_neck"
+  top: "simple_accuracy_neck"
+  include {
+    phase: TEST
+  }
+  accuracy_param {
+      ignore_label: 0
+  }
+}
 ####sleeve
 layer {
   name: "fc8_sleeve"
@@ -584,6 +597,19 @@ layer {
   per_class_accuracy_param {
       ignore_label: 0
       classifier_info_file: "models/yq_fk3/info_sleeve.txt"
+  }
+}
+layer {
+  name: "simple_accuracy_sleeve"
+  type: "Accuracy"
+  bottom: "fc8_sleeve"
+  bottom: "label_sleeve"
+  top: "simple_accuracy_sleeve"
+  include {
+    phase: TEST
+  }
+  accuracy_param {
+      ignore_label: 0
   }
 }
 ####fit
@@ -636,6 +662,19 @@ layer {
       classifier_info_file: "models/yq_fk3/info_fit.txt"
   }
 }
+layer {
+  name: "simple_accuracy_fit"
+  type: "Accuracy"
+  bottom: "fc8_fit"
+  bottom: "label_fit"
+  top: "simple_accuracy_fit"
+  include {
+    phase: TEST
+  }
+  accuracy_param {
+      ignore_label: 0
+  }
+}
 ####idea_for
 layer {
   name: "fc8_ideal_for"
@@ -684,6 +723,19 @@ layer {
   per_class_accuracy_param {
       ignore_label: 0
       classifier_info_file: "models/yq_fk3/info_ideal_for.txt"
+  }
+}
+layer {
+  name: "simple_accuracy_ideal_for"
+  type: "Accuracy"
+  bottom: "fc8_ideal_for"
+  bottom: "label_ideal_for"
+  top: "simple_accuracy_ideal_for"
+  include {
+    phase: TEST
+  }
+  accuracy_param {
+      ignore_label: 0
   }
 }
 ####occasion
@@ -736,6 +788,19 @@ layer {
       classifier_info_file: "models/yq_fk3/info_occasion.txt"
   }
 }
+layer {
+  name: "simple_accuracy_occasion"
+  type: "Accuracy"
+  bottom: "fc8_occasion"
+  bottom: "label_occasion"
+  top: "simple_accuracy_occasion"
+  include {
+    phase: TEST
+  }
+  accuracy_param {
+      ignore_label: 0
+  }
+}
 ####embellished
 layer {
   name: "fc8_embellished"
@@ -786,6 +851,19 @@ layer {
       classifier_info_file: "models/yq_fk3/info_embellished.txt"
   }
 }
+layer {
+  name: "simple_accuracy_embellished"
+  type: "Accuracy"
+  bottom: "fc8_embellished"
+  bottom: "label_embellished"
+  top: "simple_accuracy_embellished"
+  include {
+    phase: TEST
+  }
+  accuracy_param {
+      ignore_label: 0
+  }
+}
 ####embroidered
 layer {
   name: "fc8_embroidered"
@@ -834,5 +912,18 @@ layer {
   per_class_accuracy_param {
       ignore_label: 0
       classifier_info_file: "models/yq_fk3/info_embroidered.txt"
+  }
+}
+layer {
+  name: "simple_accuracy_embroidered"
+  type: "Accuracy"
+  bottom: "fc8_embroidered"
+  bottom: "label_embroidered"
+  top: "simple_accuracy_embroidered"
+  include {
+    phase: TEST
+  }
+  accuracy_param {
+      ignore_label: 0
   }
 }
