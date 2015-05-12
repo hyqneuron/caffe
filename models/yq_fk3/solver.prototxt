@@ -13,6 +13,6 @@ max_iter: 100000
 momentum: 0.9
 weight_decay: 0.0005
 snapshot: 1000
-snapshot_prefix: "models/yq_fk1/yq_fk1_finetuned"
+snapshot_prefix: "models/yq_fk3/yq_fk3_finetuned"
 # uncomment the following to default to CPU mode solving
 # solver_mode: CPU

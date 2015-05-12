@@ -1,4 +1,4 @@
-name: "yq_fk1"
+name: "yq_fk3"
 layer {
   name: "data"
   type: "ImageDataMultLabel"
