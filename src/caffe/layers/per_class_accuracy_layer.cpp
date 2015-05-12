@@ -6,6 +6,7 @@
 #include <fstream>  // NOLINT(readability/streams)
 #include <iostream>  // NOLINT(readability/streams)
 #include <string>
+#include "boost/format.hpp"
 #include "caffe/layer.hpp"
 #include "caffe/util/io.hpp"
 #include "caffe/util/math_functions.hpp"
@@ -13,6 +14,7 @@
 
 namespace caffe {
 
+using boost::format;
 
 // HYQ: adapted from accuracy_layer.cpp
 template <typename Dtype>
@@ -71,10 +73,17 @@ void PerClassAccuracyLayer<Dtype>::custom_test_information() {
     // we print precision and FN+TP
     float precision = float(class_TPs_[i]) / (class_TPs_[i] + class_FPs_[i]);
     float recall = float(class_TPs_[i]) / class_Totals_[i];
-    LOG(INFO)<< class_names_[i] 
-        << ": precision=" << precision
-        << ", recall=" << recall
-        << ", total encountered=" << class_Totals_[i];
+    LOG(INFO)<< format("%20s %10i %10i %10i %10f %10f")
+        % class_names_[i]
+        % class_TPs_[i]
+        % class_FPs_[i]
+        % class_Totals_[i]
+        % precision
+        % recall;
+        //<< class_names_[i] 
+        //<< ": precision=" << precision
+        //<< ", recall=" << recall
+        //<< ", total encountered=" << class_Totals_[i];
     // TODO we should provide a running average sort of statistic for classes
     // that are really rare.
   }
@@ -128,7 +137,7 @@ void PerClassAccuracyLayer<Dtype>::Forward_cpu(const vector<Blob<Dtype>*>& botto
   const int num_labels = bottom[0]->shape(label_axis_);
   vector<Dtype> maxval(top_k_+1);
   vector<int> max_id(top_k_+1);
-  int count = 0;
+  // int count = 0;
   // outer_num_ is number of samples per batch
   // inner_num_ is prediction per sample, usually 1. can be W*H also
   for (int i = 0; i < outer_num_; ++i) {
@@ -163,7 +172,7 @@ void PerClassAccuracyLayer<Dtype>::Forward_cpu(const vector<Blob<Dtype>*>& botto
         class_TPs_[label_value]+=1;
       else
         class_FPs_[bottom_data_vector[0].second]+=1;
-      ++count;
+      //++count;
     }
   }
 
