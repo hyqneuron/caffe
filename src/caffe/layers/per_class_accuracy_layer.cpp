@@ -167,11 +167,20 @@ void PerClassAccuracyLayer<Dtype>::Forward_cpu(const vector<Blob<Dtype>*>& botto
           break;
         }
       }
+      int predicted_label;
       class_Totals_[label_value]+=1;
-      if (match)
-        class_TPs_[label_value]+=1;
-      else
-        class_FPs_[bottom_data_vector[0].second]+=1;
+      if (match){
+        predicted_label = label_value;
+        class_TPs_[predicted_label]+=1;
+      }
+      else{
+        predicted_label = bottom_data_vector[0].second;
+        class_FPs_[predicted_label]+=1;
+      }
+      CHECK_LT(label_value, num_classes_) << "bad label";
+      CHECK_LT(predicted_label, num_classes_) << 
+          "number of classes:" << num_classes_ <<
+          "predicted label:" << predicted_label;
       //++count;
     }
   }
