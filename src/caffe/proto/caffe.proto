@@ -259,7 +259,7 @@ message ParamSpec {
 // NOTE
 // Update the next available ID when you add a new LayerParameter field.
 //
-// LayerParameter next available layer-specific ID: 133 (last added: image_data_mult_label_param )
+// LayerParameter next available layer-specific ID: 134 (last added: per_class_accuracy_param )
 message LayerParameter {
   optional string name = 1; // the layer name
   optional string type = 2; // the layer type
@@ -303,6 +303,7 @@ message LayerParameter {
   // engine parameter for selecting the implementation.
   // The default for the engine is set by the ENGINE switch at compile-time.
   optional AccuracyParameter accuracy_param = 102;
+  optional PerClassAccuracyParameter per_class_accuracy_param = 133;
   optional ArgMaxParameter argmax_param = 103;
   optional ConcatParameter concat_param = 104;
   optional ContrastiveLossParameter contrastive_loss_param = 105;
@@ -380,6 +381,17 @@ message AccuracyParameter {
   // If specified, ignore instances with the given label.
   optional int32 ignore_label = 3;
 }
+
+// HYQ begin, adapted from AccuracyParameter
+// Message that stores parameters used by PerClassAccuracyLayer
+message PerClassAccuracyParameter {
+  optional uint32 top_k = 1 [default = 1];
+  optional int32 axis = 2 [default = 1];
+  optional int32 ignore_label = 3;
+  required string classifier_info_file = 4;
+}
+// HYQ end
+
 
 // Message that stores parameters used by ArgMaxLayer
 message ArgMaxParameter {

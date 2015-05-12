@@ -15,6 +15,9 @@
 
 namespace caffe {
 
+
+// HYQ: entire file adapted from image_data_layer.cpp
+
 template <typename Dtype>
 ImageDataMultLabelLayer<Dtype>::~ImageDataMultLabelLayer<Dtype>() {
   this->JoinPrefetchThread();
@@ -242,6 +245,9 @@ void ImageDataMultLabelLayer<Dtype>::InternalThreadEntry() {
   DLOG(INFO) << "Transform time: " << trans_time / 1000 << " ms.";
 }
 
+#ifdef CPU_ONLY
+STUB_GPU_FORWARD(ImageDataMultLabelLayer, Forward);
+#endif
 INSTANTIATE_CLASS(ImageDataMultLabelLayer);
 REGISTER_LAYER_CLASS(ImageDataMultLabel);
 

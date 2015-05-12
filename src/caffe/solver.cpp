@@ -297,6 +297,14 @@ void Solver<Dtype>::Test(const int test_net_id) {
       }
     }
   }
+  // HYQ begin
+  // We first look for layers that have custom_test_information, and get them to
+  // print first. Then, we handle those output top blobs
+  for(int layer_id = 0; layer_id < test_net->layers().size(); layer_id++){
+    if(test_net->layers()[layer_id]->has_custom_test_information())
+      test_net->layers()[layer_id]->custom_test_information();
+  }
+  // HYQ end
   if (param_.test_compute_loss()) {
     loss /= param_.test_iter(test_net_id);
     LOG(INFO) << "Test loss: " << loss;

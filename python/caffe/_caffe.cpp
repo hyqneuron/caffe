@@ -211,7 +211,6 @@ BOOST_PYTHON_MODULE(_caffe) {
     .def("copy_from", static_cast<void (Net<Dtype>::*)(const string)>(
         &Net<Dtype>::CopyTrainedLayersFrom))
     .def("share_with", &Net<Dtype>::ShareTrainedLayersWith)
-    .def("copy_trained_layers_from_file", &Net<Dtype>::CopyTrainedLayersFromFile)
     .add_property("_blobs", bp::make_function(&Net<Dtype>::blobs,
         bp::return_internal_reference<>()))
     .add_property("layers", bp::make_function(&Net<Dtype>::layers,

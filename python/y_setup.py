@@ -177,6 +177,13 @@ gLenet = Model(
         ,          "../models/bvlc_googlenet/bvlc_googlenet.caffemodel"
     )
 
+mine= Model(
+        { "deploy":'../models/yq_fk1/backup_2_100000y/deploy.prototxt' # yq's customized
+        , "train" :'../models/yq_fk1/backup_2_100000y/train_val.prototxt'
+        } 
+        ,          "../models/NINImageNet/nin_imagenet.caffemodel"
+    )
+
 
 
 

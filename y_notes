@@ -22,33 +22,6 @@ TODO
       - We directly set net.bottom_need_backward_
 - try NIN
 
-footprint
-NIN
-- 900MB
-- accu: 198569701
-- 17.10 sec
-GoogLeNet
-- 4GB
-- accu: 1056115200
-- 44.43 sec
-CaffeNet
-- 700MB
-- accu: 104957201
-- 14.54 sec
-
-NIN
-- 60MB
-- accu: 1985698
-- 0.249 sec
-GoogLeNet
-- 100MB
-- accu: 10561152
-- 0.510 sec
-CaffeNet
-- 260MB
-- accu: 1049573
-- 0.291 sec
-
 Code structure
 
 python
@@ -76,10 +49,6 @@ cpp
         when they go through a layer, the layer has already been created by
         previous AppendTop, so they start with the layer's AppendBottom, then
         the layer's AppendTop
-
-src
-
-include
 
 
 Question1: How does caffe figure out parameter size for each layer?

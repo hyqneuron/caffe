@@ -88,6 +88,70 @@ class AccuracyLayer : public Layer<Dtype> {
   int ignore_label_;
 };
 
+// HYQ: adapted from AccuracyLayer above
+/**
+ * @brief Computes the classification accuracy for a one-of-many
+ *        classification task.
+ */
+template <typename Dtype>
+class PerClassAccuracyLayer : public Layer<Dtype> {
+ public:
+  /**
+   * @param param provides PerClassAccuracyParameter accuracy_param,
+   *     with PerClassAccuracyLayer options:
+   *   - top_k (\b optional, default 1).
+   *     Sets the maximum rank @f$ k @f$ at which a prediction is considered
+   *     correct.  For example, if @f$ k = 5 @f$, a prediction is counted
+   *     correct if the correct label is among the top 5 predicted labels.
+   */
+  explicit PerClassAccuracyLayer(const LayerParameter& param);
+  virtual void LayerSetUp(const vector<Blob<Dtype>*>& bottom,
+      const vector<Blob<Dtype>*>& top);
+  virtual void Reshape(const vector<Blob<Dtype>*>& bottom,
+      const vector<Blob<Dtype>*>& top);
+
+  virtual inline const char* type() const { return "PerClassAccuracy"; }
+  virtual inline int ExactNumBottomBlobs() const { return 2; }
+  // HYQ: we do custom accuracy printing, so and we do not use top at all
+  virtual inline int ExactNumTopBlobs() const { return 0; }
+  virtual bool has_custom_test_information() {return true;}
+  virtual void custom_test_information();
+
+ protected:
+  /**
+   * @param bottom input Blob vector (length 2)
+   * @param top output Blob vector (length 1)
+   * see AccuracyLayer for details
+   */
+  virtual void Forward_cpu(const vector<Blob<Dtype>*>& bottom,
+      const vector<Blob<Dtype>*>& top);
+
+
+  /// @brief Not implemented -- PerClassAccuracyLayer cannot be used as a loss.
+  virtual void Backward_cpu(const vector<Blob<Dtype>*>& top,
+      const vector<bool>& propagate_down, const vector<Blob<Dtype>*>& bottom) {
+    for (int i = 0; i < propagate_down.size(); ++i) {
+      if (propagate_down[i]) { NOT_IMPLEMENTED; }
+    }
+  }
+
+  int label_axis_, outer_num_, inner_num_;
+  int top_k_;
+  bool has_ignore_label_;
+  int ignore_label_;
+
+  // HYQ begin
+  int num_classes_;
+  string classifier_name_;
+  vector<int>    class_labels_;
+  vector<string> class_names_;
+  vector<float>  class_priors_;
+  vector<float>  class_lrmults_;
+  vector<int>    class_TPs_; // per-class true-positives for this test iter
+  vector<int>    class_Totals_; // per-class TP+FN
+  vector<int>    class_FPs_; // per-class false negatives for this test iter
+  // HYQ end
+};
 /**
  * @brief An interface for Layer%s that take two Blob%s as input -- usually
  *        (1) predictions and (2) ground-truth labels -- and output a

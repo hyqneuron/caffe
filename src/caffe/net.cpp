@@ -717,14 +717,6 @@ void Net<Dtype>::CopyTrainedLayersFrom(const string trained_filename) {
   ReadNetParamsFromBinaryFileOrDie(trained_filename, &param);
   CopyTrainedLayersFrom(param);
 }
-// begin HYQ
-template <typename Dtype>
-void Net<Dtype>::CopyTrainedLayersFromFile(const string trained_filename) {
-  NetParameter param;
-  ReadNetParamsFromBinaryFileOrDie(trained_filename, &param);
-  CopyTrainedLayersFrom(param);
-}
-// end HYQ
 
 template <typename Dtype>
 void Net<Dtype>::ToProto(NetParameter* param, bool write_diff) const {

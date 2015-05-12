@@ -1,6 +1,7 @@
 net: "models/yq_fk1/train_val.prototxt"
 test_iter: 100
 test_interval: 500
+test_compute_loss: true
 # lr for fine-tuning should be lower than when starting from scratch
 base_lr: 0.00005
 lr_policy: "step"
