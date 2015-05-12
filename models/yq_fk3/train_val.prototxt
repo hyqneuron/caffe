@@ -278,11 +278,93 @@ layer {
     stride: 2
   }
 }
+####
+layer {
+  name: "fc6"
+  type: "InnerProduct"
+  bottom: "pool5"
+  top: "fc6"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
+  param {
+    lr_mult: 2
+    decay_mult: 0
+  }
+  inner_product_param {
+    num_output: 4096
+    weight_filler {
+      type: "gaussian"
+      std: 0.005
+    }
+    bias_filler {
+      type: "constant"
+      value: 1
+    }
+  }
+}
+layer {
+  name: "relu6"
+  type: "ReLU"
+  bottom: "fc6"
+  top: "fc6"
+}
+layer {
+  name: "drop6"
+  type: "Dropout"
+  bottom: "fc6"
+  top: "fc6"
+  dropout_param {
+    dropout_ratio: 0.5
+  }
+}
+layer {
+  name: "fc7"
+  type: "InnerProduct"
+  bottom: "fc6"
+  top: "fc7"
+  # Note that lr_mult can be set to 0 to disable any fine-tuning of this, and any other, layer
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
+  param {
+    lr_mult: 2
+    decay_mult: 0
+  }
+  inner_product_param {
+    num_output: 4096
+    weight_filler {
+      type: "gaussian"
+      std: 0.005
+    }
+    bias_filler {
+      type: "constant"
+      value: 1
+    }
+  }
+}
+layer {
+  name: "relu7"
+  type: "ReLU"
+  bottom: "fc7"
+  top: "fc7"
+}
+layer {
+  name: "drop7"
+  type: "Dropout"
+  bottom: "fc7"
+  top: "fc7"
+  dropout_param {
+    dropout_ratio: 0.5
+  }
+}
 ####category
 layer {
   name: "fc8_category"
   type: "InnerProduct"
-  bottom: "pool5"
+  bottom: "fc7"
   top: "fc8_category"
   # lr_mult is set to higher than for other layers, because this layer is starting from random while the others are already trained
   param {
@@ -345,7 +427,7 @@ layer {
 layer {
   name: "fc8_pattern"
   type: "InnerProduct"
-  bottom: "pool5"
+  bottom: "fc7"
   top: "fc8_pattern"
   # lr_mult is set to higher than for other layers, because this layer is starting from random while the others are already trained
   param {
@@ -408,7 +490,7 @@ layer {
 layer {
   name: "fc8_neck"
   type: "InnerProduct"
-  bottom: "pool5"
+  bottom: "fc7"
   top: "fc8_neck"
   # lr_mult is set to higher than for other layers, because this layer is starting from random while the others are already trained
   param {
@@ -458,7 +540,7 @@ layer {
 layer {
   name: "fc8_sleeve"
   type: "InnerProduct"
-  bottom: "pool5"
+  bottom: "fc7"
   top: "fc8_sleeve"
   # lr_mult is set to higher than for other layers, because this layer is starting from random while the others are already trained
   param {
@@ -508,7 +590,7 @@ layer {
 layer {
   name: "fc8_fit"
   type: "InnerProduct"
-  bottom: "pool5"
+  bottom: "fc7"
   top: "fc8_fit"
   # lr_mult is set to higher than for other layers, because this layer is starting from random while the others are already trained
   param {
@@ -558,7 +640,7 @@ layer {
 layer {
   name: "fc8_ideal_for"
   type: "InnerProduct"
-  bottom: "pool5"
+  bottom: "fc7"
   top: "fc8_ideal_for"
   # lr_mult is set to higher than for other layers, because this layer is starting from random while the others are already trained
   param {
@@ -608,7 +690,7 @@ layer {
 layer {
   name: "fc8_occasion"
   type: "InnerProduct"
-  bottom: "pool5"
+  bottom: "fc7"
   top: "fc8_occasion"
   # lr_mult is set to higher than for other layers, because this layer is starting from random while the others are already trained
   param {
@@ -658,7 +740,7 @@ layer {
 layer {
   name: "fc8_embellished"
   type: "InnerProduct"
-  bottom: "pool5"
+  bottom: "fc7"
   top: "fc8_embellished"
   # lr_mult is set to higher than for other layers, because this layer is starting from random while the others are already trained
   param {
@@ -708,7 +790,7 @@ layer {
 layer {
   name: "fc8_embroidered"
   type: "InnerProduct"
-  bottom: "pool5"
+  bottom: "fc7"
   top: "fc8_embroidered"
   # lr_mult is set to higher than for other layers, because this layer is starting from random while the others are already trained
   param {
