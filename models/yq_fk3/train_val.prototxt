@@ -38,6 +38,8 @@ layer {
   top: "label_fit"
   top: "label_ideal_for"
   top: "label_occasion"
+  top: "label_embellished"
+  top: "label_embroidered"
   include {
     phase: TEST
   }
