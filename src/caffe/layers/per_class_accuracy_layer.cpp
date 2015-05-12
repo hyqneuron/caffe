@@ -57,8 +57,8 @@ PerClassAccuracyLayer<Dtype>::PerClassAccuracyLayer(const LayerParameter& param)
     // implement this ctor in the first place. To be consistent with the rest of
     // caffe's way of doing things, we'll leave resizing of top blobs to
     // LayerSetUp()
-    string top_name = param.name()+"."+class_name;
-    const_cast<LayerParameter&>(param).add_top(top_name);
+    // string top_name = param.name()+"."+class_name;
+    // const_cast<LayerParameter&>(param).add_top(top_name);
   }
 }
 
