@@ -2,6 +2,7 @@ import sys
 sys.path.append('python')
 import caffe
 flickrsolver = 'models/yq_test1/solver.prototxt'
+fk3solver    =  'models/yq_fk3/solver.prototxt'
 caffenetmodel= 'models/bvlc_reference_caffenet/bvlc_reference_caffenet.caffemodel'
 def getsolver(solver=flickrsolver):
     return caffe.get_solver(solver)

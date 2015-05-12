@@ -244,7 +244,7 @@ class ImageDataLayer : public BasePrefetchingDataLayer<Dtype> {
   int lines_id_;
 };
 
-// HYQ
+// HYQ: adapted from ImageDataLayer above
 template <typename Dtype>
 class ImageDataMultLabelLayer : public BasePrefetchingDataLayer<Dtype> {
  public:

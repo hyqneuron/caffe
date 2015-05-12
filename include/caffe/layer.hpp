@@ -285,6 +285,15 @@ class Layer {
     param_propagate_down_[param_id] = value;
   }
 
+  // HYQ
+  /**
+   * @brief When implemented, would do custom test-time printing
+   *        useful for printing non-numeric things or things that can't be
+   *        simply averaged across batches.
+   */
+  virtual bool has_custom_test_information(){return false;}
+  virtual void custom_test_information() {}
+
 
  protected:
   /** The protobuf that stores the layer parameters */

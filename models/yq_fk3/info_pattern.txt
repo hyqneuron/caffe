@@ -1,0 +1,16 @@
+pattern
+14
+   0 Ignored                3.468918   0.022175
+   1 Checkered              0.149534   0.514418
+   2 Embellished            0.006110  12.590640
+   3 Embroidered            0.023691   3.247000
+   4 Print.Animal           0.018457   4.167735
+   5 Print.Floral           0.108348   0.709961
+   6 Print.Geometric        0.023541   3.267625
+   7 Print.Graphic          0.041186   1.867699
+   8 Print.Polka            0.026681   2.883045
+   9 Printed                0.149534   0.514418
+  10 Self_Design            0.149534   0.514418
+  11 Solid                  0.149534   0.514418
+  12 Striped                0.149534   0.514418
+  13 Woven                  0.004315  17.826352
