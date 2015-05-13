@@ -6,6 +6,7 @@
 #include <fstream>  // NOLINT(readability/streams)
 #include <iostream>  // NOLINT(readability/streams)
 #include <string>
+#include <math.h>
 #include "boost/format.hpp"
 #include "caffe/layer.hpp"
 #include "caffe/util/io.hpp"
@@ -88,10 +89,14 @@ void printTable(std::ostream& outfile,
         // depending on normalization, we print different number
         if(!normalize)
           outfile << format(" %3i") % a_to_b_[i][j];
-        else if(normalize_bylabel)
-          outfile << format(" %3i") % int(1000*(a_to_b_[i][j]/(float)class_label_total_[i]));
-        else if(normalize_bypred)
-          outfile << format(" %3i") % int(1000*(a_to_b_[i][j]/(float)class_pred_total_[j]));
+        else{
+          float val = 0.0;
+          val = normalize_bylabel?
+            (a_to_b_[i][j]/(float)class_label_total_[i]) : 
+            (a_to_b_[i][j]/(float)class_pred_total_[j])  ;
+          if(isnan(val)) outfile << " NaN";
+          else           outfile << format(" %3i") % int(1000*val);
+        }
       }
       outfile << std::endl;
     }
