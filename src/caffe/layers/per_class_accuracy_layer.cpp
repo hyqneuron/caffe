@@ -125,15 +125,19 @@ void PerClassAccuracyLayer<Dtype>::custom_test_information() {
             std::ofstream::app | std::ofstream::out);
     outfile<< format("###################%=20s####################")
             % this->layer_param_.name();
+    outfile << std::endl;
     // print raw numbers
+    outfile << "Raw number table" << std::endl;
     printTable(outfile, class_names_, a_to_b_, 
         class_label_total_, class_pred_total_,
         false, false, false);
     // print precision (normalized by pred)
+    outfile << "precision table (normalized by TP+FP)" << std::endl;
     printTable(outfile, class_names_, a_to_b_, 
         class_label_total_, class_pred_total_,
         true, false, true);
     // print recall (normalized by label)
+    outfile << "recall table (normalized by TP+FN)" << std::endl;
     printTable(outfile, class_names_, a_to_b_, 
         class_label_total_, class_pred_total_,
         true, true, false);
