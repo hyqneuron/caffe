@@ -89,9 +89,9 @@ void printTable(std::ostream& outfile,
         if(!normalize)
           outfile << format(" %3i") % a_to_b_[i][j];
         else if(normalize_bylabel)
-          outfile << format(" %0.2f") % (a_to_b_[i][j]/(float)class_label_total_[i]);
+          outfile << format(" %3i") % int(1000*(a_to_b_[i][j]/(float)class_label_total_[i]));
         else if(normalize_bypred)
-          outfile << format(" %0.2f") % (a_to_b_[i][j]/(float)class_pred_total_[j]);
+          outfile << format(" %3i") % int(1000*(a_to_b_[i][j]/(float)class_pred_total_[j]));
       }
       outfile << std::endl;
     }
