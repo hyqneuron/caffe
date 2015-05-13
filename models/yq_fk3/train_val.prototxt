@@ -408,6 +408,7 @@ layer {
   per_class_accuracy_param {
       ignore_label: 0
       classifier_info_file: "models/yq_fk3/info_category.txt"
+      confusion_matrix_file: "models/yq_fk3/conf_category"
   }
 }
 layer {
@@ -471,6 +472,7 @@ layer {
   per_class_accuracy_param {
       ignore_label: 0
       classifier_info_file: "models/yq_fk3/info_pattern.txt"
+      confusion_matrix_file: "models/yq_fk3/conf_pattern"
   }
 }
 layer {
@@ -534,6 +536,7 @@ layer {
   per_class_accuracy_param {
       ignore_label: 0
       classifier_info_file: "models/yq_fk3/info_neck.txt"
+      confusion_matrix_file: "models/yq_fk3/conf_neck"
   }
 }
 layer {
@@ -597,6 +600,7 @@ layer {
   per_class_accuracy_param {
       ignore_label: 0
       classifier_info_file: "models/yq_fk3/info_sleeve.txt"
+      confusion_matrix_file: "models/yq_fk3/conf_sleeve"
   }
 }
 layer {
@@ -660,6 +664,7 @@ layer {
   per_class_accuracy_param {
       ignore_label: 0
       classifier_info_file: "models/yq_fk3/info_fit.txt"
+      confusion_matrix_file: "models/yq_fk3/conf_fit"
   }
 }
 layer {
@@ -723,6 +728,7 @@ layer {
   per_class_accuracy_param {
       ignore_label: 0
       classifier_info_file: "models/yq_fk3/info_ideal_for.txt"
+      confusion_matrix_file: "models/yq_fk3/conf_ideal_for"
   }
 }
 layer {
@@ -786,6 +792,7 @@ layer {
   per_class_accuracy_param {
       ignore_label: 0
       classifier_info_file: "models/yq_fk3/info_occasion.txt"
+      confusion_matrix_file: "models/yq_fk3/conf_occasion"
   }
 }
 layer {
@@ -849,6 +856,7 @@ layer {
   per_class_accuracy_param {
       ignore_label: 0
       classifier_info_file: "models/yq_fk3/info_embellished.txt"
+      confusion_matrix_file: "models/yq_fk3/conf_embellished"
   }
 }
 layer {
@@ -912,6 +920,7 @@ layer {
   per_class_accuracy_param {
       ignore_label: 0
       classifier_info_file: "models/yq_fk3/info_embroidered.txt"
+      confusion_matrix_file: "models/yq_fk3/conf_embroidered"
   }
 }
 layer {
