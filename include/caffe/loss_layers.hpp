@@ -147,9 +147,15 @@ class PerClassAccuracyLayer : public Layer<Dtype> {
   vector<string> class_names_;
   vector<float>  class_priors_;
   vector<float>  class_lrmults_;
-  vector<int>    class_TPs_; // per-class true-positives for this test iter
-  vector<int>    class_Totals_; // per-class TP+FN
-  vector<int>    class_FPs_; // per-class false negatives for this test iter
+
+  //vector<int>    class_TPs_; // per-class true-positives for this test iter
+  //vector<int>    class_FPs_; // per-class false negatives for this test iter
+  // how many labels of this class have we encountered?
+  vector<int>    class_label_total_;
+  // how many predictions of this class have we made?
+  vector<int>    class_pred_total_;
+  vector<vector<int> > a_to_b_; // confusion matrix: A to B
+                               // A being the label, B being prediction
   // HYQ end
 };
 /**

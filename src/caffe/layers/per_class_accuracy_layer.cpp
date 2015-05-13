@@ -42,7 +42,7 @@ PerClassAccuracyLayer<Dtype>::PerClassAccuracyLayer(const LayerParameter& param)
 
   // get information for each class, and dynamically declare one top blob per
   // class
-  for (int i=0;i<num_classes;i++){
+  for (int i=0;i<num_classes_;i++){
     infile >> class_label;
     infile >> class_name;
     infile >> class_prior;
@@ -51,17 +51,51 @@ PerClassAccuracyLayer<Dtype>::PerClassAccuracyLayer(const LayerParameter& param)
     class_names_.push_back  (class_name);
     class_priors_.push_back (class_prior);
     class_lrmults_.push_back(class_lrmult);
-    class_TPs_.push_back(0); // each class's TP and FP starts at 0
-    class_FPs_.push_back(0);
-    class_Totals_.push_back(0);
-    // for each class, dynamically declare one top blob
-    // this dynamic 'top' declaration is a hack. It is the reason we needed to
-    // implement this ctor in the first place. To be consistent with the rest of
-    // caffe's way of doing things, we'll leave resizing of top blobs to
-    // LayerSetUp()
-    // string top_name = param.name()+"."+class_name;
-    // const_cast<LayerParameter&>(param).add_top(top_name);
+
+    // confusion statistics
+    class_label_total_.push_back(0);
+    class_pred_total_.push_back(0);
+    a_to_b_.push_back(vector<int>(num_classes_));
   }
+}
+
+void printTable(std::ostream& outfile,
+                const vector<string>& class_names_,
+                const vector<vector<int> >& a_to_b_,
+                const vector<int>& class_label_total_,
+                const vector<int>& class_pred_total_,
+                bool normalize, 
+                bool normalize_bylabel,
+                bool normalize_bypred)
+{
+    // if normalize, must either bylabel or bypred
+    CHECK(!normalize || normalize_bylabel || normalize_bypred );
+    // we print something like below:
+    //           0  1  2  3  4  5  6  7
+    // 0 name   nn nn nn
+    // 1 name
+    // 2 name
+    outfile << format("%20s") % " "; // print 20 spaces
+    // print top-line indices
+    for(int i = 0; i<class_names_.size(); i++)
+      outfile << format(" %5i") % i;
+    outfile << std::endl;
+    // one class per line
+    for(int i = 0; i<class_names_.size(); i++){
+      outfile << format("%2i %17s") % i % class_names_[i];
+      // one number per class on this line
+      for(int j = 0; j<class_names_.size(); j++){
+        // depending on normalization, we print different number
+        if(!normalize)
+          outfile << format(" %5i") % a_to_b_[i][j];
+        else if(normalize_bylabel)
+          outfile << format(" %5f") % (a_to_b_[i][j]/(float)class_label_total_[i]);
+        else if(normalize_bypred)
+          outfile << format(" %5f") % (a_to_b_[i][j]/(float)class_pred_total_[j]);
+      }
+      outfile << std::endl;
+    }
+    // we are done
 }
 
 template <typename Dtype>
@@ -71,28 +105,45 @@ void PerClassAccuracyLayer<Dtype>::custom_test_information() {
   // start the print!
   for(int i = 0; i<num_classes_; i++){
     // we print precision and FN+TP
-    float precision = float(class_TPs_[i]) / (class_TPs_[i] + class_FPs_[i]);
-    float recall = float(class_TPs_[i]) / class_Totals_[i];
+    float precision = float(a_to_b_[i][i]) / class_pred_total_[i];
+    float recall = float(a_to_b_[i][i])    / class_label_total_[i];
+    // name TP FP label precision recall
     LOG(INFO)<< format("%20s %10i %10i %10i %10f %10f")
         % class_names_[i]
-        % class_TPs_[i]
-        % class_FPs_[i]
-        % class_Totals_[i]
+        % a_to_b_[i][i]
+        % (class_pred_total_[i] - a_to_b_[i][i])
+        % class_label_total_[i]
         % precision
         % recall;
-        //<< class_names_[i] 
-        //<< ": precision=" << precision
-        //<< ", recall=" << recall
-        //<< ", total encountered=" << class_Totals_[i];
-    // TODO we should provide a running average sort of statistic for classes
-    // that are really rare.
+  }
+  // now, if we need to write confusion matrix to file
+  if(this->layer_param_.per_class_accuracy_param().has_confusion_matrix_file()){
+    string conf_file = 
+        this->layer_param_.per_class_accuracy_param().confusion_matrix_file();
+    std::ofstream outfile(
+            conf_file.c_str(), 
+            std::ofstream::app | std::ofstream::out);
+    outfile<< format("###################%=20s####################")
+            % this->layer_param_.name();
+    // print raw numbers
+    printTable(outfile, class_names_, a_to_b_, 
+        class_label_total_, class_pred_total_,
+        false, false, false);
+    // print precision (normalized by pred)
+    printTable(outfile, class_names_, a_to_b_, 
+        class_label_total_, class_pred_total_,
+        true, false, true);
+    // print recall (normalized by label)
+    printTable(outfile, class_names_, a_to_b_, 
+        class_label_total_, class_pred_total_,
+        true, true, false);
   }
 
   // after printing, reset tracking information
   for(int i = 0; i<num_classes_; i++){
-    class_TPs_[i]=0;
-    class_FPs_[i]=0;
-    class_Totals_[i]=0;
+    class_label_total_[i]=0;
+    class_pred_total_[i]=0;
+    a_to_b_[i] = vector<int>(num_classes_);
   }
 }
 template <typename Dtype>
@@ -159,28 +210,22 @@ void PerClassAccuracyLayer<Dtype>::Forward_cpu(const vector<Blob<Dtype>*>& botto
           bottom_data_vector.begin(), bottom_data_vector.begin() + top_k_,
           bottom_data_vector.end(), std::greater<std::pair<Dtype, int> >());
       // check if true label is in top k predictions
-      bool match = false;
+      int predicted_label = bottom_data_vector[0].second;
       for (int k = 0; k < top_k_; k++) {
         if (bottom_data_vector[k].second == label_value) {
           //++accuracy;
-          match = true;
+          predicted_label = label_value;
           break;
         }
-      }
-      int predicted_label;
-      class_Totals_[label_value]+=1;
-      if (match){
-        predicted_label = label_value;
-        class_TPs_[predicted_label]+=1;
-      }
-      else{
-        predicted_label = bottom_data_vector[0].second;
-        class_FPs_[predicted_label]+=1;
       }
       CHECK_LT(label_value, num_classes_) << "bad label";
       CHECK_LT(predicted_label, num_classes_) << 
           "number of classes:" << num_classes_ <<
           "predicted label:" << predicted_label;
+      // record the stats
+      class_label_total_[label_value]+=1;      // number of this label encountered
+      class_pred_total_[predicted_label]+=1;   // number of this pred encountered
+      a_to_b_[label_value][predicted_label]+=1;// label_to_pred confusion matrix
       //++count;
     }
   }
