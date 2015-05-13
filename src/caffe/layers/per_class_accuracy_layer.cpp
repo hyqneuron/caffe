@@ -78,7 +78,7 @@ void printTable(std::ostream& outfile,
     outfile << format("%20s") % " "; // print 20 spaces
     // print top-line indices
     for(int i = 0; i<class_names_.size(); i++)
-      outfile << format(" %5i") % i;
+      outfile << format(" %3i") % i;
     outfile << std::endl;
     // one class per line
     for(int i = 0; i<class_names_.size(); i++){
@@ -87,11 +87,11 @@ void printTable(std::ostream& outfile,
       for(int j = 0; j<class_names_.size(); j++){
         // depending on normalization, we print different number
         if(!normalize)
-          outfile << format(" %5i") % a_to_b_[i][j];
+          outfile << format(" %3i") % a_to_b_[i][j];
         else if(normalize_bylabel)
-          outfile << format(" %5f") % (a_to_b_[i][j]/(float)class_label_total_[i]);
+          outfile << format(" %0.2f") % (a_to_b_[i][j]/(float)class_label_total_[i]);
         else if(normalize_bypred)
-          outfile << format(" %5f") % (a_to_b_[i][j]/(float)class_pred_total_[j]);
+          outfile << format(" %0.2f") % (a_to_b_[i][j]/(float)class_pred_total_[j]);
       }
       outfile << std::endl;
     }
