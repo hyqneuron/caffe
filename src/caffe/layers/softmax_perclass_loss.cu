@@ -2,11 +2,14 @@
 #include <cfloat>
 #include <vector>
 
+#include "boost/format.hpp"
 #include "caffe/layer.hpp"
 #include "caffe/util/math_functions.hpp"
 #include "caffe/vision_layers.hpp"
 
 namespace caffe {
+
+using boost::format;
 
 template <typename Dtype>
 __global__ void SoftmaxLossForwardGPU(const int nthreads,
