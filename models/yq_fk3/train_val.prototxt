@@ -401,7 +401,7 @@ layer {
   type: "PerClassAccuracy"
   bottom: "fc8_category"
   bottom: "label_category"
-  #top: "accuracy_category"
+  top: "accuracy_category"
   include {
     phase: TEST
   }
@@ -409,19 +409,6 @@ layer {
       ignore_label: 0
       classifier_info_file: "models/yq_fk3/info_category.txt"
       confusion_matrix_file: "models/yq_fk3/conf_category"
-  }
-}
-layer {
-  name: "simple_accuracy_category"
-  type: "Accuracy"
-  bottom: "fc8_category"
-  bottom: "label_category"
-  top: "simple_accuracy_category"
-  include {
-    phase: TEST
-  }
-  accuracy_param {
-      ignore_label: 0
   }
 }
 ####pattern
@@ -465,7 +452,7 @@ layer {
   type: "PerClassAccuracy"
   bottom: "fc8_pattern"
   bottom: "label_pattern"
-  #top: "accuracy_pattern"
+  top: "accuracy_pattern"
   include {
     phase: TEST
   }
@@ -473,19 +460,6 @@ layer {
       ignore_label: 0
       classifier_info_file: "models/yq_fk3/info_pattern.txt"
       confusion_matrix_file: "models/yq_fk3/conf_pattern"
-  }
-}
-layer {
-  name: "simple_accuracy_pattern"
-  type: "Accuracy"
-  bottom: "fc8_pattern"
-  bottom: "label_pattern"
-  top: "simple_accuracy_pattern"
-  include {
-    phase: TEST
-  }
-  accuracy_param {
-      ignore_label: 0
   }
 }
 ####neck
@@ -529,7 +503,7 @@ layer {
   type: "PerClassAccuracy"
   bottom: "fc8_neck"
   bottom: "label_neck"
-  #top: "accuracy_neck"
+  top: "accuracy_neck"
   include {
     phase: TEST
   }
@@ -537,19 +511,6 @@ layer {
       ignore_label: 0
       classifier_info_file: "models/yq_fk3/info_neck.txt"
       confusion_matrix_file: "models/yq_fk3/conf_neck"
-  }
-}
-layer {
-  name: "simple_accuracy_neck"
-  type: "Accuracy"
-  bottom: "fc8_neck"
-  bottom: "label_neck"
-  top: "simple_accuracy_neck"
-  include {
-    phase: TEST
-  }
-  accuracy_param {
-      ignore_label: 0
   }
 }
 ####sleeve
@@ -593,7 +554,7 @@ layer {
   type: "PerClassAccuracy"
   bottom: "fc8_sleeve"
   bottom: "label_sleeve"
-  #top: "accuracy_sleeve"
+  top: "accuracy_sleeve"
   include {
     phase: TEST
   }
@@ -601,19 +562,6 @@ layer {
       ignore_label: 0
       classifier_info_file: "models/yq_fk3/info_sleeve.txt"
       confusion_matrix_file: "models/yq_fk3/conf_sleeve"
-  }
-}
-layer {
-  name: "simple_accuracy_sleeve"
-  type: "Accuracy"
-  bottom: "fc8_sleeve"
-  bottom: "label_sleeve"
-  top: "simple_accuracy_sleeve"
-  include {
-    phase: TEST
-  }
-  accuracy_param {
-      ignore_label: 0
   }
 }
 ####fit
@@ -657,7 +605,7 @@ layer {
   type: "PerClassAccuracy"
   bottom: "fc8_fit"
   bottom: "label_fit"
-  #top: "accuracy_fit"
+  top: "accuracy_fit"
   include {
     phase: TEST
   }
@@ -665,19 +613,6 @@ layer {
       ignore_label: 0
       classifier_info_file: "models/yq_fk3/info_fit.txt"
       confusion_matrix_file: "models/yq_fk3/conf_fit"
-  }
-}
-layer {
-  name: "simple_accuracy_fit"
-  type: "Accuracy"
-  bottom: "fc8_fit"
-  bottom: "label_fit"
-  top: "simple_accuracy_fit"
-  include {
-    phase: TEST
-  }
-  accuracy_param {
-      ignore_label: 0
   }
 }
 ####idea_for
@@ -721,7 +656,7 @@ layer {
   type: "PerClassAccuracy"
   bottom: "fc8_ideal_for"
   bottom: "label_ideal_for"
-  #top: "accuracy_ideal_for"
+  top: "accuracy_ideal_for"
   include {
     phase: TEST
   }
@@ -729,19 +664,6 @@ layer {
       ignore_label: 0
       classifier_info_file: "models/yq_fk3/info_ideal_for.txt"
       confusion_matrix_file: "models/yq_fk3/conf_ideal_for"
-  }
-}
-layer {
-  name: "simple_accuracy_ideal_for"
-  type: "Accuracy"
-  bottom: "fc8_ideal_for"
-  bottom: "label_ideal_for"
-  top: "simple_accuracy_ideal_for"
-  include {
-    phase: TEST
-  }
-  accuracy_param {
-      ignore_label: 0
   }
 }
 ####occasion
@@ -785,7 +707,7 @@ layer {
   type: "PerClassAccuracy"
   bottom: "fc8_occasion"
   bottom: "label_occasion"
-  #top: "accuracy_occasion"
+  top: "accuracy_occasion"
   include {
     phase: TEST
   }
@@ -793,19 +715,6 @@ layer {
       ignore_label: 0
       classifier_info_file: "models/yq_fk3/info_occasion.txt"
       confusion_matrix_file: "models/yq_fk3/conf_occasion"
-  }
-}
-layer {
-  name: "simple_accuracy_occasion"
-  type: "Accuracy"
-  bottom: "fc8_occasion"
-  bottom: "label_occasion"
-  top: "simple_accuracy_occasion"
-  include {
-    phase: TEST
-  }
-  accuracy_param {
-      ignore_label: 0
   }
 }
 ####embellished
@@ -849,7 +758,7 @@ layer {
   type: "PerClassAccuracy"
   bottom: "fc8_embellished"
   bottom: "label_embellished"
-  #top: "accuracy_embellished"
+  top: "accuracy_embellished"
   include {
     phase: TEST
   }
@@ -857,19 +766,6 @@ layer {
       ignore_label: 0
       classifier_info_file: "models/yq_fk3/info_embellished.txt"
       confusion_matrix_file: "models/yq_fk3/conf_embellished"
-  }
-}
-layer {
-  name: "simple_accuracy_embellished"
-  type: "Accuracy"
-  bottom: "fc8_embellished"
-  bottom: "label_embellished"
-  top: "simple_accuracy_embellished"
-  include {
-    phase: TEST
-  }
-  accuracy_param {
-      ignore_label: 0
   }
 }
 ####embroidered
@@ -913,7 +809,7 @@ layer {
   type: "PerClassAccuracy"
   bottom: "fc8_embroidered"
   bottom: "label_embroidered"
-  #top: "accuracy_embroidered"
+  top: "accuracy_embroidered"
   include {
     phase: TEST
   }
@@ -921,18 +817,5 @@ layer {
       ignore_label: 0
       classifier_info_file: "models/yq_fk3/info_embroidered.txt"
       confusion_matrix_file: "models/yq_fk3/conf_embroidered"
-  }
-}
-layer {
-  name: "simple_accuracy_embroidered"
-  type: "Accuracy"
-  bottom: "fc8_embroidered"
-  bottom: "label_embroidered"
-  top: "simple_accuracy_embroidered"
-  include {
-    phase: TEST
-  }
-  accuracy_param {
-      ignore_label: 0
   }
 }
