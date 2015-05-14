@@ -232,9 +232,10 @@ void ImageDataMultLabelLayer<Dtype>::InternalThreadEntry() {
     lines_id_++;
     if (lines_id_ >= lines_size) {
       // We have reached the end. Restart from the first.
-      DLOG(INFO) << "Restarting data prefetching from start.";
+      LOG(INFO) << "Restarting data prefetching from start.";
       lines_id_ = 0;
       if (this->layer_param_.image_data_mult_label_param().shuffle()) {
+        LOG(INFO) << "Re-shuffling training samples";
         ShuffleImages();
       }
     }

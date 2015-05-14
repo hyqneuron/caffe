@@ -100,6 +100,34 @@ void printTable(std::ostream& outfile,
       }
       outfile << std::endl;
     }
+    // now, if normalized, we also give a confusion report
+    if(normalize){
+      outfile<< (normalize_bylabel? "Recall report " : "Precision report ")
+          <<std::endl;
+      // one row per class
+      for(int i = 0; i<class_names_.size(); i++){
+
+        outfile << format("%20s (%1.3f) %s ") 
+                % class_names_[i]
+                % (a_to_b_[i][i]/float( normalize_bylabel?
+                            class_label_total_[i] : class_pred_total_[i]))
+                % (normalize_bylabel? " >> " : " << ");
+        // one class per ckeck
+        for(int j = 0; j<class_names_.size(); j++){
+          float val = 0.0;
+          val = normalize_bylabel?
+              (a_to_b_[i][j]/(float)class_label_total_[i]) : 
+              (a_to_b_[i][j]/(float)class_pred_total_[j])  ;
+          // if problem greater than 0.01, we make a report
+          if (i!=j && val > 0.01){
+              outfile << format(" (%s, %1.3f)") 
+                  % class_names_[j]
+                  % val;
+          }
+        }
+        outfile << std::endl;
+      }
+    }
     // we are done
 }
 
