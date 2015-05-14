@@ -1,0 +1,52 @@
+
+
+####$name####
+layer {
+  name: "fc8_$name"
+  type: "InnerProduct"
+  bottom: "$fc8_bottom"
+  top: "fc8_$name"
+  param {
+    lr_mult: 10
+    decay_mult: 1
+  }
+  param {
+    lr_mult: 20
+    decay_mult: 0
+  }
+  inner_product_param {
+    num_output: $num_output
+    weight_filler {
+      type: "gaussian"
+      std: 0.01
+    }
+    bias_filler {
+      type: "constant"
+      value: 0
+    }
+  }
+}
+layer {
+  name: "loss_$name"
+  type: "SoftmaxWithLoss"
+  bottom: "fc8_$name"
+  bottom: "label_$name"
+  loss_param {
+      ignore_label: 0
+  }
+}
+layer {
+  name: "accuracy_$name"
+  type: "PerClassAccuracy"
+  bottom: "fc8_$name"
+  bottom: "label_$name"
+  top: "accuracy_$name"
+  include {
+    phase: TEST
+  }
+  per_class_accuracy_param {
+      ignore_label: 0
+      classifier_info_file: "models/$net_name/info_$name.txt"
+      confusion_matrix_file: "models/$net_name/conf_$name"
+  }
+}
