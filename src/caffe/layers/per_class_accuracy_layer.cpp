@@ -117,7 +117,7 @@ void printTable(std::ostream& outfile,
           float val = 0.0;
           val = normalize_bylabel?
               (a_to_b_[i][j]/(float)class_label_total_[i]) : 
-              (a_to_b_[i][j]/(float)class_pred_total_[j])  ;
+              (a_to_b_[j][i]/(float)class_pred_total_[i])  ;
           // if problem greater than 0.01, we make a report
           if (i!=j && val > 0.01){
               outfile << format(" (%s, %1.3f)") 
