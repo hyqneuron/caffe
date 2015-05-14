@@ -101,14 +101,20 @@ void SoftmaxWithPerClassLossLayer<Dtype>::Backward_gpu(const vector<Blob<Dtype>*
     LOG(FATAL) << this->type()
                << " Layer cannot backpropagate to label inputs.";
   }
+  LOG(INFO) << "##########################";
+  LOG(INFO) << "##########################";
+  LOG(INFO) << "--3";
   if (propagate_down[0]) {
+    LOG(INFO) << "-2";
     Dtype* bottom_diff = bottom[0]->mutable_gpu_diff();
     const Dtype* prob_data = prob_.gpu_data();
     const Dtype* top_data = top[0]->gpu_data();
+    LOG(INFO) << "-1";
     caffe_gpu_memcpy(prob_.count() * sizeof(Dtype), prob_data, bottom_diff);
     const Dtype* label = bottom[1]->gpu_data();
     const int dim = prob_.count() / outer_num_;
     const int nthreads = outer_num_ * inner_num_;
+    LOG(INFO) << "0";
     // Since this memory is never used for anything else,
     // we use to to avoid allocating new GPU memory.
     Dtype* counts = prob_.mutable_gpu_diff();
@@ -116,6 +122,7 @@ void SoftmaxWithPerClassLossLayer<Dtype>::Backward_gpu(const vector<Blob<Dtype>*
     // before we call softmax gpu backprop, we need to load each sample's label
     // and lr_mult into lr_mult_
     Dtype* lr_mult_cpu = lr_mult_.mutable_cpu_data();
+    LOG(INFO) << "a";
     for(in i = 0; i<outer_num_; ++i){
       CHECK_GE(label[i],0);
       CHECK_LT(label[i],num_classes_);
