@@ -116,7 +116,7 @@ void SoftmaxWithPerClassLossLayer<Dtype>::Backward_gpu(const vector<Blob<Dtype>*
     // before we call softmax gpu backprop, we need to load each sample's label
     // and lr_mult into lr_mult_
     Dtype* lr_mult_cpu = lr_mult_.mutable_cpu_data();
-    for(in i = 0; i<outer_num_; ++i){
+    for(int i = 0; i<outer_num_; ++i){
       CHECK_GE(label[i],0);
       CHECK_LT(label[i],num_classes_);
       lr_mult_cpu[i] = class_lrmults_[label[i]];
