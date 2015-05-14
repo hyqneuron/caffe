@@ -235,7 +235,8 @@ void PerClassAccuracyLayer<Dtype>::Forward_cpu(const vector<Blob<Dtype>*>& botto
 
   // LOG(INFO) << "Accuracy: " << accuracy;
   if(count==0)
-    LOG(INFO)<< "Accuracy cannot be computed with count 0";
+    LOG(INFO)<< "Accuracy cannot be computed with count 0 for" 
+             << this->layer_param_.name();
   top[0]->mutable_cpu_data()[0] = count==0? 0 : accuracy / count;
   // Accuracy layer should not be used as a loss function.
 }
