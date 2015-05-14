@@ -125,9 +125,7 @@ void PerClassAccuracyLayer<Dtype>::custom_test_information() {
   if(this->layer_param_.per_class_accuracy_param().has_confusion_matrix_file()){
     string conf_file = 
         this->layer_param_.per_class_accuracy_param().confusion_matrix_file();
-    std::ofstream outfile(
-            conf_file.c_str(), 
-            std::ofstream::app | std::ofstream::out);
+    std::ofstream outfile(conf_file.c_str());
     outfile<< format("###################%=20s####################")
             % this->layer_param_.name();
     outfile << std::endl;
@@ -182,24 +180,21 @@ void PerClassAccuracyLayer<Dtype>::Reshape(
       << "e.g., if label axis == 1 and prediction shape is (N, C, H, W), "
       << "label count (number of labels) must be N*H*W, "
       << "with integer values in {0, 1, ..., C-1}.";
-  // HYQ per-class accuracy does not output top
-  //vector<int> top_shape(0);  // Accuracy is a scalar; 0 axes.
-  //top[0]->Reshape(top_shape);
+  vector<int> top_shape(0);  // Accuracy is a scalar; 0 axes.
+  top[0]->Reshape(top_shape);
 }
 
 template <typename Dtype>
 void PerClassAccuracyLayer<Dtype>::Forward_cpu(const vector<Blob<Dtype>*>& bottom,
     const vector<Blob<Dtype>*>& top) {
-  //Dtype accuracy = 0;
+  Dtype accuracy = 0;
   const Dtype* bottom_data = bottom[0]->cpu_data();
   const Dtype* bottom_label = bottom[1]->cpu_data();
   const int dim = bottom[0]->count() / outer_num_;
   const int num_labels = bottom[0]->shape(label_axis_);
   vector<Dtype> maxval(top_k_+1);
   vector<int> max_id(top_k_+1);
-  // int count = 0;
-  // outer_num_ is number of samples per batch
-  // inner_num_ is prediction per sample, usually 1. can be W*H also
+  int count = 0;
   for (int i = 0; i < outer_num_; ++i) {
     for (int j = 0; j < inner_num_; ++j) {
       const int label_value =
@@ -222,8 +217,7 @@ void PerClassAccuracyLayer<Dtype>::Forward_cpu(const vector<Blob<Dtype>*>& botto
       int predicted_label = bottom_data_vector[0].second;
       for (int k = 0; k < top_k_; k++) {
         if (bottom_data_vector[k].second == label_value) {
-          //++accuracy;
-          predicted_label = label_value;
+          ++accuracy;
           break;
         }
       }
@@ -235,14 +229,14 @@ void PerClassAccuracyLayer<Dtype>::Forward_cpu(const vector<Blob<Dtype>*>& botto
       class_label_total_[label_value]+=1;      // number of this label encountered
       class_pred_total_[predicted_label]+=1;   // number of this pred encountered
       a_to_b_[label_value][predicted_label]+=1;// label_to_pred confusion matrix
-      //++count;
+      ++count;
     }
   }
 
   // LOG(INFO) << "Accuracy: " << accuracy;
-  //if(count==0)
-  //  LOG(INFO)<< "Accuracy cannot be computed with count 0";
-  //top[0]->mutable_cpu_data()[0] = count==0? 0 : accuracy / count;
+  if(count==0)
+    LOG(INFO)<< "Accuracy cannot be computed with count 0";
+  top[0]->mutable_cpu_data()[0] = count==0? 0 : accuracy / count;
   // Accuracy layer should not be used as a loss function.
 }
 
