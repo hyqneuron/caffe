@@ -362,6 +362,7 @@ message LossParameter {
   // If true, normalize each batch across all instances (including spatial
   // dimesions, but not ignored instances); else, divide by batch size only.
   optional bool normalize = 2 [default = true];
+  optional string classifier_info_file = 3;
 }
 
 // Message that stores parameters used by AccuracyLayer

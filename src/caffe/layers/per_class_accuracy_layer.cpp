@@ -18,48 +18,6 @@ namespace caffe {
 using boost::format;
 
 // HYQ: adapted from accuracy_layer.cpp
-template <typename Dtype>
-PerClassAccuracyLayer<Dtype>::PerClassAccuracyLayer(const LayerParameter& param)
-    : Layer<Dtype>(param) {
-  CHECK(param.has_per_class_accuracy_param()) 
-      << "PerClassAccuracyLayer requires a per_class_accuracy_param";
-  const string& c_file = param.per_class_accuracy_param().classifier_info_file();
-  LOG(INFO) << "Opening file " << c_file;
-  std::ifstream infile(c_file.c_str());
-
-  string classifier_name;
-  int num_classes;
-
-  int class_label;
-  string class_name;
-  float class_prior;
-  float class_lrmult;
-
-  infile >> classifier_name;
-  infile >> num_classes;
-
-  classifier_name_ = classifier_name;
-  num_classes_     = num_classes;
-
-  // get information for each class, and dynamically declare one top blob per
-  // class
-  for (int i=0;i<num_classes_;i++){
-    infile >> class_label;
-    infile >> class_name;
-    infile >> class_prior;
-    infile >> class_lrmult;
-    class_labels_.push_back (class_label);
-    class_names_.push_back  (class_name);
-    class_priors_.push_back (class_prior);
-    class_lrmults_.push_back(class_lrmult);
-
-    // confusion statistics
-    class_label_total_.push_back(0);
-    class_pred_total_.push_back(0);
-    a_to_b_.push_back(vector<int>(num_classes_));
-  }
-}
-
 void printTable(std::ostream& outfile,
                 const vector<string>& class_names_,
                 const vector<vector<int> >& a_to_b_,
@@ -191,6 +149,44 @@ void PerClassAccuracyLayer<Dtype>::LayerSetUp(
   if (has_ignore_label_) {
     ignore_label_ = this->layer_param_.per_class_accuracy_param().ignore_label();
     LOG(INFO)<<"accuracy has ignore_label: " << ignore_label_;//HYQ
+  }
+  // start reading classifier_info file
+  CHECK(this->layer_param_.has_per_class_accuracy_param()) 
+      << "PerClassAccuracyLayer requires a per_class_accuracy_param";
+  const string& c_file = this->layer_param_.per_class_accuracy_param().classifier_info_file();
+  LOG(INFO) << "Opening file " << c_file;
+  std::ifstream infile(c_file.c_str());
+
+  string classifier_name;
+  int num_classes;
+
+  int class_label;
+  string class_name;
+  float class_prior;
+  float class_lrmult;
+
+  infile >> classifier_name;
+  infile >> num_classes;
+
+  classifier_name_ = classifier_name;
+  num_classes_     = num_classes;
+
+  // get information for each class, and dynamically declare one top blob per
+  // class
+  for (int i=0;i<num_classes_;i++){
+    infile >> class_label;
+    infile >> class_name;
+    infile >> class_prior;
+    infile >> class_lrmult;
+    class_labels_.push_back (class_label);
+    class_names_.push_back  (class_name);
+    class_priors_.push_back (class_prior);
+    class_lrmults_.push_back(class_lrmult);
+
+    // confusion statistics
+    class_label_total_.push_back(0);
+    class_pred_total_.push_back(0);
+    a_to_b_.push_back(vector<int>(num_classes_));
   }
 }
 
