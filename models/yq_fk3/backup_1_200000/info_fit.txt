@@ -1,0 +1,14 @@
+fit
+12
+   0 Ignored               57.419157   0.001583
+   1 Classic_Fit            0.043843   2.073538
+   2 Comfort_Fit            0.153588   0.591901
+   3 Custom_Fit             0.043563   2.086830
+   4 Normal_Fit             0.058922   1.542869
+   5 Regular_Fit            0.153588   0.591901
+   6 Relaxed_Fit            0.052499   1.731625
+   7 Skinny_Fit             0.153588   0.591901
+   8 Slim_Fit               0.153588   0.591901
+   9 Straight_Fit           0.092712   0.980559
+  10 Tailored_Fit           0.061156   1.486509
+  11 Tight_Fit              0.032952   2.758860

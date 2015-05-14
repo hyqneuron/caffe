@@ -1,0 +1,13 @@
+neck
+11
+   0 Ignored               40.789652   0.002452
+   1 Boat_Neck              0.066520   1.503303
+   2 Chinese_Collar         0.024770   4.037097
+   3 Collar_Neck            0.024371   4.103279
+   4 Fashion_Neck           0.199760   0.500600
+   5 High_Neck              0.112465   0.889165
+   6 Hooded_Neck            0.040951   2.441951
+   7 Round_Neck             0.199760   0.500600
+   8 Square_Neck            0.031762   3.148428
+   9 Turtle_Neck            0.099880   1.001200
+  10 V_Neck                 0.199760   0.500600

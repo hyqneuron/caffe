@@ -1,0 +1,10 @@
+sleeve
+8
+   0 Ignored                2.225692   0.064186
+   1 3/4_Sleeve             0.161918   0.882283
+   2 Fashion_Sleeve         0.004502  31.728963
+   3 Full_Sleeve            0.281586   0.507330
+   4 Half_Sleeve            0.281586   0.507330
+   5 Roll-up_Sleeve         0.045996   3.105886
+   6 Short_Sleeve           0.038594   3.701501
+   7 Sleeveless             0.185817   0.768804
