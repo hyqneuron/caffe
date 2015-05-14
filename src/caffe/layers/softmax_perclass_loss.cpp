@@ -70,6 +70,10 @@ void SoftmaxWithPerClassLossLayer<Dtype>::LayerSetUp(
     class_priors_.push_back (class_prior);
     class_lrmults_.push_back(class_lrmult);
   }
+  // set up lr_mult
+  vector<int> lr_mult_shape;
+  lr_mult_shape.push_back(num_classes_);
+  lr_mult_.Reshape(lr_mult_shape);
 }
 
 template <typename Dtype>
