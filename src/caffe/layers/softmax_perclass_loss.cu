@@ -115,6 +115,7 @@ void SoftmaxWithPerClassLossLayer<Dtype>::Backward_gpu(const vector<Blob<Dtype>*
     LOG(INFO) << "-1";
     caffe_gpu_memcpy(prob_.count() * sizeof(Dtype), prob_data, bottom_diff);
     const Dtype* label = bottom[1]->gpu_data();
+    const Dtype* label_cpu = bottom[1]->cpu_data();
     const int dim = prob_.count() / outer_num_;
     const int nthreads = outer_num_ * inner_num_;
     LOG(INFO) << "0";
@@ -132,10 +133,10 @@ void SoftmaxWithPerClassLossLayer<Dtype>::Backward_gpu(const vector<Blob<Dtype>*
 
     
     for(int i = 0; i<outer_num_; ++i){
-      CHECK_GE(label[i],0);
-      CHECK_LT(label[i],num_classes_);
-      LOG(INFO) << format("%i %i") % i % label[i];
-      lr_mult_cpu[i] = class_lrmults_[label[i]];
+      CHECK_GE(label_cpu[i],0);
+      CHECK_LT(label_cpu[i],num_classes_);
+      LOG(INFO) << format("%i %i") % i % label_cpu[i];
+      lr_mult_cpu[i] = class_lrmults_[label_cpu[i]];
       LOG(INFO) << "xx";
     }
     LOG(INFO) << "1";
