@@ -1,0 +1,69 @@
+###################    accuracy_fit    ####################
+Raw number table
+                       0   1   2   3   4   5   6   7   8   9  10  11
+ 0           Ignored   0   0   0   0   0   0   0   0   0   0   0   0
+ 1       Classic_Fit   0 125   0   6   0   0   0   0   0   0   3   0
+ 2       Comfort_Fit   0   0 455   1   1   0   5   0   2   1   0   0
+ 3        Custom_Fit   0   1   0 133   0   0   0   0   0   0   4   0
+ 4        Normal_Fit   0   0   1   0 186   0   0   0   0   0   0   0
+ 5       Regular_Fit   0   0   3   0   2 438   0   1   2   2   4   0
+ 6       Relaxed_Fit   0   0   0   2   0   0 156   0   0   0   1   0
+ 7        Skinny_Fit   0   0   0   0   0   0   0 468   0   0   0   0
+ 8          Slim_Fit   0   2   2   4   0   1   0   2 434   0   5   0
+ 9      Straight_Fit   0   0   0   0   0   0   0   2   0 268   0   0
+10      Tailored_Fit   0   0   1   2   0   0   0   0   1   0 177   0
+11         Tight_Fit   0   0   0   0   0   0   0   0   0   0   0 103
+precision table (normalized by TP+FP)
+                       0   1   2   3   4   5   6   7   8   9  10  11
+ 0           Ignored NaN   0   0   0   0   0   0   0   0   0   0   0
+ 1       Classic_Fit NaN 976   0  40   0   0   0   0   0   0  15   0
+ 2       Comfort_Fit NaN   0 984   6   5   0  31   0   4   3   0   0
+ 3        Custom_Fit NaN   7   0 898   0   0   0   0   0   0  20   0
+ 4        Normal_Fit NaN   0   2   0 984   0   0   0   0   0   0   0
+ 5       Regular_Fit NaN   0   6   0  10 997   0   2   4   7  20   0
+ 6       Relaxed_Fit NaN   0   0  13   0   0 968   0   0   0   5   0
+ 7        Skinny_Fit NaN   0   0   0   0   0   0 989   0   0   0   0
+ 8          Slim_Fit NaN  15   4  27   0   2   0   4 988   0  25   0
+ 9      Straight_Fit NaN   0   0   0   0   0   0   4   0 988   0   0
+10      Tailored_Fit NaN   0   2  13   0   0   0   0   2   0 912   0
+11         Tight_Fit NaN   0   0   0   0   0   0   0   0   0   0 1000
+Precision report 
+             Ignored (-nan)  <<  
+         Classic_Fit (0.977)  <<   (Slim_Fit, 0.016)
+         Comfort_Fit (0.985)  <<  
+          Custom_Fit (0.899)  <<   (Classic_Fit, 0.041) (Relaxed_Fit, 0.014) (Slim_Fit, 0.027) (Tailored_Fit, 0.014)
+          Normal_Fit (0.984)  <<   (Regular_Fit, 0.011)
+         Regular_Fit (0.998)  <<  
+         Relaxed_Fit (0.969)  <<   (Comfort_Fit, 0.031)
+          Skinny_Fit (0.989)  <<  
+            Slim_Fit (0.989)  <<  
+        Straight_Fit (0.989)  <<  
+        Tailored_Fit (0.912)  <<   (Classic_Fit, 0.015) (Custom_Fit, 0.021) (Regular_Fit, 0.021) (Slim_Fit, 0.026)
+           Tight_Fit (1.000)  <<  
+recall table (normalized by TP+FN)
+                       0   1   2   3   4   5   6   7   8   9  10  11
+ 0           Ignored NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN
+ 1       Classic_Fit   0 932   0  44   0   0   0   0   0   0  22   0
+ 2       Comfort_Fit   0   0 978   2   2   0  10   0   4   2   0   0
+ 3        Custom_Fit   0   7   0 963   0   0   0   0   0   0  28   0
+ 4        Normal_Fit   0   0   5   0 994   0   0   0   0   0   0   0
+ 5       Regular_Fit   0   0   6   0   4 969   0   2   4   4   8   0
+ 6       Relaxed_Fit   0   0   0  12   0   0 981   0   0   0   6   0
+ 7        Skinny_Fit   0   0   0   0   0   0   0 1000   0   0   0   0
+ 8          Slim_Fit   0   4   4   8   0   2   0   4 964   0  11   0
+ 9      Straight_Fit   0   0   0   0   0   0   0   7   0 992   0   0
+10      Tailored_Fit   0   0   5  11   0   0   0   0   5   0 977   0
+11         Tight_Fit   0   0   0   0   0   0   0   0   0   0   0 1000
+Recall report 
+             Ignored (-nan)  >>  
+         Classic_Fit (0.933)  >>   (Custom_Fit, 0.045) (Tailored_Fit, 0.022)
+         Comfort_Fit (0.978)  >>   (Relaxed_Fit, 0.011)
+          Custom_Fit (0.964)  >>   (Tailored_Fit, 0.029)
+          Normal_Fit (0.995)  >>  
+         Regular_Fit (0.969)  >>  
+         Relaxed_Fit (0.981)  >>   (Custom_Fit, 0.013)
+          Skinny_Fit (1.000)  >>  
+            Slim_Fit (0.964)  >>   (Tailored_Fit, 0.011)
+        Straight_Fit (0.993)  >>  
+        Tailored_Fit (0.978)  >>   (Custom_Fit, 0.011)
+           Tight_Fit (1.000)  >>  

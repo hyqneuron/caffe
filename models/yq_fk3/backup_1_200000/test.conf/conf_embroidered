@@ -1,0 +1,24 @@
+###################accuracy_embroidered####################
+Raw number table
+                       0   1   2
+ 0           Ignored   0   0   0
+ 1                No   0 1549 233
+ 2               Yes   0 385 537
+precision table (normalized by TP+FP)
+                       0   1   2
+ 0           Ignored NaN   0   0
+ 1                No NaN 800 302
+ 2               Yes NaN 199 697
+Precision report 
+             Ignored (-nan)  <<  
+                  No (0.801)  <<   (Yes, 0.199)
+                 Yes (0.697)  <<   (No, 0.303)
+recall table (normalized by TP+FN)
+                       0   1   2
+ 0           Ignored NaN NaN NaN
+ 1                No   0 869 130
+ 2               Yes   0 417 582
+Recall report 
+             Ignored (-nan)  >>  
+                  No (0.869)  >>   (Yes, 0.131)
+                 Yes (0.582)  >>   (No, 0.418)

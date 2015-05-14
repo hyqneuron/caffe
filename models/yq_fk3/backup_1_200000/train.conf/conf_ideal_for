@@ -1,0 +1,49 @@
+################### accuracy_ideal_for ####################
+Raw number table
+                       0   1   2   3   4   5   6   7
+ 0           Ignored   0   0   0   0   0   0   0   0
+ 1        Baby_Boy's   0 472  21 229   0  32   1   1
+ 2       Baby_Girl's   0  37 774  38   0 475   1   4
+ 3             Boy's   0  89  12 5137  65 214 132   8
+ 4       Boys||Girls   0   0   0  21 240   1  21  18
+ 5            Girl's   0  34 150 383  26 6375  19 146
+ 6             Men's   0   1   0  84   7   8 7573  29
+ 7           Women's   0   1   1  19  22 149  81 7423
+precision table (normalized by TP+FP)
+                       0   1   2   3   4   5   6   7
+ 0           Ignored NaN   0   0   0   0   0   0   0
+ 1        Baby_Boy's NaN 744  21  38   0   4   0   0
+ 2       Baby_Girl's NaN  58 807   6   0  65   0   0
+ 3             Boy's NaN 140  12 869 180  29  16   1
+ 4       Boys||Girls NaN   0   0   3 666   0   2   2
+ 5            Girl's NaN  53 156  64  72 878   2  19
+ 6             Men's NaN   1   0  14  19   1 967   3
+ 7           Women's NaN   1   1   3  61  20  10 972
+Precision report 
+             Ignored (-nan)  <<  
+          Baby_Boy's (0.744)  <<   (Baby_Girl's, 0.058) (Boy's, 0.140) (Girl's, 0.054)
+         Baby_Girl's (0.808)  <<   (Baby_Boy's, 0.022) (Boy's, 0.013) (Girl's, 0.157)
+               Boy's (0.869)  <<   (Baby_Boy's, 0.039) (Girl's, 0.065) (Men's, 0.014)
+         Boys||Girls (0.667)  <<   (Boy's, 0.181) (Girl's, 0.072) (Men's, 0.019) (Women's, 0.061)
+              Girl's (0.879)  <<   (Baby_Girl's, 0.065) (Boy's, 0.030) (Women's, 0.021)
+               Men's (0.967)  <<   (Boy's, 0.017) (Women's, 0.010)
+             Women's (0.973)  <<   (Girl's, 0.019)
+recall table (normalized by TP+FN)
+                       0   1   2   3   4   5   6   7
+ 0           Ignored NaN NaN NaN NaN NaN NaN NaN NaN
+ 1        Baby_Boy's   0 624  27 302   0  42   1   1
+ 2       Baby_Girl's   0  27 582  28   0 357   0   3
+ 3             Boy's   0  15   2 908  11  37  23   1
+ 4       Boys||Girls   0   0   0  69 797   3  69  59
+ 5            Girl's   0   4  21  53   3 893   2  20
+ 6             Men's   0   0   0  10   0   1 983   3
+ 7           Women's   0   0   0   2   2  19  10 964
+Recall report 
+             Ignored (-nan)  >>  
+          Baby_Boy's (0.624)  >>   (Baby_Girl's, 0.028) (Boy's, 0.303) (Girl's, 0.042)
+         Baby_Girl's (0.582)  >>   (Baby_Boy's, 0.028) (Boy's, 0.029) (Girl's, 0.357)
+               Boy's (0.908)  >>   (Baby_Boy's, 0.016) (Boys||Girls, 0.011) (Girl's, 0.038) (Men's, 0.023)
+         Boys||Girls (0.797)  >>   (Boy's, 0.070) (Men's, 0.070) (Women's, 0.060)
+              Girl's (0.894)  >>   (Baby_Girl's, 0.021) (Boy's, 0.054) (Women's, 0.020)
+               Men's (0.983)  >>   (Boy's, 0.011)
+             Women's (0.965)  >>   (Girl's, 0.019) (Men's, 0.011)

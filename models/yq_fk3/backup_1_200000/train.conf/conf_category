@@ -1,0 +1,154 @@
+###################  accuracy_category ####################
+Raw number table
+                       0   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16  17  18  19  20  21  22  23  24  25  26  27  28
+ 0           Ignored   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
+ 1       set1/ethnic   0 2210   0   6  62  94  24 410   9   1  12   3   1  43   0   0   1   0   0  22   6   3   6   4   2   2   3  32   0
+ 2         set1/jean   0   0 8201  24   0   0 218   0  14   2 718  11   1  17   0   0   0  26   0   0   0  17   0   1   1   0   1   0   2
+ 3     set1/jumpsuit   0   4   6 561  15  13   6   0   2   3   2   2  25  90  27   0   0   3   1 172  29   9   1   0   1   6  69   6   0
+ 4        set1/kurta   0  79   0   0 4388 2099   2  67 154   5   1  29  89   4   1   0   1   0   4  65  45   1   1  34  12   0  49  20   1
+ 5        set1/kurti   0  49   0  11 1662 6655   5 118   7   4   0   6 155  23   5   0   0   0   8 179  64   0   0  30  10   1 154  19   2
+ 6      set1/legging   0   5 192  16   0  30 8737   1   0   6 185   2   0  21   0   0   1  90   0   5   0  20   0   3   0   0   6   0   1
+ 7       set1/salwar   0 107   0   1  79 115   0 1289   0   7   0   0   0   7   0   0   0   0   1  22   9   0   0   0   0   0   1  26   0
+ 8        set1/shirt   0   4   2   5  11  24   3   0 8686   4   5  53  63   8   0  18   1   0  17   2   0   5   9  42  82   0 183   4   0
+ 9        set1/skirt   0   3   0   2   0   7  13   1   0 3286  43   1   0   4   1   0   0  15   0 113   3 102   0   3   0   0   4   4   5
+10      set1/trouser   0   6 711  12   0   3 407   1   9 128 7813   0   0  14   0   0   0  70   0   6   2  76  17   2   1   0   1   3   2
+11       set1/tshirt   0   2  10   2  12   9   1   0  55   0   2 8212  28  28   1   0   1   1   2  18   1   2   0 258 282  10 226   2   1
+12        set1/tunic   0   4   0   8 316 548   2   3  72   6   0  51 662  13  10   1   0   0  21 130  11   1   1  60  25   1 398   1   0
+13    set2/Nightsuit   0  24   3  46  18  29   3   1   3   2   2  23   7 2093  38   0   0   1   2  38  82   8   4   4   8  18  29   2   0
+14     set2/babydoll   0   0   0   8   5  10   0   3   0   1   0   2   6   5 793   0  14   0   0  92  55   0   0   2   0  37  14   1   1
+15       set2/blazer   0   1   0   0   1   5   0   0  31   0   0   0   3   1   1 743   0   1  44   0   0   0   6  37  22   0  26   0   0
+16          set2/bra   0   0   0   0   0   0   2   0   0   1   0   0   0   1   6   0 5094   0   0   0   0   2   0   2   0  16   4   0   3
+17        set2/capri   0   0  51  12   0   0 156   0   0  19  98   0   0   7   0   0   0 1590   0   3   0  99   0   0   0   1   1   1   0
+18         set2/coat   0   4   0   1   6  21   0   0  15   2   1   0   9   1   0  42   0   0 352  13   0   2   0  24  32   0  16   2   1
+19        set2/dress   0   9   0  14  44 203   1  15   1  33   0  13  23  20  55   1   0   0   4 3996  88   3   0  13   3   7  94   6   2
+20       set2/nighty   0   5   0  10  53  68   1   2   1   6   5   9   8 119 103   1   0   0   2 171 1687   0   0   2   1   4  20  13   0
+21       set2/shorts   0   3  10   1   1   1  15   0   4  89  18   5   0  15   3   0   2  48   0  23   1 5169   0   2   2   3   1   0   4
+22         set2/suit   0   7   0   3   0   7   0  28   1   0   0   0   0   4   0   1   0   0   0   0   0   1 171   1   0   0   0  14   0
+23      set2/sweater   0   1   7   0  23  53   1   0  46   1   1 112  22   9   0  18   5   0  36  32   0   2   3 5159 572   1 159   2   1
+24  set2/sweatshirts   0   1   5   0   6   1   1   0  89   4   4 115  12   7   0  18   0   0  33   2   0   1   2 611 6553   0  97   1   3
+25     set2/swinsuit   0   0   0   1   0   5   2   0   2   0   1   6   3   4  25   0  18   0   0  22   0  18   0   1   3 325  17   0   4
+26          set2/top   0   4   1  22  16 130  10   0  73  12   0 157 112  28  26   4  10   0  38 132   9   6   1 164  78  16 5097   1   0
+27        set3/saree   0   4   0   1   1   8   1   5   0   6   0   0   0   1   0   0   1   0   0   0   5   0   0   3   1   0   1 9248   0
+28        set3/shoes   0   1   0   0   0   0   0   0   0   0   0   2   0   1   0   0   1   0   0   0   0   0   0   2   0   0   0   0 9295
+precision table (normalized by TP+FP)
+                       0   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16  17  18  19  20  21  22  23  24  25  26  27  28
+ 0           Ignored NaN   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
+ 1       set1/ethnic NaN 871   0   7   9   9   2 210   0   0   1   0   0  16   0   0   0   0   0   4   2   0  27   0   0   4   0   3   0
+ 2         set1/jean NaN   0 891  31   0   0  22   0   1   0  80   1   0   6   0   0   0  14   0   0   0   3   0   0   0   0   0   0   0
+ 3     set1/jumpsuit NaN   1   0 731   2   1   0   0   0   0   0   0  20  34  24   0   0   1   1  32  13   1   4   0   0  13  10   0   0
+ 4        set1/kurta NaN  31   0   0 653 207   0  34  16   1   0   3  72   1   0   0   0   0   7  12  21   0   4   5   1   0   7   2   0
+ 5        set1/kurti NaN  19   0  14 247 656   0  60   0   1   0   0 126   8   4   0   0   0  14  34  30   0   0   4   1   2  23   2   0
+ 6      set1/legging NaN   1  20  20   0   2 909   0   0   1  20   0   0   8   0   0   0  48   0   0   0   3   0   0   0   0   0   0   0
+ 7       set1/salwar NaN  42   0   1  11  11   0 663   0   1   0   0   0   2   0   0   0   0   1   4   4   0   0   0   0   0   0   2   0
+ 8        set1/shirt NaN   1   0   6   1   2   0   0 936   1   0   6  51   3   0  21   0   0  30   0   0   0  40   6  10   0  27   0   0
+ 9        set1/skirt NaN   1   0   2   0   0   1   0   0 905   4   0   0   1   0   0   0   8   0  21   1  18   0   0   0   0   0   0   0
+10      set1/trouser NaN   2  77  15   0   0  42   0   0  35 876   0   0   5   0   0   0  37   0   1   0  13  76   0   0   0   0   0   0
+11       set1/tshirt NaN   0   1   2   1   0   0   0   5   0   0 931  22  10   0   0   0   0   3   3   0   0   0  39  36  22  33   0   0
+12        set1/tunic NaN   1   0  10  47  54   0   1   7   1   0   5 538   5   9   1   0   0  37  24   5   0   4   9   3   2  59   0   0
+13    set2/Nightsuit NaN   9   0  59   2   2   0   0   0   0   0   2   5 808  34   0   0   0   3   7  39   1  18   0   1  40   4   0   0
+14     set2/babydoll NaN   0   0  10   0   0   0   1   0   0   0   0   4   1 724   0   2   0   0  17  26   0   0   0   0  82   2   0   0
+15       set2/blazer NaN   0   0   0   0   0   0   0   3   0   0   0   2   0   0 877   0   0  77   0   0   0  27   5   2   0   3   0   0
+16          set2/bra NaN   0   0   0   0   0   0   0   0   0   0   0   0   0   5   0 989   0   0   0   0   0   0   0   0  35   0   0   0
+17        set2/capri NaN   0   5  15   0   0  16   0   0   5  10   0   0   2   0   0   0 861   0   0   0  17   0   0   0   2   0   0   0
+18         set2/coat NaN   1   0   1   0   2   0   0   1   0   0   0   7   0   0  49   0   0 623   2   0   0   0   3   4   0   2   0   0
+19        set2/dress NaN   3   0  18   6  20   0   7   0   9   0   1  18   7  50   1   0   0   7 759  41   0   0   2   0  15  14   0   0
+20       set2/nighty NaN   1   0  13   7   6   0   1   0   1   0   1   6  45  94   1   0   0   3  32 804   0   0   0   0   8   2   1   0
+21       set2/shorts NaN   1   1   1   0   0   1   0   0  24   2   0   0   5   2   0   0  26   0   4   0 931   0   0   0   6   0   0   0
+22         set2/suit NaN   2   0   3   0   0   0  14   0   0   0   0   0   1   0   1   0   0   0   0   0   0 770   0   0   0   0   1   0
+23      set2/sweater NaN   0   0   0   3   5   0   0   4   0   0  12  17   3   0  21   0   0  63   6   0   0  13 798  74   2  23   0   0
+24  set2/sweatshirts NaN   0   0   0   0   0   0   0   9   1   0  13   9   2   0  21   0   0  58   0   0   0   9  94 852   0  14   0   0
+25     set2/swinsuit NaN   0   0   1   0   0   0   0   0   0   0   0   2   1  22   0   3   0   0   4   0   3   0   0   0 725   2   0   0
+26          set2/top NaN   1   0  28   2  12   1   0   7   3   0  17  91  10  23   4   1   0  67  25   4   1   4  25  10  35 764   0   0
+27        set3/saree NaN   1   0   1   0   0   0   2   0   1   0   0   0   0   0   0   0   0   0   0   2   0   0   0   0   0   0 982   0
+28        set3/shoes NaN   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0 996
+Precision report 
+             Ignored (-nan)  <<  
+         set1/ethnic (0.871)  <<   (set1/kurta, 0.031) (set1/kurti, 0.019) (set1/salwar, 0.042)
+           set1/jean (0.892)  <<   (set1/legging, 0.021) (set1/trouser, 0.077)
+       set1/jumpsuit (0.731)  <<   (set1/jean, 0.031) (set1/kurti, 0.014) (set1/legging, 0.021) (set1/trouser, 0.016) (set1/tunic, 0.010) (set2/Nightsuit, 0.060) (set2/babydoll, 0.010) (set2/capri, 0.016) (set2/dress, 0.018) (set2/nighty, 0.013) (set2/top, 0.029)
+          set1/kurta (0.653)  <<   (set1/kurti, 0.247) (set1/salwar, 0.012) (set1/tunic, 0.047)
+          set1/kurti (0.656)  <<   (set1/kurta, 0.207) (set1/salwar, 0.011) (set1/tunic, 0.054) (set2/dress, 0.020) (set2/top, 0.013)
+        set1/legging (0.909)  <<   (set1/jean, 0.023) (set1/trouser, 0.042) (set2/capri, 0.016)
+         set1/salwar (0.663)  <<   (set1/ethnic, 0.211) (set1/kurta, 0.034) (set1/kurti, 0.061) (set2/suit, 0.014)
+          set1/shirt (0.937)  <<   (set1/kurta, 0.017)
+          set1/skirt (0.906)  <<   (set1/trouser, 0.035) (set2/shorts, 0.025)
+        set1/trouser (0.877)  <<   (set1/jean, 0.081) (set1/legging, 0.021) (set2/capri, 0.011)
+         set1/tshirt (0.932)  <<   (set2/sweater, 0.013) (set2/sweatshirts, 0.013) (set2/top, 0.018)
+          set1/tunic (0.539)  <<   (set1/jumpsuit, 0.020) (set1/kurta, 0.072) (set1/kurti, 0.126) (set1/shirt, 0.051) (set1/tshirt, 0.023) (set2/dress, 0.019) (set2/sweater, 0.018) (set2/top, 0.091)
+      set2/Nightsuit (0.809)  <<   (set1/ethnic, 0.017) (set1/jumpsuit, 0.035) (set1/tshirt, 0.011) (set2/nighty, 0.046) (set2/top, 0.011)
+       set2/babydoll (0.724)  <<   (set1/jumpsuit, 0.025) (set2/Nightsuit, 0.035) (set2/dress, 0.050) (set2/nighty, 0.094) (set2/swinsuit, 0.023) (set2/top, 0.024)
+         set2/blazer (0.877)  <<   (set1/shirt, 0.021) (set2/coat, 0.050) (set2/sweater, 0.021) (set2/sweatshirts, 0.021)
+            set2/bra (0.989)  <<  
+          set2/capri (0.862)  <<   (set1/jean, 0.014) (set1/legging, 0.049) (set1/trouser, 0.038) (set2/shorts, 0.026)
+           set2/coat (0.623)  <<   (set1/kurti, 0.014) (set1/shirt, 0.030) (set1/tunic, 0.037) (set2/blazer, 0.078) (set2/sweater, 0.064) (set2/sweatshirts, 0.058) (set2/top, 0.067)
+          set2/dress (0.760)  <<   (set1/jumpsuit, 0.033) (set1/kurta, 0.012) (set1/kurti, 0.034) (set1/skirt, 0.021) (set1/tunic, 0.025) (set2/babydoll, 0.017) (set2/nighty, 0.033) (set2/top, 0.025)
+         set2/nighty (0.804)  <<   (set1/jumpsuit, 0.014) (set1/kurta, 0.021) (set1/kurti, 0.031) (set2/Nightsuit, 0.039) (set2/babydoll, 0.026) (set2/dress, 0.042)
+         set2/shorts (0.932)  <<   (set1/skirt, 0.018) (set1/trouser, 0.014) (set2/capri, 0.018)
+           set2/suit (0.770)  <<   (set1/ethnic, 0.027) (set1/shirt, 0.041) (set1/trouser, 0.077) (set2/Nightsuit, 0.018) (set2/blazer, 0.027) (set2/sweater, 0.014)
+        set2/sweater (0.798)  <<   (set1/tshirt, 0.040) (set2/sweatshirts, 0.095) (set2/top, 0.025)
+    set2/sweatshirts (0.852)  <<   (set1/shirt, 0.011) (set1/tshirt, 0.037) (set2/sweater, 0.074) (set2/top, 0.010)
+       set2/swinsuit (0.725)  <<   (set1/jumpsuit, 0.013) (set1/tshirt, 0.022) (set2/Nightsuit, 0.040) (set2/babydoll, 0.083) (set2/bra, 0.036) (set2/dress, 0.016) (set2/top, 0.036)
+            set2/top (0.764)  <<   (set1/jumpsuit, 0.010) (set1/kurti, 0.023) (set1/shirt, 0.027) (set1/tshirt, 0.034) (set1/tunic, 0.060) (set2/dress, 0.014) (set2/sweater, 0.024) (set2/sweatshirts, 0.015)
+          set3/saree (0.983)  <<  
+          set3/shoes (0.996)  <<  
+recall table (normalized by TP+FN)
+                       0   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16  17  18  19  20  21  22  23  24  25  26  27  28
+ 0           Ignored NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN
+ 1       set1/ethnic   0 747   0   2  20  31   8 138   3   0   4   1   0  14   0   0   0   0   0   7   2   1   2   1   0   0   1  10   0
+ 2         set1/jean   0   0 886   2   0   0  23   0   1   0  77   1   0   1   0   0   0   2   0   0   0   1   0   0   0   0   0   0   0
+ 3     set1/jumpsuit   0   3   5 532  14  12   5   0   1   2   1   1  23  85  25   0   0   2   0 163  27   8   0   0   0   5  65   5   0
+ 4        set1/kurta   0  11   0   0 613 293   0   9  21   0   0   4  12   0   0   0   0   0   0   9   6   0   0   4   1   0   6   2   0
+ 5        set1/kurti   0   5   0   1 181 725   0  12   0   0   0   0  16   2   0   0   0   0   0  19   6   0   0   3   1   0  16   2   0
+ 6      set1/legging   0   0  20   1   0   3 937   0   0   0  19   0   0   2   0   0   0   9   0   0   0   2   0   0   0   0   0   0   0
+ 7       set1/salwar   0  64   0   0  47  69   0 774   0   4   0   0   0   4   0   0   0   0   0  13   5   0   0   0   0   0   0  15   0
+ 8        set1/shirt   0   0   0   0   1   2   0   0 940   0   0   5   6   0   0   1   0   0   1   0   0   0   0   4   8   0  19   0   0
+ 9        set1/skirt   0   0   0   0   0   1   3   0   0 910  11   0   0   1   0   0   0   4   0  31   0  28   0   0   0   0   1   1   1
+10      set1/trouser   0   0  76   1   0   0  43   0   0  13 841   0   0   1   0   0   0   7   0   0   0   8   1   0   0   0   0   0   0
+11       set1/tshirt   0   0   1   0   1   0   0   0   6   0   0 895   3   3   0   0   0   0   0   1   0   0   0  28  30   1  24   0   0
+12        set1/tunic   0   1   0   3 134 233   0   1  30   2   0  21 282   5   4   0   0   0   8  55   4   0   0  25  10   0 169   0   0
+13    set2/Nightsuit   0   9   1  18   7  11   1   0   1   0   0   9   2 841  15   0   0   0   0  15  32   3   1   1   3   7  11   0   0
+14     set2/babydoll   0   0   0   7   4   9   0   2   0   0   0   1   5   4 755   0  13   0   0  87  52   0   0   1   0  35  13   0   0
+15       set2/blazer   0   1   0   0   1   5   0   0  33   0   0   0   3   1   1 805   0   1  47   0   0   0   6  40  23   0  28   0   0
+16          set2/bra   0   0   0   0   0   0   0   0   0   0   0   0   0   0   1   0 992   0   0   0   0   0   0   0   0   3   0   0   0
+17        set2/capri   0   0  25   5   0   0  76   0   0   9  48   0   0   3   0   0   0 780   0   1   0  48   0   0   0   0   0   0   0
+18         set2/coat   0   7   0   1  11  38   0   0  27   3   1   0  16   1   0  77   0   0 647  23   0   3   0  44  58   0  29   3   1
+19        set2/dress   0   1   0   3   9  43   0   3   0   7   0   2   4   4  11   0   0   0   0 859  18   0   0   2   0   1  20   1   0
+20       set2/nighty   0   2   0   4  23  29   0   0   0   2   2   3   3  51  44   0   0   0   0  74 736   0   0   0   0   1   8   5   0
+21       set2/shorts   0   0   1   0   0   0   2   0   0  16   3   0   0   2   0   0   0   8   0   4   0 953   0   0   0   0   0   0   0
+22         set2/suit   0  29   0  12   0  29   0 117   4   0   0   0   0  16   0   4   0   0   0   0   0   4 718   4   0   0   0  58   0
+23      set2/sweater   0   0   1   0   3   8   0   0   7   0   0  17   3   1   0   2   0   0   5   5   0   0   0 823  91   0  25   0   0
+24  set2/sweatshirts   0   0   0   0   0   0   0   0  11   0   0  15   1   0   0   2   0   0   4   0   0   0   0  80 866   0  12   0   0
+25     set2/swinsuit   0   0   0   2   0  10   4   0   4   0   2  13   6   8  54   0  39   0   0  48   0  39   0   2   6 711  37   0   8
+26          set2/top   0   0   0   3   2  21   1   0  11   1   0  25  18   4   4   0   1   0   6  21   1   0   0  26  12   2 829   0   0
+27        set3/saree   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0 995   0
+28        set3/shoes   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0 999
+Recall report 
+             Ignored (-nan)  >>  
+         set1/ethnic (0.748)  >>   (set1/kurta, 0.021) (set1/kurti, 0.032) (set1/salwar, 0.139) (set2/Nightsuit, 0.015) (set3/saree, 0.011)
+           set1/jean (0.886)  >>   (set1/legging, 0.024) (set1/trouser, 0.078)
+       set1/jumpsuit (0.533)  >>   (set1/kurta, 0.014) (set1/kurti, 0.012) (set1/tunic, 0.024) (set2/Nightsuit, 0.085) (set2/babydoll, 0.026) (set2/dress, 0.163) (set2/nighty, 0.028) (set2/top, 0.066)
+          set1/kurta (0.614)  >>   (set1/ethnic, 0.011) (set1/kurti, 0.294) (set1/shirt, 0.022) (set1/tunic, 0.012)
+          set1/kurti (0.726)  >>   (set1/kurta, 0.181) (set1/salwar, 0.013) (set1/tunic, 0.017) (set2/dress, 0.020) (set2/top, 0.017)
+        set1/legging (0.937)  >>   (set1/jean, 0.021) (set1/trouser, 0.020)
+         set1/salwar (0.775)  >>   (set1/ethnic, 0.064) (set1/kurta, 0.047) (set1/kurti, 0.069) (set2/dress, 0.013) (set3/saree, 0.016)
+          set1/shirt (0.941)  >>   (set2/top, 0.020)
+          set1/skirt (0.910)  >>   (set1/trouser, 0.012) (set2/dress, 0.031) (set2/shorts, 0.028)
+        set1/trouser (0.842)  >>   (set1/jean, 0.077) (set1/legging, 0.044) (set1/skirt, 0.014)
+         set1/tshirt (0.896)  >>   (set2/sweater, 0.028) (set2/sweatshirts, 0.031) (set2/top, 0.025)
+          set1/tunic (0.282)  >>   (set1/kurta, 0.135) (set1/kurti, 0.234) (set1/shirt, 0.031) (set1/tshirt, 0.022) (set2/dress, 0.055) (set2/sweater, 0.026) (set2/sweatshirts, 0.011) (set2/top, 0.170)
+      set2/Nightsuit (0.841)  >>   (set1/jumpsuit, 0.018) (set1/kurti, 0.012) (set2/babydoll, 0.015) (set2/dress, 0.015) (set2/nighty, 0.033) (set2/top, 0.012)
+       set2/babydoll (0.756)  >>   (set2/bra, 0.013) (set2/dress, 0.088) (set2/nighty, 0.052) (set2/swinsuit, 0.035) (set2/top, 0.013)
+         set2/blazer (0.806)  >>   (set1/shirt, 0.034) (set2/coat, 0.048) (set2/sweater, 0.040) (set2/sweatshirts, 0.024) (set2/top, 0.028)
+            set2/bra (0.993)  >>  
+          set2/capri (0.780)  >>   (set1/jean, 0.025) (set1/legging, 0.077) (set1/trouser, 0.048) (set2/shorts, 0.049)
+           set2/coat (0.647)  >>   (set1/kurta, 0.011) (set1/kurti, 0.039) (set1/shirt, 0.028) (set1/tunic, 0.017) (set2/blazer, 0.077) (set2/dress, 0.024) (set2/sweater, 0.044) (set2/sweatshirts, 0.059) (set2/top, 0.029)
+          set2/dress (0.860)  >>   (set1/kurti, 0.044) (set2/babydoll, 0.012) (set2/nighty, 0.019) (set2/top, 0.020)
+         set2/nighty (0.736)  >>   (set1/kurta, 0.023) (set1/kurti, 0.030) (set2/Nightsuit, 0.052) (set2/babydoll, 0.045) (set2/dress, 0.075)
+         set2/shorts (0.954)  >>   (set1/skirt, 0.016)
+           set2/suit (0.718)  >>   (set1/ethnic, 0.029) (set1/jumpsuit, 0.013) (set1/kurti, 0.029) (set1/salwar, 0.118) (set2/Nightsuit, 0.017) (set3/saree, 0.059)
+        set2/sweater (0.823)  >>   (set1/tshirt, 0.018) (set2/sweatshirts, 0.091) (set2/top, 0.025)
+    set2/sweatshirts (0.866)  >>   (set1/shirt, 0.012) (set1/tshirt, 0.015) (set2/sweater, 0.081) (set2/top, 0.013)
+       set2/swinsuit (0.711)  >>   (set1/kurti, 0.011) (set1/tshirt, 0.013) (set2/babydoll, 0.055) (set2/bra, 0.039) (set2/dress, 0.048) (set2/shorts, 0.039) (set2/top, 0.037)
+            set2/top (0.829)  >>   (set1/kurti, 0.021) (set1/shirt, 0.012) (set1/tshirt, 0.026) (set1/tunic, 0.018) (set2/dress, 0.021) (set2/sweater, 0.027) (set2/sweatshirts, 0.013)
+          set3/saree (0.996)  >>  
+          set3/shoes (0.999)  >>  
