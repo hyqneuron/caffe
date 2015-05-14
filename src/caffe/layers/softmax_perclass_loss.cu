@@ -121,12 +121,15 @@ void SoftmaxWithPerClassLossLayer<Dtype>::Backward_gpu(const vector<Blob<Dtype>*
       CHECK_LT(label[i],num_classes_);
       lr_mult_cpu[i] = class_lrmults_[label[i]];
     }
+    LOG(INFO) << "1";
     lr_mult_.gpu_data();
+    LOG(INFO) << "2";
     // NOLINT_NEXT_LINE(whitespace/operators)
     SoftmaxLossBackwardGPU<Dtype><<<CAFFE_GET_BLOCKS(nthreads),
         CAFFE_CUDA_NUM_THREADS>>>(nthreads, top_data, label, bottom_diff,
         outer_num_, dim, inner_num_, has_ignore_label_, ignore_label_, counts,
         lr_mult_.mutable_gpu_data());
+    LOG(INFO) << "3";
     const Dtype loss_weight = top[0]->cpu_diff()[0];
     if (normalize_) {
       Dtype count;
