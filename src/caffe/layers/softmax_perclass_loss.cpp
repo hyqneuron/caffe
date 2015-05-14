@@ -94,7 +94,7 @@ void SoftmaxWithPerClassLossLayer<Dtype>::Reshape(
   }
   // set up lr_mult
   vector<int> lr_mult_shape;
-  lr_mult_shape.push_back(num_classes_);
+  lr_mult_shape.push_back(outer_num_);
   lr_mult_.Reshape(lr_mult_shape);
 }
 
