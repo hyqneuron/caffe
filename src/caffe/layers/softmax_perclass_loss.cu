@@ -104,21 +104,15 @@ void SoftmaxWithPerClassLossLayer<Dtype>::Backward_gpu(const vector<Blob<Dtype>*
     LOG(FATAL) << this->type()
                << " Layer cannot backpropagate to label inputs.";
   }
-  LOG(INFO) << "##########################";
-  LOG(INFO) << "##########################";
-  LOG(INFO) << "--3";
   if (propagate_down[0]) {
-    LOG(INFO) << "-2";
     Dtype* bottom_diff = bottom[0]->mutable_gpu_diff();
     const Dtype* prob_data = prob_.gpu_data();
     const Dtype* top_data = top[0]->gpu_data();
-    LOG(INFO) << "-1";
     caffe_gpu_memcpy(prob_.count() * sizeof(Dtype), prob_data, bottom_diff);
     const Dtype* label = bottom[1]->gpu_data();
     const Dtype* label_cpu = bottom[1]->cpu_data();
     const int dim = prob_.count() / outer_num_;
     const int nthreads = outer_num_ * inner_num_;
-    LOG(INFO) << "0";
     // Since this memory is never used for anything else,
     // we use to to avoid allocating new GPU memory.
     Dtype* counts = prob_.mutable_gpu_diff();
@@ -126,28 +120,19 @@ void SoftmaxWithPerClassLossLayer<Dtype>::Backward_gpu(const vector<Blob<Dtype>*
     // before we call softmax gpu backprop, we need to load each sample's label
     // and lr_mult into lr_mult_
     Dtype* lr_mult_cpu = lr_mult_.mutable_cpu_data();
-    LOG(INFO) << "a";
-    LOG(INFO) << "count=" << lr_mult_.count();
-    LOG(INFO) << "cpu_addr=" << (long long) lr_mult_cpu;
-    LOG(INFO) << "num_classes=" << num_classes_;
 
     
     for(int i = 0; i<outer_num_; ++i){
       CHECK_GE(label_cpu[i],0);
       CHECK_LT(label_cpu[i],num_classes_);
-      LOG(INFO) << format("%i %i") % i % label_cpu[i];
       lr_mult_cpu[i] = class_lrmults_[label_cpu[i]];
-      LOG(INFO) << "xx";
     }
-    LOG(INFO) << "1";
     lr_mult_.gpu_data();
-    LOG(INFO) << "2";
     // NOLINT_NEXT_LINE(whitespace/operators)
     SoftmaxLossBackwardGPU<Dtype><<<CAFFE_GET_BLOCKS(nthreads),
         CAFFE_CUDA_NUM_THREADS>>>(nthreads, top_data, label, bottom_diff,
         outer_num_, dim, inner_num_, has_ignore_label_, ignore_label_, counts,
         lr_mult_.mutable_gpu_data());
-    LOG(INFO) << "3";
     const Dtype loss_weight = top[0]->cpu_diff()[0];
     if (normalize_) {
       Dtype count;
