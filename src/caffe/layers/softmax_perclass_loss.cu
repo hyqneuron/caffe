@@ -90,7 +90,6 @@ __global__ void SoftmaxLossBackwardGPU(const int nthreads, const Dtype* top,
       }
       counts[index] = 0;
     } else {
-      //bottom_diff[n * dim + label_value * spatial_dim + s] -= lr_mult[n];
       //if (dim==29) // print only for category, alright
       //  printf("n=%i, dim=%i, spatial_dim=%i, label_value=%i, lr_mult=%f\n", n, dim, spatial_dim, label_value, lr_mult[n]);
       bottom_diff[n * dim + label_value * spatial_dim + s] -= 1;
@@ -147,7 +146,7 @@ void SoftmaxWithPerClassLossLayer<Dtype>::Backward_gpu(const vector<Blob<Dtype>*
                      bottom_diff);
     } else {
       caffe_gpu_scal(prob_.count(), 
-                     outer_num_==0? 0 : loss_weight / outer_num_, 
+                     loss_weight / outer_num_, 
                      bottom_diff);
     }
   }

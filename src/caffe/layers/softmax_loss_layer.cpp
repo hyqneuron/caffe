@@ -77,7 +77,7 @@ void SoftmaxWithLossLayer<Dtype>::Forward_cpu(
   if (normalize_) {
     top[0]->mutable_cpu_data()[0] = count==0? 0 : loss / count;
   } else {
-    top[0]->mutable_cpu_data()[0] = outer_num_==0? 0 : loss / outer_num_;
+    top[0]->mutable_cpu_data()[0] = loss / outer_num_;
   }
   if (top.size() == 2) {
     top[1]->ShareData(prob_);
@@ -119,7 +119,7 @@ void SoftmaxWithLossLayer<Dtype>::Backward_cpu(const vector<Blob<Dtype>*>& top,
                  bottom_diff);
     } else {
       caffe_scal(prob_.count(), 
-                 outer_num_==0? 0: loss_weight / outer_num_, 
+                 loss_weight / outer_num_, 
                  bottom_diff);
     }
   }
