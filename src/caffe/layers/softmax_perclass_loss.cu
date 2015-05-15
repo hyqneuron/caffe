@@ -90,9 +90,8 @@ __global__ void SoftmaxLossBackwardGPU(const int nthreads, const Dtype* top,
       }
       counts[index] = 0;
     } else {
-      bottom_diff[n * dim + label_value * spatial_dim + s] -= lr_mult[n];
-      printf("n=%i, dim=%i, label_value=%i, lr_mult=%f", n, dim, label_value,
-              lr_mult[n]);
+      bottom_diff[n * dim + label_value * spatial_dim + s] -= 1; // lr_mult[n];
+      //printf("n=%i, dim=%i, label_value=%i, lr_mult=%f", n, dim, label_value, lr_mult[n]);
       //bottom_diff[n * dim + label_value * spatial_dim + s] -= 1;
       counts[index] = 1;
     }
