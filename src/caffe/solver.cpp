@@ -5,6 +5,7 @@
 #include <vector>
 #include <ctime>
 
+#include "boost/format.hpp"
 #include "caffe/net.hpp"
 #include "caffe/proto/caffe.pb.h"
 #include "caffe/solver.hpp"
@@ -13,6 +14,8 @@
 #include "caffe/util/upgrade_proto.hpp"
 
 namespace caffe {
+
+using boost::format;
 
 template <typename Dtype>
 Solver<Dtype>::Solver(const SolverParameter& param)
@@ -191,7 +194,8 @@ void Solver<Dtype>::Step(int iters) {
     if (display) {
       LOG(INFO) << "Iteration " << iter_ << ", loss = " << smoothed_loss;
       std::time_t end_time = std::time(NULL);
-      LOG(INFO) << "Iteration " << iter_  << ", time = " << float( std::difftime(end_time, start_time) );
+      LOG(INFO) << "Iteration " << iter_  << ", time = " << 
+          format("%2.2f") % float( std::difftime(end_time, start_time) );
       start_time = end_time;
       const vector<Blob<Dtype>*>& result = net_->output_blobs();
       int score_index = 0;
