@@ -1,8 +1,8 @@
 fit
 6
-   0 Ignored               30.496387   0.085044
-   1 Comfort_Fit            0.118940   1.361768
-   2 Regular_Fit            0.332430   0.814549
-   3 Skinny_Fit             0.166215   1.151946
-   4 Slim_Fit               0.332430   0.814549
-   5 Straight_Fit           0.049985   2.100621
+   0 Ignored               30.496387   1.000000
+   1 Comfort_Fit            0.118940   1.000000
+   2 Regular_Fit            0.332430   1.000000
+   3 Skinny_Fit             0.166215   1.000000
+   4 Slim_Fit               0.332430   1.000000
+   5 Straight_Fit           0.049985   1.000000
