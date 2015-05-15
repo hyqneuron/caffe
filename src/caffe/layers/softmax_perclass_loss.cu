@@ -59,7 +59,7 @@ void SoftmaxWithPerClassLossLayer<Dtype>::Forward_gpu(
     loss = count==0? 0 : loss / count;
     //loss /= count;
   } else {
-    loss = outer_num_==0? 0 : loss / outer_num_;
+    loss = loss / outer_num_;
     //loss /= outer_num_;
   }
   top[0]->mutable_cpu_data()[0] = loss;
@@ -93,8 +93,11 @@ __global__ void SoftmaxLossBackwardGPU(const int nthreads, const Dtype* top,
       //if (dim==29) // print only for category, alright
       //  printf("n=%i, dim=%i, spatial_dim=%i, label_value=%i, lr_mult=%f\n", n, dim, spatial_dim, label_value, lr_mult[n]);
       bottom_diff[n * dim + label_value * spatial_dim + s] -= 1;
-      // HYQ
-      bottom_diff[n * dim + label_value * spatial_dim + s] *= lr_mult[n];
+      // HYQ begin
+      for (int c = 0; c < channels; ++c) {
+        bottom_diff[n * dim + c * spatial_dim + s] *= lr_mult[n];
+      }
+      // HYQ end
       counts[index] = 1;
     }
   }
