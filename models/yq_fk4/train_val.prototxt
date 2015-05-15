@@ -401,6 +401,7 @@ layer {
   bottom: "label_category"
   loss_param {
       ignore_label: 0
+      normalize: true
       classifier_info_file: "models/yq_fk4/info_category.txt"
   }
 }
@@ -455,6 +456,7 @@ layer {
   bottom: "label_pattern"
   loss_param {
       ignore_label: 0
+      normalize: true
       classifier_info_file: "models/yq_fk4/info_pattern.txt"
   }
 }
@@ -509,6 +511,7 @@ layer {
   bottom: "label_neck"
   loss_param {
       ignore_label: 0
+      normalize: true
       classifier_info_file: "models/yq_fk4/info_neck.txt"
   }
 }
@@ -563,6 +566,7 @@ layer {
   bottom: "label_sleeve"
   loss_param {
       ignore_label: 0
+      normalize: true
       classifier_info_file: "models/yq_fk4/info_sleeve.txt"
   }
 }
@@ -617,6 +621,7 @@ layer {
   bottom: "label_fit"
   loss_param {
       ignore_label: 0
+      normalize: true
       classifier_info_file: "models/yq_fk4/info_fit.txt"
   }
 }
@@ -671,6 +676,7 @@ layer {
   bottom: "label_ideal_for"
   loss_param {
       ignore_label: 0
+      normalize: true
       classifier_info_file: "models/yq_fk4/info_ideal_for.txt"
   }
 }
@@ -725,6 +731,7 @@ layer {
   bottom: "label_occasion"
   loss_param {
       ignore_label: 0
+      normalize: true
       classifier_info_file: "models/yq_fk4/info_occasion.txt"
   }
 }
@@ -779,6 +786,7 @@ layer {
   bottom: "label_embellished"
   loss_param {
       ignore_label: 0
+      normalize: true
       classifier_info_file: "models/yq_fk4/info_embellished.txt"
   }
 }
@@ -833,6 +841,7 @@ layer {
   bottom: "label_embroidered"
   loss_param {
       ignore_label: 0
+      normalize: true
       classifier_info_file: "models/yq_fk4/info_embroidered.txt"
   }
 }
