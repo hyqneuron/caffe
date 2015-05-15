@@ -168,7 +168,7 @@ void Solver<Dtype>::Step(int iters) {
   vector<Dtype> losses;
   Dtype smoothed_loss = 0;
 
-  std::clock_t display_start_time = std::clock();
+  std::time_t start_time = std::time(NULL);
 
   for (; iter_ < stop_iter; ++iter_) {
     if (param_.test_interval() && iter_ % param_.test_interval() == 0
@@ -190,10 +190,9 @@ void Solver<Dtype>::Step(int iters) {
     }
     if (display) {
       LOG(INFO) << "Iteration " << iter_ << ", loss = " << smoothed_loss;
-      std::clock_t display_now_time = std::clock();
-      LOG(INFO) << "Time = " << 
-          float(display_now_time - display_start_time) / CLOCKS_PER_SEC;
-      display_start_time = display_now_time;
+      std::time_t end_time = std::time(NULL);
+      LOG(INFO) << "Iteration " << iter_  << ", time = " << float( std::difftime(end_time, start_time) );
+      start_time = end_time;
       const vector<Blob<Dtype>*>& result = net_->output_blobs();
       int score_index = 0;
       for (int j = 0; j < result.size(); ++j) {
