@@ -91,6 +91,8 @@ __global__ void SoftmaxLossBackwardGPU(const int nthreads, const Dtype* top,
       counts[index] = 0;
     } else {
       bottom_diff[n * dim + label_value * spatial_dim + s] -= lr_mult[n];
+      printf("n=%i, dim=%i, label_value=%i, lr_mult=%f", n, dim, label_value,
+              lr_mult[n]);
       //bottom_diff[n * dim + label_value * spatial_dim + s] -= 1;
       counts[index] = 1;
     }
@@ -113,6 +115,7 @@ void SoftmaxWithPerClassLossLayer<Dtype>::Backward_gpu(const vector<Blob<Dtype>*
     const Dtype* label_cpu = bottom[1]->cpu_data();
     const int dim = prob_.count() / outer_num_;
     const int nthreads = outer_num_ * inner_num_;
+    LOG(INFO) << "nthreads=" << nthreads;
     // Since this memory is never used for anything else,
     // we use to to avoid allocating new GPU memory.
     Dtype* counts = prob_.mutable_gpu_diff();
