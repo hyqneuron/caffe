@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <string>
 #include <vector>
+#include <ctime>
 
 #include "caffe/net.hpp"
 #include "caffe/proto/caffe.pb.h"
@@ -167,6 +168,8 @@ void Solver<Dtype>::Step(int iters) {
   vector<Dtype> losses;
   Dtype smoothed_loss = 0;
 
+  std::clock_t display_start_time = std::clock();
+
   for (; iter_ < stop_iter; ++iter_) {
     if (param_.test_interval() && iter_ % param_.test_interval() == 0
         && (iter_ > 0 || param_.test_initialization())) {
@@ -187,6 +190,10 @@ void Solver<Dtype>::Step(int iters) {
     }
     if (display) {
       LOG(INFO) << "Iteration " << iter_ << ", loss = " << smoothed_loss;
+      std::clock_t display_now_time = std::clock();
+      LOG(INFO) << "Time = " << 
+          float(display_now_time - display_start_time) / CLOCKS_PER_SEC;
+      display_start_time = display_now_time;
       const vector<Blob<Dtype>*>& result = net_->output_blobs();
       int score_index = 0;
       for (int j = 0; j < result.size(); ++j) {
