@@ -33,6 +33,7 @@
 *.swp
 *.swo
 *~
+tags
 
 # Sublime Text settings
 *.sublime-workspace
