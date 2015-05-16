@@ -357,12 +357,24 @@ layer {
   top: "fc7"
 }
 layer {
-  name: "drop7"
+  name: "drop7-0.5"
   type: "Dropout"
   bottom: "fc7"
   top: "fc7"
   dropout_param {
+    # this is probability of dropout
+    # not the probability of retainment
     dropout_ratio: 0.5
+  }
+}
+layer {
+  name: "drop7-0.9"
+  type: "Dropout"
+  bottom: "fc7"
+  top: "fc7-0.9"
+  dropout_param {
+    # drop'em like crazy
+    dropout_ratio: 0.9
   }
 }
 
@@ -401,7 +413,7 @@ layer {
   bottom: "label_category"
   loss_param {
       ignore_label: 0
-      normalize: false
+      normalize: true
       classifier_info_file: "models/yq_fk4/info_category.txt"
   }
 }
@@ -456,7 +468,7 @@ layer {
   bottom: "label_pattern"
   loss_param {
       ignore_label: 0
-      normalize: false
+      normalize: true
       classifier_info_file: "models/yq_fk4/info_pattern.txt"
   }
 }
@@ -482,7 +494,7 @@ layer {
 layer {
   name: "fc8_neck"
   type: "InnerProduct"
-  bottom: "fc7"
+  bottom: "fc7-0.9"
   top: "fc8_neck"
   param {
     lr_mult: 10
@@ -511,7 +523,7 @@ layer {
   bottom: "label_neck"
   loss_param {
       ignore_label: 0
-      normalize: false
+      normalize: true
       classifier_info_file: "models/yq_fk4/info_neck.txt"
   }
 }
@@ -566,7 +578,7 @@ layer {
   bottom: "label_sleeve"
   loss_param {
       ignore_label: 0
-      normalize: false
+      normalize: true
       classifier_info_file: "models/yq_fk4/info_sleeve.txt"
   }
 }
@@ -592,7 +604,7 @@ layer {
 layer {
   name: "fc8_fit"
   type: "InnerProduct"
-  bottom: "fc7"
+  bottom: "fc7-0.9"
   top: "fc8_fit"
   param {
     lr_mult: 10
@@ -621,7 +633,7 @@ layer {
   bottom: "label_fit"
   loss_param {
       ignore_label: 0
-      normalize: false
+      normalize: true
       classifier_info_file: "models/yq_fk4/info_fit.txt"
   }
 }
@@ -676,7 +688,7 @@ layer {
   bottom: "label_ideal_for"
   loss_param {
       ignore_label: 0
-      normalize: false
+      normalize: true
       classifier_info_file: "models/yq_fk4/info_ideal_for.txt"
   }
 }
@@ -731,7 +743,7 @@ layer {
   bottom: "label_occasion"
   loss_param {
       ignore_label: 0
-      normalize: false
+      normalize: true
       classifier_info_file: "models/yq_fk4/info_occasion.txt"
   }
 }
@@ -786,7 +798,7 @@ layer {
   bottom: "label_embellished"
   loss_param {
       ignore_label: 0
-      normalize: false
+      normalize: true
       classifier_info_file: "models/yq_fk4/info_embellished.txt"
   }
 }
@@ -841,7 +853,7 @@ layer {
   bottom: "label_embroidered"
   loss_param {
       ignore_label: 0
-      normalize: false
+      normalize: true
       classifier_info_file: "models/yq_fk4/info_embroidered.txt"
   }
 }
