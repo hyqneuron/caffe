@@ -1,0 +1,64 @@
+###################    accuracy_neck   ####################
+Raw number table
+                       0   1   2   3   4   5   6   7   8   9  10
+ 0           Ignored   0   0   0   0   0   0   0   0   0   0   0
+ 1         Boat_Neck   0  16   1   0   3   0   0   2   2   0   0
+ 2    Chinese_Collar   0   1   9   0   3   0   2   0   1   0   1
+ 3       Collar_Neck   0   1   1   3   2   0   0   0   0   0   2
+ 4      Fashion_Neck   0   2   2   1  54   3   0   5   3   0   1
+ 5         High_Neck   0   0   0   0   1  47   0   2   0   3   1
+ 6       Hooded_Neck   0   0   0   0   0   2  26   0   0   0   0
+ 7        Round_Neck   0   9   0   3  14   5   1  36   9   7   7
+ 8       Square_Neck   0   1   0   0   0   0   0   3   6   0   1
+ 9       Turtle_Neck   0   0   1   0   0   8   0   1   0  18   4
+10            V_Neck   0   6   2   2   4   6   1   6   1   8  37
+precision table (normalized by TP+FP)
+                       0   1   2   3   4   5   6   7   8   9  10
+ 0           Ignored NaN   0   0   0   0   0   0   0   0   0   0
+ 1         Boat_Neck NaN 444  62   0  37   0   0  36  90   0   0
+ 2    Chinese_Collar NaN  27 562   0  37   0  66   0  45   0  18
+ 3       Collar_Neck NaN  27  62 333  24   0   0   0   0   0  37
+ 4      Fashion_Neck NaN  55 125 111 666  42   0  90 136   0  18
+ 5         High_Neck NaN   0   0   0  12 661   0  36   0  83  18
+ 6       Hooded_Neck NaN   0   0   0   0  28 866   0   0   0   0
+ 7        Round_Neck NaN 250   0 333 172  70  33 654 409 194 129
+ 8       Square_Neck NaN  27   0   0   0   0   0  54 272   0  18
+ 9       Turtle_Neck NaN   0  62   0   0 112   0  18   0 500  74
+10            V_Neck NaN 166 125 222  49  84  33 109  45 222 685
+Precision report 
+             Ignored (-nan)  <<  
+           Boat_Neck (0.444)  <<   (Chinese_Collar, 0.028) (Collar_Neck, 0.028) (Fashion_Neck, 0.056) (Round_Neck, 0.250) (Square_Neck, 0.028) (V_Neck, 0.167)
+      Chinese_Collar (0.562)  <<   (Boat_Neck, 0.062) (Collar_Neck, 0.062) (Fashion_Neck, 0.125) (Turtle_Neck, 0.062) (V_Neck, 0.125)
+         Collar_Neck (0.333)  <<   (Fashion_Neck, 0.111) (Round_Neck, 0.333) (V_Neck, 0.222)
+        Fashion_Neck (0.667)  <<   (Boat_Neck, 0.037) (Chinese_Collar, 0.037) (Collar_Neck, 0.025) (High_Neck, 0.012) (Round_Neck, 0.173) (V_Neck, 0.049)
+           High_Neck (0.662)  <<   (Fashion_Neck, 0.042) (Hooded_Neck, 0.028) (Round_Neck, 0.070) (Turtle_Neck, 0.113) (V_Neck, 0.085)
+         Hooded_Neck (0.867)  <<   (Chinese_Collar, 0.067) (Round_Neck, 0.033) (V_Neck, 0.033)
+          Round_Neck (0.655)  <<   (Boat_Neck, 0.036) (Fashion_Neck, 0.091) (High_Neck, 0.036) (Square_Neck, 0.055) (Turtle_Neck, 0.018) (V_Neck, 0.109)
+         Square_Neck (0.273)  <<   (Boat_Neck, 0.091) (Chinese_Collar, 0.045) (Fashion_Neck, 0.136) (Round_Neck, 0.409) (V_Neck, 0.045)
+         Turtle_Neck (0.500)  <<   (High_Neck, 0.083) (Round_Neck, 0.194) (V_Neck, 0.222)
+              V_Neck (0.685)  <<   (Chinese_Collar, 0.019) (Collar_Neck, 0.037) (Fashion_Neck, 0.019) (High_Neck, 0.019) (Round_Neck, 0.130) (Square_Neck, 0.019) (Turtle_Neck, 0.074)
+recall table (normalized by TP+FN)
+                       0   1   2   3   4   5   6   7   8   9  10
+ 0           Ignored NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN
+ 1         Boat_Neck   0 666  41   0 125   0   0  83  83   0   0
+ 2    Chinese_Collar   0  58 529   0 176   0 117   0  58   0  58
+ 3       Collar_Neck   0 111 111 333 222   0   0   0   0   0 222
+ 4      Fashion_Neck   0  28  28  14 760  42   0  70  42   0  14
+ 5         High_Neck   0   0   0   0  18 870   0  37   0  55  18
+ 6       Hooded_Neck   0   0   0   0   0  71 928   0   0   0   0
+ 7        Round_Neck   0  98   0  32 153  54  10 395  98  76  76
+ 8       Square_Neck   0  90   0   0   0   0   0 272 545   0  90
+ 9       Turtle_Neck   0   0  31   0   0 250   0  31   0 562 125
+10            V_Neck   0  82  27  27  54  82  13  82  13 109 506
+Recall report 
+             Ignored (-nan)  >>  
+           Boat_Neck (0.667)  >>   (Chinese_Collar, 0.042) (Fashion_Neck, 0.125) (Round_Neck, 0.083) (Square_Neck, 0.083)
+      Chinese_Collar (0.529)  >>   (Boat_Neck, 0.059) (Fashion_Neck, 0.176) (Hooded_Neck, 0.118) (Square_Neck, 0.059) (V_Neck, 0.059)
+         Collar_Neck (0.333)  >>   (Boat_Neck, 0.111) (Chinese_Collar, 0.111) (Fashion_Neck, 0.222) (V_Neck, 0.222)
+        Fashion_Neck (0.761)  >>   (Boat_Neck, 0.028) (Chinese_Collar, 0.028) (Collar_Neck, 0.014) (High_Neck, 0.042) (Round_Neck, 0.070) (Square_Neck, 0.042) (V_Neck, 0.014)
+           High_Neck (0.870)  >>   (Fashion_Neck, 0.019) (Round_Neck, 0.037) (Turtle_Neck, 0.056) (V_Neck, 0.019)
+         Hooded_Neck (0.929)  >>   (High_Neck, 0.071)
+          Round_Neck (0.396)  >>   (Boat_Neck, 0.099) (Collar_Neck, 0.033) (Fashion_Neck, 0.154) (High_Neck, 0.055) (Hooded_Neck, 0.011) (Square_Neck, 0.099) (Turtle_Neck, 0.077) (V_Neck, 0.077)
+         Square_Neck (0.545)  >>   (Boat_Neck, 0.091) (Round_Neck, 0.273) (V_Neck, 0.091)
+         Turtle_Neck (0.562)  >>   (Chinese_Collar, 0.031) (High_Neck, 0.250) (Round_Neck, 0.031) (V_Neck, 0.125)
+              V_Neck (0.507)  >>   (Boat_Neck, 0.082) (Chinese_Collar, 0.027) (Collar_Neck, 0.027) (Fashion_Neck, 0.055) (High_Neck, 0.082) (Hooded_Neck, 0.014) (Round_Neck, 0.082) (Square_Neck, 0.014) (Turtle_Neck, 0.110)
