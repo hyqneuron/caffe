@@ -1,0 +1,79 @@
+###################  accuracy_pattern  ####################
+Raw number table
+                       0   1   2   3   4   5   6   7   8   9  10  11  12  13
+ 0           Ignored   0   0   0   0   0   0   0   0   0   0   0   0   0   0
+ 1         Checkered   0 2683   2   3   5  29  50   6  25  21  39 125 210   8
+ 2       Embellished   0   0 127  31   5  15   2   6   2   4  27  14   5   9
+ 3       Embroidered   0   1  68 506   8  59   3  25  23  51 105  65   2  15
+ 4      Print.Animal   0   3   7   8 479  69  16  19  51  22  15  12   5   6
+ 5      Print.Floral   0  13  22 135 109 1970  85  32 125 170 477  41  20  11
+ 6   Print.Geometric   0  25   9  30  42 150 298  13  77  85 107  31  45   6
+ 7     Print.Graphic   0  11   7  39  29 169  45 1043  34 111  36  65  22   9
+ 8       Print.Polka   0  27  21  33  50 130  34   8 534  45  80  55  15   6
+ 9           Printed   0  30  16 162 156 601 138 358 163 1055 305 165  52  12
+10       Self_Design   0  42  95 334  51 310  77  33  78 123 1681 329  61  30
+11             Solid   0  72  74 136   8  29  20  34  26  77 154 2360 164  70
+12           Striped   0 322  14  23  18  14  67  23  34  56 110 288 2243  15
+13             Woven   0   6   7  15   1  11   1   1   8   3   7  31   9  70
+precision table (normalized by TP+FP)
+                       0   1   2   3   4   5   6   7   8   9  10  11  12  13
+ 0           Ignored NaN   0   0   0   0   0   0   0   0   0   0   0   0   0
+ 1         Checkered NaN 829   4   2   5   8  59   3  21  11  12  34  73  29
+ 2       Embellished NaN   0 270  21   5   4   2   3   1   2   8   3   1  33
+ 3       Embroidered NaN   0 144 347   8  16   3  15  19  27  33  18   0  56
+ 4      Print.Animal NaN   0  14   5 498  19  19  11  43  12   4   3   1  22
+ 5      Print.Floral NaN   4  46  92 113 553 101  19 105  93 151  11   7  41
+ 6   Print.Geometric NaN   7  19  20  43  42 356   8  65  46  34   8  15  22
+ 7     Print.Graphic NaN   3  14  26  30  47  53 651  28  60  11  18   7  33
+ 8       Print.Polka NaN   8  44  22  52  36  40   4 452  24  25  15   5  22
+ 9           Printed NaN   9  34 111 162 169 165 223 138 578  97  46  18  44
+10       Self_Design NaN  12 202 229  53  87  92  20  66  67 534  91  21 112
+11             Solid NaN  22 157  93   8   8  23  21  22  42  48 659  57 262
+12           Striped NaN  99  29  15  18   3  80  14  28  30  34  80 786  56
+13             Woven NaN   1  14  10   1   3   1   0   6   1   2   8   3 262
+Precision report 
+             Ignored (-nan)  <<  
+           Checkered (0.829)  <<   (Self_Design, 0.013) (Solid, 0.022) (Striped, 0.100)
+         Embellished (0.271)  <<   (Embroidered, 0.145) (Print.Animal, 0.015) (Print.Floral, 0.047) (Print.Geometric, 0.019) (Print.Graphic, 0.015) (Print.Polka, 0.045) (Printed, 0.034) (Self_Design, 0.203) (Solid, 0.158) (Striped, 0.030) (Woven, 0.015)
+         Embroidered (0.348)  <<   (Embellished, 0.021) (Print.Floral, 0.093) (Print.Geometric, 0.021) (Print.Graphic, 0.027) (Print.Polka, 0.023) (Printed, 0.111) (Self_Design, 0.230) (Solid, 0.093) (Striped, 0.016) (Woven, 0.010)
+        Print.Animal (0.498)  <<   (Print.Floral, 0.113) (Print.Geometric, 0.044) (Print.Graphic, 0.030) (Print.Polka, 0.052) (Printed, 0.162) (Self_Design, 0.053) (Striped, 0.019)
+        Print.Floral (0.554)  <<   (Embroidered, 0.017) (Print.Animal, 0.019) (Print.Geometric, 0.042) (Print.Graphic, 0.048) (Print.Polka, 0.037) (Printed, 0.169) (Self_Design, 0.087)
+     Print.Geometric (0.356)  <<   (Checkered, 0.060) (Print.Animal, 0.019) (Print.Floral, 0.102) (Print.Graphic, 0.054) (Print.Polka, 0.041) (Printed, 0.165) (Self_Design, 0.092) (Solid, 0.024) (Striped, 0.080)
+       Print.Graphic (0.651)  <<   (Embroidered, 0.016) (Print.Animal, 0.012) (Print.Floral, 0.020) (Printed, 0.224) (Self_Design, 0.021) (Solid, 0.021) (Striped, 0.014)
+         Print.Polka (0.453)  <<   (Checkered, 0.021) (Embroidered, 0.019) (Print.Animal, 0.043) (Print.Floral, 0.106) (Print.Geometric, 0.065) (Print.Graphic, 0.029) (Printed, 0.138) (Self_Design, 0.066) (Solid, 0.022) (Striped, 0.029)
+             Printed (0.579)  <<   (Checkered, 0.012) (Embroidered, 0.028) (Print.Animal, 0.012) (Print.Floral, 0.093) (Print.Geometric, 0.047) (Print.Graphic, 0.061) (Print.Polka, 0.025) (Self_Design, 0.067) (Solid, 0.042) (Striped, 0.031)
+         Self_Design (0.535)  <<   (Checkered, 0.012) (Embroidered, 0.033) (Print.Floral, 0.152) (Print.Geometric, 0.034) (Print.Graphic, 0.011) (Print.Polka, 0.025) (Printed, 0.097) (Solid, 0.049) (Striped, 0.035)
+               Solid (0.659)  <<   (Checkered, 0.035) (Embroidered, 0.018) (Print.Floral, 0.011) (Print.Graphic, 0.018) (Print.Polka, 0.015) (Printed, 0.046) (Self_Design, 0.092) (Striped, 0.080)
+             Striped (0.786)  <<   (Checkered, 0.074) (Print.Geometric, 0.016) (Printed, 0.018) (Self_Design, 0.021) (Solid, 0.057)
+               Woven (0.262)  <<   (Checkered, 0.030) (Embellished, 0.034) (Embroidered, 0.056) (Print.Animal, 0.022) (Print.Floral, 0.041) (Print.Geometric, 0.022) (Print.Graphic, 0.034) (Print.Polka, 0.022) (Printed, 0.045) (Self_Design, 0.112) (Solid, 0.262) (Striped, 0.056)
+recall table (normalized by TP+FN)
+                       0   1   2   3   4   5   6   7   8   9  10  11  12  13
+ 0           Ignored NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN
+ 1         Checkered   0 836   0   0   1   9  15   1   7   6  12  38  65   2
+ 2       Embellished   0   0 514 125  20  60   8  24   8  16 109  56  20  36
+ 3       Embroidered   0   1  73 543   8  63   3  26  24  54 112  69   2  16
+ 4      Print.Animal   0   4   9  11 672  96  22  26  71  30  21  16   7   8
+ 5      Print.Floral   0   4   6  42  33 613  26   9  38  52 148  12   6   3
+ 6   Print.Geometric   0  27   9  32  45 163 324  14  83  92 116  33  49   6
+ 7     Print.Graphic   0   6   4  24  17 104  27 643  20  68  22  40  13   5
+ 8       Print.Polka   0  26  20  31  48 125  32   7 514  43  77  52  14   5
+ 9           Printed   0   9   4  50  48 187  42 111  50 328  94  51  16   3
+10       Self_Design   0  12  29 102  15  95  23  10  24  37 518 101  18   9
+11             Solid   0  22  22  42   2   8   6  10   8  23  47 732  50  21
+12           Striped   0  99   4   7   5   4  20   7  10  17  34  89 695   4
+13             Woven   0  35  41  88   5  64   5   5  47  17  41 182  52 411
+Recall report 
+             Ignored (-nan)  >>  
+           Checkered (0.837)  >>   (Print.Geometric, 0.016) (Self_Design, 0.012) (Solid, 0.039) (Striped, 0.066)
+         Embellished (0.514)  >>   (Embroidered, 0.126) (Print.Animal, 0.020) (Print.Floral, 0.061) (Print.Graphic, 0.024) (Printed, 0.016) (Self_Design, 0.109) (Solid, 0.057) (Striped, 0.020) (Woven, 0.036)
+         Embroidered (0.544)  >>   (Embellished, 0.073) (Print.Floral, 0.063) (Print.Graphic, 0.027) (Print.Polka, 0.025) (Printed, 0.055) (Self_Design, 0.113) (Solid, 0.070) (Woven, 0.016)
+        Print.Animal (0.673)  >>   (Embroidered, 0.011) (Print.Floral, 0.097) (Print.Geometric, 0.022) (Print.Graphic, 0.027) (Print.Polka, 0.072) (Printed, 0.031) (Self_Design, 0.021) (Solid, 0.017)
+        Print.Floral (0.614)  >>   (Embroidered, 0.042) (Print.Animal, 0.034) (Print.Geometric, 0.026) (Print.Polka, 0.039) (Printed, 0.053) (Self_Design, 0.149) (Solid, 0.013)
+     Print.Geometric (0.325)  >>   (Checkered, 0.027) (Embroidered, 0.033) (Print.Animal, 0.046) (Print.Floral, 0.163) (Print.Graphic, 0.014) (Print.Polka, 0.084) (Printed, 0.093) (Self_Design, 0.117) (Solid, 0.034) (Striped, 0.049)
+       Print.Graphic (0.644)  >>   (Embroidered, 0.024) (Print.Animal, 0.018) (Print.Floral, 0.104) (Print.Geometric, 0.028) (Print.Polka, 0.021) (Printed, 0.069) (Self_Design, 0.022) (Solid, 0.040) (Striped, 0.014)
+         Print.Polka (0.514)  >>   (Checkered, 0.026) (Embellished, 0.020) (Embroidered, 0.032) (Print.Animal, 0.048) (Print.Floral, 0.125) (Print.Geometric, 0.033) (Printed, 0.043) (Self_Design, 0.077) (Solid, 0.053) (Striped, 0.014)
+             Printed (0.328)  >>   (Embroidered, 0.050) (Print.Animal, 0.049) (Print.Floral, 0.187) (Print.Geometric, 0.043) (Print.Graphic, 0.111) (Print.Polka, 0.051) (Self_Design, 0.095) (Solid, 0.051) (Striped, 0.016)
+         Self_Design (0.518)  >>   (Checkered, 0.013) (Embellished, 0.029) (Embroidered, 0.103) (Print.Animal, 0.016) (Print.Floral, 0.096) (Print.Geometric, 0.024) (Print.Graphic, 0.010) (Print.Polka, 0.024) (Printed, 0.038) (Solid, 0.101) (Striped, 0.019)
+               Solid (0.732)  >>   (Checkered, 0.022) (Embellished, 0.023) (Embroidered, 0.042) (Print.Graphic, 0.011) (Printed, 0.024) (Self_Design, 0.048) (Striped, 0.051) (Woven, 0.022)
+             Striped (0.695)  >>   (Checkered, 0.100) (Print.Geometric, 0.021) (Print.Polka, 0.011) (Printed, 0.017) (Self_Design, 0.034) (Solid, 0.089)
+               Woven (0.412)  >>   (Checkered, 0.035) (Embellished, 0.041) (Embroidered, 0.088) (Print.Floral, 0.065) (Print.Polka, 0.047) (Printed, 0.018) (Self_Design, 0.041) (Solid, 0.182) (Striped, 0.053)

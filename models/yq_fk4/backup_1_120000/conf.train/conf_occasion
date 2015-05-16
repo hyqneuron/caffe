@@ -1,0 +1,59 @@
+###################  accuracy_occasion ####################
+Raw number table
+                       0   1   2   3   4   5   6   7   8   9
+ 0           Ignored   0   0   0   0   0   0   0   0   0   0
+ 1        Beach_Wear   0 113   1   0   2   1   3   8   0   0
+ 2            Casual   0 101 5310 123 880 881 261 718 597  66
+ 3            Ethnic   0   2  13 353  13   5   0  14   2   0
+ 4           Festive   0  18 269 130 4298  82  58 1951   6 290
+ 5            Formal   0   7 626  44 273 7520  60 371  50  29
+ 6       Lounge_Wear   0   3  31   0   9   1 368  24   1   1
+ 7             Party   0  73 743 169 1477 729 280 5142  57 323
+ 8            Sports   0  18 377   2   1  51   8  17 4049   0
+ 9           Wedding   0   3  14  27 218  16   7 411   2 279
+precision table (normalized by TP+FP)
+                       0   1   2   3   4   5   6   7   8   9
+ 0           Ignored NaN   0   0   0   0   0   0   0   0   0
+ 1        Beach_Wear NaN 334   0   0   0   0   2   0   0   0
+ 2            Casual NaN 298 719 145 122  94 249  82 125  66
+ 3            Ethnic NaN   5   1 416   1   0   0   1   0   0
+ 4           Festive NaN  53  36 153 599   8  55 225   1 293
+ 5            Formal NaN  20  84  51  38 809  57  42  10  29
+ 6       Lounge_Wear NaN   8   4   0   1   0 352   2   0   1
+ 7             Party NaN 215 100 199 205  78 267 594  11 326
+ 8            Sports NaN  53  51   2   0   5   7   1 849   0
+ 9           Wedding NaN   8   1  31  30   1   6  47   0 282
+Precision report 
+             Ignored (-nan)  <<  
+          Beach_Wear (0.334)  <<   (Casual, 0.299) (Festive, 0.053) (Formal, 0.021) (Party, 0.216) (Sports, 0.053)
+              Casual (0.719)  <<   (Festive, 0.036) (Formal, 0.085) (Party, 0.101) (Sports, 0.051)
+              Ethnic (0.416)  <<   (Casual, 0.145) (Festive, 0.153) (Formal, 0.052) (Party, 0.199) (Wedding, 0.032)
+             Festive (0.599)  <<   (Casual, 0.123) (Formal, 0.038) (Party, 0.206) (Wedding, 0.030)
+              Formal (0.810)  <<   (Casual, 0.095) (Party, 0.079)
+         Lounge_Wear (0.352)  <<   (Casual, 0.250) (Festive, 0.056) (Formal, 0.057) (Party, 0.268)
+               Party (0.594)  <<   (Casual, 0.083) (Festive, 0.225) (Formal, 0.043) (Wedding, 0.047)
+              Sports (0.850)  <<   (Casual, 0.125) (Formal, 0.010) (Party, 0.012)
+             Wedding (0.282)  <<   (Casual, 0.067) (Festive, 0.294) (Formal, 0.029) (Party, 0.327)
+recall table (normalized by TP+FN)
+                       0   1   2   3   4   5   6   7   8   9
+ 0           Ignored NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN
+ 1        Beach_Wear   0 882   7   0  15   7  23  62   0   0
+ 2            Casual   0  11 594  13  98  98  29  80  66   7
+ 3            Ethnic   0   4  32 878  32  12   0  34   4   0
+ 4           Festive   0   2  37  18 605  11   8 274   0  40
+ 5            Formal   0   0  69   4  30 837   6  41   5   3
+ 6       Lounge_Wear   0   6  70   0  20   2 840  54   2   2
+ 7             Party   0   8  82  18 164  81  31 571   6  35
+ 8            Sports   0   3  83   0   0  11   1   3 895   0
+ 9           Wedding   0   3  14  27 223  16   7 420   2 285
+Recall report 
+             Ignored (-nan)  >>  
+          Beach_Wear (0.883)  >>   (Festive, 0.016) (Lounge_Wear, 0.023) (Party, 0.062)
+              Casual (0.594)  >>   (Beach_Wear, 0.011) (Ethnic, 0.014) (Festive, 0.098) (Formal, 0.099) (Lounge_Wear, 0.029) (Party, 0.080) (Sports, 0.067)
+              Ethnic (0.878)  >>   (Casual, 0.032) (Festive, 0.032) (Formal, 0.012) (Party, 0.035)
+             Festive (0.605)  >>   (Casual, 0.038) (Ethnic, 0.018) (Formal, 0.012) (Party, 0.275) (Wedding, 0.041)
+              Formal (0.837)  >>   (Casual, 0.070) (Festive, 0.030) (Party, 0.041)
+         Lounge_Wear (0.840)  >>   (Casual, 0.071) (Festive, 0.021) (Party, 0.055)
+               Party (0.572)  >>   (Casual, 0.083) (Ethnic, 0.019) (Festive, 0.164) (Formal, 0.081) (Lounge_Wear, 0.031) (Wedding, 0.036)
+              Sports (0.895)  >>   (Casual, 0.083) (Formal, 0.011)
+             Wedding (0.286)  >>   (Casual, 0.014) (Ethnic, 0.028) (Festive, 0.223) (Formal, 0.016) (Party, 0.421)
