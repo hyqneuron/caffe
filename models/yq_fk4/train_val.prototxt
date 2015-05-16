@@ -360,7 +360,7 @@ layer {
   name: "drop7-0.5"
   type: "Dropout"
   bottom: "fc7"
-  top: "fc7"
+  top: "fc7-0.5"
   dropout_param {
     # this is probability of dropout
     # not the probability of retainment
