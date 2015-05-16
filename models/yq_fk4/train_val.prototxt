@@ -384,7 +384,7 @@ layer {
 layer {
   name: "fc8_category"
   type: "InnerProduct"
-  bottom: "fc7"
+  bottom: "fc7-0.5"
   top: "fc8_category"
   param {
     lr_mult: 10
@@ -439,7 +439,7 @@ layer {
 layer {
   name: "fc8_pattern"
   type: "InnerProduct"
-  bottom: "fc7"
+  bottom: "fc7-0.5"
   top: "fc8_pattern"
   param {
     lr_mult: 10
@@ -549,7 +549,7 @@ layer {
 layer {
   name: "fc8_sleeve"
   type: "InnerProduct"
-  bottom: "fc7"
+  bottom: "fc7-0.5"
   top: "fc8_sleeve"
   param {
     lr_mult: 10
@@ -659,7 +659,7 @@ layer {
 layer {
   name: "fc8_ideal_for"
   type: "InnerProduct"
-  bottom: "fc7"
+  bottom: "fc7-0.5"
   top: "fc8_ideal_for"
   param {
     lr_mult: 10
@@ -714,7 +714,7 @@ layer {
 layer {
   name: "fc8_occasion"
   type: "InnerProduct"
-  bottom: "fc7"
+  bottom: "fc7-0.5"
   top: "fc8_occasion"
   param {
     lr_mult: 10
@@ -769,7 +769,7 @@ layer {
 layer {
   name: "fc8_embellished"
   type: "InnerProduct"
-  bottom: "fc7"
+  bottom: "fc7-0.5"
   top: "fc8_embellished"
   param {
     lr_mult: 10
@@ -824,7 +824,7 @@ layer {
 layer {
   name: "fc8_embroidered"
   type: "InnerProduct"
-  bottom: "fc7"
+  bottom: "fc7-0.5"
   top: "fc8_embroidered"
   param {
     lr_mult: 10
