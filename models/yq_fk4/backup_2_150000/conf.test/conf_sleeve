@@ -1,0 +1,44 @@
+###################   accuracy_sleeve  ####################
+Raw number table
+                       0   1   2   3   4   5   6
+ 0           Ignored   0   0   0   0   0   0   0
+ 1        3/4_Sleeve   0 515   9   5  12  17  10
+ 2       Full_Sleeve   0  45 452   4  95   1   9
+ 3       Half_Sleeve   0  10   5 498  20  46  28
+ 4    Roll-up_Sleeve   0  27  32  12 222   4   0
+ 5      Short_Sleeve   0   2   0  20   3 212   6
+ 6        Sleeveless   0  10  10  13   1  26 523
+precision table (normalized by TP+FP)
+                       0   1   2   3   4   5   6
+ 0           Ignored NaN   0   0   0   0   0   0
+ 1        3/4_Sleeve NaN 845  17   9  33  55  17
+ 2       Full_Sleeve NaN  73 889   7 269   3  15
+ 3       Half_Sleeve NaN  16   9 902  56 150  48
+ 4    Roll-up_Sleeve NaN  44  62  21 628  13   0
+ 5      Short_Sleeve NaN   3   0  36   8 692  10
+ 6        Sleeveless NaN  16  19  23   2  84 907
+Precision report 
+             Ignored (-nan)  <<  
+          3/4_Sleeve (0.846)  <<   (Full_Sleeve, 0.074) (Half_Sleeve, 0.016) (Roll-up_Sleeve, 0.044) (Sleeveless, 0.016)
+         Full_Sleeve (0.890)  <<   (3/4_Sleeve, 0.018) (Roll-up_Sleeve, 0.063) (Sleeveless, 0.020)
+         Half_Sleeve (0.902)  <<   (Roll-up_Sleeve, 0.022) (Short_Sleeve, 0.036) (Sleeveless, 0.024)
+      Roll-up_Sleeve (0.629)  <<   (3/4_Sleeve, 0.034) (Full_Sleeve, 0.269) (Half_Sleeve, 0.057)
+        Short_Sleeve (0.693)  <<   (3/4_Sleeve, 0.056) (Half_Sleeve, 0.150) (Roll-up_Sleeve, 0.013) (Sleeveless, 0.085)
+          Sleeveless (0.908)  <<   (3/4_Sleeve, 0.017) (Full_Sleeve, 0.016) (Half_Sleeve, 0.049) (Short_Sleeve, 0.010)
+recall table (normalized by TP+FN)
+                       0   1   2   3   4   5   6
+ 0           Ignored NaN NaN NaN NaN NaN NaN NaN
+ 1        3/4_Sleeve   0 906  15   8  21  29  17
+ 2       Full_Sleeve   0  74 745   6 156   1  14
+ 3       Half_Sleeve   0  16   8 820  32  75  46
+ 4    Roll-up_Sleeve   0  90 107  40 747  13   0
+ 5      Short_Sleeve   0   8   0  82  12 872  24
+ 6        Sleeveless   0  17  17  22   1  44 897
+Recall report 
+             Ignored (-nan)  >>  
+          3/4_Sleeve (0.907)  >>   (Full_Sleeve, 0.016) (Roll-up_Sleeve, 0.021) (Short_Sleeve, 0.030) (Sleeveless, 0.018)
+         Full_Sleeve (0.746)  >>   (3/4_Sleeve, 0.074) (Roll-up_Sleeve, 0.157) (Sleeveless, 0.015)
+         Half_Sleeve (0.820)  >>   (3/4_Sleeve, 0.016) (Roll-up_Sleeve, 0.033) (Short_Sleeve, 0.076) (Sleeveless, 0.046)
+      Roll-up_Sleeve (0.747)  >>   (3/4_Sleeve, 0.091) (Full_Sleeve, 0.108) (Half_Sleeve, 0.040) (Short_Sleeve, 0.013)
+        Short_Sleeve (0.872)  >>   (Half_Sleeve, 0.082) (Roll-up_Sleeve, 0.012) (Sleeveless, 0.025)
+          Sleeveless (0.897)  >>   (3/4_Sleeve, 0.017) (Full_Sleeve, 0.017) (Half_Sleeve, 0.022) (Short_Sleeve, 0.045)

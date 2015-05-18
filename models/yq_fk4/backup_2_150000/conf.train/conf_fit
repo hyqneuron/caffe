@@ -1,0 +1,39 @@
+###################    accuracy_fit    ####################
+Raw number table
+                       0   1   2   3   4   5
+ 0           Ignored   0   0   0   0   0   0
+ 1       Comfort_Fit   0 466 111   9  58  13
+ 2       Regular_Fit   0  91 1247 120 243 144
+ 3        Skinny_Fit   0   1  29 885  11   0
+ 4          Slim_Fit   0  51 298 238 1213  30
+ 5      Straight_Fit   0   0  16   5   1 254
+precision table (normalized by TP+FP)
+                       0   1   2   3   4   5
+ 0           Ignored NaN   0   0   0   0   0
+ 1       Comfort_Fit NaN 765  65   7  38  29
+ 2       Regular_Fit NaN 149 733  95 159 326
+ 3        Skinny_Fit NaN   1  17 704   7   0
+ 4          Slim_Fit NaN  83 175 189 794  68
+ 5      Straight_Fit NaN   0   9   3   0 575
+Precision report 
+             Ignored (-nan)  <<  
+         Comfort_Fit (0.765)  <<   (Regular_Fit, 0.149) (Slim_Fit, 0.084)
+         Regular_Fit (0.733)  <<   (Comfort_Fit, 0.065) (Skinny_Fit, 0.017) (Slim_Fit, 0.175)
+          Skinny_Fit (0.704)  <<   (Regular_Fit, 0.095) (Slim_Fit, 0.189)
+            Slim_Fit (0.795)  <<   (Comfort_Fit, 0.038) (Regular_Fit, 0.159)
+        Straight_Fit (0.576)  <<   (Comfort_Fit, 0.029) (Regular_Fit, 0.327) (Slim_Fit, 0.068)
+recall table (normalized by TP+FN)
+                       0   1   2   3   4   5
+ 0           Ignored NaN NaN NaN NaN NaN NaN
+ 1       Comfort_Fit   0 709 168  13  88  19
+ 2       Regular_Fit   0  49 675  65 131  78
+ 3        Skinny_Fit   0   1  31 955  11   0
+ 4          Slim_Fit   0  27 162 130 662  16
+ 5      Straight_Fit   0   0  57  18   3 920
+Recall report 
+             Ignored (-nan)  >>  
+         Comfort_Fit (0.709)  >>   (Regular_Fit, 0.169) (Skinny_Fit, 0.014) (Slim_Fit, 0.088) (Straight_Fit, 0.020)
+         Regular_Fit (0.676)  >>   (Comfort_Fit, 0.049) (Skinny_Fit, 0.065) (Slim_Fit, 0.132) (Straight_Fit, 0.078)
+          Skinny_Fit (0.956)  >>   (Regular_Fit, 0.031) (Slim_Fit, 0.012)
+            Slim_Fit (0.663)  >>   (Comfort_Fit, 0.028) (Regular_Fit, 0.163) (Skinny_Fit, 0.130) (Straight_Fit, 0.016)
+        Straight_Fit (0.920)  >>   (Regular_Fit, 0.058) (Skinny_Fit, 0.018)

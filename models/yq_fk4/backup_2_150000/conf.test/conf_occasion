@@ -1,0 +1,59 @@
+###################  accuracy_occasion ####################
+Raw number table
+                       0   1   2   3   4   5   6   7   8   9
+ 0           Ignored   0   0   0   0   0   0   0   0   0   0
+ 1        Beach_Wear   0  12   5   0   0   0   0   2   1   0
+ 2            Casual   0   6 724   8  71  69  20  98  76   7
+ 3            Ethnic   0   0   1  24   0   2   0   5   0   0
+ 4           Festive   0   2  43  12 451   6   1 280   0  15
+ 5            Formal   0   0  95   5  26 860   5  60   2   0
+ 6       Lounge_Wear   0   0   3   0   1   0  44   6   0   0
+ 7             Party   0   9  92  19 134  67  18 659   5  17
+ 8            Sports   0   2  57   0   0   3   2   2 418   2
+ 9           Wedding   0   0   4   4  20   2   1  51   0  17
+precision table (normalized by TP+FP)
+                       0   1   2   3   4   5   6   7   8   9
+ 0           Ignored NaN   0   0   0   0   0   0   0   0   0
+ 1        Beach_Wear NaN 387   4   0   0   0   0   1   1   0
+ 2            Casual NaN 193 707 111 100  68 219  84 151 120
+ 3            Ethnic NaN   0   0 333   0   1   0   4   0   0
+ 4           Festive NaN  64  41 166 641   5  10 240   0 258
+ 5            Formal NaN   0  92  69  36 852  54  51   3   0
+ 6       Lounge_Wear NaN   0   2   0   1   0 483   5   0   0
+ 7             Party NaN 290  89 263 190  66 197 566   9 293
+ 8            Sports NaN  64  55   0   0   2  21   1 832  34
+ 9           Wedding NaN   0   3  55  28   1  10  43   0 293
+Precision report 
+             Ignored (-nan)  <<  
+          Beach_Wear (0.387)  <<   (Casual, 0.194) (Festive, 0.065) (Party, 0.290) (Sports, 0.065)
+              Casual (0.707)  <<   (Festive, 0.042) (Formal, 0.093) (Party, 0.090) (Sports, 0.056)
+              Ethnic (0.333)  <<   (Casual, 0.111) (Festive, 0.167) (Formal, 0.069) (Party, 0.264) (Wedding, 0.056)
+             Festive (0.642)  <<   (Casual, 0.101) (Formal, 0.037) (Party, 0.191) (Wedding, 0.028)
+              Formal (0.852)  <<   (Casual, 0.068) (Party, 0.066)
+         Lounge_Wear (0.484)  <<   (Casual, 0.220) (Festive, 0.011) (Formal, 0.055) (Party, 0.198) (Sports, 0.022) (Wedding, 0.011)
+               Party (0.567)  <<   (Casual, 0.084) (Festive, 0.241) (Formal, 0.052) (Wedding, 0.044)
+              Sports (0.833)  <<   (Casual, 0.151)
+             Wedding (0.293)  <<   (Casual, 0.121) (Festive, 0.259) (Party, 0.293) (Sports, 0.034)
+recall table (normalized by TP+FN)
+                       0   1   2   3   4   5   6   7   8   9
+ 0           Ignored NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN
+ 1        Beach_Wear   0 600 250   0   0   0   0 100  50   0
+ 2            Casual   0   5 670   7  65  63  18  90  70   6
+ 3            Ethnic   0   0  31 750   0  62   0 156   0   0
+ 4           Festive   0   2  53  14 556   7   1 345   0  18
+ 5            Formal   0   0  90   4  24 816   4  56   1   0
+ 6       Lounge_Wear   0   0  55   0  18   0 814 111   0   0
+ 7             Party   0   8  90  18 131  65  17 646   4  16
+ 8            Sports   0   4 117   0   0   6   4   4 860   4
+ 9           Wedding   0   0  40  40 202  20  10 515   0 171
+Recall report 
+             Ignored (-nan)  >>  
+          Beach_Wear (0.600)  >>   (Casual, 0.250) (Party, 0.100) (Sports, 0.050)
+              Casual (0.671)  >>   (Festive, 0.066) (Formal, 0.064) (Lounge_Wear, 0.019) (Party, 0.091) (Sports, 0.070)
+              Ethnic (0.750)  >>   (Casual, 0.031) (Formal, 0.062) (Party, 0.156)
+             Festive (0.557)  >>   (Casual, 0.053) (Ethnic, 0.015) (Party, 0.346) (Wedding, 0.019)
+              Formal (0.817)  >>   (Casual, 0.090) (Festive, 0.025) (Party, 0.057)
+         Lounge_Wear (0.815)  >>   (Casual, 0.056) (Festive, 0.019) (Party, 0.111)
+               Party (0.646)  >>   (Casual, 0.090) (Ethnic, 0.019) (Festive, 0.131) (Formal, 0.066) (Lounge_Wear, 0.018) (Wedding, 0.017)
+              Sports (0.860)  >>   (Casual, 0.117)
+             Wedding (0.172)  >>   (Casual, 0.040) (Ethnic, 0.040) (Festive, 0.202) (Formal, 0.020) (Lounge_Wear, 0.010) (Party, 0.515)
