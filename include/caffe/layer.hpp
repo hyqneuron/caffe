@@ -292,7 +292,9 @@ class Layer {
    *        simply averaged across batches.
    */
   virtual bool has_custom_test_information(){return false;}
+  virtual bool has_custom_test_information2(){return false;}
   virtual void custom_test_information() {}
+  virtual void custom_test_information2() {}
 
 
  protected:

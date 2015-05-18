@@ -90,6 +90,37 @@ void printTable(std::ostream& outfile,
 }
 
 template <typename Dtype>
+void PerClassAccuracyLayer<Dtype>::custom_test_information2() {
+  // compute true positive rate first
+  int total_label = 0;
+  int total_TP = 0;
+  float mean_accu_sum = 0;
+  int mean_accu_denom = 0;
+  for(int i = 0; i<num_classes_; i++){
+    total_label += class_label_total_[i];
+    total_TP += a_to_b_[i][i];
+    if(class_label_total_[i]!=0){
+      mean_accu_denom+=1;
+      mean_accu_sum += a_to_b_[i][i] / class_label_total_[i];
+    }
+  }
+
+  // print
+  LOG(INFO) << "Accuracy for "<< this->layer_param_.name()
+      << "=" << float(total_TP)/total_label;
+  LOG(INFO) << "Mean Accuracy for "<< this->layer_param_.name()
+      << "=" << mean_accu_sum / mean_accu_denom;
+
+  // after printing, reset tracking information
+  // HACK custom_test_information() and custom_test_information2() must both be
+  // called to have correct resetting behaviour
+  for(int i = 0; i<num_classes_; i++){
+    class_label_total_[i]=0;
+    class_pred_total_[i]=0;
+    a_to_b_[i] = vector<int>(num_classes_);
+  }
+}
+template <typename Dtype>
 void PerClassAccuracyLayer<Dtype>::custom_test_information() {
   LOG(INFO) << "#############";
   LOG(INFO) << "Per-Class Information for "<< this->layer_param_.name();
@@ -131,13 +162,7 @@ void PerClassAccuracyLayer<Dtype>::custom_test_information() {
         class_label_total_, class_pred_total_,
         true, true, false);
   }
-
-  // after printing, reset tracking information
-  for(int i = 0; i<num_classes_; i++){
-    class_label_total_[i]=0;
-    class_pred_total_[i]=0;
-    a_to_b_[i] = vector<int>(num_classes_);
-  }
+  // tracking information is reset in custom_test_information2()
 }
 template <typename Dtype>
 void PerClassAccuracyLayer<Dtype>::LayerSetUp(
