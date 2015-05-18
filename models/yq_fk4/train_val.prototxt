@@ -422,7 +422,6 @@ layer {
   type: "PerClassAccuracy"
   bottom: "fc8_category"
   bottom: "label_category"
-  top: "accuracy_category"
   include {
     phase: TEST
   }
@@ -477,7 +476,6 @@ layer {
   type: "PerClassAccuracy"
   bottom: "fc8_pattern"
   bottom: "label_pattern"
-  top: "accuracy_pattern"
   include {
     phase: TEST
   }
@@ -532,7 +530,6 @@ layer {
   type: "PerClassAccuracy"
   bottom: "fc8_neck"
   bottom: "label_neck"
-  top: "accuracy_neck"
   include {
     phase: TEST
   }
@@ -587,7 +584,6 @@ layer {
   type: "PerClassAccuracy"
   bottom: "fc8_sleeve"
   bottom: "label_sleeve"
-  top: "accuracy_sleeve"
   include {
     phase: TEST
   }
@@ -642,7 +638,6 @@ layer {
   type: "PerClassAccuracy"
   bottom: "fc8_fit"
   bottom: "label_fit"
-  top: "accuracy_fit"
   include {
     phase: TEST
   }
@@ -697,7 +692,6 @@ layer {
   type: "PerClassAccuracy"
   bottom: "fc8_ideal_for"
   bottom: "label_ideal_for"
-  top: "accuracy_ideal_for"
   include {
     phase: TEST
   }
@@ -752,7 +746,6 @@ layer {
   type: "PerClassAccuracy"
   bottom: "fc8_occasion"
   bottom: "label_occasion"
-  top: "accuracy_occasion"
   include {
     phase: TEST
   }
@@ -807,7 +800,6 @@ layer {
   type: "PerClassAccuracy"
   bottom: "fc8_embellished"
   bottom: "label_embellished"
-  top: "accuracy_embellished"
   include {
     phase: TEST
   }
@@ -862,7 +854,6 @@ layer {
   type: "PerClassAccuracy"
   bottom: "fc8_embroidered"
   bottom: "label_embroidered"
-  top: "accuracy_embroidered"
   include {
     phase: TEST
   }
