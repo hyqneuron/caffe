@@ -5,8 +5,6 @@ layer {
   type: "ImageDataMultLabel"
   top: "data"
   top: "label_category"
-  top: "label_pattern"
-  top: "label_sleeve"
   include {
     phase: TRAIN
   }
@@ -31,8 +29,6 @@ layer {
   type: "ImageDataMultLabel"
   top: "data"
   top: "label_category"
-  top: "label_pattern"
-  top: "label_sleeve"
   include {
     phase: TEST
   }
@@ -327,109 +323,5 @@ layer {
       ignore_label: 0
       classifier_info_file: "models/yq_fk5/info_category.txt"
       confusion_matrix_file: "models/yq_fk5/conf_category"
-  }
-}
-
-
-
-####pattern####
-layer {
-  name: "fc8_pattern"
-  type: "InnerProduct"
-  bottom: "pool5"
-  top: "fc8_pattern"
-  param {
-    lr_mult: 1
-    decay_mult: 1
-  }
-  param {
-    lr_mult: 2
-    decay_mult: 0
-  }
-  inner_product_param {
-    num_output: 14
-    weight_filler {
-      type: "gaussian"
-      std: 0.01
-    }
-    bias_filler {
-      type: "constant"
-      value: 0
-    }
-  }
-}
-layer {
-  name: "loss_pattern"
-  type: "SoftmaxWithPerClassLoss"
-  bottom: "fc8_pattern"
-  bottom: "label_pattern"
-  loss_param {
-      ignore_label: 0
-      normalize: true
-      classifier_info_file: "models/yq_fk5/info_pattern.txt"
-      class_specific_lr: false
-  }
-}
-layer {
-  name: "accuracy_pattern"
-  type: "PerClassAccuracy"
-  bottom: "fc8_pattern"
-  bottom: "label_pattern"
-  per_class_accuracy_param {
-      ignore_label: 0
-      classifier_info_file: "models/yq_fk5/info_pattern.txt"
-      confusion_matrix_file: "models/yq_fk5/conf_pattern"
-  }
-}
-
-
-
-####sleeve####
-layer {
-  name: "fc8_sleeve"
-  type: "InnerProduct"
-  bottom: "pool5"
-  top: "fc8_sleeve"
-  param {
-    lr_mult: 1
-    decay_mult: 1
-  }
-  param {
-    lr_mult: 2
-    decay_mult: 0
-  }
-  inner_product_param {
-    num_output: 7
-    weight_filler {
-      type: "gaussian"
-      std: 0.01
-    }
-    bias_filler {
-      type: "constant"
-      value: 0
-    }
-  }
-}
-layer {
-  name: "loss_sleeve"
-  type: "SoftmaxWithPerClassLoss"
-  bottom: "fc8_sleeve"
-  bottom: "label_sleeve"
-  loss_param {
-      ignore_label: 0
-      normalize: true
-      classifier_info_file: "models/yq_fk5/info_sleeve.txt"
-      class_specific_lr: false
-  }
-}
-layer {
-  name: "accuracy_sleeve"
-  type: "PerClassAccuracy"
-  bottom: "fc8_sleeve"
-  bottom: "label_sleeve"
-  per_class_accuracy_param {
-      ignore_label: 0
-      classifier_info_file: "models/yq_fk5/info_sleeve.txt"
-      confusion_matrix_file: "models/yq_fk5/conf_sleeve"
   }
 }
