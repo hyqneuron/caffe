@@ -101,7 +101,7 @@ void PerClassAccuracyLayer<Dtype>::custom_test_information2() {
     total_TP += a_to_b_[i][i];
     if(class_label_total_[i]!=0){
       mean_accu_denom+=1;
-      mean_accu_sum += a_to_b_[i][i] / class_label_total_[i];
+      mean_accu_sum += float(a_to_b_[i][i]) / class_label_total_[i];
     }
   }
 
@@ -140,8 +140,10 @@ void PerClassAccuracyLayer<Dtype>::custom_test_information() {
   }
   // now, if we need to write confusion matrix to file
   if(this->layer_param_.per_class_accuracy_param().has_confusion_matrix_file()){
+    string suffix = this->layer_param_.phase()==TRAIN? ".train" : ".test";
     string conf_file = 
-        this->layer_param_.per_class_accuracy_param().confusion_matrix_file();
+        this->layer_param_.per_class_accuracy_param().confusion_matrix_file()
+        + suffix;
     std::ofstream outfile(conf_file.c_str());
     outfile<< format("###################%=20s####################")
             % this->layer_param_.name();

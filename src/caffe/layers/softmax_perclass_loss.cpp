@@ -36,6 +36,7 @@ void SoftmaxWithPerClassLossLayer<Dtype>::LayerSetUp(
   }
   normalize_ = this->layer_param_.loss_param().normalize();
 
+  class_specific_lr_ = softmax_param.loss_param().class_specific_lr();
   // start reading file
   // adapted from per_class_accuracy_layer.cpp
   CHECK(softmax_param.loss_param().has_classifier_info_file()) <<

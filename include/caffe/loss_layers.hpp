@@ -892,6 +892,7 @@ class SoftmaxWithPerClassLossLayer : public LossLayer<Dtype> {
   vector<float>  class_lrmults_;
   // lr_mult_ sync per-sample multiplier
   Blob<Dtype> lr_mult_;
+  bool class_specific_lr_;
   // HYQ end
 };
 }  // namespace caffe

@@ -132,7 +132,9 @@ void SoftmaxWithPerClassLossLayer<Dtype>::Backward_gpu(const vector<Blob<Dtype>*
     for(int i = 0; i<outer_num_; ++i){
       CHECK_GE(label_cpu[i],0);
       CHECK_LT(label_cpu[i],num_classes_);
-      lr_mult_cpu[i] = class_lrmults_[label_cpu[i]];
+      lr_mult_cpu[i] = class_specific_lr_? 
+                        class_lrmults_[label_cpu[i]]
+                        : 1 ;
     }
     lr_mult_.gpu_data();
     // NOLINT_NEXT_LINE(whitespace/operators)

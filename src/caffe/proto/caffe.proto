@@ -138,6 +138,9 @@ message SolverParameter {
   // the number of iterations between displaying info. If display = 0, no info
   // will be displayed.
   optional int32 display = 6;
+  // the number of iterations between printing custom information using Layer's
+  // custom_test_information() and custom_test_information2() 
+  optional int32 custom_print = 40 [default = 0];
   // Display the loss averaged over the last average_loss iterations
   optional int32 average_loss = 33 [default = 1];
   optional int32 max_iter = 7; // the maximum number of iterations
@@ -363,6 +366,7 @@ message LossParameter {
   // dimesions, but not ignored instances); else, divide by batch size only.
   optional bool normalize = 2 [default = true];
   optional string classifier_info_file = 3;
+  optional bool class_specific_lr = 4 [default = false];
 }
 
 // Message that stores parameters used by AccuracyLayer

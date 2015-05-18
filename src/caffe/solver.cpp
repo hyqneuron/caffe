@@ -180,6 +180,8 @@ void Solver<Dtype>::Step(int iters) {
     }
 
     const bool display = param_.display() && iter_ % param_.display() == 0;
+    const bool custom_print = param_.custom_print() > 0 && 
+                              iter_ % param_.custom_print() == 0;
     net_->set_debug_info(display && param_.debug_info());
     Dtype loss = net_->ForwardBackward(bottom_vec);
     if (losses.size() < average_loss) {
@@ -215,6 +217,12 @@ void Solver<Dtype>::Step(int iters) {
               << score_index++ << ": " << output_name << " = "
               << result_vec[k] << loss_msg_stream.str();
         }
+      }
+    }
+    if (custom_print){
+      for(int layer_id = 0; layer_id < net_->layers().size(); layer_id++){
+        if(net_->layers()[layer_id]->has_custom_test_information2())
+          net_->layers()[layer_id]->custom_test_information2();
       }
     }
     ComputeUpdateValue();
