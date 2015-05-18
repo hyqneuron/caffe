@@ -230,7 +230,7 @@ void PerClassAccuracyLayer<Dtype>::Reshape(
       << "label count (number of labels) must be N*H*W, "
       << "with integer values in {0, 1, ..., C-1}.";
   vector<int> top_shape(0);  // Accuracy is a scalar; 0 axes.
-  top[0]->Reshape(top_shape);
+  //top[0]->Reshape(top_shape);
 }
 
 template <typename Dtype>
@@ -283,10 +283,10 @@ void PerClassAccuracyLayer<Dtype>::Forward_cpu(const vector<Blob<Dtype>*>& botto
   }
 
   // LOG(INFO) << "Accuracy: " << accuracy;
-  if(count==0)
-    LOG(INFO)<< "Accuracy cannot be computed with count 0 for: " 
-             << this->layer_param_.name();
-  top[0]->mutable_cpu_data()[0] = count==0? 0 : accuracy / count;
+  // if(count==0)
+  //  LOG(INFO)<< "Accuracy cannot be computed with count 0 for: " 
+  //           << this->layer_param_.name();
+  // top[0]->mutable_cpu_data()[0] = count==0? 0 : accuracy / count;
   // Accuracy layer should not be used as a loss function.
 }
 
