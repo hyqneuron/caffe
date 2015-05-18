@@ -287,11 +287,11 @@ layer {
   bottom: "pool5"
   top: "fc8_category"
   param {
-    lr_mult: 10
+    lr_mult: 1
     decay_mult: 1
   }
   param {
-    lr_mult: 20
+    lr_mult: 2
     decay_mult: 0
   }
   inner_product_param {
@@ -339,11 +339,11 @@ layer {
   bottom: "pool5"
   top: "fc8_pattern"
   param {
-    lr_mult: 10
+    lr_mult: 1
     decay_mult: 1
   }
   param {
-    lr_mult: 20
+    lr_mult: 2
     decay_mult: 0
   }
   inner_product_param {
@@ -391,11 +391,11 @@ layer {
   bottom: "pool5"
   top: "fc8_sleeve"
   param {
-    lr_mult: 10
+    lr_mult: 1
     decay_mult: 1
   }
   param {
-    lr_mult: 20
+    lr_mult: 2
     decay_mult: 0
   }
   inner_product_param {
