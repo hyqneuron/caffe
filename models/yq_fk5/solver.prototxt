@@ -6,7 +6,9 @@ test_interval: 1000
 test_iter: 200
 test_compute_loss: true
 
-base_lr: 0.01
+custom_print: 200
+
+base_lr: 0.003
 lr_policy: "step"
 gamma: 0.1
 stepsize: 100000
