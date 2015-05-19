@@ -29,3 +29,9 @@ category
   26 trouser                0.069442   0.779325
   27 tshirt                 0.069442   0.779325
   28 tunic                  0.016642   1.591956
+5
+pantsX             2   9 26
+legX               2   13 5
+nightX             2   14 1
+sweatX             2   22 23
+kurtX              2   11 12
