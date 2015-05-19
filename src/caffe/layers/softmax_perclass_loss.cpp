@@ -77,8 +77,6 @@ void SoftmaxWithPerClassLossLayer<Dtype>::LayerSetUp(
 template <typename Dtype>
 void SoftmaxWithPerClassLossLayer<Dtype>::Reshape(
     const vector<Blob<Dtype>*>& bottom, const vector<Blob<Dtype>*>& top) {
-  LOG(INFO) << "Reshaping "<<this->layer_param_.name();
-  LOG(INFO) << this->layer_param_.name() << " has "<< top.size() << " tops";
   LossLayer<Dtype>::Reshape(bottom, top);
   softmax_layer_->Reshape(softmax_bottom_vec_, softmax_top_vec_);
   softmax_axis_ =
@@ -93,7 +91,6 @@ void SoftmaxWithPerClassLossLayer<Dtype>::Reshape(
       << "label count (number of labels) must be N*H*W, "
       << "with integer values in {0, 1, ..., C-1}.";
   if (top.size() >= 2) {
-    LOG(INFO) << this->layer_param_.name() << " also outputs probability to second top.";
     // softmax output
     top[1]->ReshapeLike(*bottom[0]);
   }
