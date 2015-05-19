@@ -112,7 +112,8 @@ class PerClassAccuracyLayer : public Layer<Dtype> {
       const vector<Blob<Dtype>*>& top);
 
   virtual inline const char* type() const { return "PerClassAccuracy"; }
-  virtual inline int ExactNumBottomBlobs() const { return 2; }
+  virtual inline int MinBottomBlobs() const { return 2; } // HYQ prob, label [, product_id]
+  virtual inline int MaxBottomBlobs() const { return 3; }
   virtual inline int ExactNumTopBlobs() const { return 0; }
   virtual bool has_custom_test_information() {return true;}
   virtual bool has_custom_test_information2() {return true;}
@@ -143,6 +144,13 @@ class PerClassAccuracyLayer : public Layer<Dtype> {
   int ignore_label_;
 
   // HYQ begin
+  bool use_hierarchy_;
+  int num_superclass_;
+  vector<int>          superclass_sizes_;
+  vector<string>       superclass_names_;
+  vector<vector<int> > superclass_members_;
+
+  //
   int num_classes_;
   string classifier_name_;
   vector<int>    class_labels_;

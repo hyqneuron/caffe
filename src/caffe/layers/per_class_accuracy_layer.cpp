@@ -177,6 +177,9 @@ void PerClassAccuracyLayer<Dtype>::LayerSetUp(
     ignore_label_ = this->layer_param_.per_class_accuracy_param().ignore_label();
     LOG(INFO)<<"accuracy has ignore_label: " << ignore_label_;//HYQ
   }
+
+  use_hierarchy_ =this->layer_param_.per_class_accuracy_param().use_hierarchy();
+
   // start reading classifier_info file
   CHECK(this->layer_param_.has_per_class_accuracy_param()) 
       << "PerClassAccuracyLayer requires a per_class_accuracy_param";
@@ -214,6 +217,40 @@ void PerClassAccuracyLayer<Dtype>::LayerSetUp(
     class_label_total_.push_back(0);
     class_pred_total_.push_back(0);
     a_to_b_.push_back(vector<int>(num_classes_));
+  }
+  // if we're using hierarchy, the thing that comes is the super-class
+  // information
+  if(use_hierarchy_){
+    // first line is the number of superclasses (N)
+    // then, followed by 1 line per superclass
+    // each superclass's line is:
+    // name num_subclasses list_of_subclass_indices
+    infile >> num_superclass_;
+    // one line per superclass
+    for(int i = 0; i<num_superclass_; i++){
+      string sup_name;
+      int    sup_size;
+      int    member_id;
+      infile >> sup_name;
+      infile >> sup_size;
+      superclass_names_.push_back(sup_name);
+      superclass_sizes_.push_back(sup_size);
+      vector<int> members;
+      for(int j = 0; j<sup_size; j++){
+        infile >> member_id;
+        members.push_back(member_id);
+      }
+      superclass_members_.push_back(members);
+    }
+    // print things out just to show we read the file correctly.
+    LOG(INFO)<< this->layer_param_.name() << " has " << num_superclass_
+        << " superclasses";
+    for(int i = 0; i<num_superclass_; i++){
+      string line = superclass_names_[i]+": ";
+      for(int j = 0; j<superclass_sizes_[i]; j++)
+        line += " "+class_names_[superclass_members_[i][j]];
+      LOG(INFO)<< line;
+    }
   }
 }
 
