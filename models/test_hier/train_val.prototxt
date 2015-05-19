@@ -275,6 +275,46 @@ layer {
     stride: 2
   }
 }
+layer {
+  name: "fc6"
+  type: "InnerProduct"
+  bottom: "pool5"
+  top: "fc6"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
+  param {
+    lr_mult: 2
+    decay_mult: 0
+  }
+  inner_product_param {
+    num_output: 1024
+    weight_filler {
+      type: "gaussian"
+      std: 0.005
+    }
+    bias_filler {
+      type: "constant"
+      value: 1
+    }
+  }
+}
+layer {
+  name: "relu6"
+  type: "ReLU"
+  bottom: "fc6"
+  top: "fc6"
+}
+layer {
+  name: "drop6"
+  type: "Dropout"
+  bottom: "fc6"
+  top: "fc6"
+  dropout_param {
+    dropout_ratio: 0.7
+  }
+}
 
 
 
@@ -282,7 +322,7 @@ layer {
 layer {
   name: "fc8_category"
   type: "InnerProduct"
-  bottom: "pool5"
+  bottom: "fc6"
   top: "fc8_category"
   param {
     lr_mult: 1
@@ -330,5 +370,6 @@ layer {
       ignore_label: 0
       classifier_info_file: "models/test_hier/info_category.txt"
       confusion_matrix_file: "models/test_hier/conf_category"
+      use_hierarchy: true
   }
 }
