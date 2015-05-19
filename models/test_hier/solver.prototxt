@@ -1,5 +1,5 @@
 
-net: "models/yq_fk5/train_val.prototxt"
+net: "models/test_hier/train_val.prototxt"
 
 display: 20
 test_interval: 1000
@@ -19,6 +19,6 @@ momentum: 0.9
 weight_decay: 0.0005
 
 snapshot: 1000
-snapshot_prefix: "models/yq_fk5/yq_fk5"
+snapshot_prefix: "models/test_hier/test_hier"
 
 # solver_mode: CPU
