@@ -397,6 +397,7 @@ message PerClassAccuracyParameter {
   optional string confusion_matrix_file = 5;
   // if use hierarchy, we classifier_info_file to contain hierarchy information
   optional bool use_hierarchy = 6 [default = false];
+  optional int32 num_grades = 7 [default = 1];
 }
 // HYQ end
 

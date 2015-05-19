@@ -119,7 +119,8 @@ class PerClassAccuracyLayer : public Layer<Dtype> {
   virtual bool has_custom_test_information2() {return true;}
   virtual void custom_test_information();
   virtual void custom_test_information2();
-  void compute_hierarchical_accuracy();
+  void compute_hierarchical_accuracy(
+                vector<Dtype> probs, int predicted_label, int label_value);
 
  protected:
   /**
@@ -150,6 +151,8 @@ class PerClassAccuracyLayer : public Layer<Dtype> {
   vector<int>          superclass_sizes_;
   vector<string>       superclass_names_;
   vector<vector<int> > superclass_members_;
+  int hier_total_;
+  vector<int> hier_graded_TP_;
 
   //
   int num_classes_;

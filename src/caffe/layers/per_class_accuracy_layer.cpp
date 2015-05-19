@@ -91,6 +91,9 @@ void printTable(std::ostream& outfile,
 
 template <typename Dtype>
 void PerClassAccuracyLayer<Dtype>::custom_test_information2() {
+  // custom_test_information2
+  //     prints overall accuracy and mean accuracy
+
   // compute true positive rate first
   int total_label = 0;
   int total_TP = 0;
@@ -106,10 +109,12 @@ void PerClassAccuracyLayer<Dtype>::custom_test_information2() {
   }
 
   // print
-  LOG(INFO) << "Accuracy for "<< this->layer_param_.name()
-      << "=" << float(total_TP)/total_label;
-  LOG(INFO) << "Mean Accuracy for "<< this->layer_param_.name()
-      << "=" << mean_accu_sum / mean_accu_denom;
+  string prefix = this->layer_param_.phase()==TRAIN? "TRAIN: " : "Test: ";
+  string name = this->layer_param_.name();
+  LOG(INFO) << prefix + "Accuracy for "<< name
+              << " = " << float(total_TP)/total_label;
+  LOG(INFO) << prefix + "Mean Accuracy for "<< name
+              << " = " << mean_accu_sum / mean_accu_denom;
 
   // after printing, reset tracking information
   // HACK custom_test_information() and custom_test_information2() must both be
@@ -119,24 +124,34 @@ void PerClassAccuracyLayer<Dtype>::custom_test_information2() {
     class_pred_total_[i]=0;
     a_to_b_[i] = vector<int>(num_classes_);
   }
+  if(use_hierarchy_){
+    for(int i = 0; i<hier_graded_TP_.size(); i++)
+      hier_graded_TP_[i]=0;
+    hier_total_ = 0;
+  }
 }
 template <typename Dtype>
 void PerClassAccuracyLayer<Dtype>::custom_test_information() {
-  LOG(INFO) << "#############";
-  LOG(INFO) << "Per-Class Information for "<< this->layer_param_.name();
-  // start the print!
-  for(int i = 0; i<num_classes_; i++){
-    // we print precision and FN+TP
-    float precision = float(a_to_b_[i][i]) / class_pred_total_[i];
-    float recall = float(a_to_b_[i][i])    / class_label_total_[i];
-    // name TP FP label precision recall
-    LOG(INFO)<< format("%20s %10i %10i %10i %10f %10f")
-        % class_names_[i]
-        % a_to_b_[i][i]
-        % (class_pred_total_[i] - a_to_b_[i][i])
-        % class_label_total_[i]
-        % precision
-        % recall;
+  // custom_test_information 
+  //    prints accuracy table (only for TEST phase)
+  //    writes confusion file
+  if(this->layer_param_.phase()==TEST){
+    LOG(INFO) << "#############";
+    LOG(INFO) << "Per-Class Information for "<< this->layer_param_.name();
+    // start the print!
+    for(int i = 0; i<num_classes_; i++){
+      // we print precision and FN+TP
+      float precision = float(a_to_b_[i][i]) / class_pred_total_[i];
+      float recall = float(a_to_b_[i][i])    / class_label_total_[i];
+      // name TP FP label precision recall
+      LOG(INFO)<< format("%20s %10i %10i %10i %10f %10f")
+          % class_names_[i]
+          % a_to_b_[i][i]
+          % (class_pred_total_[i] - a_to_b_[i][i])
+          % class_label_total_[i]
+          % precision
+          % recall;
+    }
   }
   // now, if we need to write confusion matrix to file
   if(this->layer_param_.per_class_accuracy_param().has_confusion_matrix_file()){
@@ -163,6 +178,16 @@ void PerClassAccuracyLayer<Dtype>::custom_test_information() {
     printTable(outfile, class_names_, a_to_b_, 
         class_label_total_, class_pred_total_,
         true, true, false);
+    // print hierarchy-based accuracy
+    if(use_hierarchy_){
+      outfile <<"Hierarchy-based accuracy"<< std::endl;
+      for(int i = 0; i<hier_graded_TP_.size(); i++){
+        outfile<< format("  %1.2f  %1.5f")
+                     % (float(i)/hier_graded_TP_.size())
+                     % (float(hier_graded_TP_[i]) / hier_total_);
+        outfile << std::endl;
+      }
+    }
   }
   // tracking information is reset in custom_test_information2()
 }
@@ -233,6 +258,7 @@ void PerClassAccuracyLayer<Dtype>::LayerSetUp(
       int    member_id;
       infile >> sup_name;
       infile >> sup_size;
+      CHECK_GT(sup_size, 0) << sup_name << "has no subclass";
       superclass_names_.push_back(sup_name);
       superclass_sizes_.push_back(sup_size);
       vector<int> members;
@@ -251,6 +277,10 @@ void PerClassAccuracyLayer<Dtype>::LayerSetUp(
         line += " "+class_names_[superclass_members_[i][j]];
       LOG(INFO)<< line;
     }
+    // set up grades
+    for(int i = 0; i<this->layer_param_.per_class_accuracy_param().num_grades();i++)
+      hier_graded_TP_.push_back(0);
+    hier_total_ = 0;
   }
 }
 
@@ -294,9 +324,11 @@ void PerClassAccuracyLayer<Dtype>::Forward_cpu(const vector<Blob<Dtype>*>& botto
       DCHECK_LT(label_value, num_labels);
       // Top-k accuracy
       std::vector<std::pair<Dtype, int> > bottom_data_vector;
+      vector<Dtype> prob_for_hier;
       for (int k = 0; k < num_labels; ++k) {
-        bottom_data_vector.push_back(std::make_pair(
-            bottom_data[i * dim + k * inner_num_ + j], k));
+        Dtype prob = bottom_data[i * dim + k * inner_num_ + j];
+        bottom_data_vector.push_back(std::make_pair(prob, k));
+        prob_for_hier.push_back(prob);
       }
       std::partial_sort(
           bottom_data_vector.begin(), bottom_data_vector.begin() + top_k_,
@@ -318,6 +350,9 @@ void PerClassAccuracyLayer<Dtype>::Forward_cpu(const vector<Blob<Dtype>*>& botto
       class_pred_total_[predicted_label]+=1;   // number of this pred encountered
       a_to_b_[label_value][predicted_label]+=1;// label_to_pred confusion matrix
       ++count;
+      // compute hierarchical accuracy as an afterthought
+      if(use_hierarchy_)
+        compute_hierarchical_accuracy(prob_for_hier, predicted_label, label_value);
     }
   }
 
@@ -330,9 +365,81 @@ void PerClassAccuracyLayer<Dtype>::Forward_cpu(const vector<Blob<Dtype>*>& botto
 }
 
 template <typename Dtype>
-void PerClassAccuracyLayer<Dtype>::compute_hierarchical_accuracy(){
-  // data needed: prob, superclass_xxx
+void PerClassAccuracyLayer<Dtype>::compute_hierarchical_accuracy(
+        vector<Dtype> probs, int predicted_label, int label_value
+        ){
+  // data needed: prob, superclass_xxx, max_index
   //
+  // Steps:
+  // - Compute sum_prob and mean_prob of each superclass
+  // - Find maximal sum_prob and mean_prob
+  // - determine if the superclasses that correspond to max_sum and max_mean
+  //   contain label_value
+  if(num_superclass_<=0) return;
+
+  vector<Dtype> sup_prob_sum;
+  vector<Dtype> sup_prob_mean;
+  int max_sum_index = 0;
+  int max_mean_index = 0;
+  Dtype max_sum = 0;
+  Dtype max_mean = 0;
+  // find maximal mean and sum
+  for(int i = 0; i<num_superclass_; i++){
+    Dtype sum = 0;
+    Dtype mean= 0;
+    for(int j = 0; j<superclass_sizes_[i]; j++){
+      sum += probs[superclass_members_[i][j]];
+    }
+    mean = sum/superclass_sizes_[i];
+    if(sum>max_sum){
+      max_sum = sum;
+      max_sum_index = i;
+    }
+    if(mean>max_mean){
+      max_mean = mean;
+      max_mean_index = i;
+    }
+    sup_prob_sum.push_back(sum);
+    sup_prob_mean.push_back(mean);
+  }
+  // find if they contain it
+  vector<int>::iterator found;
+  bool max_sum_haslabel, max_mean_haslabel;
+  // for max_sum
+  vector<int> &target = superclass_members_[max_sum_index];
+  found=std::find( target.begin(), target.end(), label_value);
+  max_sum_haslabel = found != target.end();
+  // for max_mean
+  target = superclass_members_[max_mean_index];
+  found=std::find( target.begin(), target.end(), label_value);
+  max_mean_haslabel = found != target.end();
+
+  hier_total_ += 1;
+  Dtype predicted_prob = probs[predicted_label];
+  for(int i = 0; i<hier_graded_TP_.size(); i++){
+    // when i=0, we consider
+    //      max_sum  > predicted_prob
+    // when i!=0, we consider the relationship of
+    //      max_mean > k * predicted_prob
+    //      where k = i/hier_grade_TP_.size() (if got 10 grades,then 0.1 to 0.9)
+    //
+    // if the inequality is true, we predict the corresponding superclass
+    // otherwise we predict the original subclass
+    Dtype max_val = i==0? max_sum : max_mean;
+    Dtype val_cap = i==0? 
+                predicted_prob : 
+                predicted_prob * i / float(hier_graded_TP_.size());
+    bool max_haslabel = i==0? max_sum_haslabel : max_mean_haslabel;
+    // predict superclass
+    if(max_val>=val_cap){
+      if(max_haslabel)
+        hier_graded_TP_[i]++;
+    }
+    // predict subclass
+    else if(predicted_label==label_value)
+      hier_graded_TP_[i]++;
+
+  }
 }
 
 INSTANTIATE_CLASS(PerClassAccuracyLayer);
