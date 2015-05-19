@@ -2,7 +2,7 @@
 name: "yq_fk5"
 layer {
   name: "data"
-  type: "ImageDataMultLabel"
+  type: "ImageData"
   top: "data"
   top: "label_category"
   include {
@@ -16,7 +16,7 @@ layer {
     mean_value: 176
     mean_value: 176
   }
-  image_data_mult_label_param {
+  image_data_param {
     source: "models/yq_fk5/train.txt"
     batch_size: 50
     new_height: 256
@@ -26,7 +26,7 @@ layer {
 }
 layer {
   name: "data"
-  type: "ImageDataMultLabel"
+  type: "ImageData"
   top: "data"
   top: "label_category"
   include {
@@ -40,8 +40,8 @@ layer {
     mean_value: 176
     mean_value: 176
   }
-  image_data_mult_label_param {
-    source: "models/yq_fk5/test.txt"
+  image_data_param {
+    source: "models/yq_fk5/train.txt"
     batch_size: 50
     new_height: 256
     new_width: 256
@@ -307,6 +307,10 @@ layer {
   type: "SoftmaxWithPerClassLoss"
   bottom: "fc8_category"
   bottom: "label_category"
+  top: "loss_category"
+  top: "prob_category"
+  loss_weight: 1
+  loss_weight: 0
   loss_param {
       ignore_label: 0
       normalize: true
@@ -317,11 +321,13 @@ layer {
 layer {
   name: "accuracy_category"
   type: "PerClassAccuracy"
-  bottom: "fc8_category"
+  bottom: "prob_category"
   bottom: "label_category"
   per_class_accuracy_param {
       ignore_label: 0
       classifier_info_file: "models/yq_fk5/info_category.txt"
       confusion_matrix_file: "models/yq_fk5/conf_category"
+      use_hierarchy: true
+      num_grades: 20
   }
 }
