@@ -119,6 +119,7 @@ class PerClassAccuracyLayer : public Layer<Dtype> {
   virtual bool has_custom_test_information2() {return true;}
   virtual void custom_test_information();
   virtual void custom_test_information2();
+  void compute_hierarchical_accuracy();
 
  protected:
   /**
@@ -857,9 +858,10 @@ class SoftmaxWithPerClassLossLayer : public LossLayer<Dtype> {
       const vector<Blob<Dtype>*>& top);
 
   virtual inline const char* type() const { return "SoftmaxWithPerClassLoss"; }
-  virtual inline int ExactNumTopBlobs() const { return -1; }
-  virtual inline int MinTopBlobs() const { return 1; }
-  virtual inline int MaxTopBlobs() const { return 2; }
+  virtual inline int ExactNumTopBlobs() const { return 2; }
+  virtual inline bool AutoTopBlobs() const { return false; }
+  //virtual inline int MinTopBlobs() const { return 1; }
+  //virtual inline int MaxTopBlobs() const { return 2; }
 
  protected:
   virtual void Forward_cpu(const vector<Blob<Dtype>*>& bottom,

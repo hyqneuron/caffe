@@ -329,6 +329,12 @@ void PerClassAccuracyLayer<Dtype>::Forward_cpu(const vector<Blob<Dtype>*>& botto
   // Accuracy layer should not be used as a loss function.
 }
 
+template <typename Dtype>
+void PerClassAccuracyLayer<Dtype>::compute_hierarchical_accuracy(){
+  // data needed: prob, superclass_xxx
+  //
+}
+
 INSTANTIATE_CLASS(PerClassAccuracyLayer);
 REGISTER_LAYER_CLASS(PerClassAccuracy);
 
