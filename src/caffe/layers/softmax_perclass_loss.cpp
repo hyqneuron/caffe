@@ -90,7 +90,7 @@ void SoftmaxWithPerClassLossLayer<Dtype>::Reshape(
       << "label count (number of labels) must be N*H*W, "
       << "with integer values in {0, 1, ..., C-1}.";
   if (top.size() >= 2) {
-    LOG(INFO) << this->layer_param_.name() << " also outputs probability to second top."
+    LOG(INFO) << this->layer_param_.name() << " also outputs probability to second top.";
     // softmax output
     top[1]->ReshapeLike(*bottom[0]);
   }
