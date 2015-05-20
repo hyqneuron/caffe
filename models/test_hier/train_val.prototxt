@@ -370,6 +370,8 @@ layer {
       ignore_label: 0
       classifier_info_file: "models/test_hier/info_category.txt"
       confusion_matrix_file: "models/test_hier/conf_category"
+      confusion_id_file: "models/test_hier/conf_id_category"
       use_hierarchy: true
+      num_grades: 20
   }
 }
