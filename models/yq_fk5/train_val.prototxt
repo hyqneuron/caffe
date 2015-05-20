@@ -41,7 +41,7 @@ layer {
     mean_value: 176
   }
   image_data_param {
-    source: "models/yq_fk5/train.txt"
+    source: "models/yq_fk5/test.txt"
     batch_size: 50
     new_height: 256
     new_width: 256
