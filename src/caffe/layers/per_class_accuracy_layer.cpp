@@ -90,11 +90,7 @@ void printTable(std::ostream& outfile,
 }
 
 template <typename Dtype>
-void PerClassAccuracyLayer<Dtype>::custom_test_information2() {
-  // custom_test_information2
-  //     prints overall accuracy and mean accuracy
-
-  // compute true positive rate first
+std::pair<float,float> PerClassAccuracyLayer<Dtype>::get_accu() {
   int total_label = 0;
   int total_TP = 0;
   float mean_accu_sum = 0;
@@ -107,14 +103,23 @@ void PerClassAccuracyLayer<Dtype>::custom_test_information2() {
       mean_accu_sum += float(a_to_b_[i][i]) / class_label_total_[i];
     }
   }
+  return std::make_pair(float(total_TP)/total_label,
+                        mean_accu_sum/mean_accu_denom);
+}
+template <typename Dtype>
+void PerClassAccuracyLayer<Dtype>::custom_test_information2() {
+  // custom_test_information2
+  //     prints overall accuracy and mean accuracy
 
+  // compute true positive rate first
+  std::pair<float,float> accus = get_accu();
   // print
-  string prefix = this->layer_param_.phase()==TRAIN? "TRAIN: " : "Test: ";
+  string prefix = this->layer_param_.phase()==TRAIN? "TRAIN: " : "TEST: ";
   string name = this->layer_param_.name();
   LOG(INFO) << prefix + "Accuracy for "<< name
-              << " = " << float(total_TP)/total_label;
+              << " = " << accus.first;
   LOG(INFO) << prefix + "Mean Accuracy for "<< name
-              << " = " << mean_accu_sum / mean_accu_denom;
+              << " = " << accus.second;
 
   // after printing, reset tracking information
   // HACK custom_test_information() and custom_test_information2() must both be
@@ -191,6 +196,12 @@ void PerClassAccuracyLayer<Dtype>::custom_test_information() {
     printTable(outfile, class_names_, a_to_b_, 
         class_label_total_, class_pred_total_,
         true, true, false);
+    // print overall accuracy and mean accuracy
+    std::pair<float,float> accus = get_accu();
+    outfile<< std::endl;
+    outfile<< "Overall Accuracy: " << accus.first<<std::endl;
+    outfile<< "Mean    Accuracy: " << accus.second<<std::endl;
+    outfile<< std::endl;
     // print hierarchy-based accuracy
     if(use_hierarchy_){
       outfile <<"Hierarchy-based accuracy"<< std::endl;

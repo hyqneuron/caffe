@@ -145,6 +145,7 @@ message SolverParameter {
   optional int32 average_loss = 33 [default = 1];
   optional int32 max_iter = 7; // the maximum number of iterations
   optional string lr_policy = 8; // The learning rate decay policy.
+  optional string lr_file = 100; // when this file contains positive float, use the float instead
   optional float gamma = 9; // The parameter to compute the learning rate.
   optional float power = 10; // The parameter to compute the learning rate.
   optional float momentum = 11; // The momentum value.
