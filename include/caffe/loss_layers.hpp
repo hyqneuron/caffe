@@ -4,6 +4,7 @@
 #include <string>
 #include <utility>
 #include <vector>
+#include <tuple>
 
 #include "caffe/blob.hpp"
 #include "caffe/common.hpp"
@@ -114,6 +115,7 @@ class PerClassAccuracyLayer : public Layer<Dtype> {
   virtual inline const char* type() const { return "PerClassAccuracy"; }
   virtual inline int MinBottomBlobs() const { return 2; } // HYQ prob, label [, product_id]
   virtual inline int MaxBottomBlobs() const { return 3; }
+  // HYQ begin
   virtual inline int ExactNumTopBlobs() const { return 0; }
   virtual bool has_custom_test_information() {return true;}
   virtual bool has_custom_test_information2() {return true;}
@@ -121,6 +123,24 @@ class PerClassAccuracyLayer : public Layer<Dtype> {
   virtual void custom_test_information2();
   void compute_hierarchical_accuracy(
                 vector<Dtype> probs, int predicted_label, int label_value);
+  // We record several things:
+  // - confusion matrix 
+  //     (a_to_b_, class_label_total_, class_pred_total_) 
+  // - hierarchical accuracy
+  //     (hier_total_, hier_graded_TP_)
+  // - errors 
+  //     (confusion_ids)
+  // - probabilities 
+  //     (probabilities_)
+  // 
+  // Several things may trigger custom_test_information and 2.
+  // For training, every custom_print iterations triggers it
+  // For testing, they are always triggered at the end 
+  // custom_test_information is called before custom_test_information2
+  //
+  // and custom_test_information2 calls clear_records to clear records
+  void clear_records();
+  // HYQ end
 
  protected:
   /**
@@ -153,6 +173,14 @@ class PerClassAccuracyLayer : public Layer<Dtype> {
   vector<vector<int> > superclass_members_;
   int hier_total_;
   vector<int> hier_graded_TP_;
+
+  // logging errors and probability
+  // for each error made, we record image_id, label_value, predicted_label
+  bool record_confusion_;
+  vector<std::tuple<int,int,int> > confusion_ids_;
+  // for every sample encountered, we record image_id, label_value, probs
+  bool record_probabilities_;
+  vector<std::tuple<int,int, vector<Dtype> > > probabilities_;
 
   //
   int num_classes_;

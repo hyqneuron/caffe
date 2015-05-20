@@ -395,9 +395,11 @@ message PerClassAccuracyParameter {
   optional int32 ignore_label = 3;
   required string classifier_info_file = 4;
   optional string confusion_matrix_file = 5;
+  optional string confusion_id_file = 6;
+  optional string probabilities_file = 7;
   // if use hierarchy, we classifier_info_file to contain hierarchy information
-  optional bool use_hierarchy = 6 [default = false];
-  optional int32 num_grades = 7 [default = 1];
+  optional bool use_hierarchy = 8 [default = false];
+  optional int32 num_grades = 9 [default = 1];
 }
 // HYQ end
 

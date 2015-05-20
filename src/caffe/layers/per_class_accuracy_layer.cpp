@@ -119,17 +119,29 @@ void PerClassAccuracyLayer<Dtype>::custom_test_information2() {
   // after printing, reset tracking information
   // HACK custom_test_information() and custom_test_information2() must both be
   // called to have correct resetting behaviour
+}
+template <typename Dtype>
+void PerClassAccuracyLayer<Dtype>::clear_records() {
+  // for confusion matrix
   for(int i = 0; i<num_classes_; i++){
     class_label_total_[i]=0;
     class_pred_total_[i]=0;
     a_to_b_[i] = vector<int>(num_classes_);
   }
+  // for hierarchical error rate
   if(use_hierarchy_){
     for(int i = 0; i<hier_graded_TP_.size(); i++)
       hier_graded_TP_[i]=0;
     hier_total_ = 0;
   }
+  // for confusion id
+  if(record_confusion_)
+    confusion_ids_.clear();
+  // for probabilities
+  if(record_probabilities_)
+    probabilities_.clear();
 }
+
 template <typename Dtype>
 void PerClassAccuracyLayer<Dtype>::custom_test_information() {
   // custom_test_information 
@@ -153,9 +165,10 @@ void PerClassAccuracyLayer<Dtype>::custom_test_information() {
           % recall;
     }
   }
+  // suffix is the appended to names of files that we output
+  string suffix = this->layer_param_.phase()==TRAIN? ".train" : ".test";
   // now, if we need to write confusion matrix to file
   if(this->layer_param_.per_class_accuracy_param().has_confusion_matrix_file()){
-    string suffix = this->layer_param_.phase()==TRAIN? ".train" : ".test";
     string conf_file = 
         this->layer_param_.per_class_accuracy_param().confusion_matrix_file()
         + suffix;
@@ -189,6 +202,42 @@ void PerClassAccuracyLayer<Dtype>::custom_test_information() {
       }
     }
   }
+  // if we need to write down the confusion ids
+  // format: for each false prediction
+  //   ID label_value predicted_label
+  if(record_confusion_){
+    string cid_file = 
+        this->layer_param_.per_class_accuracy_param().confusion_id_file();
+    std::ofstream outfile(cid_file.c_str(), std::ofstream::app);
+    // one row per entry in confusion_ids_
+    for(int i = 0; i<confusion_ids_.size(); i++){
+      outfile << format("%8i  %3i %3i")
+          % std::get<0>(confusion_ids_[i])
+          % std::get<1>(confusion_ids_[i])
+          % std::get<2>(confusion_ids_[i])
+          << std::endl;
+    }
+  }
+  //
+  // if we need to write probability file
+  // format: for every sample encountered:
+  //   ID label_value prob_1 prob_2 prob_3 ... prob_n
+  if(record_probabilities_){
+      string prob_file = 
+          this->layer_param_.per_class_accuracy_param().probabilities_file();
+      std::ofstream outfile(prob_file.c_str(), std::ofstream::app);
+      // one row per entry in probabilities_
+      for(int i = 0; i<probabilities_.size(); i++){
+        outfile << format("%8i %3i ") 
+          % std::get<0>(probabilities_[i])
+          % std::get<1>(probabilities_[i]);
+        // for prob per label
+        for(int j = 0; j<std::get<2>(probabilities_[i]).size(); j++){
+          outfile << format(" %1.4f") % std::get<2>(probabilities_[i])[j];
+        }
+        outfile << std::endl;
+      }
+  }
   // tracking information is reset in custom_test_information2()
 }
 template <typename Dtype>
@@ -203,7 +252,15 @@ void PerClassAccuracyLayer<Dtype>::LayerSetUp(
     LOG(INFO)<<"accuracy has ignore_label: " << ignore_label_;//HYQ
   }
 
-  use_hierarchy_ =this->layer_param_.per_class_accuracy_param().use_hierarchy();
+  use_hierarchy_        = this->layer_param_.per_class_accuracy_param()
+                               .use_hierarchy();
+  record_confusion_     = this->layer_param_.per_class_accuracy_param()
+                              .has_confusion_id_file();
+  record_probabilities_ = this->layer_param_.per_class_accuracy_param()
+                              .has_probabilities_file();
+  if(record_confusion_ || record_probabilities_)
+    CHECK_EQ(bottom.size(),3) << "When recording confusion or probability, "
+         << "a bottom[2] should provide integral product_id";
 
   // start reading classifier_info file
   CHECK(this->layer_param_.has_per_class_accuracy_param()) 
@@ -282,6 +339,7 @@ void PerClassAccuracyLayer<Dtype>::LayerSetUp(
       hier_graded_TP_.push_back(0);
     hier_total_ = 0;
   }
+  // for record_probabilities_ and record_confusion_, nothing needs to be done
 }
 
 template <typename Dtype>
@@ -308,6 +366,8 @@ void PerClassAccuracyLayer<Dtype>::Forward_cpu(const vector<Blob<Dtype>*>& botto
   Dtype accuracy = 0;
   const Dtype* bottom_data = bottom[0]->cpu_data();
   const Dtype* bottom_label = bottom[1]->cpu_data();
+  const Dtype* bottom_pid = (record_confusion_||record_probabilities_)?
+                             bottom[2]->cpu_data() : NULL;
   const int dim = bottom[0]->count() / outer_num_;
   const int num_labels = bottom[0]->shape(label_axis_);
   vector<Dtype> maxval(top_k_+1);
@@ -353,6 +413,19 @@ void PerClassAccuracyLayer<Dtype>::Forward_cpu(const vector<Blob<Dtype>*>& botto
       // compute hierarchical accuracy as an afterthought
       if(use_hierarchy_)
         compute_hierarchical_accuracy(prob_for_hier, predicted_label, label_value);
+      int sample_ID = -1;
+      if(record_confusion_ || record_probabilities_){
+        sample_ID = int(bottom_pid[i]);
+      }
+      if(record_confusion_ && label_value != predicted_label){
+        confusion_ids_.push_back(
+                std::make_tuple(sample_ID, label_value, predicted_label));
+      }
+      if(record_probabilities_){
+        probabilities_.push_back(
+                std::make_tuple(sample_ID, label_value, vector<Dtype>(
+                        bottom_data+i*dim, bottom_data+(i+1)*dim)));
+      }
     }
   }
 
