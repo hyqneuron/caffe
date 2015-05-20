@@ -2,6 +2,7 @@
 
 #include <algorithm>
 #include <string>
+#include <fstream>
 #include <vector>
 #include <ctime>
 
@@ -413,6 +414,16 @@ void Solver<Dtype>::Restore(const char* state_file) {
 template <typename Dtype>
 Dtype SGDSolver<Dtype>::GetLearningRate() {
   Dtype rate;
+  // 2 policies
+  // if lr_file exists and it contains positive value, we use that value
+  // instead. Otherwise, we use the specified lr_policy
+  if(this->param_.has_lr_file()){
+    Dtype val;
+    std::ifstream lrfile(this->param_.lr_file().c_str());
+    lrfile >> val;
+    if(val>0)
+      return val;
+  }
   const string& lr_policy = this->param_.lr_policy();
   if (lr_policy == "fixed") {
     rate = this->param_.base_lr();

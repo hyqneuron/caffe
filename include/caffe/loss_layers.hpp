@@ -140,6 +140,8 @@ class PerClassAccuracyLayer : public Layer<Dtype> {
   //
   // and custom_test_information2 calls clear_records to clear records
   void clear_records();
+  // get overall accuracy, mean accuracy (across classes)
+  std::pair<float,float> get_accu();
   // HYQ end
 
  protected:
