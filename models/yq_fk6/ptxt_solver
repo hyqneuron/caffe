@@ -1,0 +1,25 @@
+
+net: "models/$net_name/train_val.prototxt"
+
+display: 20
+test_interval: 1000
+test_iter: 200
+test_compute_loss: true
+
+custom_print: 200
+
+
+base_lr: 0.0001
+lr_policy: "step"
+lr_file: "models/$net_name/lr_file.txt"
+gamma: 0.1
+stepsize: 20000
+max_iter: 100000
+
+momentum: 0.9
+weight_decay: 0.0005
+
+snapshot: 1000
+snapshot_prefix: "models/$net_name/$net_name"
+
+# solver_mode: CPU
