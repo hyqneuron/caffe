@@ -1,0 +1,50 @@
+
+name: "$net_name"
+layer {
+  name: "data"
+  type: "ImageDataMultLabel"
+  top: "data"
+$top_labels
+  include {
+    phase: TRAIN
+  }
+  transform_param {
+    mirror: true
+    crop_size: 227
+    #mean_file: "$mean_file"
+    mean_value: 187
+    mean_value: 176
+    mean_value: 176
+  }
+  image_data_mult_label_param {
+    source: "$train_txt"
+    batch_size: 50
+    new_height: 256
+    new_width: 256
+    shuffle: true
+  }
+}
+layer {
+  name: "data"
+  type: "ImageDataMultLabel"
+  top: "data"
+$top_labels
+  include {
+    phase: TEST
+  }
+  transform_param {
+    mirror: false
+    crop_size: 227
+    #mean_file: "$mean_file"
+    mean_value: 187
+    mean_value: 176
+    mean_value: 176
+  }
+  image_data_mult_label_param {
+    source: "$test_txt"
+    batch_size: 50
+    new_height: 256
+    new_width: 256
+    shuffle: true
+  }
+}

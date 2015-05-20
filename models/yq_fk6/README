@@ -1,0 +1,4 @@
+This mainly tests CaffeNet finetuning with category only.
+Previous attempts fk1 and fk2 had flawed accuracy calculation, and was used with
+multiple classifiers on top. This time, we try with one classifier, the category
+classifier, only.
