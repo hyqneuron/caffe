@@ -410,6 +410,7 @@ layer {
       ignore_label: 0
       classifier_info_file: "models/yq_fk7/info_category.txt"
       confusion_matrix_file: "models/yq_fk7/conf_category"
+      confusion_id_file: "models/yq_fk7/conf_id_category"
       use_hierarchy: true
       num_grades: 20
   }
