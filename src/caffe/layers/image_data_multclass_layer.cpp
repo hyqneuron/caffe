@@ -34,12 +34,17 @@ void ImageDataMultLabelLayer<Dtype>::DataLayerSetUp(const vector<Blob<Dtype>*>& 
   CHECK((new_height == 0 && new_width == 0) ||
       (new_height > 0 && new_width > 0)) << "Current implementation requires "
       "new_height and new_width to be set at the same time.";
+
   // Read the file with filenames and labels
   num_labels_ = top.size()-1;
   const string& source = this->layer_param_.image_data_mult_label_param().source();
   LOG(INFO) << "Opening file " << source;
   std::ifstream infile(source.c_str());
   string filename;
+  // if prefix exists, we prepend it to all filenames
+  string prefix = "";
+  if(this->layer_param_.image_data_mult_label_param().has_image_location_prefix())
+    prefix = this->layer_param_.image_data_mult_label_param().image_location_prefix();
   //int label;
   //while (infile >> filename >> label) {
   while (infile >> filename ) {
@@ -50,7 +55,7 @@ void ImageDataMultLabelLayer<Dtype>::DataLayerSetUp(const vector<Blob<Dtype>*>& 
       infile >> label;
       labels[label_id]=label;
     }
-    lines_.push_back(std::make_pair(filename, labels));
+    lines_.push_back(std::make_pair(prefix+filename, labels));
   }
 
   if (this->layer_param_.image_data_mult_label_param().shuffle()) {

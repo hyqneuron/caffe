@@ -631,6 +631,8 @@ message ImageDataMultLabelParameter {
   optional string root_folder = 12 [default = ""];
   // define label names
   repeated string label_name = 13;
+  // prefix to image locations in source
+  optional string image_location_prefix = 14;
 }
 // end HYQ
 
