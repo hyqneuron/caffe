@@ -124,6 +124,7 @@ void PerClassAccuracyLayer<Dtype>::custom_test_information2() {
   // after printing, reset tracking information
   // HACK custom_test_information() and custom_test_information2() must both be
   // called to have correct resetting behaviour
+  clear_records();
 }
 template <typename Dtype>
 void PerClassAccuracyLayer<Dtype>::clear_records() {
