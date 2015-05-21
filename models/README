@@ -1,0 +1,27 @@
+
+Steps for completing a model
+0. Create backup directory
+   - copy over *.prototxt, 
+   - copy over info_*
+   - copy over caffe.INFO
+   - copy over train.txt and test.txt
+   - copy over ptxt*
+1. Test on testing set
+   - Change solver.prototxt's test iteration to 400
+   - Change solver.prototxt's maximum iteration to last snapshot's iter
+   - train with solver.prototxt with last snapshot
+   - Create backup_folder/conf.test
+     - copy over conf_id*
+     - copy over conf_*.test
+2. Test on training set
+   - Change solver.prototxt's test iteration to 3500
+   - Change train_val.prototxt's testing source to train.txt
+   - train with solver.prototxt with last snapshot
+   - Create backup_folder/conf.train
+     - copy over conf_id*
+     - copy over conf_*.test
+3. Finalize
+   - revert solver.prototxt's test iteration to 200
+   - revert train_val.prototxt's testing source to test.txt
+   - git add -f backup_folder
+   - move caffemodel and solverstate to backup_folder
