@@ -608,6 +608,15 @@ void PerClassAccuracyLayer<Dtype>::compute_hierarchical_accuracy(
         // found, we break
       }
     }
+    if(label_sup==-1){
+      for(int i = 0; i<num_superclass_; i++){
+        target = superclass_members_[i];
+        LOG(INFO) << superclass_names_[i];
+        for(int j = 0; j<target.size(); j++){
+          LOG(INFO) << target[j];
+        }
+      }
+    }
     CHECK_NE(label_sup, -1) <<
         "Encountered a label that does not belong to any superclass when using detailed hierarchical accuracy."
         <<std::endl
