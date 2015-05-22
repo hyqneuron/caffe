@@ -128,6 +128,8 @@ class PerClassAccuracyLayer : public Layer<Dtype> {
   //     (a_to_b_, class_label_total_, class_pred_total_) 
   // - hierarchical accuracy
   //     (hier_total_, hier_graded_TP_)
+  // - detailed hierarchical accuracy
+  //     (supa_to_supb_, suplabel_total_, suppred_total_)
   // - errors 
   //     (confusion_ids)
   // - probabilities 
@@ -140,8 +142,6 @@ class PerClassAccuracyLayer : public Layer<Dtype> {
   //
   // and custom_test_information2 calls clear_records to clear records
   void clear_records();
-  // get overall accuracy, mean accuracy (across classes)
-  std::pair<float,float> get_accu();
   // HYQ end
 
  protected:
@@ -176,6 +176,14 @@ class PerClassAccuracyLayer : public Layer<Dtype> {
   int hier_total_;
   vector<int> hier_graded_TP_;
 
+  // when we only track "hierarchical accuracy", in addition to tracking
+  // subclasses using a_to_b_, we also track superclass performance using
+  // supa_to_supb_
+  bool use_detailed_hier_accu_;
+  vector<int>          suplabel_total_;
+  vector<int>          suppred_total_;
+  vector<vector<int> > supa_to_supb_;
+
   // logging errors and probability
   // for each error made, we record image_id, label_value, predicted_label
   bool record_confusion_;
@@ -192,8 +200,6 @@ class PerClassAccuracyLayer : public Layer<Dtype> {
   vector<float>  class_priors_;
   vector<float>  class_lrmults_;
 
-  //vector<int>    class_TPs_; // per-class true-positives for this test iter
-  //vector<int>    class_FPs_; // per-class false negatives for this test iter
   // how many labels of this class have we encountered?
   vector<int>    class_label_total_;
   // how many predictions of this class have we made?
