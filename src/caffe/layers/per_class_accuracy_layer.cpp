@@ -599,21 +599,16 @@ void PerClassAccuracyLayer<Dtype>::compute_hierarchical_accuracy(
     //   have to do lookup... which is quite stupid, but easy to code
     int label_sup = -1;
     for(int i = 0; i<num_superclass_; i++){
-      target = superclass_members_[i];
-      found=std::find( target.begin(), target.end(), label_value);
-      if( found != target.end()){
-        label_sup = i;
-        break;
-        // we assume the superclasses are mutually exclusive, so once it is
-        // found, we break
+      for(int j = 0; j<superclass_members_[i].size(); j++){
+        if (label_value == superclass_members_[i][j])
+          label_sup = i;
       }
     }
     if(label_sup==-1){
       for(int i = 0; i<num_superclass_; i++){
-        target = superclass_members_[i];
         LOG(INFO) << superclass_names_[i];
-        for(int j = 0; j<target.size(); j++){
-          LOG(INFO) << target[j];
+        for(int j = 0; j<superclass_members_[i].size(); j++){
+          LOG(INFO) << superclass_members_[i][j];
         }
       }
     }
