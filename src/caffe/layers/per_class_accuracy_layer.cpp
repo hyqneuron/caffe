@@ -611,7 +611,9 @@ void PerClassAccuracyLayer<Dtype>::compute_hierarchical_accuracy(
     CHECK_NE(label_sup, -1) <<
         "Encountered a label that does not belong to any superclass when using detailed hierarchical accuracy."
         <<std::endl
-        <<"label="<<label_value;
+        <<"label="<<label_value
+        << std::endl
+        <<"classifier="<<classifier_name_;
 
     // find predicted superclass
     //   we take a very simple policy: he who has max_max is the predicted
