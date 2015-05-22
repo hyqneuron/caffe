@@ -553,13 +553,13 @@ void PerClassAccuracyLayer<Dtype>::compute_hierarchical_accuracy(
   vector<int>::iterator found;
   bool max_sum_haslabel, max_mean_haslabel;
   // for max_sum
-  vector<int> &target = superclass_members_[max_sum_index];
-  found=std::find( target.begin(), target.end(), label_value);
-  max_sum_haslabel = found != target.end();
+  vector<int> *target = &superclass_members_[max_sum_index];
+  found=std::find( target->begin(), target->end(), label_value);
+  max_sum_haslabel = found != target->end();
   // for max_mean
-  target = superclass_members_[max_mean_index];
-  found=std::find( target.begin(), target.end(), label_value);
-  max_mean_haslabel = found != target.end();
+  target = &superclass_members_[max_mean_index];
+  found=std::find( target->begin(), target->end(), label_value);
+  max_mean_haslabel = found != target->end();
 
   hier_total_ += 1;
   Dtype predicted_prob = probs[predicted_label];
