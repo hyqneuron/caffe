@@ -338,7 +338,7 @@ void PerClassAccuracyLayer<Dtype>::LayerSetUp(
                               .has_probabilities_file();
   CHECK(!(use_detailed_hier_accu_ && ! use_hierarchy_))
       << "if using detailed hierarchical accuracy, then must use hierarchy first.";
-  if(record_confusion_ || record_probabilities_)
+  if(record_confusion_ || record_hier_conf_ || record_probabilities_)
     CHECK_EQ(bottom.size(),3) << "When recording confusion or probability, "
          << "a bottom[2] should provide integral product_id";
 
@@ -458,8 +458,10 @@ void PerClassAccuracyLayer<Dtype>::Forward_cpu(const vector<Blob<Dtype>*>& botto
   Dtype accuracy = 0;
   const Dtype* bottom_data = bottom[0]->cpu_data();
   const Dtype* bottom_label = bottom[1]->cpu_data();
-  const Dtype* bottom_pid = (record_confusion_||record_probabilities_)?
-                             bottom[2]->cpu_data() : NULL;
+  const Dtype* bottom_pid = (record_confusion_||
+                             record_hier_conf_||
+                             record_probabilities_)?
+                                 bottom[2]->cpu_data() : NULL;
   const int dim = bottom[0]->count() / outer_num_;
   const int num_labels = bottom[0]->shape(label_axis_);
   vector<Dtype> maxval(top_k_+1);
