@@ -503,7 +503,7 @@ void PerClassAccuracyLayer<Dtype>::Forward_cpu(const vector<Blob<Dtype>*>& botto
       a_to_b_[label_value][predicted_label]+=1;// label_to_pred confusion matrix
       ++count;
       int sample_ID = -1;
-      if(record_confusion_ || record_probabilities_){
+      if(record_confusion_ || record_hier_conf_ || record_probabilities_){
         sample_ID = int(bottom_pid[i]);
       }
       if(record_confusion_ && label_value != predicted_label){
