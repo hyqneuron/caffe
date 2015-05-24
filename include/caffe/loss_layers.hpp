@@ -122,7 +122,10 @@ class PerClassAccuracyLayer : public Layer<Dtype> {
   virtual void custom_test_information();
   virtual void custom_test_information2();
   void compute_hierarchical_accuracy(
-                vector<Dtype> probs, int predicted_label, int label_value);
+                vector<Dtype> probs, 
+                int predicted_label, 
+                int label_value,
+                int sample_ID);
   // We record several things:
   // - confusion matrix 
   //     (a_to_b_, class_label_total_, class_pred_total_) 
@@ -130,6 +133,8 @@ class PerClassAccuracyLayer : public Layer<Dtype> {
   //     (hier_total_, hier_graded_TP_)
   // - detailed hierarchical accuracy
   //     (supa_to_supb_, suplabel_total_, suppred_total_)
+  // - hierarchical errors
+  //     (hier_conf_ids_)
   // - errors 
   //     (confusion_ids)
   // - probabilities 
@@ -188,6 +193,10 @@ class PerClassAccuracyLayer : public Layer<Dtype> {
   // for each error made, we record image_id, label_value, predicted_label
   bool record_confusion_;
   vector<std::tuple<int,int,int> > confusion_ids_;
+  // for each error made in hierarchical mode, make a record of
+  // image_id, superclass_label, predicted_superclass
+  bool record_hier_conf_;
+  vector<std::tuple<int,int,int> > hier_conf_ids_;
   // for every sample encountered, we record image_id, label_value, probs
   bool record_probabilities_;
   vector<std::tuple<int,int, vector<Dtype> > > probabilities_;

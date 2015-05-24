@@ -401,7 +401,8 @@ message PerClassAccuracyParameter {
   // if use hierarchy, we classifier_info_file to contain hierarchy information
   optional bool use_hierarchy = 8 [default = false];
   optional bool use_detailed_hier_accu = 9 [default = false];
-  optional int32 num_grades = 10 [default = 1];
+  optional string hier_confusion_file = 10;
+  optional int32 num_grades = 11 [default = 1];
 }
 // HYQ end
 
