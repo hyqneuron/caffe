@@ -395,7 +395,7 @@ layer {
   bottom: "label_category"
   top: "loss_category"
   top: "prob_category"
-  loss_weight: 1
+  loss_weight: 0.5
   loss_weight: 0
   loss_param {
       ignore_label: 0
@@ -414,6 +414,7 @@ layer {
       ignore_label: 0
       classifier_info_file: "models/yq_fk9/info_category.txt"
       confusion_matrix_file: "models/yq_fk9/conf_category"
+      confusion_id_file: "models/yq_fk9/conf_id_category"
       use_hierarchy: true
       num_grades: 20
   }
@@ -454,7 +455,7 @@ layer {
   bottom: "label_pattern"
   top: "loss_pattern"
   top: "prob_pattern"
-  loss_weight: 0.3
+  loss_weight: 1
   loss_weight: 0
   loss_param {
       ignore_label: 0
@@ -475,6 +476,7 @@ layer {
       confusion_matrix_file: "models/yq_fk9/conf_pattern"
       use_hierarchy: true
       use_detailed_hier_accu: true
+      hier_confusion_file: "models/yq_fk9/conf_hier_pattern"
       num_grades: 20
   }
 }
@@ -514,7 +516,7 @@ layer {
   bottom: "label_sleeve"
   top: "loss_sleeve"
   top: "prob_sleeve"
-  loss_weight: 0.3
+  loss_weight: 1
   loss_weight: 0
   loss_param {
       ignore_label: 0
@@ -535,6 +537,7 @@ layer {
       confusion_matrix_file: "models/yq_fk9/conf_sleeve"
       use_hierarchy: true
       use_detailed_hier_accu: true
+      hier_confusion_file: "models/yq_fk9/conf_hier_sleeve"
       num_grades: 20
   }
 }
