@@ -1,0 +1,174 @@
+###################  accuracy_category ####################
+Raw number table
+                       0   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16  17  18  19  20  21  22  23  24  25  26  27
+ 0           Ignored   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
+ 1         Nightsuit   0 269   6   0   0   0   0   1   2  10   0   3   1   7   2   0   0   2   1   0   1   1   0   3   3   0   2   0
+ 2          babydoll   0   1  90   0   2   0   0  15   0   0   0   0   0   4   1   0   0   0   0   0   0   0   0   5   2   0   0   0
+ 3            blazer   0   0   0  99   0   0   6   0   0   0   0   0   0   0   0   0   3   0   0   0   0   9   4   0   2   0   0   0
+ 4               bra   0   0   2   0 585   0   0   0   0   0   0   1   2   0   0   0   0   3   0   0   0   0   0   0   0   0   1   0
+ 5             capri   0   0   0   0   0 194   0   0   7   1   0   0  18   0   0   0   0   0  19   2   0   0   0   0   0  13   1   0
+ 6              coat   0   1   0   3   0   0  43   1   0   0   0   5   0   0   0   0   1   2   0   4   0   4   2   0   1   0   0   2
+ 7             dress   0   4   9   0   0   0   0 454   0   2   3  29   1  11   3   0   0   3   0  10   0   0   0   0   9   1   1   1
+ 8              jean   0   2   0   0   0   6   0   0 1048   3   0   0  30   0   0   0   5   0   2   1   0   0   0   0   2 116   2   0
+ 9          jumpsuit   0  15   6   0   0   0   0  24   1  63   2   1   1   3   1   0   0   0   0   1   0   0   0   3   3   0   0   8
+10             kurta   0   0   0   3   0   0   4  15   0   1 391 349   0   5  13   2  23   0   0   0   0   2   7   1  13   0   2  13
+11             kurti   0   4   0   0   0   0   4  29   0   1 204 758   0   5  16   4   1   0   0   1   0   3   3   0  15   0   2  25
+12           legging   0   2   0   0   1  18   0   0  18   2   0   0 927   0   0   1   0   0   2   0   0   0   0   0   3  51   0   0
+13            nighty   0  15   7   0   0   0   0  32   0   0  10   9   0 181   1   2   0   1   0   0   1   0   0   0   1   0   1   2
+14            salwar   0   3   1   0   0   0   0   5   0   0   6  13   0   2 127   2   0   0   0   3   0   0   0   0   1   0   0   0
+15             saree   0   0   0   0   0   0   0   0   0   0   1   0   0   2   3 1244   0   1   0   0   0   0   0   0   1   0   0   0
+16             shirt   0   2   0   7   0   0   4   1   0   0   0   1   0   0   0   1 1099   1   2   1   2   3   8   0  29   2   8   7
+17             shoes   0   0   0   0   1   0   0   0   0   0   0   0   0   0   0   0   0 1211   0   0   0   0   0   0   0   0   1   0
+18            shorts   0   3   0   0   0   4   0   2   1   0   0   0   1   0   1   0   0   2 580  11   0   2   0   0   1   0   1   0
+19             skirt   0   0   0   0   0   0   0  14   0   1   1   0   1   0   0   2   2   0  19 387   0   1   0   0   0   4   0   0
+20              suit   0   0   0   0   0   0   0   0   0   0   0   0   0   0   6   1   0   1   1   0  16   0   0   0   1   0   0   0
+21           sweater   0   1   0   1   1   0   4   8   1   0   1   8   0   2   0   0   7   0   2   0   1 548  86   0  32   0  22   6
+22       sweatshirts   0   3   0   1   0   0   4   1   0   0   2   0   0   0   0   0  11   0   0   0   1 104 766   0  17   0  14   3
+23          swinsuit   0   2   8   0   1   0   0   3   0   0   0   1   1   0   0   0   0   0   4   2   1   0   0  29   4   0   0   0
+24               top   0   4   2   0   0   0   4   6   0   4   2  20   0   0   0   1  13   0   0   2   0  11   9   0 561   0  43  16
+25           trouser   0   4   0   0   0   6   0   1  86   0   0   0  48   1   0   0   2   0  16  16   0   0   0   1   0 1009   0   0
+26            tshirt   0   3   0   1   2   0   0   1   1   0   1   0   0   0   0   0   7   0   0   0   0  45  42   1  37   0 1025   2
+27             tunic   0   0   0   0   0   0   4  20   0   1  28  69   0   2   1   0  10   0   0   0   1   9   3   0  48   0   4  83
+precision table (normalized by TP+FP)
+                       0   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16  17  18  19  20  21  22  23  24  25  26  27
+ 0           Ignored NaN   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
+ 1         Nightsuit NaN 795  45   0   0   0   0   1   1 112   0   2   0  31  11   0   0   1   1   0  41   1   0  69   3   0   1   0
+ 2          babydoll NaN   2 687   0   3   0   0  23   0   0   0   0   0  17   5   0   0   0   0   0   0   0   0 116   2   0   0   0
+ 3            blazer NaN   0   0 860   0   0  77   0   0   0   0   0   0   0   0   0   2   0   0   0   0  12   4   0   2   0   0   0
+ 4               bra NaN   0  15   0 986   0   0   0   0   0   0   0   1   0   0   0   0   2   0   0   0   0   0   0   0   0   0   0
+ 5             capri NaN   0   0   0   0 850   0   0   6  11   0   0  17   0   0   0   0   0  29   4   0   0   0   0   0  10   0   0
+ 6              coat NaN   2   0  26   0   0 558   1   0   0   0   3   0   0   0   0   0   1   0   9   0   5   2   0   1   0   0  11
+ 7             dress NaN  11  68   0   0   0   0 717   0  22   4  22   0  48  17   0   0   2   0  22   0   0   0   0  11   0   0   5
+ 8              jean NaN   5   0   0   0  26   0   0 899  33   0   0  29   0   0   0   4   0   3   2   0   0   0   0   2  96   1   0
+ 9          jumpsuit NaN  44  45   0   0   0   0  37   0 707   3   0   0  13   5   0   0   0   0   2   0   0   0  69   3   0   0  47
+10             kurta NaN   0   0  26   0   0  51  23   0  11 599 275   0  22  74   1  19   0   0   0   0   2   7  23  16   0   1  77
+11             kurti NaN  11   0   0   0   0  51  45   0  11 312 598   0  22  91   3   0   0   0   2   0   4   3   0  19   0   1 148
+12           legging NaN   5   0   0   1  78   0   0  15  22   0   0 899   0   0   0   0   0   3   0   0   0   0   0   3  42   0   0
+13            nighty NaN  44  53   0   0   0   0  50   0   0  15   7   0 804   5   1   0   0   0   0  41   0   0   0   1   0   0  11
+14            salwar NaN   8   7   0   0   0   0   7   0   0   9  10   0   8 725   1   0   0   0   6   0   0   0   0   1   0   0   0
+15             saree NaN   0   0   0   0   0   0   0   0   0   1   0   0   8  17 987   0   0   0   0   0   0   0   0   1   0   0   0
+16             shirt NaN   5   0  60   0   0  51   1   0   0   0   0   0   0   0   0 928   0   3   2  83   4   8   0  36   1   7  41
+17             shoes NaN   0   0   0   1   0   0   0   0   0   0   0   0   0   0   0   0 986   0   0   0   0   0   0   0   0   0   0
+18            shorts NaN   8   0   0   0  17   0   3   0   0   0   0   0   0   5   0   0   1 895  24   0   2   0   0   1   0   0   0
+19             skirt NaN   0   0   0   0   0   0  22   0  11   1   0   0   0   0   1   1   0  29 877   0   1   0   0   0   3   0   0
+20              suit NaN   0   0   0   0   0   0   0   0   0   0   0   0   0  34   0   0   0   1   0 666   0   0   0   1   0   0   0
+21           sweater NaN   2   0   8   1   0  51  12   0   0   1   6   0   8   0   0   5   0   3   0  41 738  92   0  40   0  19  35
+22       sweatshirts NaN   8   0   8   0   0  51   1   0   0   3   0   0   0   0   0   9   0   0   0  41 140 823   0  21   0  12  17
+23          swinsuit NaN   5  61   0   1   0   0   4   0   0   0   0   0   0   0   0   0   0   6   4  41   0   0 674   5   0   0   0
+24               top NaN  11  15   0   0   0  51   9   0  44   3  15   0   0   0   0  10   0   0   4   0  14   9   0 713   0  38  95
+25           trouser NaN  11   0   0   0  26   0   1  73   0   0   0  46   4   0   0   1   0  24  36   0   0   0  23   0 843   0   0
+26            tshirt NaN   8   0   8   3   0   0   1   0   0   1   0   0   0   0   0   5   0   0   0   0  60  45  23  47   0 907  11
+27             tunic NaN   0   0   0   0   0  51  31   0  11  42  54   0   8   5   0   8   0   0   0  41  12   3   0  61   0   3 494
+Precision report 
+             Ignored (-nan)  <<  
+           Nightsuit (0.796)  <<   (dress, 0.012) (jumpsuit, 0.044) (kurti, 0.012) (nighty, 0.044) (top, 0.012) (trouser, 0.012)
+            babydoll (0.687)  <<   (Nightsuit, 0.046) (bra, 0.015) (dress, 0.069) (jumpsuit, 0.046) (nighty, 0.053) (swinsuit, 0.061) (top, 0.015)
+              blazer (0.861)  <<   (coat, 0.026) (kurta, 0.026) (shirt, 0.061)
+                 bra (0.987)  <<  
+               capri (0.851)  <<   (jean, 0.026) (legging, 0.079) (shorts, 0.018) (trouser, 0.026)
+                coat (0.558)  <<   (blazer, 0.078) (kurta, 0.052) (kurti, 0.052) (shirt, 0.052) (sweater, 0.052) (sweatshirts, 0.052) (top, 0.052) (tunic, 0.052)
+               dress (0.717)  <<   (babydoll, 0.024) (jumpsuit, 0.038) (kurta, 0.024) (kurti, 0.046) (nighty, 0.051) (skirt, 0.022) (sweater, 0.013) (tunic, 0.032)
+                jean (0.900)  <<   (legging, 0.015) (trouser, 0.074)
+            jumpsuit (0.708)  <<   (Nightsuit, 0.112) (capri, 0.011) (dress, 0.022) (jean, 0.034) (kurta, 0.011) (kurti, 0.011) (legging, 0.022) (skirt, 0.011) (top, 0.045) (tunic, 0.011)
+               kurta (0.600)  <<   (kurti, 0.313) (nighty, 0.015) (tunic, 0.043)
+               kurti (0.598)  <<   (dress, 0.023) (kurta, 0.275) (salwar, 0.010) (top, 0.016) (tunic, 0.054)
+             legging (0.899)  <<   (capri, 0.017) (jean, 0.029) (trouser, 0.047)
+              nighty (0.804)  <<   (Nightsuit, 0.031) (babydoll, 0.018) (dress, 0.049) (jumpsuit, 0.013) (kurta, 0.022) (kurti, 0.022)
+              salwar (0.726)  <<   (Nightsuit, 0.011) (dress, 0.017) (kurta, 0.074) (kurti, 0.091) (saree, 0.017) (suit, 0.034)
+               saree (0.987)  <<  
+               shirt (0.928)  <<   (kurta, 0.019) (top, 0.011)
+               shoes (0.987)  <<  
+              shorts (0.895)  <<   (capri, 0.029) (skirt, 0.029) (trouser, 0.025)
+               skirt (0.878)  <<   (dress, 0.023) (shorts, 0.025) (trouser, 0.036)
+                suit (0.667)  <<   (Nightsuit, 0.042) (nighty, 0.042) (shirt, 0.083) (sweater, 0.042) (sweatshirts, 0.042) (swinsuit, 0.042) (tunic, 0.042)
+             sweater (0.739)  <<   (blazer, 0.012) (sweatshirts, 0.140) (top, 0.015) (tshirt, 0.061) (tunic, 0.012)
+         sweatshirts (0.824)  <<   (sweater, 0.092) (tshirt, 0.045)
+            swinsuit (0.674)  <<   (Nightsuit, 0.070) (babydoll, 0.116) (jumpsuit, 0.070) (kurta, 0.023) (trouser, 0.023) (tshirt, 0.023)
+                 top (0.714)  <<   (dress, 0.011) (kurta, 0.017) (kurti, 0.019) (shirt, 0.037) (sweater, 0.041) (sweatshirts, 0.022) (tshirt, 0.047) (tunic, 0.061)
+             trouser (0.844)  <<   (capri, 0.011) (jean, 0.097) (legging, 0.043)
+              tshirt (0.907)  <<   (sweater, 0.019) (sweatshirts, 0.012) (top, 0.038)
+               tunic (0.494)  <<   (coat, 0.012) (jumpsuit, 0.048) (kurta, 0.077) (kurti, 0.149) (nighty, 0.012) (shirt, 0.042) (sweater, 0.036) (sweatshirts, 0.018) (top, 0.095) (tshirt, 0.012)
+recall table (normalized by TP+FN)
+                       0   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16  17  18  19  20  21  22  23  24  25  26  27
+ 0           Ignored NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN
+ 1         Nightsuit   0 856  19   0   0   0   0   3   6  31   0   9   3  22   6   0   0   6   3   0   3   3   0   9   9   0   6   0
+ 2          babydoll   0   8 750   0  16   0   0 125   0   0   0   0   0  33   8   0   0   0   0   0   0   0   0  41  16   0   0   0
+ 3            blazer   0   0   0 804   0   0  48   0   0   0   0   0   0   0   0   0  24   0   0   0   0  73  32   0  16   0   0   0
+ 4               bra   0   0   3   0 984   0   0   0   0   0   0   1   3   0   0   0   0   5   0   0   0   0   0   0   0   0   1   0
+ 5             capri   0   0   0   0   0 760   0   0  27   3   0   0  70   0   0   0   0   0  74   7   0   0   0   0   0  50   3   0
+ 6              coat   0  14   0  43   0   0 623  14   0   0   0  72   0   0   0   0  14  28   0  57   0  57  28   0  14   0   0  28
+ 7             dress   0   7  16   0   0   0   0 839   0   3   5  53   1  20   5   0   0   5   0  18   0   0   0   0  16   1   1   1
+ 8              jean   0   1   0   0   0   4   0   0 861   2   0   0  24   0   0   0   4   0   1   0   0   0   0   0   1  95   1   0
+ 9          jumpsuit   0 113  45   0   0   0   0 181   7 477  15   7   7  22   7   0   0   0   0   7   0   0   0  22  22   0   0  60
+10             kurta   0   0   0   3   0   0   4  17   0   1 463 413   0   5  15   2  27   0   0   0   0   2   8   1  15   0   2  15
+11             kurti   0   3   0   0   0   0   3  26   0   0 189 705   0   4  14   3   0   0   0   0   0   2   2   0  13   0   1  23
+12           legging   0   1   0   0   0  17   0   0  17   1   0   0 904   0   0   0   0   0   1   0   0   0   0   0   2  49   0   0
+13            nighty   0  57  26   0   0   0   0 121   0   0  38  34   0 688   3   7   0   3   0   0   3   0   0   0   3   0   3   7
+14            salwar   0  18   6   0   0   0   0  30   0   0  36  79   0  12 779  12   0   0   0  18   0   0   0   0   6   0   0   0
+15             saree   0   0   0   0   0   0   0   0   0   0   0   0   0   1   2 993   0   0   0   0   0   0   0   0   0   0   0   0
+16             shirt   0   1   0   5   0   0   3   0   0   0   0   0   0   0   0   0 932   0   1   0   1   2   6   0  24   1   6   5
+17             shoes   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0 998   0   0   0   0   0   0   0   0   0   0
+18            shorts   0   4   0   0   0   6   0   3   1   0   0   0   1   0   1   0   0   3 952  18   0   3   0   0   1   0   1   0
+19             skirt   0   0   0   0   0   0   0  32   0   2   2   0   2   0   0   4   4   0  43 895   0   2   0   0   0   9   0   0
+20              suit   0   0   0   0   0   0   0   0   0   0   0   0   0   0 230  38   0  38  38   0 615   0   0   0  38   0   0   0
+21           sweater   0   1   0   1   1   0   5  10   1   0   1  10   0   2   0   0   9   0   2   0   1 749 117   0  43   0  30   8
+22       sweatshirts   0   3   0   1   0   0   4   1   0   0   2   0   0   0   0   0  11   0   0   0   1 112 826   0  18   0  15   3
+23          swinsuit   0  35 142   0  17   0   0  53   0   0   0  17  17   0   0   0   0   0  71  35  17   0   0 517  71   0   0   0
+24               top   0   5   2   0   0   0   5   8   0   5   2  28   0   0   0   1  18   0   0   2   0  15  12   0 803   0  61  22
+25           trouser   0   3   0   0   0   5   0   0  72   0   0   0  40   0   0   0   1   0  13  13   0   0   0   0   0 847   0   0
+26            tshirt   0   2   0   0   1   0   0   0   0   0   0   0   0   0   0   0   5   0   0   0   0  38  35   0  31   0 877   1
+27             tunic   0   0   0   0   0   0  14  70   0   3  98 243   0   7   3   0  35   0   0   0   3  31  10   0 169   0  14 293
+Recall report 
+             Ignored (-nan)  >>  
+           Nightsuit (0.857)  >>   (babydoll, 0.019) (jumpsuit, 0.032) (nighty, 0.022)
+            babydoll (0.750)  >>   (bra, 0.017) (dress, 0.125) (nighty, 0.033) (swinsuit, 0.042) (top, 0.017)
+              blazer (0.805)  >>   (coat, 0.049) (shirt, 0.024) (sweater, 0.073) (sweatshirts, 0.033) (top, 0.016)
+                 bra (0.985)  >>  
+               capri (0.761)  >>   (jean, 0.027) (legging, 0.071) (shorts, 0.075) (trouser, 0.051)
+                coat (0.623)  >>   (Nightsuit, 0.014) (blazer, 0.043) (dress, 0.014) (kurti, 0.072) (shirt, 0.014) (shoes, 0.029) (skirt, 0.058) (sweater, 0.058) (sweatshirts, 0.029) (top, 0.014) (tunic, 0.029)
+               dress (0.839)  >>   (babydoll, 0.017) (kurti, 0.054) (nighty, 0.020) (skirt, 0.018) (top, 0.017)
+                jean (0.861)  >>   (legging, 0.025) (trouser, 0.095)
+            jumpsuit (0.477)  >>   (Nightsuit, 0.114) (babydoll, 0.045) (dress, 0.182) (kurta, 0.015) (nighty, 0.023) (swinsuit, 0.023) (top, 0.023) (tunic, 0.061)
+               kurta (0.463)  >>   (dress, 0.018) (kurti, 0.414) (salwar, 0.015) (shirt, 0.027) (top, 0.015) (tunic, 0.015)
+               kurti (0.705)  >>   (dress, 0.027) (kurta, 0.190) (salwar, 0.015) (top, 0.014) (tunic, 0.023)
+             legging (0.904)  >>   (capri, 0.018) (jean, 0.018) (trouser, 0.050)
+              nighty (0.688)  >>   (Nightsuit, 0.057) (babydoll, 0.027) (dress, 0.122) (kurta, 0.038) (kurti, 0.034)
+              salwar (0.779)  >>   (Nightsuit, 0.018) (dress, 0.031) (kurta, 0.037) (kurti, 0.080) (nighty, 0.012) (saree, 0.012) (skirt, 0.018)
+               saree (0.994)  >>  
+               shirt (0.933)  >>   (top, 0.025)
+               shoes (0.998)  >>  
+              shorts (0.952)  >>   (skirt, 0.018)
+               skirt (0.896)  >>   (dress, 0.032) (shorts, 0.044)
+                suit (0.615)  >>   (salwar, 0.231) (saree, 0.038) (shoes, 0.038) (shorts, 0.038) (top, 0.038)
+             sweater (0.750)  >>   (dress, 0.011) (kurti, 0.011) (sweatshirts, 0.118) (top, 0.044) (tshirt, 0.030)
+         sweatshirts (0.826)  >>   (shirt, 0.012) (sweater, 0.112) (top, 0.018) (tshirt, 0.015)
+            swinsuit (0.518)  >>   (Nightsuit, 0.036) (babydoll, 0.143) (bra, 0.018) (dress, 0.054) (kurti, 0.018) (legging, 0.018) (shorts, 0.071) (skirt, 0.036) (suit, 0.018) (top, 0.071)
+                 top (0.804)  >>   (kurti, 0.029) (shirt, 0.019) (sweater, 0.016) (sweatshirts, 0.013) (tshirt, 0.062) (tunic, 0.023)
+             trouser (0.848)  >>   (jean, 0.072) (legging, 0.040) (shorts, 0.013) (skirt, 0.013)
+              tshirt (0.878)  >>   (sweater, 0.039) (sweatshirts, 0.036) (top, 0.032)
+               tunic (0.293)  >>   (coat, 0.014) (dress, 0.071) (kurta, 0.099) (kurti, 0.244) (shirt, 0.035) (sweater, 0.032) (sweatshirts, 0.011) (top, 0.170) (tshirt, 0.014)
+
+Overall Accuracy: 0.835677
+Mean    Accuracy: 0.770479
+
+Hierarchy-based accuracy
+  0.00  0.89708
+  0.05  0.86689
+  0.10  0.88120
+  0.15  0.88811
+  0.20  0.89205
+  0.25  0.89520
+  0.30  0.89544
+  0.35  0.89574
+  0.40  0.89605
+  0.45  0.89671
+  0.50  0.89708
+  0.55  0.89284
+  0.60  0.88811
+  0.65  0.88405
+  0.70  0.87902
+  0.75  0.87229
+  0.80  0.86459
+  0.85  0.85732
+  0.90  0.85022
+  0.95  0.84277
