@@ -1,0 +1,21 @@
+neck
+13
+   0 Ignored                     1.000000   1.000000
+   1 V_Neck_sweater              1.000000   1.000000
+   2 V_Neck_anything             1.000000   1.000000
+   3 Round_Neck_anything         1.000000   1.000000
+   4 Round_Neck_Nightsuit        1.000000   1.000000
+   5 Round_Neck_sweater          1.000000   1.000000
+   6 Round_Neck_sweatshirts      1.000000   1.000000
+   7 Round_Neck_kurti            1.000000   1.000000
+   8 Round_Neck_dress            1.000000   1.000000
+   9 Round_Neck_top              1.000000   1.000000
+  10 Turtle_Neck_anything        1.000000   1.000000
+  11 Hooded_Neck_anything        1.000000   1.000000
+  12 High_Neck_anything          1.000000   1.000000
+5
+V_Neck             2   1 2
+Round_Neck         7   3 4 5 6 7 8 9
+Turtle_Neck        1   10
+Hooded_Neck        1   11
+High_Neck          1   12
