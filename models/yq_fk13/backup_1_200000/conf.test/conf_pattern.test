@@ -1,0 +1,265 @@
+###################  accuracy_pattern  ####################
+Raw number table
+                               0   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16  17  18  19  20  21  22  23  24  25  26  27  28  29  30  31  32  33  34  35  36  37  38  39  40
+ 0                   Ignored   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
+ 1               Solid_saree   0  67   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0 109   0   0   0   0   0   0   0   0   0   0   0   0   0   0
+ 2             Solid_legging   0   0 407  12   0   0   1   1   0   0   0   0   4   0   0   0   5   0   0   0   0   0   0   0   0   0   0   3   0   0   2   0   0   0   0   0   0   0   0   0   0
+ 3             Solid_trouser   0   0   5 404   0   0   1   5   0   0   0   1   2   0   0   0  27   1   0   0   0   0   1   0   0   0   0   0   0   0   1   0   0   0   0   0   0   0   0   0   0
+ 4               Solid_tunic   0   0   0   0  41   3   2   0   1   0   4   3   0   0  11   0   0   4   9   4   0   0   0   0   0   0   0   0   2   0   1   0   0   0   1   0   0   2   0   0   7
+ 5               Solid_shirt   0   0   0   1   4 337   1   0   3   0   2   6   0   0   0   2   0   0   4   3   0   0   0  34   6   0   0   0   0   2   0   0   1   0   0   0   1   0   0   0   0
+ 6            Solid_anything   0   0   1   0   3   0 253   3   0   0   0   0   0   0   1   4   0  11   5   2   0   0   1   0   0   0   0   0   0   1  16   0   0   9   1  24   0   2   1   3   2
+ 7              Solid_shorts   0   0   0   0   0   0   0 408   0   4   0   0   0   0   0   0   0   0   1   0   0   0   0   0   1   0   0   0   0   0   1   6   0   0   0   0   0   0   0   0   0
+ 8         Solid_sweatshirts   0   0   0   0   3   9   0   0 379   0  25   3   0   0   0   1   0   0   5   0   1   0   4   0   0   0   0   0   0   0   1   0  38   0   0   0   0   0   0   0   0
+ 9               Solid_skirt   0   0   0   0   0   0   0   2   0 113   0   0   0   0   0   0   0   1   0   0   0   0   1   0   0   1   0   0   0   0   0   2   0   0   0   0   0   0  11   0   0
+10             Solid_sweater   0   0   0   0   3   3   0   0  36   0 247  15   0   0   0   0   0   0   5   0   1  16   0   0   0   2   0   0   1   0   4   0   5   0   2   0   0   0   0   1   1
+11              Solid_tshirt   0   0   0   0   5   2   1   0  11   0  17 364   0   0   1   0   0   0   9   1   7   2   0   0   0   0   0   0   0   0   1   0   1   0   0   0  29   0   0   0   0
+12               Solid_capri   0   0   6   3   0   0   0   9   0   0   0   0 190   0   0   0   1   0   0   0   0   0   0   0   0   0   0   0   0   0   2   0   0   0   0   0   0   0   0   0   0
+13                 Solid_bra   0   0   0   0   0   0   0   0   0   0   0   0   0 334   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0  10   0   0   0   0   0   0   0   0   0   0
+14               Solid_kurti   0   0   0   0   6   0   1   0   0   0   0   0   0   0  58   0   0   2   3  12   0   0   0   0   0   0   0   0   0   0   1   0   0   0   0   0   0  31   0   0  31
+15              Solid_blazer   0   0   0   0   0   0   2   0   1   0   3   0   0   0   0  87   0   0   0   0   0   0   0   0   0   0   0   0   0   1   0   0   0   0   0   0   0   0   0   0   0
+16                Solid_jean   0   0   4  31   0   0   1   0   0   0   0   0   1   0   0   0 391   0   0   0   0   0   0   0   0   0   0   0   0   0   1   0   0   0   0   0   0   0   0   0   0
+17               Solid_dress   0   0   0   0   1   0   6   0   0   0   0   0   0   0   2   0   0 131   4   0   0   0   1   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0  10   0
+18                 Solid_top   0   0   0   0   8   5   2   1   5   0   9   4   0   1   1   0   0   1 208   0   0   2   2   0   0   0   0   0   0   0   0   0   1   0  15   1   2   3   0   1   0
+19               Solid_kurta   0   0   1   0   4   7   2   0   1   0   1   2   0   0  12   0   0   1   0  84   0   0   0   0   1   0   0   0   0   1   0   0   0   0   0   0   0  11   0   0  43
+20            Striped_tshirt   0   0   0   0   0   2   0   0   0   1   2  16   0   0   0   0   0   1   2   1 238  11   9   2   0   0   0   0   0   0   0   0   2   0   0   0   9   0   0   0   0
+21           Striped_sweater   0   0   0   0   0   0   0   0   7   0  19   1   0   0   0   0   0   0   0   0   5 180  12   0   0   4   0   0   0   0   2   0   1   0   0   0   0   0   0   1   0
+22          Striped_anything   0   4   2  47   2   3   5  14  10   4   1   2   2   7   1   3   2   3   4  12   0  17 102   2   1   4  47   2   2   0   7   4   3   2   2  12   0   8   4   5   8
+23             Striped_shirt   0   0   0   0   0 105   0   1   1   0   1   2   0   0   0   0   0   0   1   0   0   0   1 308  27   0   0   0   1   2   1   0   0   0   0   0   0   0   0   0   1
+24           Checkered_shirt   0   0   0   0   0  34   0   0   1   0   0   1   0   0   0   0   0   0   0   0   0   0   0  46 311   1   0   0   1   7   0   0   0   0   0   0   0   0   0   0   0
+25        Checkered_anything   0   1   0  34   0   0   4  13   2   1   8   1   0   1   0   7   0   2   0   2   1   4   2   0   7  68  18   3   1   2   8   7   3   0   2   1   3   4   5   2   0
+26             Printed_saree   0  26   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0 408   0   0   0   0   0   0   0   0   0   0   0   0   0   0
+27           Printed_legging   0   0  16   0   0   0   0   0   0   0   0   0   1   0   0   0   1   0   0   0   0   0   0   0   0   0   0  62   0   0   5   0   0   0   0   0   0   0   0   0   0
+28             Printed_tunic   0   0   0   0   3   0   1   0   0   0   0   0   0   0   2   0   0   0   1   1   0   0   1   0   0   1   0   0  46   3   1   0   0   0  12   0   1  22   0   3   7
+29             Printed_shirt   0   0   0   0   1  41   0   0   0   0   1   0   0   0   0   0   0   0   2   0   0   0   0   5  11   0   0   0   4  40   1   0   0   0   9   1   0   0   0   0   0
+30          Printed_anything   0   0   0   5   0   0  20   0   2   0   4   0   3  14   0   3   5   1   0   1   2   4   3   0   1   3   0  10   2   1 187   6   9   3   1   3   1   3   3   5   4
+31            Printed_shorts   0   0   0   0   0   0   0  28   0   0   0   1   1   0   0   0   0   0   0   0   0   0   0   0   0   3   0   0   0   0   2  46   0   0   0   3   0   0   0   0   0
+32       Printed_sweatshirts   0   0   0   0   0   0   0   0  57   0   2   0   0   0   0   0   0   0   1   0   0   2   1   0   0   0   0   0   0   0   3   0 232   0   1   1   1   1   0   0   0
+33            Printed_nighty   0   0   0   0   0   0   3   0   0   0   0   0   0   0   0   0   0   0   0   1   0   0   0   0   0   0   0   0   1   0   0   0   0  70   0   5   0   1   0   4   1
+34               Printed_top   0   0   0   0   0   1   0   0   0   0   0   2   0   0   1   0   0   0   6   1   3   1   3   0   0   0   0   0   8   5   0   0   3   0 193   0   7   7   0   0   0
+35         Printed_Nightsuit   0   0   0   0   1   0  14   0   0   0   0   0   0   0   0   0   0   0   1   0   0   0   3   0   0   0   0   0   0   0   1   0   0   1   0 143   1   0   1   0   0
+36            Printed_tshirt   0   0   0   0   1   0   0   0   1   0   0  20   0   0   0   0   0   0   1   0   1   0   0   0   1   0   0   0   0   0   0   0  11   0   6   0 364   0   0   1   0
+37             Printed_kurti   0   0   0   0   1   0   0   0   0   0   0   1   0   0  20   0   0   0   0   6   0   0   1   0   0   1   0   0  13   0   6   0   0   1   1   0   0 240   0   3 121
+38             Printed_skirt   0   0   0   1   0   0   0   1   0  12   0   0   0   0   0   0   0   0   0   0   0   0   1   0   0   1   2   0   0   0   2   1   0   0   0   0   0   0 163   1   0
+39             Printed_dress   0   0   1   0   0   0   1   0   0   0   0   0   0   0   0   0   0   6   1   0   0   0   4   0   0   0   0   0   3   0   5   0   0   1   1   1   1   6   1 134   1
+40             Printed_kurta   0   0   0   0   0   1   0   0   1   0   1   0   0   0   4   0   0   1   2  25   0   0   0   0   0   1   0   0  14   1   6   0   0   0   3   0   0  84   0   1 283
+precision table (normalized by TP+FP)
+                               0   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16  17  18  19  20  21  22  23  24  25  26  27  28  29  30  31  32  33  34  35  36  37  38  39  40
+ 0                   Ignored NaN   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
+ 1               Solid_saree NaN 683   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0 186   0   0   0   0   0   0   0   0   0   0   0   0   0   0
+ 2             Solid_legging NaN   0 918  22   0   0   3   2   0   0   0   0  19   0   0   0  11   0   0   0   0   0   0   0   0   0   0  37   0   0   7   0   0   0   0   0   0   0   0   0   0
+ 3             Solid_trouser NaN   0  11 750   0   0   3  10   0   0   0   2   9   0   0   0  62   6   0   0   0   0   6   0   0   0   0   0   0   0   3   0   0   0   0   0   0   0   0   0   0
+ 4               Solid_tunic NaN   0   0   0 471   5   6   0   1   0  11   6   0   0  96   0   0  24  32  25   0   0   0   0   0   0   0   0  20   0   3   0   0   0   4   0   0   4   0   0  13
+ 5               Solid_shirt NaN   0   0   1  45 609   3   0   5   0   5  13   0   0   0  18   0   0  14  19   0   0   0  85  16   0   0   0   0  30   0   0   3   0   0   0   2   0   0   0   0
+ 6            Solid_anything NaN   0   2   0  34   0 788   6   0   0   0   0   0   0   8  37   0  66  18  12   0   0   6   0   0   0   0   0   0  15  57   0   0 103   4 123   0   4   5  17   3
+ 7              Solid_shorts NaN   0   0   0   0   0   0 839   0  29   0   0   0   0   0   0   0   0   3   0   0   0   0   0   2   0   0   0   0   0   3  83   0   0   0   0   0   0   0   0   0
+ 8         Solid_sweatshirts NaN   0   0   0  34  16   0   0 730   0  72   6   0   0   0   9   0   0  18   0   3   0  26   0   0   0   0   0   0   0   3   0 122   0   0   0   0   0   0   0   0
+ 9               Solid_skirt NaN   0   0   0   0   0   0   4   0 837   0   0   0   0   0   0   0   6   0   0   0   0   6   0   0  11   0   0   0   0   0  27   0   0   0   0   0   0  58   0   0
+10             Solid_sweater NaN   0   0   0  34   5   0   0  69   0 711  33   0   0   0   0   0   0  18   0   3  66   0   0   0  22   0   0  10   0  14   0  16   0   8   0   0   0   0   5   1
+11              Solid_tshirt NaN   0   0   0  57   3   3   0  21   0  48 817   0   0   8   0   0   0  32   6  27   8   0   0   0   0   0   0   0   0   3   0   3   0   0   0  69   0   0   0   0
+12               Solid_capri NaN   0  13   5   0   0   0  18   0   0   0   0 931   0   0   0   2   0   0   0   0   0   0   0   0   0   0   0   0   0   7   0   0   0   0   0   0   0   0   0   0
+13                 Solid_bra NaN   0   0   0   0   0   0   0   0   0   0   0   0 935   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0  35   0   0   0   0   0   0   0   0   0   0
+14               Solid_kurti NaN   0   0   0  68   0   3   0   0   0   0   0   0   0 508   0   0  12  10  76   0   0   0   0   0   0   0   0   0   0   3   0   0   0   0   0   0  72   0   0  60
+15              Solid_blazer NaN   0   0   0   0   0   6   0   1   0   8   0   0   0   0 813   0   0   0   0   0   0   0   0   0   0   0   0   0  15   0   0   0   0   0   0   0   0   0   0   0
+16                Solid_jean NaN   0   9  57   0   0   3   0   0   0   0   0   4   0   0   0 905   0   0   0   0   0   0   0   0   0   0   0   0   0   3   0   0   0   0   0   0   0   0   0   0
+17               Solid_dress NaN   0   0   0  11   0  18   0   0   0   0   0   0   0  17   0   0 789  14   0   0   0   6   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0  57   0
+18                 Solid_top NaN   0   0   0  91   9   6   2   9   0  25   8   0   2   8   0   0   6 756   0   0   8  13   0   0   0   0   0   0   0   0   0   3   0  60   5   4   7   0   5   0
+19               Solid_kurta NaN   0   2   0  45  12   6   0   1   0   2   4   0   0 105   0   0   6   0 538   0   0   0   0   2   0   0   0   0  15   0   0   0   0   0   0   0  25   0   0  84
+20            Striped_tshirt NaN   0   0   0   0   3   0   0   0   7   5  35   0   0   0   0   0   6   7   6 918  46  58   5   0   0   0   0   0   0   0   0   6   0   0   0  21   0   0   0   0
+21           Striped_sweater NaN   0   0   0   0   0   0   0  13   0  54   2   0   0   0   0   0   0   0   0  19 753  78   0   0  44   0   0   0   0   7   0   3   0   0   0   0   0   0   5   0
+22          Striped_anything NaN  40   4  87  22   5  15  28  19  29   2   4   9  19   8  28   4  18  14  76   0  71 666   5   2  44  80  25  20   0  25  55   9  22   8  61   0  18  21  28  15
+23             Striped_shirt NaN   0   0   0   0 189   0   2   1   0   2   4   0   0   0   0   0   0   3   0   0   0   6 775  73   0   0   0  10  30   3   0   0   0   0   0   0   0   0   0   1
+24           Checkered_shirt NaN   0   0   0   0  61   0   0   1   0   0   2   0   0   0   0   0   0   0   0   0   0   0 115 847  11   0   0  10 106   0   0   0   0   0   0   0   0   0   0   0
+25        Checkered_anything NaN  10   0  63   0   0  12  26   3   7  23   2   0   2   0  65   0  12   0  12   3  16  13   0  19 755  30  37  10  30  28  97   9   0   8   5   7   9  26  11   0
+26             Printed_saree NaN 265   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0 698   0   0   0   0   0   0   0   0   0   0   0   0   0   0
+27           Printed_legging NaN   0  36   0   0   0   0   0   0   0   0   0   4   0   0   0   2   0   0   0   0   0   0   0   0   0   0 775   0   0  17   0   0   0   0   0   0   0   0   0   0
+28             Printed_tunic NaN   0   0   0  34   0   3   0   0   0   0   0   0   0  17   0   0   0   3   6   0   0   6   0   0  11   0   0 464  45   3   0   0   0  48   0   2  51   0  17  13
+29             Printed_shirt NaN   0   0   0  11  74   0   0   0   0   2   0   0   0   0   0   0   0   7   0   0   0   0  12  29   0   0   0  40 606   3   0   0   0  36   5   0   0   0   0   0
+30          Printed_anything NaN   0   0   9   0   0  62   0   3   0  11   0  14  39   0  28  11   6   0   6   7  16  19   0   2  33   0 125  20  15 672  83  29  34   4  15   2   7  15  28   7
+31            Printed_shorts NaN   0   0   0   0   0   0  57   0   0   0   2   4   0   0   0   0   0   0   0   0   0   0   0   0  33   0   0   0   0   7 638   0   0   0  15   0   0   0   0   0
+32       Printed_sweatshirts NaN   0   0   0   0   0   0   0 109   0   5   0   0   0   0   0   0   0   3   0   0   8   6   0   0   0   0   0   0   0  10   0 748   0   4   5   2   2   0   0   0
+33            Printed_nighty NaN   0   0   0   0   0   9   0   0   0   0   0   0   0   0   0   0   0   0   6   0   0   0   0   0   0   0   0  10   0   0   0   0 804   0  25   0   2   0  22   1
+34               Printed_top NaN   0   0   0   0   1   0   0   0   0   0   4   0   0   8   0   0   0  21   6  11   4  19   0   0   0   0   0  80  75   0   0   9   0 772   0  16  16   0   0   0
+35         Printed_Nightsuit NaN   0   0   0  11   0  43   0   0   0   0   0   0   0   0   0   0   0   3   0   0   0  19   0   0   0   0   0   0   0   3   0   0  11   0 733   2   0   5   0   0
+36            Printed_tshirt NaN   0   0   0  11   0   0   0   1   0   0  44   0   0   0   0   0   0   3   0   3   0   0   0   2   0   0   0   0   0   0   0  35   0  24   0 866   0   0   5   0
+37             Printed_kurti NaN   0   0   0  11   0   0   0   0   0   0   2   0   0 175   0   0   0   0  38   0   0   6   0   0  11   0   0 131   0  21   0   0  11   4   0   0 564   0  17 237
+38             Printed_skirt NaN   0   0   1   0   0   0   2   0  88   0   0   0   0   0   0   0   0   0   0   0   0   6   0   0  11   3   0   0   0   7  13   0   0   0   0   0   0 862   5   0
+39             Printed_dress NaN   0   2   0   0   0   3   0   0   0   0   0   0   0   0   0   0  36   3   0   0   0  26   0   0   0   0   0  30   0  17   0   0  11   4   5   2  14   5 765   1
+40             Printed_kurta NaN   0   0   0   0   1   0   0   1   0   2   0   0   0  35   0   0   6   7 160   0   0   0   0   0  11   0   0 141  15  21   0   0   0  12   0   0 197   0   5 554
+Precision report 
+                  Ignored (-nan)  <<  
+              Solid_saree (0.684)  <<   (Striped_anything, 0.041) (Checkered_anything, 0.010) (Printed_saree, 0.265)
+            Solid_legging (0.919)  <<   (Solid_trouser, 0.011) (Solid_capri, 0.014) (Printed_legging, 0.036)
+            Solid_trouser (0.751)  <<   (Solid_legging, 0.022) (Solid_jean, 0.058) (Striped_anything, 0.087) (Checkered_anything, 0.063)
+              Solid_tunic (0.471)  <<   (Solid_shirt, 0.046) (Solid_anything, 0.034) (Solid_sweatshirts, 0.034) (Solid_sweater, 0.034) (Solid_tshirt, 0.057) (Solid_kurti, 0.069) (Solid_dress, 0.011) (Solid_top, 0.092) (Solid_kurta, 0.046) (Striped_anything, 0.023) (Printed_tunic, 0.034) (Printed_shirt, 0.011) (Printed_Nightsuit, 0.011) (Printed_tshirt, 0.011) (Printed_kurti, 0.011)
+              Solid_shirt (0.609)  <<   (Solid_sweatshirts, 0.016) (Solid_kurta, 0.013) (Striped_shirt, 0.190) (Checkered_shirt, 0.061) (Printed_shirt, 0.074)
+           Solid_anything (0.788)  <<   (Solid_dress, 0.019) (Striped_anything, 0.016) (Checkered_anything, 0.012) (Printed_anything, 0.062) (Printed_Nightsuit, 0.044)
+             Solid_shorts (0.840)  <<   (Solid_trouser, 0.010) (Solid_capri, 0.019) (Striped_anything, 0.029) (Checkered_anything, 0.027) (Printed_shorts, 0.058)
+        Solid_sweatshirts (0.730)  <<   (Solid_sweater, 0.069) (Solid_tshirt, 0.021) (Striped_sweater, 0.013) (Striped_anything, 0.019) (Printed_sweatshirts, 0.110)
+              Solid_skirt (0.837)  <<   (Solid_shorts, 0.030) (Striped_anything, 0.030) (Printed_skirt, 0.089)
+            Solid_sweater (0.712)  <<   (Solid_tunic, 0.012) (Solid_sweatshirts, 0.072) (Solid_tshirt, 0.049) (Solid_top, 0.026) (Striped_sweater, 0.055) (Checkered_anything, 0.023) (Printed_anything, 0.012)
+             Solid_tshirt (0.818)  <<   (Solid_shirt, 0.013) (Solid_sweater, 0.034) (Striped_tshirt, 0.036) (Printed_tshirt, 0.045)
+              Solid_capri (0.931)  <<   (Solid_legging, 0.020) (Printed_anything, 0.015)
+                Solid_bra (0.936)  <<   (Striped_anything, 0.020) (Printed_anything, 0.039)
+              Solid_kurti (0.509)  <<   (Solid_tunic, 0.096) (Solid_dress, 0.018) (Solid_kurta, 0.105) (Printed_tunic, 0.018) (Printed_kurti, 0.175) (Printed_kurta, 0.035)
+             Solid_blazer (0.813)  <<   (Solid_shirt, 0.019) (Solid_anything, 0.037) (Striped_anything, 0.028) (Checkered_anything, 0.065) (Printed_anything, 0.028)
+               Solid_jean (0.905)  <<   (Solid_legging, 0.012) (Solid_trouser, 0.062) (Printed_anything, 0.012)
+              Solid_dress (0.789)  <<   (Solid_tunic, 0.024) (Solid_anything, 0.066) (Solid_kurti, 0.012) (Striped_anything, 0.018) (Checkered_anything, 0.012) (Printed_dress, 0.036)
+                Solid_top (0.756)  <<   (Solid_tunic, 0.033) (Solid_shirt, 0.015) (Solid_anything, 0.018) (Solid_sweatshirts, 0.018) (Solid_sweater, 0.018) (Solid_tshirt, 0.033) (Solid_kurti, 0.011) (Solid_dress, 0.015) (Striped_anything, 0.015) (Printed_top, 0.022)
+              Solid_kurta (0.538)  <<   (Solid_tunic, 0.026) (Solid_shirt, 0.019) (Solid_anything, 0.013) (Solid_kurti, 0.077) (Striped_anything, 0.077) (Checkered_anything, 0.013) (Printed_kurti, 0.038) (Printed_kurta, 0.160)
+           Striped_tshirt (0.919)  <<   (Solid_tshirt, 0.027) (Striped_sweater, 0.019) (Printed_top, 0.012)
+          Striped_sweater (0.753)  <<   (Solid_sweater, 0.067) (Striped_tshirt, 0.046) (Striped_anything, 0.071) (Checkered_anything, 0.017) (Printed_anything, 0.017)
+         Striped_anything (0.667)  <<   (Solid_sweatshirts, 0.026) (Solid_top, 0.013) (Striped_tshirt, 0.059) (Striped_sweater, 0.078) (Checkered_anything, 0.013) (Printed_anything, 0.020) (Printed_top, 0.020) (Printed_Nightsuit, 0.020) (Printed_dress, 0.026)
+            Striped_shirt (0.776)  <<   (Solid_shirt, 0.086) (Checkered_shirt, 0.116) (Printed_shirt, 0.013)
+          Checkered_shirt (0.847)  <<   (Solid_shirt, 0.016) (Striped_shirt, 0.074) (Checkered_anything, 0.019) (Printed_shirt, 0.030)
+       Checkered_anything (0.756)  <<   (Solid_skirt, 0.011) (Solid_sweater, 0.022) (Striped_sweater, 0.044) (Striped_anything, 0.044) (Checkered_shirt, 0.011) (Printed_tunic, 0.011) (Printed_anything, 0.033) (Printed_shorts, 0.033) (Printed_kurti, 0.011) (Printed_skirt, 0.011) (Printed_kurta, 0.011)
+            Printed_saree (0.699)  <<   (Solid_saree, 0.187) (Striped_anything, 0.080) (Checkered_anything, 0.031)
+          Printed_legging (0.775)  <<   (Solid_legging, 0.038) (Striped_anything, 0.025) (Checkered_anything, 0.038) (Printed_anything, 0.125)
+            Printed_tunic (0.465)  <<   (Solid_tunic, 0.020) (Solid_sweater, 0.010) (Striped_anything, 0.020) (Striped_shirt, 0.010) (Checkered_shirt, 0.010) (Checkered_anything, 0.010) (Printed_shirt, 0.040) (Printed_anything, 0.020) (Printed_nighty, 0.010) (Printed_top, 0.081) (Printed_kurti, 0.131) (Printed_dress, 0.030) (Printed_kurta, 0.141)
+            Printed_shirt (0.606)  <<   (Solid_shirt, 0.030) (Solid_anything, 0.015) (Solid_blazer, 0.015) (Solid_kurta, 0.015) (Striped_shirt, 0.030) (Checkered_shirt, 0.106) (Checkered_anything, 0.030) (Printed_tunic, 0.045) (Printed_anything, 0.015) (Printed_top, 0.076) (Printed_kurta, 0.015)
+         Printed_anything (0.673)  <<   (Solid_anything, 0.058) (Solid_sweater, 0.014) (Solid_bra, 0.036) (Striped_anything, 0.025) (Checkered_anything, 0.029) (Printed_legging, 0.018) (Printed_sweatshirts, 0.011) (Printed_kurti, 0.022) (Printed_dress, 0.018) (Printed_kurta, 0.022)
+           Printed_shorts (0.639)  <<   (Solid_shorts, 0.083) (Solid_skirt, 0.028) (Striped_anything, 0.056) (Checkered_anything, 0.097) (Printed_anything, 0.083) (Printed_skirt, 0.014)
+      Printed_sweatshirts (0.748)  <<   (Solid_sweatshirts, 0.123) (Solid_sweater, 0.016) (Printed_anything, 0.029) (Printed_tshirt, 0.035)
+           Printed_nighty (0.805)  <<   (Solid_anything, 0.103) (Striped_anything, 0.023) (Printed_anything, 0.034) (Printed_Nightsuit, 0.011) (Printed_kurti, 0.011) (Printed_dress, 0.011)
+              Printed_top (0.772)  <<   (Solid_top, 0.060) (Printed_tunic, 0.048) (Printed_shirt, 0.036) (Printed_tshirt, 0.024) (Printed_kurta, 0.012)
+        Printed_Nightsuit (0.733)  <<   (Solid_anything, 0.123) (Striped_anything, 0.062) (Printed_anything, 0.015) (Printed_shorts, 0.015) (Printed_nighty, 0.026)
+           Printed_tshirt (0.867)  <<   (Solid_tshirt, 0.069) (Striped_tshirt, 0.021) (Printed_top, 0.017)
+            Printed_kurti (0.565)  <<   (Solid_kurti, 0.073) (Solid_kurta, 0.026) (Striped_anything, 0.019) (Printed_tunic, 0.052) (Printed_top, 0.016) (Printed_dress, 0.014) (Printed_kurta, 0.198)
+            Printed_skirt (0.862)  <<   (Solid_skirt, 0.058) (Striped_anything, 0.021) (Checkered_anything, 0.026) (Printed_anything, 0.016)
+            Printed_dress (0.766)  <<   (Solid_anything, 0.017) (Solid_dress, 0.057) (Striped_anything, 0.029) (Checkered_anything, 0.011) (Printed_tunic, 0.017) (Printed_anything, 0.029) (Printed_nighty, 0.023) (Printed_kurti, 0.017)
+            Printed_kurta (0.555)  <<   (Solid_tunic, 0.014) (Solid_kurti, 0.061) (Solid_kurta, 0.084) (Striped_anything, 0.016) (Printed_tunic, 0.014) (Printed_kurti, 0.237)
+recall table (normalized by TP+FN)
+                               0   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16  17  18  19  20  21  22  23  24  25  26  27  28  29  30  31  32  33  34  35  36  37  38  39  40
+ 0                   Ignored NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN
+ 1               Solid_saree   0 380   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0 619   0   0   0   0   0   0   0   0   0   0   0   0   0   0
+ 2             Solid_legging   0   0 935  27   0   0   2   2   0   0   0   0   9   0   0   0  11   0   0   0   0   0   0   0   0   0   0   6   0   0   4   0   0   0   0   0   0   0   0   0   0
+ 3             Solid_trouser   0   0  11 901   0   0   2  11   0   0   0   2   4   0   0   0  60   2   0   0   0   0   2   0   0   0   0   0   0   0   2   0   0   0   0   0   0   0   0   0   0
+ 4               Solid_tunic   0   0   0   0 431  31  21   0  10   0  42  31   0   0 115   0   0  42  94  42   0   0   0   0   0   0   0   0  21   0  10   0   0   0  10   0   0  21   0   0  73
+ 5               Solid_shirt   0   0   0   2   9 828   2   0   7   0   4  14   0   0   0   4   0   0   9   7   0   0   0  83  14   0   0   0   0   4   0   0   2   0   0   0   2   0   0   0   0
+ 6            Solid_anything   0   0   2   0   8   0 737   8   0   0   0   0   0   0   2  11   0  32  14   5   0   0   2   0   0   0   0   0   0   2  46   0   0  26   2  69   0   5   2   8   5
+ 7              Solid_shorts   0   0   0   0   0   0   0 969   0   9   0   0   0   0   0   0   0   0   2   0   0   0   0   0   2   0   0   0   0   0   2  14   0   0   0   0   0   0   0   0   0
+ 8         Solid_sweatshirts   0   0   0   0   6  19   0   0 808   0  53   6   0   0   0   2   0   0  10   0   2   0   8   0   0   0   0   0   0   0   2   0  81   0   0   0   0   0   0   0   0
+ 9               Solid_skirt   0   0   0   0   0   0   0  15   0 862   0   0   0   0   0   0   0   7   0   0   0   0   7   0   0   7   0   0   0   0   0  15   0   0   0   0   0   0  83   0   0
+10             Solid_sweater   0   0   0   0   8   8   0   0 105   0 722  43   0   0   0   0   0   0  14   0   2  46   0   0   0   5   0   0   2   0  11   0  14   0   5   0   0   0   0   2   2
+11              Solid_tshirt   0   0   0   0  11   4   2   0  24   0  37 807   0   0   2   0   0   0  19   2  15   4   0   0   0   0   0   0   0   0   2   0   2   0   0   0  64   0   0   0   0
+12               Solid_capri   0   0  28  14   0   0   0  42   0   0   0   0 900   0   0   0   4   0   0   0   0   0   0   0   0   0   0   0   0   0   9   0   0   0   0   0   0   0   0   0   0
+13                 Solid_bra   0   0   0   0   0   0   0   0   0   0   0   0   0 970   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0  29   0   0   0   0   0   0   0   0   0   0
+14               Solid_kurti   0   0   0   0  41   0   6   0   0   0   0   0   0   0 400   0   0  13  20  82   0   0   0   0   0   0   0   0   0   0   6   0   0   0   0   0   0 213   0   0 213
+15              Solid_blazer   0   0   0   0   0   0  21   0  10   0  31   0   0   0   0 925   0   0   0   0   0   0   0   0   0   0   0   0   0  10   0   0   0   0   0   0   0   0   0   0   0
+16                Solid_jean   0   0   9  72   0   0   2   0   0   0   0   0   2   0   0   0 911   0   0   0   0   0   0   0   0   0   0   0   0   0   2   0   0   0   0   0   0   0   0   0   0
+17               Solid_dress   0   0   0   0   6   0  38   0   0   0   0   0   0   0  12   0   0 845  25   0   0   0   6   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0  64   0
+18                 Solid_top   0   0   0   0  29  18   7   3  18   0  33  14   0   3   3   0   0   3 764   0   0   7   7   0   0   0   0   0   0   0   0   0   3   0  55   3   7  11   0   3   0
+19               Solid_kurta   0   0   5   0  23  40  11   0   5   0   5  11   0   0  70   0   0   5   0 491   0   0   0   0   5   0   0   0   0   5   0   0   0   0   0   0   0  64   0   0 251
+20            Striped_tshirt   0   0   0   0   0   6   0   0   0   3   6  54   0   0   0   0   0   3   6   3 804  37  30   6   0   0   0   0   0   0   0   0   6   0   0   0  30   0   0   0   0
+21           Striped_sweater   0   0   0   0   0   0   0   0  30   0  81   4   0   0   0   0   0   0   0   0  21 775  51   0   0  17   0   0   0   0   8   0   4   0   0   0   0   0   0   4   0
+22          Striped_anything   0  11   5 130   5   8  13  38  27  11   2   5   5  19   2   8   5   8  11  33   0  47 283   5   2  11 130   5   5   0  19  11   8   5   5  33   0  22  11  13  22
+23             Striped_shirt   0   0   0   0   0 232   0   2   2   0   2   4   0   0   0   0   0   0   2   0   0   0   2 681  59   0   0   0   2   4   2   0   0   0   0   0   0   0   0   0   2
+24           Checkered_shirt   0   0   0   0   0  84   0   0   2   0   0   2   0   0   0   0   0   0   0   0   0   0   0 114 773   2   0   0   2  17   0   0   0   0   0   0   0   0   0   0   0
+25        Checkered_anything   0   4   0 156   0   0  18  59   9   4  36   4   0   4   0  32   0   9   0   9   4  18   9   0  32 313  82  13   4   9  36  32  13   0   9   4  13  18  23   9   0
+26             Printed_saree   0  59   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0 940   0   0   0   0   0   0   0   0   0   0   0   0   0   0
+27           Printed_legging   0   0 188   0   0   0   0   0   0   0   0   0  11   0   0   0  11   0   0   0   0   0   0   0   0   0   0 729   0   0  58   0   0   0   0   0   0   0   0   0   0
+28             Printed_tunic   0   0   0   0  28   0   9   0   0   0   0   0   0   0  19   0   0   0   9   9   0   0   9   0   0   9   0   0 438  28   9   0   0   0 114   0   9 209   0  28  66
+29             Printed_shirt   0   0   0   0   8 353   0   0   0   0   8   0   0   0   0   0   0   0  17   0   0   0   0  43  94   0   0   0  34 344   8   0   0   0  77   8   0   0   0   0   0
+30          Printed_anything   0   0   0  16   0   0  64   0   6   0  12   0   9  45   0   9  16   3   0   3   6  12   9   0   3   9   0  32   6   3 605  19  29   9   3   9   3   9   9  16  12
+31            Printed_shorts   0   0   0   0   0   0   0 333   0   0   0  11  11   0   0   0   0   0   0   0   0   0   0   0   0  35   0   0   0   0  23 547   0   0   0  35   0   0   0   0   0
+32       Printed_sweatshirts   0   0   0   0   0   0   0   0 188   0   6   0   0   0   0   0   0   0   3   0   0   6   3   0   0   0   0   0   0   0   9   0 768   0   3   3   3   3   0   0   0
+33            Printed_nighty   0   0   0   0   0   0  34   0   0   0   0   0   0   0   0   0   0   0   0  11   0   0   0   0   0   0   0   0  11   0   0   0   0 813   0  58   0  11   0  46  11
+34               Printed_top   0   0   0   0   0   4   0   0   0   0   0   8   0   0   4   0   0   0  24   4  12   4  12   0   0   0   0   0  33  20   0   0  12   0 800   0  29  29   0   0   0
+35         Printed_Nightsuit   0   0   0   0   6   0  84   0   0   0   0   0   0   0   0   0   0   0   6   0   0   0  18   0   0   0   0   0   0   0   6   0   0   6   0 861   6   0   6   0   0
+36            Printed_tshirt   0   0   0   0   2   0   0   0   2   0   0  49   0   0   0   0   0   0   2   0   2   0   0   0   2   0   0   0   0   0   0   0  27   0  14   0 894   0   0   2   0
+37             Printed_kurti   0   0   0   0   2   0   0   0   0   0   0   2   0   0  48   0   0   0   0  14   0   0   2   0   0   2   0   0  31   0  14   0   0   2   2   0   0 578   0   7 291
+38             Printed_skirt   0   0   0   5   0   0   0   5   0  64   0   0   0   0   0   0   0   0   0   0   0   0   5   0   0   5  10   0   0   0  10   5   0   0   0   0   0   0 881   5   0
+39             Printed_dress   0   0   5   0   0   0   5   0   0   0   0   0   0   0   0   0   0  35   5   0   0   0  23   0   0   0   0   0  17   0  29   0   0   5   5   5   5  35   5 802   5
+40             Printed_kurta   0   0   0   0   0   2   0   0   2   0   2   0   0   0   9   0   0   2   4  58   0   0   0   0   0   2   0   0  32   2  14   0   0   0   7   0   0 196   0   2 661
+Recall report 
+                  Ignored (-nan)  >>  
+              Solid_saree (0.381)  >>   (Printed_saree, 0.619)
+            Solid_legging (0.936)  >>   (Solid_trouser, 0.028) (Solid_jean, 0.011)
+            Solid_trouser (0.902)  >>   (Solid_legging, 0.011) (Solid_shorts, 0.011) (Solid_jean, 0.060)
+              Solid_tunic (0.432)  >>   (Solid_shirt, 0.032) (Solid_anything, 0.021) (Solid_sweatshirts, 0.011) (Solid_sweater, 0.042) (Solid_tshirt, 0.032) (Solid_kurti, 0.116) (Solid_dress, 0.042) (Solid_top, 0.095) (Solid_kurta, 0.042) (Printed_tunic, 0.021) (Printed_anything, 0.011) (Printed_top, 0.011) (Printed_kurti, 0.021) (Printed_kurta, 0.074)
+              Solid_shirt (0.828)  >>   (Solid_tshirt, 0.015) (Striped_shirt, 0.084) (Checkered_shirt, 0.015)
+           Solid_anything (0.738)  >>   (Solid_blazer, 0.012) (Solid_dress, 0.032) (Solid_top, 0.015) (Printed_anything, 0.047) (Printed_nighty, 0.026) (Printed_Nightsuit, 0.070)
+             Solid_shorts (0.969)  >>   (Printed_shorts, 0.014)
+        Solid_sweatshirts (0.808)  >>   (Solid_shirt, 0.019) (Solid_sweater, 0.053) (Solid_top, 0.011) (Printed_sweatshirts, 0.081)
+              Solid_skirt (0.863)  >>   (Solid_shorts, 0.015) (Printed_shorts, 0.015) (Printed_skirt, 0.084)
+            Solid_sweater (0.722)  >>   (Solid_sweatshirts, 0.105) (Solid_tshirt, 0.044) (Solid_top, 0.015) (Striped_sweater, 0.047) (Printed_anything, 0.012) (Printed_sweatshirts, 0.015)
+             Solid_tshirt (0.807)  >>   (Solid_tunic, 0.011) (Solid_sweatshirts, 0.024) (Solid_sweater, 0.038) (Solid_top, 0.020) (Striped_tshirt, 0.016) (Printed_tshirt, 0.064)
+              Solid_capri (0.900)  >>   (Solid_legging, 0.028) (Solid_trouser, 0.014) (Solid_shorts, 0.043)
+                Solid_bra (0.971)  >>   (Printed_anything, 0.029)
+              Solid_kurti (0.400)  >>   (Solid_tunic, 0.041) (Solid_dress, 0.014) (Solid_top, 0.021) (Solid_kurta, 0.083) (Printed_kurti, 0.214) (Printed_kurta, 0.214)
+             Solid_blazer (0.926)  >>   (Solid_anything, 0.021) (Solid_sweatshirts, 0.011) (Solid_sweater, 0.032) (Printed_shirt, 0.011)
+               Solid_jean (0.911)  >>   (Solid_trouser, 0.072)
+              Solid_dress (0.845)  >>   (Solid_anything, 0.039) (Solid_kurti, 0.013) (Solid_top, 0.026) (Printed_dress, 0.065)
+                Solid_top (0.765)  >>   (Solid_tunic, 0.029) (Solid_shirt, 0.018) (Solid_sweatshirts, 0.018) (Solid_sweater, 0.033) (Solid_tshirt, 0.015) (Printed_top, 0.055) (Printed_kurti, 0.011)
+              Solid_kurta (0.491)  >>   (Solid_tunic, 0.023) (Solid_shirt, 0.041) (Solid_anything, 0.012) (Solid_tshirt, 0.012) (Solid_kurti, 0.070) (Printed_kurti, 0.064) (Printed_kurta, 0.251)
+           Striped_tshirt (0.804)  >>   (Solid_tshirt, 0.054) (Striped_sweater, 0.037) (Striped_anything, 0.030) (Printed_tshirt, 0.030)
+          Striped_sweater (0.776)  >>   (Solid_sweatshirts, 0.030) (Solid_sweater, 0.082) (Striped_tshirt, 0.022) (Striped_anything, 0.052) (Checkered_anything, 0.017)
+         Striped_anything (0.283)  >>   (Solid_saree, 0.011) (Solid_trouser, 0.131) (Solid_anything, 0.014) (Solid_shorts, 0.039) (Solid_sweatshirts, 0.028) (Solid_skirt, 0.011) (Solid_bra, 0.019) (Solid_top, 0.011) (Solid_kurta, 0.033) (Striped_sweater, 0.047) (Checkered_anything, 0.011) (Printed_saree, 0.131) (Printed_anything, 0.019) (Printed_shorts, 0.011) (Printed_Nightsuit, 0.033) (Printed_kurti, 0.022) (Printed_skirt, 0.011) (Printed_dress, 0.014) (Printed_kurta, 0.022)
+            Striped_shirt (0.681)  >>   (Solid_shirt, 0.232) (Checkered_shirt, 0.060)
+          Checkered_shirt (0.774)  >>   (Solid_shirt, 0.085) (Striped_shirt, 0.114) (Printed_shirt, 0.017)
+       Checkered_anything (0.313)  >>   (Solid_trouser, 0.157) (Solid_anything, 0.018) (Solid_shorts, 0.060) (Solid_sweater, 0.037) (Solid_blazer, 0.032) (Striped_sweater, 0.018) (Checkered_shirt, 0.032) (Printed_saree, 0.083) (Printed_legging, 0.014) (Printed_anything, 0.037) (Printed_shorts, 0.032) (Printed_sweatshirts, 0.014) (Printed_tshirt, 0.014) (Printed_kurti, 0.018) (Printed_skirt, 0.023)
+            Printed_saree (0.940)  >>   (Solid_saree, 0.060)
+          Printed_legging (0.729)  >>   (Solid_legging, 0.188) (Solid_capri, 0.012) (Solid_jean, 0.012) (Printed_anything, 0.059)
+            Printed_tunic (0.438)  >>   (Solid_tunic, 0.029) (Solid_kurti, 0.019) (Printed_shirt, 0.029) (Printed_top, 0.114) (Printed_kurti, 0.210) (Printed_dress, 0.029) (Printed_kurta, 0.067)
+            Printed_shirt (0.345)  >>   (Solid_shirt, 0.353) (Solid_top, 0.017) (Striped_shirt, 0.043) (Checkered_shirt, 0.095) (Printed_tunic, 0.034) (Printed_top, 0.078)
+         Printed_anything (0.605)  >>   (Solid_trouser, 0.016) (Solid_anything, 0.065) (Solid_sweater, 0.013) (Solid_bra, 0.045) (Solid_jean, 0.016) (Striped_sweater, 0.013) (Printed_legging, 0.032) (Printed_shorts, 0.019) (Printed_sweatshirts, 0.029) (Printed_dress, 0.016) (Printed_kurta, 0.013)
+           Printed_shorts (0.548)  >>   (Solid_shorts, 0.333) (Solid_tshirt, 0.012) (Solid_capri, 0.012) (Checkered_anything, 0.036) (Printed_anything, 0.024) (Printed_Nightsuit, 0.036)
+      Printed_sweatshirts (0.768)  >>   (Solid_sweatshirts, 0.189)
+           Printed_nighty (0.814)  >>   (Solid_anything, 0.035) (Solid_kurta, 0.012) (Printed_tunic, 0.012) (Printed_Nightsuit, 0.058) (Printed_kurti, 0.012) (Printed_dress, 0.047) (Printed_kurta, 0.012)
+              Printed_top (0.801)  >>   (Solid_top, 0.025) (Striped_tshirt, 0.012) (Striped_anything, 0.012) (Printed_tunic, 0.033) (Printed_shirt, 0.021) (Printed_sweatshirts, 0.012) (Printed_tshirt, 0.029) (Printed_kurti, 0.029)
+        Printed_Nightsuit (0.861)  >>   (Solid_anything, 0.084) (Striped_anything, 0.018)
+           Printed_tshirt (0.894)  >>   (Solid_tshirt, 0.049) (Printed_sweatshirts, 0.027) (Printed_top, 0.015)
+            Printed_kurti (0.578)  >>   (Solid_kurti, 0.048) (Solid_kurta, 0.014) (Printed_tunic, 0.031) (Printed_anything, 0.014) (Printed_kurta, 0.292)
+            Printed_skirt (0.881)  >>   (Solid_skirt, 0.065) (Printed_saree, 0.011) (Printed_anything, 0.011)
+            Printed_dress (0.802)  >>   (Solid_dress, 0.036) (Striped_anything, 0.024) (Printed_tunic, 0.018) (Printed_anything, 0.030) (Printed_kurti, 0.036)
+            Printed_kurta (0.661)  >>   (Solid_kurta, 0.058) (Printed_tunic, 0.033) (Printed_anything, 0.014) (Printed_kurti, 0.196)
+
+Overall Accuracy: 0.754534
+Mean    Accuracy: 0.722314
+
+Hierarchy-based accuracy
+  0.00  0.84866
+  0.05  0.81592
+  0.10  0.78183
+  0.15  0.76043
+  0.20  0.75725
+  0.25  0.75753
+  0.30  0.75825
+  0.35  0.75753
+  0.40  0.75608
+  0.45  0.75571
+  0.50  0.75544
+  0.55  0.75490
+  0.60  0.75462
+  0.65  0.75444
+  0.70  0.75444
+  0.75  0.75444
+  0.80  0.75444
+  0.85  0.75453
+  0.90  0.75453
+  0.95  0.75453
+Precision table for superclass (normalized by TP+FP)
+                               0   1   2   3
+ 0                     Solid 863  69  24 122
+ 1                   Striped  50 846  78  33
+ 2                 Checkered  19  50 846  17
+ 3                   Printed  66  33  50 825
+Precision report 
+                    Solid (0.864)  <<   (Striped, 0.050) (Checkered, 0.019) (Printed, 0.067)
+                  Striped (0.846)  <<   (Solid, 0.070) (Checkered, 0.051) (Printed, 0.033)
+                Checkered (0.847)  <<   (Solid, 0.024) (Striped, 0.079) (Printed, 0.050)
+                  Printed (0.825)  <<   (Solid, 0.123) (Striped, 0.034) (Checkered, 0.018)
+Recall table for superclass (normalized by TP+FN)
+                               0   1   2   3
+ 0                     Solid 901  13   1  83
+ 1                   Striped 217 661  26  94
+ 2                 Checkered 180  85 625 108
+ 3                   Printed 109   9   6 874
+Recall report 
+                    Solid (0.902)  >>   (Striped, 0.013) (Printed, 0.083)
+                  Striped (0.662)  >>   (Solid, 0.217) (Checkered, 0.027) (Printed, 0.094)
+                Checkered (0.625)  >>   (Solid, 0.181) (Striped, 0.086) (Printed, 0.108)
+                  Printed (0.875)  >>   (Solid, 0.109)
+
+Superclass Overall Accuracy: 0.848386
+Superclass Mean    Accuracy: 0.765858
+

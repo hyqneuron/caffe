@@ -1,0 +1,48 @@
+pattern
+41
+   0 Ignored                     1.000000   1.000000
+   1 Solid_saree                 1.000000   1.000000
+   2 Solid_legging               1.000000   1.000000
+   3 Solid_trouser               1.000000   1.000000
+   4 Solid_tunic                 1.000000   1.000000
+   5 Solid_shirt                 1.000000   1.000000
+   6 Solid_anything              1.000000   1.000000
+   7 Solid_shorts                1.000000   1.000000
+   8 Solid_sweatshirts           1.000000   1.000000
+   9 Solid_skirt                 1.000000   1.000000
+  10 Solid_sweater               1.000000   1.000000
+  11 Solid_tshirt                1.000000   1.000000
+  12 Solid_capri                 1.000000   1.000000
+  13 Solid_bra                   1.000000   1.000000
+  14 Solid_kurti                 1.000000   1.000000
+  15 Solid_blazer                1.000000   1.000000
+  16 Solid_jean                  1.000000   1.000000
+  17 Solid_dress                 1.000000   1.000000
+  18 Solid_top                   1.000000   1.000000
+  19 Solid_kurta                 1.000000   1.000000
+  20 Striped_tshirt              1.000000   1.000000
+  21 Striped_sweater             1.000000   1.000000
+  22 Striped_anything            1.000000   1.000000
+  23 Striped_shirt               1.000000   1.000000
+  24 Checkered_shirt             1.000000   1.000000
+  25 Checkered_anything          1.000000   1.000000
+  26 Printed_saree               1.000000   1.000000
+  27 Printed_legging             1.000000   1.000000
+  28 Printed_tunic               1.000000   1.000000
+  29 Printed_shirt               1.000000   1.000000
+  30 Printed_anything            1.000000   1.000000
+  31 Printed_shorts              1.000000   1.000000
+  32 Printed_sweatshirts         1.000000   1.000000
+  33 Printed_nighty              1.000000   1.000000
+  34 Printed_top                 1.000000   1.000000
+  35 Printed_Nightsuit           1.000000   1.000000
+  36 Printed_tshirt              1.000000   1.000000
+  37 Printed_kurti               1.000000   1.000000
+  38 Printed_skirt               1.000000   1.000000
+  39 Printed_dress               1.000000   1.000000
+  40 Printed_kurta               1.000000   1.000000
+4
+Solid             19   1 2 3 4 5 6 7 8 17 10 12 11 19 14 15 16 9 18 13
+Striped            4   20 21 23 22
+Checkered          2   24 25
+Printed           15   26 27 28 29 30 31 32 33 34 35 36 37 39 38 40
