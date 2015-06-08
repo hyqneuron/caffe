@@ -1,0 +1,23 @@
+
+net: "models/yq_fk13/train_val.prototxt"
+
+display: 40
+test_interval: 1000
+test_iter: 27
+test_compute_loss: true
+
+custom_print: 200
+
+
+base_lr: 0.0001
+lr_policy: "step"
+lr_file: "models/yq_fk13/lr_file.txt"
+gamma: 0.1
+stepsize: 100000
+max_iter: 200000
+
+momentum: 0.9
+weight_decay: 0.0005
+
+snapshot: 1000
+snapshot_prefix: "models/yq_fk13/yq_fk13"

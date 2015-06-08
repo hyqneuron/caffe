@@ -1,0 +1,12 @@
+neck
+6
+   0 Ignored                     1.000000   1.000000
+   1 round_loose                 1.000000   1.000000
+   2 round_tight                 1.000000   1.000000
+   3 v_tight                     1.000000   1.000000
+   4 v_loose                     1.000000   1.000000
+   5 v_collar                    1.000000   1.000000
+3
+round              2   1 2
+v                  2   3 4
+collar             1   5
