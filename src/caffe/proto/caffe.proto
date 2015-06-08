@@ -403,6 +403,8 @@ message PerClassAccuracyParameter {
   optional bool use_detailed_hier_accu = 9 [default = false];
   optional string hier_confusion_file = 10;
   optional int32 num_grades = 11 [default = 1];
+  //optional float threshold = 12;
+  //optional string threshold_file=13;
 }
 // HYQ end
 

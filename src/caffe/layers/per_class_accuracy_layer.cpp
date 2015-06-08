@@ -34,14 +34,14 @@ void printTable(std::ostream& outfile,
     // 0 name   nn nn nn
     // 1 name
     // 2 name
-    outfile << format("%28s") % " "; // print 20 spaces
+    outfile << format("%33s") % " "; // print 33 spaces
     // print top-line indices
     for(int i = 0; i<class_names_.size(); i++)
       outfile << format(" %3i") % i;
     outfile << std::endl;
     // one class per line
     for(int i = 0; i<class_names_.size(); i++){
-      outfile << format("%2i %25s") % i % class_names_[i];
+      outfile << format("%2i %30s") % i % class_names_[i];
       // one number per class on this line
       for(int j = 0; j<class_names_.size(); j++){
         // depending on normalization, we print different number
@@ -65,7 +65,7 @@ void printTable(std::ostream& outfile,
       // one row per class
       for(int i = 0; i<class_names_.size(); i++){
 
-        outfile << format("%25s (%1.3f) %s ") 
+        outfile << format("%30s (%1.3f) %s ") 
                 % class_names_[i]
                 % (a_to_b_[i][i]/float( normalize_bylabel?
                             class_label_total_[i] : class_pred_total_[i]))
@@ -169,7 +169,7 @@ void PerClassAccuracyLayer<Dtype>::custom_test_information() {
       float precision = float(a_to_b_[i][i]) / class_pred_total_[i];
       float recall = float(a_to_b_[i][i])    / class_label_total_[i];
       // name TP FP label precision recall
-      LOG(INFO)<< format("%20s %10i %10i %10i %10f %10f")
+      LOG(INFO)<< format("%30s %10i %10i %10i %10f %10f")
           % class_names_[i]
           % a_to_b_[i][i]
           % (class_pred_total_[i] - a_to_b_[i][i])
@@ -279,7 +279,7 @@ void PerClassAccuracyLayer<Dtype>::custom_test_information() {
   if(record_probabilities_){
       string prob_file = 
           this->layer_param_.per_class_accuracy_param().probabilities_file();
-      std::ofstream outfile(prob_file.c_str(), std::ofstream::app);
+      std::ofstream outfile(prob_file.c_str());
       // one row per entry in probabilities_
       for(int i = 0; i<probabilities_.size(); i++){
         outfile << format("%8i %3i ") 
@@ -505,7 +505,7 @@ void PerClassAccuracyLayer<Dtype>::Forward_cpu(const vector<Blob<Dtype>*>& botto
       a_to_b_[label_value][predicted_label]+=1;// label_to_pred confusion matrix
       ++count;
       int sample_ID = -1;
-      if(record_confusion_ || record_hier_conf_ || record_probabilities_){
+      if(record_confusion_ || record_hier_conf_ || record_probabilities_ ){
         sample_ID = int(bottom_pid[i]);
       }
       if(record_confusion_ && label_value != predicted_label){
