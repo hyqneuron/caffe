@@ -1,0 +1,86 @@
+###################    accuracy_neck   ####################
+Raw number table
+                               0   1   2   3   4   5
+ 0                   Ignored   0   0   0   0   0   0
+ 1               round_loose   0 397   7   0   0   0
+ 2               round_tight   0   4 398   0   0   0
+ 3                   v_tight   0   0   0 385   0   0
+ 4                   v_loose   0   0   0   2 401   0
+ 5                  v_collar   0   0   0   0   0 406
+precision table (normalized by TP+FP)
+                               0   1   2   3   4   5
+ 0                   Ignored NaN   0   0   0   0   0
+ 1               round_loose NaN 990  17   0   0   0
+ 2               round_tight NaN   9 982   0   0   0
+ 3                   v_tight NaN   0   0 994   0   0
+ 4                   v_loose NaN   0   0   5 1000   0
+ 5                  v_collar NaN   0   0   0   0 1000
+Precision report 
+                  Ignored (-nan)  <<  
+              round_loose (0.990)  <<  
+              round_tight (0.983)  <<   (round_loose, 0.017)
+                  v_tight (0.995)  <<  
+                  v_loose (1.000)  <<  
+                 v_collar (1.000)  <<  
+recall table (normalized by TP+FN)
+                               0   1   2   3   4   5
+ 0                   Ignored NaN NaN NaN NaN NaN NaN
+ 1               round_loose   0 982  17   0   0   0
+ 2               round_tight   0   9 990   0   0   0
+ 3                   v_tight   0   0   0 1000   0   0
+ 4                   v_loose   0   0   0   4 995   0
+ 5                  v_collar   0   0   0   0   0 1000
+Recall report 
+                  Ignored (-nan)  >>  
+              round_loose (0.983)  >>   (round_tight, 0.017)
+              round_tight (0.990)  >>  
+                  v_tight (1.000)  >>  
+                  v_loose (0.995)  >>  
+                 v_collar (1.000)  >>  
+
+Overall Accuracy: 0.9935
+Mean    Accuracy: 0.993552
+
+Hierarchy-based accuracy
+  0.00  1.00000
+  0.05  0.99950
+  0.10  0.99950
+  0.15  0.99950
+  0.20  0.99950
+  0.25  0.99950
+  0.30  0.99950
+  0.35  0.99950
+  0.40  0.99950
+  0.45  0.99950
+  0.50  0.99950
+  0.55  1.00000
+  0.60  1.00000
+  0.65  1.00000
+  0.70  0.99900
+  0.75  0.99850
+  0.80  0.99750
+  0.85  0.99700
+  0.90  0.99550
+  0.95  0.99450
+Precision table for superclass (normalized by TP+FP)
+                               0   1   2
+ 0                     round 1000   0   0
+ 1                         v   0 1000   0
+ 2                    collar   0   0 1000
+Precision report 
+                    round (1.000)  <<  
+                        v (1.000)  <<  
+                   collar (1.000)  <<  
+Recall table for superclass (normalized by TP+FN)
+                               0   1   2
+ 0                     round 1000   0   0
+ 1                         v   0 1000   0
+ 2                    collar   0   0 1000
+Recall report 
+                    round (1.000)  >>  
+                        v (1.000)  >>  
+                   collar (1.000)  >>  
+
+Superclass Overall Accuracy: 1
+Superclass Mean    Accuracy: 1
+

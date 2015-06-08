@@ -1,0 +1,4 @@
+0.00001
+
+# -1 means lr is controlled by caffe
+# give it a positive value, and lr would be controlled by this file

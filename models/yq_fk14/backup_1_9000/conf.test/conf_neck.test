@@ -1,0 +1,86 @@
+###################    accuracy_neck   ####################
+Raw number table
+                               0   1   2   3   4   5
+ 0                   Ignored   0   0   0   0   0   0
+ 1               round_loose   0 180  50   0  12   0
+ 2               round_tight   0  38 202   5   4   0
+ 3                   v_tight   0   0   0   0   0   0
+ 4                   v_loose   0  31  11  60 374  13
+ 5                  v_collar   0   0   0   9   2 359
+precision table (normalized by TP+FP)
+                               0   1   2   3   4   5
+ 0                   Ignored NaN   0   0   0   0   0
+ 1               round_loose NaN 722 190   0  30   0
+ 2               round_tight NaN 152 768  67  10   0
+ 3                   v_tight NaN   0   0   0   0   0
+ 4                   v_loose NaN 124  41 810 954  34
+ 5                  v_collar NaN   0   0 121   5 965
+Precision report 
+                  Ignored (-nan)  <<  
+              round_loose (0.723)  <<   (round_tight, 0.153) (v_loose, 0.124)
+              round_tight (0.768)  <<   (round_loose, 0.190) (v_loose, 0.042)
+                  v_tight (0.000)  <<   (round_tight, 0.068) (v_loose, 0.811) (v_collar, 0.122)
+                  v_loose (0.954)  <<   (round_loose, 0.031) (round_tight, 0.010)
+                 v_collar (0.965)  <<   (v_loose, 0.035)
+recall table (normalized by TP+FN)
+                               0   1   2   3   4   5
+ 0                   Ignored NaN NaN NaN NaN NaN NaN
+ 1               round_loose   0 743 206   0  49   0
+ 2               round_tight   0 152 811  20  16   0
+ 3                   v_tight NaN NaN NaN NaN NaN NaN
+ 4                   v_loose   0  63  22 122 764  26
+ 5                  v_collar   0   0   0  24   5 970
+Recall report 
+                  Ignored (-nan)  >>  
+              round_loose (0.744)  >>   (round_tight, 0.207) (v_loose, 0.050)
+              round_tight (0.811)  >>   (round_loose, 0.153) (v_tight, 0.020) (v_loose, 0.016)
+                  v_tight (-nan)  >>  
+                  v_loose (0.765)  >>   (round_loose, 0.063) (round_tight, 0.022) (v_tight, 0.123) (v_collar, 0.027)
+                 v_collar (0.970)  >>   (v_tight, 0.024)
+
+Overall Accuracy: 0.825926
+Mean    Accuracy: 0.822536
+
+Hierarchy-based accuracy
+  0.00  0.93481
+  0.05  0.93481
+  0.10  0.93481
+  0.15  0.93481
+  0.20  0.93481
+  0.25  0.93481
+  0.30  0.93481
+  0.35  0.93481
+  0.40  0.93481
+  0.45  0.93481
+  0.50  0.93481
+  0.55  0.86889
+  0.60  0.85630
+  0.65  0.84741
+  0.70  0.83926
+  0.75  0.83704
+  0.80  0.83407
+  0.85  0.82815
+  0.90  0.82667
+  0.95  0.82667
+Precision table for superclass (normalized by TP+FP)
+                               0   1   2
+ 0                     round 917  45   0
+ 1                         v  82 931  34
+ 2                    collar   0  23 965
+Precision report 
+                    round (0.918)  <<   (v, 0.082)
+                        v (0.931)  <<   (round, 0.045) (collar, 0.024)
+                   collar (0.965)  <<   (v, 0.035)
+Recall table for superclass (normalized by TP+FN)
+                               0   1   2
+ 0                     round 957  42   0
+ 1                         v  85 887  26
+ 2                    collar   0  29 970
+Recall report 
+                    round (0.957)  >>   (v, 0.043)
+                        v (0.888)  >>   (round, 0.086) (collar, 0.027)
+                   collar (0.970)  >>   (v, 0.030)
+
+Superclass Overall Accuracy: 0.935556
+Superclass Mean    Accuracy: 0.938342
+
