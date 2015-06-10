@@ -271,8 +271,13 @@ void DataTransformer<Dtype>::Transform(const cv::Mat& cv_img,
   const bool has_mean_values = mean_values_.size() > 0;
 
   CHECK_GT(img_channels, 0);
-  CHECK_GE(img_height, crop_size);
-  CHECK_GE(img_width, crop_size);
+  if(!param_.resize_preserving_aspect_ratio()){
+    CHECK_GE(img_height, crop_size);
+    CHECK_GE(img_width,  crop_size);
+  }else{
+    CHECK_GE(height, crop_size);
+    CHECK_GE(width,  crop_size);
+  }
 
   // checks on mean value
   Dtype* mean = NULL;
