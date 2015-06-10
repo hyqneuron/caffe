@@ -15,6 +15,8 @@ layer {
   transform_param {
     mirror: true
     crop_size: 227
+    resize_preserving_aspect_ratio:true
+    resize_size: 256
     #mean_file: "data/ilsvrc12/imagenet_mean.binaryproto"
     mean_value: 187
     mean_value: 176
@@ -23,8 +25,8 @@ layer {
   image_data_mult_label_param {
     source: "models/yq_fk13/train.txt"
     batch_size: 50
-    new_height: 256
-    new_width: 256
+    #new_height: 256
+    #new_width: 256
     shuffle: true
   }
 }
@@ -43,6 +45,8 @@ layer {
   transform_param {
     mirror: false
     crop_size: 227
+    resize_preserving_aspect_ratio:true
+    resize_size: 256
     #mean_file: "data/ilsvrc12/imagenet_mean.binaryproto"
     mean_value: 187
     mean_value: 176
@@ -51,8 +55,8 @@ layer {
   image_data_mult_label_param {
     source: "models/yq_fk13/test.txt"
     batch_size: 50
-    new_height: 256
-    new_width: 256
+    #new_height: 256
+    #new_width: 256
     shuffle: true
   }
 }
@@ -416,6 +420,7 @@ layer {
       ignore_label: 0
       classifier_info_file: "models/yq_fk13/info_category.txt"
       confusion_matrix_file: "models/yq_fk13/conf_category"
+      confusion_id_file:   "models/yq_fk13/conf_id_category"
       use_hierarchy: true
       num_grades: 20
   }
@@ -456,7 +461,7 @@ layer {
   bottom: "label_pattern"
   top: "loss_pattern"
   top: "prob_pattern"
-  loss_weight: 0.3
+  loss_weight: 0.2
   loss_weight: 0
   loss_param {
       ignore_label: 0
@@ -475,6 +480,8 @@ layer {
       ignore_label: 0
       classifier_info_file: "models/yq_fk13/info_pattern.txt"
       confusion_matrix_file: "models/yq_fk13/conf_pattern"
+      confusion_id_file:   "models/yq_fk13/conf_id_pattern"
+      hier_confusion_file: "models/yq_fk13/conf_hier_pattern"
       use_hierarchy: true
       use_detailed_hier_accu: true
       num_grades: 20
@@ -516,7 +523,7 @@ layer {
   bottom: "label_sleeve"
   top: "loss_sleeve"
   top: "prob_sleeve"
-  loss_weight: 0.3
+  loss_weight: 0.2
   loss_weight: 0
   loss_param {
       ignore_label: 0
@@ -535,6 +542,8 @@ layer {
       ignore_label: 0
       classifier_info_file: "models/yq_fk13/info_sleeve.txt"
       confusion_matrix_file: "models/yq_fk13/conf_sleeve"
+      confusion_id_file:   "models/yq_fk13/conf_id_sleeve"
+      hier_confusion_file: "models/yq_fk13/conf_hier_sleeve"
       use_hierarchy: true
       use_detailed_hier_accu: true
       num_grades: 20
@@ -576,7 +585,7 @@ layer {
   bottom: "label_neck"
   top: "loss_neck"
   top: "prob_neck"
-  loss_weight: 0.3
+  loss_weight: 0.2
   loss_weight: 0
   loss_param {
       ignore_label: 0
@@ -595,6 +604,8 @@ layer {
       ignore_label: 0
       classifier_info_file: "models/yq_fk13/info_neck.txt"
       confusion_matrix_file: "models/yq_fk13/conf_neck"
+      confusion_id_file:   "models/yq_fk13/conf_id_neck"
+      hier_confusion_file: "models/yq_fk13/conf_hier_neck"
       use_hierarchy: true
       use_detailed_hier_accu: true
       num_grades: 20
