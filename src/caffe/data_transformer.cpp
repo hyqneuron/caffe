@@ -256,8 +256,10 @@ void DataTransformer<Dtype>::Transform(const cv::Mat& cv_img,
   // height and width are required_height and required_width, and they must be
   // less than the actual img_height and img_width
   CHECK_EQ(channels, img_channels);
-  CHECK_LE(height, img_height);
-  CHECK_LE(width, img_width);
+  if(!param_.resize_preserving_aspect_ratio()){
+    CHECK_LE(height, img_height);
+    CHECK_LE(width, img_width);
+  }
   CHECK_GE(num, 1);
 
   CHECK(cv_img.depth() == CV_8U) << "Image data type must be unsigned byte";
