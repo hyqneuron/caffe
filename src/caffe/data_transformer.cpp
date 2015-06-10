@@ -484,6 +484,8 @@ void DataTransformer<Dtype>::InitRand() {
 
 template <typename Dtype>
 int DataTransformer<Dtype>::Rand(int n) {
+  if(!rng_)
+    InitRand();
   CHECK(rng_);
   CHECK_GT(n, 0);
   caffe::rng_t* rng =
