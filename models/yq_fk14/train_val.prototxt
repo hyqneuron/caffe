@@ -43,7 +43,7 @@ layer {
     mean_value: 176
   }
   image_data_mult_label_param {
-    source: "models/yq_fk14/neck_test.txt"
+    source: "models/yq_fk14/zeroed_files"
     batch_size: 50
     new_height: 256
     new_width: 256
@@ -386,11 +386,11 @@ layer {
 layer {
   name: "loss_neck"
   type: "SoftmaxWithPerClassLoss"
-  bottom: "FCend_neck"
+  bottom: "FCend_neckhack"
   bottom: "label_neck"
   top: "loss_neck"
   top: "prob_neck"
-  loss_weight: 0.3
+  loss_weight: 1
   loss_weight: 0
   loss_param {
       ignore_label: 0
@@ -409,6 +409,9 @@ layer {
       ignore_label: 0
       classifier_info_file: "models/yq_fk14/info_neck.txt"
       confusion_matrix_file: "models/yq_fk14/conf_neck"
+      confusion_id_file:  "models/yq_fk14/conf_id_neck"
+      probabilities_file: "models/yq_fk14/prob_neck"
+      hier_confusion_file:"models/yq_fk14/conf_hier_neck"
       use_hierarchy: true
       use_detailed_hier_accu: true
       num_grades: 20
