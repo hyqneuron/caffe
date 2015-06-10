@@ -1,0 +1,129 @@
+###################    accuracy_neck   ####################
+Raw number table
+                               0   1   2   3   4   5   6   7   8   9  10  11  12
+ 0                   Ignored   0   0   0   0   0   0   0   0   0   0   0   0   0
+ 1            V_Neck_sweater   0 140   2   0   0  12   0   0   0   2   1   0   0
+ 2           V_Neck_anything   0   3 110   8   7   1   2  15   3  14   0   1   1
+ 3       Round_Neck_anything   0   0  11  65   4   1   0   9   5   2   1   0   0
+ 4      Round_Neck_Nightsuit   0   0   1   2  98   0   0   0   0   0   0   0   0
+ 5        Round_Neck_sweater   0  11   3   1   0 156   7   0   1   5   7   0   4
+ 6    Round_Neck_sweatshirts   0   2   1   1   0  15 115   0   0   0   1   3   3
+ 7          Round_Neck_kurti   0   2  17   7   0   1   0  76   3   1   0   0   0
+ 8          Round_Neck_dress   0   0   1   6   1   0   0   2 133   1   0   0   0
+ 9            Round_Neck_top   0   0  10   4   0   1   3   1   4 143   1   0   0
+10      Turtle_Neck_anything   0   4   3   0   0   8   1   0   0   3  27   0   4
+11      Hooded_Neck_anything   0   0   0   0   0   0   1   0   0   0   0  25   0
+12        High_Neck_anything   0   0   0   0   0   1   1   1   0   0   2   0  46
+precision table (normalized by TP+FP)
+                               0   1   2   3   4   5   6   7   8   9  10  11  12
+ 0                   Ignored NaN   0   0   0   0   0   0   0   0   0   0   0   0
+ 1            V_Neck_sweater NaN 864  12   0   0  61   0   0   0  11  25   0   0
+ 2           V_Neck_anything NaN  18 691  85  63   5  15 144  20  81   0  34  17
+ 3       Round_Neck_anything NaN   0  69 691  36   5   0  86  33  11  25   0   0
+ 4      Round_Neck_Nightsuit NaN   0   6  21 890   0   0   0   0   0   0   0   0
+ 5        Round_Neck_sweater NaN  67  18  10   0 795  53   0   6  29 175   0  68
+ 6    Round_Neck_sweatshirts NaN  12   6  10   0  76 884   0   0   0  25 103  51
+ 7          Round_Neck_kurti NaN  12 106  74   0   5   0 730  20   5   0   0   0
+ 8          Round_Neck_dress NaN   0   6  63   9   0   0  19 892   5   0   0   0
+ 9            Round_Neck_top NaN   0  62  42   0   5  23   9  26 836  25   0   0
+10      Turtle_Neck_anything NaN  24  18   0   0  40   7   0   0  17 675   0  68
+11      Hooded_Neck_anything NaN   0   0   0   0   0   7   0   0   0   0 862   0
+12        High_Neck_anything NaN   0   0   0   0   5   7   9   0   0  50   0 793
+Precision report 
+                  Ignored (-nan)  <<  
+           V_Neck_sweater (0.864)  <<   (V_Neck_anything, 0.019) (Round_Neck_sweater, 0.068) (Round_Neck_sweatshirts, 0.012) (Round_Neck_kurti, 0.012) (Turtle_Neck_anything, 0.025)
+          V_Neck_anything (0.692)  <<   (V_Neck_sweater, 0.013) (Round_Neck_anything, 0.069) (Round_Neck_sweater, 0.019) (Round_Neck_kurti, 0.107) (Round_Neck_top, 0.063) (Turtle_Neck_anything, 0.019)
+      Round_Neck_anything (0.691)  <<   (V_Neck_anything, 0.085) (Round_Neck_Nightsuit, 0.021) (Round_Neck_sweater, 0.011) (Round_Neck_sweatshirts, 0.011) (Round_Neck_kurti, 0.074) (Round_Neck_dress, 0.064) (Round_Neck_top, 0.043)
+     Round_Neck_Nightsuit (0.891)  <<   (V_Neck_anything, 0.064) (Round_Neck_anything, 0.036)
+       Round_Neck_sweater (0.796)  <<   (V_Neck_sweater, 0.061) (Round_Neck_sweatshirts, 0.077) (Turtle_Neck_anything, 0.041)
+   Round_Neck_sweatshirts (0.885)  <<   (V_Neck_anything, 0.015) (Round_Neck_sweater, 0.054) (Round_Neck_top, 0.023)
+         Round_Neck_kurti (0.731)  <<   (V_Neck_anything, 0.144) (Round_Neck_anything, 0.087) (Round_Neck_dress, 0.019)
+         Round_Neck_dress (0.893)  <<   (V_Neck_anything, 0.020) (Round_Neck_anything, 0.034) (Round_Neck_kurti, 0.020) (Round_Neck_top, 0.027)
+           Round_Neck_top (0.836)  <<   (V_Neck_sweater, 0.012) (V_Neck_anything, 0.082) (Round_Neck_anything, 0.012) (Round_Neck_sweater, 0.029) (Turtle_Neck_anything, 0.018)
+     Turtle_Neck_anything (0.675)  <<   (V_Neck_sweater, 0.025) (Round_Neck_anything, 0.025) (Round_Neck_sweater, 0.175) (Round_Neck_sweatshirts, 0.025) (Round_Neck_top, 0.025) (High_Neck_anything, 0.050)
+     Hooded_Neck_anything (0.862)  <<   (V_Neck_anything, 0.034) (Round_Neck_sweatshirts, 0.103)
+       High_Neck_anything (0.793)  <<   (V_Neck_anything, 0.017) (Round_Neck_sweater, 0.069) (Round_Neck_sweatshirts, 0.052) (Turtle_Neck_anything, 0.069)
+recall table (normalized by TP+FN)
+                               0   1   2   3   4   5   6   7   8   9  10  11  12
+ 0                   Ignored NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN
+ 1            V_Neck_sweater   0 891  12   0   0  76   0   0   0  12   6   0   0
+ 2           V_Neck_anything   0  18 666  48  42   6  12  90  18  84   0   6   6
+ 3       Round_Neck_anything   0   0 112 663  40  10   0  91  51  20  10   0   0
+ 4      Round_Neck_Nightsuit   0   0   9  19 970   0   0   0   0   0   0   0   0
+ 5        Round_Neck_sweater   0  56  15   5   0 800  35   0   5  25  35   0  20
+ 6    Round_Neck_sweatshirts   0  14   7   7   0 106 815   0   0   0   7  21  21
+ 7          Round_Neck_kurti   0  18 158  65   0   9   0 710  28   9   0   0   0
+ 8          Round_Neck_dress   0   0   6  41   6   0   0  13 923   6   0   0   0
+ 9            Round_Neck_top   0   0  59  23   0   5  17   5  23 856   5   0   0
+10      Turtle_Neck_anything   0  80  60   0   0 160  20   0   0  60 540   0  80
+11      Hooded_Neck_anything   0   0   0   0   0   0  38   0   0   0   0 961   0
+12        High_Neck_anything   0   0   0   0   0  19  19  19   0   0  39   0 901
+Recall report 
+                  Ignored (-nan)  >>  
+           V_Neck_sweater (0.892)  >>   (V_Neck_anything, 0.013) (Round_Neck_sweater, 0.076) (Round_Neck_top, 0.013)
+          V_Neck_anything (0.667)  >>   (V_Neck_sweater, 0.018) (Round_Neck_anything, 0.048) (Round_Neck_Nightsuit, 0.042) (Round_Neck_sweatshirts, 0.012) (Round_Neck_kurti, 0.091) (Round_Neck_dress, 0.018) (Round_Neck_top, 0.085)
+      Round_Neck_anything (0.663)  >>   (V_Neck_anything, 0.112) (Round_Neck_Nightsuit, 0.041) (Round_Neck_sweater, 0.010) (Round_Neck_kurti, 0.092) (Round_Neck_dress, 0.051) (Round_Neck_top, 0.020) (Turtle_Neck_anything, 0.010)
+     Round_Neck_Nightsuit (0.970)  >>   (Round_Neck_anything, 0.020)
+       Round_Neck_sweater (0.800)  >>   (V_Neck_sweater, 0.056) (V_Neck_anything, 0.015) (Round_Neck_sweatshirts, 0.036) (Round_Neck_top, 0.026) (Turtle_Neck_anything, 0.036) (High_Neck_anything, 0.021)
+   Round_Neck_sweatshirts (0.816)  >>   (V_Neck_sweater, 0.014) (Round_Neck_sweater, 0.106) (Hooded_Neck_anything, 0.021) (High_Neck_anything, 0.021)
+         Round_Neck_kurti (0.710)  >>   (V_Neck_sweater, 0.019) (V_Neck_anything, 0.159) (Round_Neck_anything, 0.065) (Round_Neck_dress, 0.028)
+         Round_Neck_dress (0.924)  >>   (Round_Neck_anything, 0.042) (Round_Neck_kurti, 0.014)
+           Round_Neck_top (0.856)  >>   (V_Neck_anything, 0.060) (Round_Neck_anything, 0.024) (Round_Neck_sweatshirts, 0.018) (Round_Neck_dress, 0.024)
+     Turtle_Neck_anything (0.540)  >>   (V_Neck_sweater, 0.080) (V_Neck_anything, 0.060) (Round_Neck_sweater, 0.160) (Round_Neck_sweatshirts, 0.020) (Round_Neck_top, 0.060) (High_Neck_anything, 0.080)
+     Hooded_Neck_anything (0.962)  >>   (Round_Neck_sweatshirts, 0.038)
+       High_Neck_anything (0.902)  >>   (Round_Neck_sweater, 0.020) (Round_Neck_sweatshirts, 0.020) (Round_Neck_kurti, 0.020) (Turtle_Neck_anything, 0.039)
+
+Overall Accuracy: 0.808845
+Mean    Accuracy: 0.808436
+
+Hierarchy-based accuracy
+  0.00  0.87732
+  0.05  0.83951
+  0.10  0.83951
+  0.15  0.82454
+  0.20  0.80456
+  0.25  0.79601
+  0.30  0.79672
+  0.35  0.79957
+  0.40  0.80029
+  0.45  0.80314
+  0.50  0.80670
+  0.55  0.80742
+  0.60  0.80813
+  0.65  0.80742
+  0.70  0.80884
+  0.75  0.80813
+  0.80  0.80884
+  0.85  0.80884
+  0.90  0.80884
+  0.95  0.80813
+Precision table for superclass (normalized by TP+FP)
+                               0   1   2   3   4
+ 0                    V_Neck 794  67  25  34  17
+ 1                Round_Neck 183 916 250 103 120
+ 2               Turtle_Neck  21  12 675   0  68
+ 3               Hooded_Neck   0   1   0 862   0
+ 4                 High_Neck   0   3  50   0 793
+Precision report 
+                   V_Neck (0.794)  <<   (Round_Neck, 0.184) (Turtle_Neck, 0.022)
+               Round_Neck (0.916)  <<   (V_Neck, 0.067) (Turtle_Neck, 0.013)
+              Turtle_Neck (0.675)  <<   (V_Neck, 0.025) (Round_Neck, 0.250) (High_Neck, 0.050)
+              Hooded_Neck (0.862)  <<   (V_Neck, 0.034) (Round_Neck, 0.103)
+                High_Neck (0.793)  <<   (V_Neck, 0.017) (Round_Neck, 0.121) (Turtle_Neck, 0.069)
+Recall table for superclass (normalized by TP+FN)
+                               0   1   2   3   4
+ 0                    V_Neck 791 198   3   3   3
+ 1                Round_Neck  61 917  10   3   7
+ 2               Turtle_Neck 140 240 540   0  80
+ 3               Hooded_Neck   0  38   0 961   0
+ 4                 High_Neck   0  58  39   0 901
+Recall report 
+                   V_Neck (0.792)  >>   (Round_Neck, 0.199)
+               Round_Neck (0.917)  >>   (V_Neck, 0.062) (Turtle_Neck, 0.010)
+              Turtle_Neck (0.540)  >>   (V_Neck, 0.140) (Round_Neck, 0.240) (High_Neck, 0.080)
+              Hooded_Neck (0.962)  >>   (Round_Neck, 0.038)
+                High_Neck (0.902)  >>   (Round_Neck, 0.059) (Turtle_Neck, 0.039)
+
+Superclass Overall Accuracy: 0.875178
+Superclass Mean    Accuracy: 0.822506
+

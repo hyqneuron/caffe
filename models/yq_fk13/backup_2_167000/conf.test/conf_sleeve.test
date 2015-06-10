@@ -1,0 +1,194 @@
+###################   accuracy_sleeve  ####################
+Raw number table
+                               0   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16  17  18  19  20  21  22  23  24  25
+ 0                   Ignored   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
+ 1            3/4_Sleeve_top   0 112  13   5   1   0   0   1   0   0   1   0   0   4   0   0   0   0   3   0   0   1   0   9   4   0
+ 2       3/4_Sleeve_anything   0  19  95  24   3   0   1   0   0   0   1   0   1   0   0   0   1   3  18   1   3   1   1   4   4   8
+ 3          3/4_Sleeve_kurti   0   5  10 232   0   0   0   0   4   0   0   0   0   0   0   0   0   0   1   1   0   0  12   0   0   0
+ 4       Sleeveless_anything   0   0   3   1 211   0  10  19  16   0   4   2   3   1   5   0   1   0   2   6   0   1   0   0   0   1
+ 5        Sleeveless_sweater   0   0   0   0   6 102   0   1   0   0   2   0   0   0   2   0   1   1   0   0   3   0   0   0   0   0
+ 6          Sleeveless_dress   0   0   2   0  17   0 272   1   7   0   1   0   1   0   0   1  11   0   1   0   0   0   0   0   0   0
+ 7            Sleeveless_top   0   0   0   0  21   0   3 171   4   0   0   0   0  16   0   0   0   0   0   0   0   0   0   0   0   0
+ 8          Sleeveless_kurti   0   0   0   2  11   0  12   2 114   0   0   0   0   0   0   7   1   0   1   0   0   0   0   0   0   0
+ 9         Half_Sleeve_shirt   0   0   2   0   2   1   0   0   0 255   2   1   0   2   2   0   0   6   0   0   0   0   0   0  11   1
+10      Half_Sleeve_anything   0   0   6   1  10   0   0   0   1   1  55   0   1   9   3  15   3   0   0   1   1   1   1   0   0   4
+11     Half_Sleeve_Nightsuit   0   0   0   0   3   0   0   0   0   0   2 107   2   0   0   0   0   0   0   0   0   0   0   0   0   0
+12        Half_Sleeve_nighty   0   0   0   0   2   0   0   0   0   0   1   3  66   0   0   1   0   0   2   0   0   0   0   0   0   0
+13           Half_Sleeve_top   0   6   0   0   0   0   0   8   1   3   7   1   0 178   8   2   3   0   0   0   0   0   0   0   0   3
+14        Half_Sleeve_tshirt   0   0   0   0   3   1   0   0   0   2   1   0   0  10 293   0   0   0   0   0   0   0   0   0   0   0
+15         Half_Sleeve_kurti   0   0   3   7   2   0   0   0  14   0   6   1   3   1   0 132   1   0   0   0   0   0   0   0   0   0
+16         Half_Sleeve_dress   0   0   1   0   0   0  13   0   0   0   1   0   1   4   0   2  54   0   0   0   0   0   0   0   0   0
+17         Full_Sleeve_shirt   0   0   3   0   1   0   0   0   0   2   0   0   0   0   0   0   0 209   0   2   2   1   0   2  55   0
+18      Full_Sleeve_anything   0   0  17   7   3   0   1   0   0   0   0   1   1   0   0   0   0   2 106   2   5   1   5   4   1   0
+19   Full_Sleeve_sweatshirts   0   0   0   0   1   1   0   0   0   0   0   0   0   0   0   0   0   4   0 248  21  13   0   2   0   0
+20       Full_Sleeve_sweater   0   1   2   0   0   1   0   0   0   0   1   0   0   0   0   0   0   0   7  20 222  10   2   5   0   0
+21        Full_Sleeve_tshirt   0   1   3   0   0   0   0   0   0   0   0   0   0   0   1   0   0   3   0  30  29 122   0   1   0   0
+22         Full_Sleeve_kurti   0   0   2  30   0   0   1   0   0   0   0   0   1   0   0   0   0   0   4   0   2   0  65   0   0   0
+23           Full_Sleeve_top   0   5   0   1   0   0   0   0   0   0   0   0   0   1   0   0   0   0   4   8   6   2   1  60   1   0
+24      Roll-up_Sleeve_shirt   0   1   5   0   0   0   0   0   0   6   0   0   0   1   0   0   0  54   1   0   1   0   0   0 131   4
+25   Roll-up_Sleeve_anything   0   6  17   5   1   0   0   0   0   2   1   0   0   1   2   1   0   0   2   0   0   2   0   2   0  12
+precision table (normalized by TP+FP)
+                               0   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16  17  18  19  20  21  22  23  24  25
+ 0                   Ignored NaN   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
+ 1            3/4_Sleeve_top NaN 717  70  15   3   0   0   4   0   0  11   0   0  17   0   0   0   0  19   0   0   6   0 101  19   0
+ 2       3/4_Sleeve_anything NaN 121 516  76  10   0   3   0   0   0  11   0  12   0   0   0  13  10 118   3  10   6  11  44  19 242
+ 3          3/4_Sleeve_kurti NaN  32  54 736   0   0   0   0  24   0   0   0   0   0   0   0   0   0   6   3   0   0 137   0   0   0
+ 4       Sleeveless_anything NaN   0  16   3 708   0  31  93  99   0  46  17  37   4  15   0  13   0  13  18   0   6   0   0   0  30
+ 5        Sleeveless_sweater NaN   0   0   0  20 962   0   4   0   0  23   0   0   0   6   0  13   3   0   0  10   0   0   0   0   0
+ 6          Sleeveless_dress NaN   0  10   0  57   0 869   4  43   0  11   0  12   0   0   6 144   0   6   0   0   0   0   0   0   0
+ 7            Sleeveless_top NaN   0   0   0  70   0   9 842  24   0   0   0   0  70   0   0   0   0   0   0   0   0   0   0   0   0
+ 8          Sleeveless_kurti NaN   0   0   6  36   0  38   9 708   0   0   0   0   0   0  43  13   0   6   0   0   0   0   0   0   0
+ 9         Half_Sleeve_shirt NaN   0  10   0   6   9   0   0   0 940  23   8   0   8   6   0   0  21   0   0   0   0   0   0  53  30
+10      Half_Sleeve_anything NaN   0  32   3  33   0   0   0   6   3 639   0  12  39   9  93  39   0   0   3   3   6  11   0   0 121
+11     Half_Sleeve_Nightsuit NaN   0   0   0  10   0   0   0   0   0  23 922  25   0   0   0   0   0   0   0   0   0   0   0   0   0
+12        Half_Sleeve_nighty NaN   0   0   0   6   0   0   0   0   0  11  25 825   0   0   6   0   0  13   0   0   0   0   0   0   0
+13           Half_Sleeve_top NaN  38   0   0   0   0   0  39   6  11  81   8   0 780  25  12  39   0   0   0   0   0   0   0   0  90
+14        Half_Sleeve_tshirt NaN   0   0   0  10   9   0   0   0   7  11   0   0  43 927   0   0   0   0   0   0   0   0   0   0   0
+15         Half_Sleeve_kurti NaN   0  16  22   6   0   0   0  86   0  69   8  37   4   0 819  13   0   0   0   0   0   0   0   0   0
+16         Half_Sleeve_dress NaN   0   5   0   0   0  41   0   0   0  11   0  12  17   0  12 710   0   0   0   0   0   0   0   0   0
+17         Full_Sleeve_shirt NaN   0  16   0   3   0   0   0   0   7   0   0   0   0   0   0   0 741   0   6   6   6   0  22 265   0
+18      Full_Sleeve_anything NaN   0  92  22  10   0   3   0   0   0   0   8  12   0   0   0   0   7 697   6  16   6  57  44   4   0
+19   Full_Sleeve_sweatshirts NaN   0   0   0   3   9   0   0   0   0   0   0   0   0   0   0   0  14   0 777  71  83   0  22   0   0
+20       Full_Sleeve_sweater NaN   6  10   0   0   9   0   0   0   0  11   0   0   0   0   0   0   0  46  62 752  64  22  56   0   0
+21        Full_Sleeve_tshirt NaN   6  16   0   0   0   0   0   0   0   0   0   0   0   3   0   0  10   0  94  98 787   0  11   0   0
+22         Full_Sleeve_kurti NaN   0  10  95   0   0   3   0   0   0   0   0  12   0   0   0   0   0  26   0   6   0 747   0   0   0
+23           Full_Sleeve_top NaN  32   0   3   0   0   0   0   0   0   0   0   0   4   0   0   0   0  26  25  20  12  11 674   4   0
+24      Roll-up_Sleeve_shirt NaN   6  27   0   0   0   0   0   0  22   0   0   0   4   0   0   0 191   6   0   3   0   0   0 632 121
+25   Roll-up_Sleeve_anything NaN  38  92  15   3   0   0   0   0   7  11   0   0   4   6   6   0   0  13   0   0  12   0  22   0 363
+Precision report 
+                  Ignored (-nan)  <<  
+           3/4_Sleeve_top (0.718)  <<   (3/4_Sleeve_anything, 0.122) (3/4_Sleeve_kurti, 0.032) (Half_Sleeve_top, 0.038) (Full_Sleeve_top, 0.032) (Roll-up_Sleeve_anything, 0.038)
+      3/4_Sleeve_anything (0.516)  <<   (3/4_Sleeve_top, 0.071) (3/4_Sleeve_kurti, 0.054) (Sleeveless_anything, 0.016) (Sleeveless_dress, 0.011) (Half_Sleeve_shirt, 0.011) (Half_Sleeve_anything, 0.033) (Half_Sleeve_kurti, 0.016) (Full_Sleeve_shirt, 0.016) (Full_Sleeve_anything, 0.092) (Full_Sleeve_sweater, 0.011) (Full_Sleeve_tshirt, 0.016) (Full_Sleeve_kurti, 0.011) (Roll-up_Sleeve_shirt, 0.027) (Roll-up_Sleeve_anything, 0.092)
+         3/4_Sleeve_kurti (0.737)  <<   (3/4_Sleeve_top, 0.016) (3/4_Sleeve_anything, 0.076) (Half_Sleeve_kurti, 0.022) (Full_Sleeve_anything, 0.022) (Full_Sleeve_kurti, 0.095) (Roll-up_Sleeve_anything, 0.016)
+      Sleeveless_anything (0.708)  <<   (3/4_Sleeve_anything, 0.010) (Sleeveless_sweater, 0.020) (Sleeveless_dress, 0.057) (Sleeveless_top, 0.070) (Sleeveless_kurti, 0.037) (Half_Sleeve_anything, 0.034) (Half_Sleeve_Nightsuit, 0.010) (Half_Sleeve_tshirt, 0.010) (Full_Sleeve_anything, 0.010)
+       Sleeveless_sweater (0.962)  <<  
+         Sleeveless_dress (0.869)  <<   (Sleeveless_anything, 0.032) (Sleeveless_kurti, 0.038) (Half_Sleeve_dress, 0.042)
+           Sleeveless_top (0.842)  <<   (Sleeveless_anything, 0.094) (Half_Sleeve_top, 0.039)
+         Sleeveless_kurti (0.708)  <<   (3/4_Sleeve_kurti, 0.025) (Sleeveless_anything, 0.099) (Sleeveless_dress, 0.043) (Sleeveless_top, 0.025) (Half_Sleeve_kurti, 0.087)
+        Half_Sleeve_shirt (0.941)  <<   (Half_Sleeve_top, 0.011) (Roll-up_Sleeve_shirt, 0.022)
+     Half_Sleeve_anything (0.640)  <<   (3/4_Sleeve_top, 0.012) (3/4_Sleeve_anything, 0.012) (Sleeveless_anything, 0.047) (Sleeveless_sweater, 0.023) (Sleeveless_dress, 0.012) (Half_Sleeve_shirt, 0.023) (Half_Sleeve_Nightsuit, 0.023) (Half_Sleeve_nighty, 0.012) (Half_Sleeve_top, 0.081) (Half_Sleeve_tshirt, 0.012) (Half_Sleeve_kurti, 0.070) (Half_Sleeve_dress, 0.012) (Full_Sleeve_sweater, 0.012) (Roll-up_Sleeve_anything, 0.012)
+    Half_Sleeve_Nightsuit (0.922)  <<   (Sleeveless_anything, 0.017) (Half_Sleeve_nighty, 0.026)
+       Half_Sleeve_nighty (0.825)  <<   (3/4_Sleeve_anything, 0.013) (Sleeveless_anything, 0.038) (Sleeveless_dress, 0.013) (Half_Sleeve_anything, 0.013) (Half_Sleeve_Nightsuit, 0.025) (Half_Sleeve_kurti, 0.038) (Half_Sleeve_dress, 0.013) (Full_Sleeve_anything, 0.013) (Full_Sleeve_kurti, 0.013)
+          Half_Sleeve_top (0.781)  <<   (3/4_Sleeve_top, 0.018) (Sleeveless_top, 0.070) (Half_Sleeve_anything, 0.039) (Half_Sleeve_tshirt, 0.044) (Half_Sleeve_dress, 0.018)
+       Half_Sleeve_tshirt (0.927)  <<   (Sleeveless_anything, 0.016) (Half_Sleeve_top, 0.025)
+        Half_Sleeve_kurti (0.820)  <<   (Sleeveless_kurti, 0.043) (Half_Sleeve_anything, 0.093) (Half_Sleeve_top, 0.012) (Half_Sleeve_dress, 0.012)
+        Half_Sleeve_dress (0.711)  <<   (3/4_Sleeve_anything, 0.013) (Sleeveless_anything, 0.013) (Sleeveless_sweater, 0.013) (Sleeveless_dress, 0.145) (Sleeveless_kurti, 0.013) (Half_Sleeve_anything, 0.039) (Half_Sleeve_top, 0.039) (Half_Sleeve_kurti, 0.013)
+        Full_Sleeve_shirt (0.741)  <<   (3/4_Sleeve_anything, 0.011) (Half_Sleeve_shirt, 0.021) (Full_Sleeve_sweatshirts, 0.014) (Full_Sleeve_tshirt, 0.011) (Roll-up_Sleeve_shirt, 0.191)
+     Full_Sleeve_anything (0.697)  <<   (3/4_Sleeve_top, 0.020) (3/4_Sleeve_anything, 0.118) (Sleeveless_anything, 0.013) (Half_Sleeve_nighty, 0.013) (Full_Sleeve_sweater, 0.046) (Full_Sleeve_kurti, 0.026) (Full_Sleeve_top, 0.026) (Roll-up_Sleeve_anything, 0.013)
+  Full_Sleeve_sweatshirts (0.777)  <<   (Sleeveless_anything, 0.019) (Full_Sleeve_sweater, 0.063) (Full_Sleeve_tshirt, 0.094) (Full_Sleeve_top, 0.025)
+      Full_Sleeve_sweater (0.753)  <<   (3/4_Sleeve_anything, 0.010) (Sleeveless_sweater, 0.010) (Full_Sleeve_anything, 0.017) (Full_Sleeve_sweatshirts, 0.071) (Full_Sleeve_tshirt, 0.098) (Full_Sleeve_top, 0.020)
+       Full_Sleeve_tshirt (0.787)  <<   (Full_Sleeve_sweatshirts, 0.084) (Full_Sleeve_sweater, 0.065) (Full_Sleeve_top, 0.013) (Roll-up_Sleeve_anything, 0.013)
+        Full_Sleeve_kurti (0.747)  <<   (3/4_Sleeve_anything, 0.011) (3/4_Sleeve_kurti, 0.138) (Half_Sleeve_anything, 0.011) (Full_Sleeve_anything, 0.057) (Full_Sleeve_sweater, 0.023) (Full_Sleeve_top, 0.011)
+          Full_Sleeve_top (0.674)  <<   (3/4_Sleeve_top, 0.101) (3/4_Sleeve_anything, 0.045) (Full_Sleeve_shirt, 0.022) (Full_Sleeve_anything, 0.045) (Full_Sleeve_sweatshirts, 0.022) (Full_Sleeve_sweater, 0.056) (Full_Sleeve_tshirt, 0.011) (Roll-up_Sleeve_anything, 0.022)
+     Roll-up_Sleeve_shirt (0.633)  <<   (3/4_Sleeve_top, 0.019) (3/4_Sleeve_anything, 0.019) (Half_Sleeve_shirt, 0.053) (Full_Sleeve_shirt, 0.266)
+  Roll-up_Sleeve_anything (0.364)  <<   (3/4_Sleeve_anything, 0.242) (Sleeveless_anything, 0.030) (Half_Sleeve_shirt, 0.030) (Half_Sleeve_anything, 0.121) (Half_Sleeve_top, 0.091) (Roll-up_Sleeve_shirt, 0.121)
+recall table (normalized by TP+FN)
+                               0   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16  17  18  19  20  21  22  23  24  25
+ 0                   Ignored NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN
+ 1            3/4_Sleeve_top   0 727  84  32   6   0   0   6   0   0   6   0   0  25   0   0   0   0  19   0   0   6   0  58  25   0
+ 2       3/4_Sleeve_anything   0 101 505 127  15   0   5   0   0   0   5   0   5   0   0   0   5  15  95   5  15   5   5  21  21  42
+ 3          3/4_Sleeve_kurti   0  18  37 875   0   0   0   0  15   0   0   0   0   0   0   0   0   0   3   3   0   0  45   0   0   0
+ 4       Sleeveless_anything   0   0  10   3 737   0  34  66  55   0  13   6  10   3  17   0   3   0   6  20   0   3   0   0   0   3
+ 5        Sleeveless_sweater   0   0   0   0  50 864   0   8   0   0  16   0   0   0  16   0   8   8   0   0  25   0   0   0   0   0
+ 6          Sleeveless_dress   0   0   6   0  54   0 866   3  22   0   3   0   3   0   0   3  35   0   3   0   0   0   0   0   0   0
+ 7            Sleeveless_top   0   0   0   0  97   0  13 795  18   0   0   0   0  74   0   0   0   0   0   0   0   0   0   0   0   0
+ 8          Sleeveless_kurti   0   0   0  13  73   0  80  13 760   0   0   0   0   0   0  46   6   0   6   0   0   0   0   0   0   0
+ 9         Half_Sleeve_shirt   0   0   7   0   7   3   0   0   0 894   7   3   0   7   7   0   0  21   0   0   0   0   0   0  38   3
+10      Half_Sleeve_anything   0   0  53   8  88   0   0   0   8   8 486   0   8  79  26 132  26   0   0   8   8   8   8   0   0  35
+11     Half_Sleeve_Nightsuit   0   0   0   0  26   0   0   0   0   0  17 938  17   0   0   0   0   0   0   0   0   0   0   0   0   0
+12        Half_Sleeve_nighty   0   0   0   0  26   0   0   0   0   0  13  40 880   0   0  13   0   0  26   0   0   0   0   0   0   0
+13           Half_Sleeve_top   0  27   0   0   0   0   0  36   4  13  31   4   0 809  36   9  13   0   0   0   0   0   0   0   0  13
+14        Half_Sleeve_tshirt   0   0   0   0   9   3   0   0   0   6   3   0   0  32 945   0   0   0   0   0   0   0   0   0   0   0
+15         Half_Sleeve_kurti   0   0  17  41  11   0   0   0  82   0  35   5  17   5   0 776   5   0   0   0   0   0   0   0   0   0
+16         Half_Sleeve_dress   0   0  13   0   0   0 171   0   0   0  13   0  13  52   0  26 710   0   0   0   0   0   0   0   0   0
+17         Full_Sleeve_shirt   0   0  10   0   3   0   0   0   0   7   0   0   0   0   0   0   0 754   0   7   7   3   0   7 198   0
+18      Full_Sleeve_anything   0   0 108  44  19   0   6   0   0   0   0   6   6   0   0   0   0  12 679  12  32   6  32  25   6   0
+19   Full_Sleeve_sweatshirts   0   0   0   0   3   3   0   0   0   0   0   0   0   0   0   0   0  13   0 855  72  44   0   6   0   0
+20       Full_Sleeve_sweater   0   3   7   0   0   3   0   0   0   0   3   0   0   0   0   0   0   0  25  73 819  36   7  18   0   0
+21        Full_Sleeve_tshirt   0   5  15   0   0   0   0   0   0   0   0   0   0   0   5   0   0  15   0 157 152 642   0   5   0   0
+22         Full_Sleeve_kurti   0   0  19 285   0   0   9   0   0   0   0   0   9   0   0   0   0   0  38   0  19   0 619   0   0   0
+23           Full_Sleeve_top   0  56   0  11   0   0   0   0   0   0   0   0   0  11   0   0   0   0  44  89  67  22  11 674  11   0
+24      Roll-up_Sleeve_shirt   0   4  24   0   0   0   0   0   0  29   0   0   0   4   0   0   0 264   4   0   4   0   0   0 642  19
+25   Roll-up_Sleeve_anything   0 111 314  92  18   0   0   0   0  37  18   0   0  18  37  18   0   0  37   0   0  37   0  37   0 222
+Recall report 
+                  Ignored (-nan)  >>  
+           3/4_Sleeve_top (0.727)  >>   (3/4_Sleeve_anything, 0.084) (3/4_Sleeve_kurti, 0.032) (Half_Sleeve_top, 0.026) (Full_Sleeve_anything, 0.019) (Full_Sleeve_top, 0.058) (Roll-up_Sleeve_shirt, 0.026)
+      3/4_Sleeve_anything (0.505)  >>   (3/4_Sleeve_top, 0.101) (3/4_Sleeve_kurti, 0.128) (Sleeveless_anything, 0.016) (Full_Sleeve_shirt, 0.016) (Full_Sleeve_anything, 0.096) (Full_Sleeve_sweater, 0.016) (Full_Sleeve_top, 0.021) (Roll-up_Sleeve_shirt, 0.021) (Roll-up_Sleeve_anything, 0.043)
+         3/4_Sleeve_kurti (0.875)  >>   (3/4_Sleeve_top, 0.019) (3/4_Sleeve_anything, 0.038) (Sleeveless_kurti, 0.015) (Full_Sleeve_kurti, 0.045)
+      Sleeveless_anything (0.738)  >>   (3/4_Sleeve_anything, 0.010) (Sleeveless_dress, 0.035) (Sleeveless_top, 0.066) (Sleeveless_kurti, 0.056) (Half_Sleeve_anything, 0.014) (Half_Sleeve_nighty, 0.010) (Half_Sleeve_tshirt, 0.017) (Full_Sleeve_sweatshirts, 0.021)
+       Sleeveless_sweater (0.864)  >>   (Sleeveless_anything, 0.051) (Half_Sleeve_anything, 0.017) (Half_Sleeve_tshirt, 0.017) (Full_Sleeve_sweater, 0.025)
+         Sleeveless_dress (0.866)  >>   (Sleeveless_anything, 0.054) (Sleeveless_kurti, 0.022) (Half_Sleeve_dress, 0.035)
+           Sleeveless_top (0.795)  >>   (Sleeveless_anything, 0.098) (Sleeveless_dress, 0.014) (Sleeveless_kurti, 0.019) (Half_Sleeve_top, 0.074)
+         Sleeveless_kurti (0.760)  >>   (3/4_Sleeve_kurti, 0.013) (Sleeveless_anything, 0.073) (Sleeveless_dress, 0.080) (Sleeveless_top, 0.013) (Half_Sleeve_kurti, 0.047)
+        Half_Sleeve_shirt (0.895)  >>   (Full_Sleeve_shirt, 0.021) (Roll-up_Sleeve_shirt, 0.039)
+     Half_Sleeve_anything (0.487)  >>   (3/4_Sleeve_anything, 0.053) (Sleeveless_anything, 0.088) (Half_Sleeve_top, 0.080) (Half_Sleeve_tshirt, 0.027) (Half_Sleeve_kurti, 0.133) (Half_Sleeve_dress, 0.027) (Roll-up_Sleeve_anything, 0.035)
+    Half_Sleeve_Nightsuit (0.939)  >>   (Sleeveless_anything, 0.026) (Half_Sleeve_anything, 0.018) (Half_Sleeve_nighty, 0.018)
+       Half_Sleeve_nighty (0.880)  >>   (Sleeveless_anything, 0.027) (Half_Sleeve_anything, 0.013) (Half_Sleeve_Nightsuit, 0.040) (Half_Sleeve_kurti, 0.013) (Full_Sleeve_anything, 0.027)
+          Half_Sleeve_top (0.809)  >>   (3/4_Sleeve_top, 0.027) (Sleeveless_top, 0.036) (Half_Sleeve_shirt, 0.014) (Half_Sleeve_anything, 0.032) (Half_Sleeve_tshirt, 0.036) (Half_Sleeve_dress, 0.014) (Roll-up_Sleeve_anything, 0.014)
+       Half_Sleeve_tshirt (0.945)  >>   (Half_Sleeve_top, 0.032)
+        Half_Sleeve_kurti (0.776)  >>   (3/4_Sleeve_anything, 0.018) (3/4_Sleeve_kurti, 0.041) (Sleeveless_anything, 0.012) (Sleeveless_kurti, 0.082) (Half_Sleeve_anything, 0.035) (Half_Sleeve_nighty, 0.018)
+        Half_Sleeve_dress (0.711)  >>   (3/4_Sleeve_anything, 0.013) (Sleeveless_dress, 0.171) (Half_Sleeve_anything, 0.013) (Half_Sleeve_nighty, 0.013) (Half_Sleeve_top, 0.053) (Half_Sleeve_kurti, 0.026)
+        Full_Sleeve_shirt (0.755)  >>   (3/4_Sleeve_anything, 0.011) (Roll-up_Sleeve_shirt, 0.199)
+     Full_Sleeve_anything (0.679)  >>   (3/4_Sleeve_anything, 0.109) (3/4_Sleeve_kurti, 0.045) (Sleeveless_anything, 0.019) (Full_Sleeve_shirt, 0.013) (Full_Sleeve_sweatshirts, 0.013) (Full_Sleeve_sweater, 0.032) (Full_Sleeve_kurti, 0.032) (Full_Sleeve_top, 0.026)
+  Full_Sleeve_sweatshirts (0.855)  >>   (Full_Sleeve_shirt, 0.014) (Full_Sleeve_sweater, 0.072) (Full_Sleeve_tshirt, 0.045)
+      Full_Sleeve_sweater (0.819)  >>   (Full_Sleeve_anything, 0.026) (Full_Sleeve_sweatshirts, 0.074) (Full_Sleeve_tshirt, 0.037) (Full_Sleeve_top, 0.018)
+       Full_Sleeve_tshirt (0.642)  >>   (3/4_Sleeve_anything, 0.016) (Full_Sleeve_shirt, 0.016) (Full_Sleeve_sweatshirts, 0.158) (Full_Sleeve_sweater, 0.153)
+        Full_Sleeve_kurti (0.619)  >>   (3/4_Sleeve_anything, 0.019) (3/4_Sleeve_kurti, 0.286) (Full_Sleeve_anything, 0.038) (Full_Sleeve_sweater, 0.019)
+          Full_Sleeve_top (0.674)  >>   (3/4_Sleeve_top, 0.056) (3/4_Sleeve_kurti, 0.011) (Half_Sleeve_top, 0.011) (Full_Sleeve_anything, 0.045) (Full_Sleeve_sweatshirts, 0.090) (Full_Sleeve_sweater, 0.067) (Full_Sleeve_tshirt, 0.022) (Full_Sleeve_kurti, 0.011) (Roll-up_Sleeve_shirt, 0.011)
+     Roll-up_Sleeve_shirt (0.642)  >>   (3/4_Sleeve_anything, 0.025) (Half_Sleeve_shirt, 0.029) (Full_Sleeve_shirt, 0.265) (Roll-up_Sleeve_anything, 0.020)
+  Roll-up_Sleeve_anything (0.222)  >>   (3/4_Sleeve_top, 0.111) (3/4_Sleeve_anything, 0.315) (3/4_Sleeve_kurti, 0.093) (Sleeveless_anything, 0.019) (Half_Sleeve_shirt, 0.037) (Half_Sleeve_anything, 0.019) (Half_Sleeve_top, 0.019) (Half_Sleeve_tshirt, 0.037) (Half_Sleeve_kurti, 0.019) (Full_Sleeve_anything, 0.037) (Full_Sleeve_tshirt, 0.037) (Full_Sleeve_top, 0.037)
+
+Overall Accuracy: 0.772873
+Mean    Accuracy: 0.739247
+
+Hierarchy-based accuracy
+  0.00  0.88441
+  0.05  0.87673
+  0.10  0.87673
+  0.15  0.86458
+  0.20  0.84474
+  0.25  0.82022
+  0.30  0.80700
+  0.35  0.79463
+  0.40  0.78610
+  0.45  0.78332
+  0.50  0.78098
+  0.55  0.77884
+  0.60  0.77607
+  0.65  0.77458
+  0.70  0.77373
+  0.75  0.77351
+  0.80  0.77309
+  0.85  0.77309
+  0.90  0.77287
+  0.95  0.77287
+Precision table for superclass (normalized by TP+FP)
+                               0   1   2   3   4
+ 0                3/4_Sleeve 786   9   5  42  66
+ 1                Sleeveless  12 925  44  10   4
+ 2               Half_Sleeve  39  56 933   8  79
+ 3               Full_Sleeve 109   8   5 893 237
+ 4            Roll-up_Sleeve  51   0  10  44 612
+Precision report 
+               3/4_Sleeve (0.786)  <<   (Sleeveless, 0.012) (Half_Sleeve, 0.040) (Full_Sleeve, 0.110) (Roll-up_Sleeve, 0.052)
+               Sleeveless (0.925)  <<   (Half_Sleeve, 0.056)
+              Half_Sleeve (0.933)  <<   (Sleeveless, 0.044) (Roll-up_Sleeve, 0.010)
+              Full_Sleeve (0.893)  <<   (3/4_Sleeve, 0.042) (Sleeveless, 0.011) (Roll-up_Sleeve, 0.045)
+           Roll-up_Sleeve (0.613)  <<   (3/4_Sleeve, 0.067) (Half_Sleeve, 0.079) (Full_Sleeve, 0.237)
+Recall table for superclass (normalized by TP+FN)
+                               0   1   2   3   4
+ 0                3/4_Sleeve 848  16  13  95  26
+ 1                Sleeveless   7 923  54  13   0
+ 2               Half_Sleeve  19  44 913   8  13
+ 3               Full_Sleeve  52   6   5 894  41
+ 4            Roll-up_Sleeve 131   3  54 240 569
+Recall report 
+               3/4_Sleeve (0.848)  >>   (Sleeveless, 0.016) (Half_Sleeve, 0.013) (Full_Sleeve, 0.096) (Roll-up_Sleeve, 0.026)
+               Sleeveless (0.923)  >>   (Half_Sleeve, 0.054) (Full_Sleeve, 0.014)
+              Half_Sleeve (0.913)  >>   (3/4_Sleeve, 0.019) (Sleeveless, 0.045) (Roll-up_Sleeve, 0.014)
+              Full_Sleeve (0.894)  >>   (3/4_Sleeve, 0.052) (Roll-up_Sleeve, 0.041)
+           Roll-up_Sleeve (0.570)  >>   (3/4_Sleeve, 0.132) (Half_Sleeve, 0.054) (Full_Sleeve, 0.240)
+
+Superclass Overall Accuracy: 0.882704
+Superclass Mean    Accuracy: 0.829808
+
