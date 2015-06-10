@@ -230,8 +230,8 @@ cv::Mat DataTransformer<Dtype>::ResizePreservingAspectRatio(
     int offset_h = (height- target_height)/2;
     if(!centered){
       // if not centered, we move things randomly
-      offset_w = Rand(offset_w*2);
-      offset_h = Rand(offset_h*2);
+      offset_w = Rand(offset_w*2+1);
+      offset_h = Rand(offset_h*2+1);
     }
     // copy
     // unlike Mat(height,width), Rect and Size use (width, height)
