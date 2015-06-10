@@ -245,8 +245,8 @@ template<typename Dtype>
 void DataTransformer<Dtype>::Transform(const cv::Mat& cv_img,
                                        Blob<Dtype>* transformed_blob) {
   const int img_channels = cv_img.channels();
-  const int img_height = cv_img.rows;
-  const int img_width = cv_img.cols;
+  int img_height = cv_img.rows;
+  int img_width = cv_img.cols;
 
   const int channels = transformed_blob->channels();
   const int height = transformed_blob->height();
@@ -279,29 +279,16 @@ void DataTransformer<Dtype>::Transform(const cv::Mat& cv_img,
     CHECK_GE(width,  crop_size);
   }
 
-  // checks on mean value
-  Dtype* mean = NULL;
-  if (has_mean_file) {
-    CHECK_EQ(img_channels, data_mean_.channels());
-    CHECK_EQ(img_height, data_mean_.height());
-    CHECK_EQ(img_width, data_mean_.width());
-    mean = data_mean_.mutable_cpu_data();
-  }
-  if (has_mean_values) {
-    CHECK(mean_values_.size() == 1 || mean_values_.size() == img_channels) <<
-     "Specify either 1 mean_value or as many as channels: " << img_channels;
-    if (img_channels > 1 && mean_values_.size() == 1) {
-      // Replicate the mean_value for simplicity
-      for (int c = 1; c < img_channels; ++c) {
-        mean_values_.push_back(mean_values_[0]);
-      }
-    }
-  }
 
   // resize preserving aspect ratio first before we do cropping
   cv::Mat cv_scaled_img = cv_img;
   if(param_.resize_preserving_aspect_ratio()){
-    cv_scaled_img = ResizePreservingAspectRatio(cv_img, height, width, true);
+    // if resize_size is not specified, we default to adding 20 pixels around crop
+    int resize_size = param_.has_resize_size()? param_.resize_size() : crop_size+20;
+    img_height = resize_size;
+    img_width  = resize_size;
+    cv_scaled_img = ResizePreservingAspectRatio(cv_img, resize_size, resize_size, 
+            param_.resize_centered());
     CHECK(cv_scaled_img.data);
   }
 
@@ -331,6 +318,24 @@ void DataTransformer<Dtype>::Transform(const cv::Mat& cv_img,
 
   CHECK(cv_cropped_img.data);
 
+  // checks on mean value
+  Dtype* mean = NULL;
+  if (has_mean_file) {
+    CHECK_EQ(img_channels, data_mean_.channels());
+    CHECK_EQ(img_height, data_mean_.height());
+    CHECK_EQ(img_width, data_mean_.width());
+    mean = data_mean_.mutable_cpu_data();
+  }
+  if (has_mean_values) {
+    CHECK(mean_values_.size() == 1 || mean_values_.size() == img_channels) <<
+     "Specify either 1 mean_value or as many as channels: " << img_channels;
+    if (img_channels > 1 && mean_values_.size() == 1) {
+      // Replicate the mean_value for simplicity
+      for (int c = 1; c < img_channels; ++c) {
+        mean_values_.push_back(mean_values_[0]);
+      }
+    }
+  }
   // perform mean subtraction and scaling
   // pixel = (pixel - mean)*scale; for height, width, channel
   Dtype* transformed_data = transformed_blob->mutable_cpu_data();
