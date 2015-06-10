@@ -1,4 +1,5 @@
 #include <opencv2/core/core.hpp>
+#include "opencv2/opencv.hpp"
 
 #include <string>
 #include <vector>
@@ -194,6 +195,53 @@ void DataTransformer<Dtype>::Transform(const vector<cv::Mat> & mat_vector,
 }
 
 template<typename Dtype>
+cv::Mat DataTransformer<Dtype>::ResizePreservingAspectRatio(
+        const cv::Mat& input_img, int height, int width, bool centered){
+    // this function resizes given input without distorting aspect ratio
+    // 1. create a white, colored image of height by width
+    // 2. create a new Mat whose dimensions are appropriately scaled to fill the
+    //    the box specified by height x width without warping
+    // 3. copy the scaled img into the white image and return the white img
+    //
+    // note: height = rows
+    //       width  = cols
+
+    // 1: new image, height by width, white
+    // this constructor requires (row, col, type, value)
+    cv::Mat new_img(height, width, CV_8UC3, cv::Scalar(255,255,255));
+
+    // 2: figure out appropriate scaling factor and resize
+    float input_height = input_img.rows;
+    float input_width  = input_img.cols;
+    float h_factor = input_height / height;
+    float w_factor = input_width  / width;
+    float max_factor = h_factor > w_factor? h_factor : w_factor;
+    // we scale such that the dimension having the max_factor is perfectly
+    // aligned
+    int target_height = int(input_height / max_factor)-1; // -1 just to be safe
+    int target_width  = int(input_width  / max_factor)-1;
+    // resize
+    cv::Mat scaled_img;
+    cv::resize(input_img, scaled_img, cv::Size(target_width, target_height));
+
+    // 3: copy scaled_img into new_img
+    // decide offset
+    int offset_w = (width - target_width )/2;
+    int offset_h = (height- target_height)/2;
+    if(!centered){
+      // if not centered, we move things randomly
+      offset_w = Rand(offset_w*2);
+      offset_h = Rand(offset_h*2);
+    }
+    // copy
+    // unlike Mat(height,width), Rect and Size use (width, height)
+    cv::Mat inner_region = new_img(cv::Rect(offset_w,offset_h,
+                                            target_width, target_height));
+    scaled_img.copyTo(inner_region);
+    return new_img;
+}
+
+template<typename Dtype>
 void DataTransformer<Dtype>::Transform(const cv::Mat& cv_img,
                                        Blob<Dtype>* transformed_blob) {
   const int img_channels = cv_img.channels();
@@ -205,6 +253,8 @@ void DataTransformer<Dtype>::Transform(const cv::Mat& cv_img,
   const int width = transformed_blob->width();
   const int num = transformed_blob->num();
 
+  // height and width are required_height and required_width, and they must be
+  // less than the actual img_height and img_width
   CHECK_EQ(channels, img_channels);
   CHECK_LE(height, img_height);
   CHECK_LE(width, img_width);
@@ -222,6 +272,7 @@ void DataTransformer<Dtype>::Transform(const cv::Mat& cv_img,
   CHECK_GE(img_height, crop_size);
   CHECK_GE(img_width, crop_size);
 
+  // checks on mean value
   Dtype* mean = NULL;
   if (has_mean_file) {
     CHECK_EQ(img_channels, data_mean_.channels());
@@ -240,13 +291,23 @@ void DataTransformer<Dtype>::Transform(const cv::Mat& cv_img,
     }
   }
 
+  // resize preserving aspect ratio first before we do cropping
+  cv::Mat cv_scaled_img = cv_img;
+  if(param_.resize_preserving_aspect_ratio()){
+    cv_scaled_img = ResizePreservingAspectRatio(cv_img, height, width, true);
+    CHECK(cv_scaled_img.data);
+  }
+
+  // perform cropping
   int h_off = 0;
   int w_off = 0;
-  cv::Mat cv_cropped_img = cv_img;
+  cv::Mat cv_cropped_img = cv_scaled_img;
   if (crop_size) {
     CHECK_EQ(crop_size, height);
     CHECK_EQ(crop_size, width);
     // We only do random crop when we do training.
+    // training => random crop
+    // testing  => center crop
     if (phase_ == TRAIN) {
       h_off = Rand(img_height - crop_size + 1);
       w_off = Rand(img_width - crop_size + 1);
@@ -255,7 +316,7 @@ void DataTransformer<Dtype>::Transform(const cv::Mat& cv_img,
       w_off = (img_width - crop_size) / 2;
     }
     cv::Rect roi(w_off, h_off, crop_size, crop_size);
-    cv_cropped_img = cv_img(roi);
+    cv_cropped_img = cv_scaled_img(roi);
   } else {
     CHECK_EQ(img_height, height);
     CHECK_EQ(img_width, width);
@@ -263,6 +324,8 @@ void DataTransformer<Dtype>::Transform(const cv::Mat& cv_img,
 
   CHECK(cv_cropped_img.data);
 
+  // perform mean subtraction and scaling
+  // pixel = (pixel - mean)*scale; for height, width, channel
   Dtype* transformed_data = transformed_blob->mutable_cpu_data();
   int top_index;
   for (int h = 0; h < height; ++h) {

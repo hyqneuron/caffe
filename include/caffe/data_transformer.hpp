@@ -98,6 +98,9 @@ class DataTransformer {
    */
   virtual int Rand(int n);
 
+  cv::Mat ResizePreservingAspectRatio(
+        const cv::Mat& input_img, int height, int width, bool centered);
+
   void Transform(const Datum& datum, Dtype* transformed_data);
   // Tranformation parameters
   TransformationParameter param_;

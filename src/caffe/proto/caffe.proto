@@ -357,6 +357,11 @@ message TransformationParameter {
   // or can be repeated the same number of times as channels
   // (would subtract them from the corresponding channel)
   repeated float mean_value = 5;
+  // HYQ
+  // if we'd like to resize without distorting aspect-ratio
+  // this requires the corresponding image does not resize the image first (i.e.
+  // having new_height and new_width unset or set to 0)
+  optional bool resize_preserving_aspect_ratio = 6 [default = false];
 }
 
 // Message that stores parameters shared by loss layers
