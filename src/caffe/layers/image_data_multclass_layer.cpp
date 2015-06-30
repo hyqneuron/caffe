@@ -247,10 +247,10 @@ void ImageDataMultLabelLayer<Dtype>::InternalThreadEntry() {
       // 2.1 making the bounding box 1.1 times its original size
       width  = std::get<2>(bbox);
       height = std::get<3>(bbox);
-      left = std::get<0>(bbox)-0.05*width;
-      top  = std::get<1>(bbox)-0.05*height;
-      width  += 0.1*width;
-      height += 0.1*height;
+      left = std::get<0>(bbox);//-0.05*width;
+      top  = std::get<1>(bbox);//-0.05*height;
+      //width  += 0.1*width;
+      //height += 0.1*height;
       right = left + width;
       bottom= top  + height;
       // 2.2 correct bounding box if it is out-of-bounds
@@ -268,7 +268,15 @@ void ImageDataMultLabelLayer<Dtype>::InternalThreadEntry() {
       i_width  = cv_img.cols * width;
       i_height = cv_img.rows * height;
 
-      LOG(INFO)<<i_left << " " 
+      int pid = lines_[lines_id_].second[0];
+
+      LOG(INFO)<< "ID=" << pid << " "
+               << left << " "
+               << top << " "
+               << width << " "
+               << height << " " ;
+      LOG(INFO)<< "ID=" << pid << " "
+               << i_left << " " 
                << i_top << " " 
                << i_width << " " 
                << i_height<< " "  
