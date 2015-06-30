@@ -40,7 +40,7 @@ layer {
     mean_value: 176
   }
   image_data_mult_label_param {
-    source: "models/yq_fkpat1/zeroed_files"
+    source: "models/yq_fkpat1/patches_test.txt"
     batch_size: 50
     shuffle: true
     use_bbox:true
