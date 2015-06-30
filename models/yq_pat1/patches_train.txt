@@ -126,7 +126,6 @@
 /images/fk3sets_all/msfs-1901-green-monteil-munero-38-400x400-imaduwdb6dvkzz2m.jpeg 0.292988379397 0.4075 0.356783919598 0.1975 2171 0
 /images/fk3sets_all/hlsh007716-highlander-m-400x400-imadx93ufqhpnp9v.jpeg 0.503963977833 0.385 0.28078817734 0.1775 3007 1
 /images/fk3sets_all/245365657red-ruggers-m-400x400-imadn2d7jqpzhfse.jpeg 0.286030375874 0.5425 0.311188811189 0.2075 2765 1
-/images/fk3sets_all/croton-ssindigo-pepe-m-400x400-imadtssesdaqutw7.jpeg 0.341974431818 0.3325 0.367132867133 0.3175 3825 2
 /images/fk3sets_all/rocco-13150-crocodile-s-400x400-imadn2cy9rcagzbb.jpeg 0.436380026224 0.5825 0.22027972028 0.1625 2990 1
 /images/fk3sets_all/gs-168-925-ivoc-m-400x400-imae4q5wxvupvupg.jpeg 0.550539626289 0.5825 0.5 0.2175 874 4
 /images/fk3sets_all/glory-ssindigo-pepe-m-400x400-imadsa7anyfzggkw.jpeg 0.293023382867 0.445 0.384615384615 0.24 4863 2
