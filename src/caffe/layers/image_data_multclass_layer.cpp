@@ -268,6 +268,8 @@ void ImageDataMultLabelLayer<Dtype>::InternalThreadEntry() {
       i_width  = cv_img.rows * width;
       i_height = cv_img.cols * height;
 
+      LOG(INFO)<<i_left << i_top << i_width << i_height << cv_img.rows << cv_img.cols;
+
       // 2.4 crop bounding box
       cv::Mat img_bbox;
       cv::Rect roi(i_left, i_top, i_width, i_height);
