@@ -263,10 +263,10 @@ void ImageDataMultLabelLayer<Dtype>::InternalThreadEntry() {
 
       // 2.3 compute integer bbox coordinates
       int i_left, i_top, i_width, i_height;
-      i_left = cv_img.rows * left;
-      i_top  = cv_img.cols * top;
-      i_width  = cv_img.rows * width;
-      i_height = cv_img.cols * height;
+      i_left = cv_img.cols * left;
+      i_top  = cv_img.rows * top;
+      i_width  = cv_img.cols * width;
+      i_height = cv_img.rows * height;
 
       LOG(INFO)<<i_left << " " 
                << i_top << " " 
