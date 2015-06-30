@@ -281,8 +281,9 @@ void ImageDataMultLabelLayer<Dtype>::InternalThreadEntry() {
       i_width  = cv_img.cols * width;
       i_height = cv_img.rows * height;
 
-      int pid = lines_[lines_id_].second[0];
 
+      /*
+      int pid = lines_[lines_id_].second[0];
       LOG(INFO)<< "ID=" << pid << " "
                << left << " "
                << top << " "
@@ -295,6 +296,7 @@ void ImageDataMultLabelLayer<Dtype>::InternalThreadEntry() {
                << i_height<< " "  
                << cv_img.rows<< " "  
                << cv_img.cols;
+               */
 
       // 2.4 crop bounding box
       cv::Mat img_bbox;
@@ -335,7 +337,7 @@ void ImageDataMultLabelLayer<Dtype>::InternalThreadEntry() {
     }
   }
   // FIXME hack to get first batch of resized jpgs
-  CHECK(false);
+  // CHECK(false);
   batch_timer.Stop();
   DLOG(INFO) << "Prefetch batch: " << batch_timer.MilliSeconds() << " ms.";
   DLOG(INFO) << "     Read time: " << read_time / 1000 << " ms.";
