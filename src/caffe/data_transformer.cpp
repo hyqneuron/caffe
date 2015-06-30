@@ -244,6 +244,9 @@ cv::Mat DataTransformer<Dtype>::ResizePreservingAspectRatio(
 template<typename Dtype>
 void DataTransformer<Dtype>::Transform(const cv::Mat& cv_img,
                                        Blob<Dtype>* transformed_blob) {
+  // 1. resize preserving aspect ratio (if enabled)
+  // 2. crop (if enabled)
+  // 3. mean subtraction and scaling
   const int img_channels = cv_img.channels();
   int img_height = cv_img.rows;
   int img_width = cv_img.cols;
@@ -280,7 +283,7 @@ void DataTransformer<Dtype>::Transform(const cv::Mat& cv_img,
   }
 
 
-  // resize preserving aspect ratio first before we do cropping
+  // 1. resize preserving aspect ratio 
   cv::Mat cv_scaled_img = cv_img;
   if(param_.resize_preserving_aspect_ratio()){
     // if resize_size is not specified, we default to adding 20 pixels around crop
@@ -292,7 +295,7 @@ void DataTransformer<Dtype>::Transform(const cv::Mat& cv_img,
     CHECK(cv_scaled_img.data);
   }
 
-  // perform cropping
+  // 2. crop
   int h_off = 0;
   int w_off = 0;
   cv::Mat cv_cropped_img = cv_scaled_img;
@@ -336,7 +339,7 @@ void DataTransformer<Dtype>::Transform(const cv::Mat& cv_img,
       }
     }
   }
-  // perform mean subtraction and scaling
+  // 3. mean subtraction and scaling
   // pixel = (pixel - mean)*scale; for height, width, channel
   Dtype* transformed_data = transformed_blob->mutable_cpu_data();
   int top_index;
@@ -484,8 +487,6 @@ void DataTransformer<Dtype>::InitRand() {
 
 template <typename Dtype>
 int DataTransformer<Dtype>::Rand(int n) {
-  if(!rng_)
-    InitRand();
   CHECK(rng_);
   CHECK_GT(n, 0);
   caffe::rng_t* rng =

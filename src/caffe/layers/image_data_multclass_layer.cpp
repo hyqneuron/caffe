@@ -1,4 +1,5 @@
 #include <opencv2/core/core.hpp>
+#include "opencv2/opencv.hpp"
 
 #include <fstream>  // NOLINT(readability/streams)
 #include <iostream>  // NOLINT(readability/streams)
@@ -50,6 +51,17 @@ void ImageDataMultLabelLayer<Dtype>::DataLayerSetUp(const vector<Blob<Dtype>*>& 
   while (infile >> filename ) {
     vector<int> labels;
     labels.resize(num_labels_);
+    // if using bounding box, first 4 numbers are bounding coordinates
+    // left,top,width,height
+    if(this->layer_param_.image_data_mult_label_param().use_bbox()){
+      float left,top,width,height;
+      infile >> left;
+      infile >> top;
+      infile >> width;
+      infile >> height;
+      bboxes_.push_back(std::make_tuple(left,top,width,height));
+    }
+    // now, the normal labels
     for(int label_id = 0; label_id<num_labels_; label_id++){
       int label;
       infile >> label;
@@ -221,6 +233,55 @@ void ImageDataMultLabelLayer<Dtype>::InternalThreadEntry() {
     CHECK(cv_img.data) << "Could not load " << lines_[lines_id_].first;
     read_time += timer.MicroSeconds();
     timer.Start();
+
+    // if using dynamic bounding box, get the crop first
+    if(this->layer_param_.image_data_mult_label_param().use_bbox()){
+      // if we're dealing with a bbox'ed image, here's what we do:
+      // 1. read in image (already done before)
+      // 2. crop to bounding box + 0.1
+      // 3. resize cropped region to 100x100
+      // 4. transformer crops again to 82x82
+      float left,top,width,height;
+      float right,bottom;
+      std::tuple<float,float,float,float> bbox = bboxes_[lines_id_];
+      // 2.1 making the bounding box 1.1 times its original size
+      width  = std::get<2>(bbox);
+      height = std::get<3>(bbox);
+      left = std::get<0>(bbox)-0.05*width;
+      top  = std::get<1>(bbox)-0.05*height;
+      width  += 0.1*width;
+      height += 0.1*height;
+      right = left + width;
+      bottom= top  + height;
+      // 2.2 correct bounding box if it is out-of-bounds
+      if(left<0) left = 0;
+      if(right>1)right= 1;
+      if(top<0) top=0;
+      if(bottom>1) bottom=1;
+      width = right-left;
+      height= bottom-top;
+
+      // 2.3 compute integer bbox coordinates
+      int i_left, i_top, i_width, i_height;
+      i_left = cv_img.rows * left;
+      i_top  = cv_img.cols * top;
+      i_width  = cv_img.rows * width;
+      i_height = cv_img.cols * height;
+
+      // 2.4 crop bounding box
+      cv::Mat img_bbox;
+      cv::Rect roi(i_left, i_top, i_width, i_height);
+      img_bbox = cv_img(roi);
+
+      // 3. resize to 100x100
+      cv::Mat img_resized;
+      int resized_size = 100; //TODO use variable size
+      cv::resize(img_bbox, img_resized, cv::Size(resized_size, resized_size)); 
+
+      cv_img = img_resized;
+      // we assume lines_ contain [(pid, class)]
+      cv::imwrite(std::to_string(lines_[lines_id_].second[0])+".jpg", cv_img);
+    }
     // Apply transformations (mirror, crop...) to the image
     int offset = this->prefetch_data_.offset(item_id);
     this->transformed_data_.set_cpu_data(prefetch_data + offset);
@@ -245,6 +306,8 @@ void ImageDataMultLabelLayer<Dtype>::InternalThreadEntry() {
       }
     }
   }
+  // FIXME hack to get first batch of resized jpgs
+  CHECK(false);
   batch_timer.Stop();
   DLOG(INFO) << "Prefetch batch: " << batch_timer.MilliSeconds() << " ms.";
   DLOG(INFO) << "     Read time: " << read_time / 1000 << " ms.";

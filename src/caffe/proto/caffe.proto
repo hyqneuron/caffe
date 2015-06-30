@@ -644,6 +644,9 @@ message ImageDataMultLabelParameter {
   repeated string label_name = 13;
   // prefix to image locations in source
   optional string image_location_prefix = 14;
+  // when use_bbox is true, the first 4 numbers on the line are bounding
+  // coordinates [left, top, width, height]
+  optional bool use_bbox = 15 [default = false];
 }
 // end HYQ
 

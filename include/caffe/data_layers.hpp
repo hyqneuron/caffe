@@ -280,6 +280,7 @@ class ImageDataMultLabelLayer : public BasePrefetchingDataLayer<Dtype> {
   virtual void InternalThreadEntry();
 
   vector<std::pair<std::string, vector<int> > > lines_;
+  vector<std::tuple<float,float,float,float> > bboxes_;
   int lines_id_;
   int num_labels_;
   vector<shared_ptr<Blob<Dtype> > > prefetch_labels_;
