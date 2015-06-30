@@ -282,8 +282,8 @@ void ImageDataMultLabelLayer<Dtype>::InternalThreadEntry() {
       i_height = cv_img.rows * height;
 
 
-      /*
       int pid = lines_[lines_id_].second[0];
+      /*
       LOG(INFO)<< "ID=" << pid << " "
                << left << " "
                << top << " "
@@ -297,6 +297,9 @@ void ImageDataMultLabelLayer<Dtype>::InternalThreadEntry() {
                << cv_img.rows<< " "  
                << cv_img.cols;
                */
+      if(i_width <10 || i_height < 10){
+        LOG(INFO) << "Small bounding box!: " << pid;
+      }
       CHECK_GT(i_width, 0);
       CHECK_GT(i_height, 0);
 
