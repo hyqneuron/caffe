@@ -297,6 +297,8 @@ void ImageDataMultLabelLayer<Dtype>::InternalThreadEntry() {
                << cv_img.rows<< " "  
                << cv_img.cols;
                */
+      CHECK_GT(i_width, 0);
+      CHECK_GT(i_height, 0);
 
       // 2.4 crop bounding box
       cv::Mat img_bbox;
