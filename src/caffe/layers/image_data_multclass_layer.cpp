@@ -81,6 +81,11 @@ void ImageDataMultLabelLayer<Dtype>::DataLayerSetUp(const vector<Blob<Dtype>*>& 
   LOG(INFO) << "Last sample being: " << lines_.back().first;
   for(int label_id = 0; label_id<num_labels_; label_id++)
     LOG(INFO) << "Label: " << lines_.back().second[label_id];
+  if(this->layer_param_.image_data_mult_label_param().use_bbox())
+    LOG(INFO) << "bbox: " << std::get<0>(bboxes_.back()) << " "
+                          << std::get<1>(bboxes_.back()) << " "
+                          << std::get<2>(bboxes_.back()) << " "
+                          << std::get<3>(bboxes_.back()) << " ";
 
   lines_id_ = 0;
   // Check if we would need to randomly skip a few data points
