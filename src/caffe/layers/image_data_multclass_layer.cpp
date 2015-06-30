@@ -138,9 +138,17 @@ void ImageDataMultLabelLayer<Dtype>::DataLayerSetUp(const vector<Blob<Dtype>*>& 
 
 template <typename Dtype>
 void ImageDataMultLabelLayer<Dtype>::ShuffleImages() {
+
+  auto seed = unsigned ( std::time(0) );
+  std::srand ( seed );
+  std::random_shuffle ( lines_.begin(), lines_.end() );
+  std::srand ( seed );
+  std::random_shuffle ( bboxes_.begin(), bboxes_.end() );
+  /*
   caffe::rng_t* prefetch_rng =
       static_cast<caffe::rng_t*>(prefetch_rng_->generator());
   shuffle(lines_.begin(), lines_.end(), prefetch_rng);
+  */
 }
 
 // HYQ adapted from BasePrefetchingDataLayer
