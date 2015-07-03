@@ -336,7 +336,8 @@ void ImageDataMultLabelLayer<Dtype>::InternalThreadEntry() {
       cv_img = img_resized;
       // we assume lines_ contain [(pid, class)]
       // KKK
-      cv::imwrite(std::to_string(lines_[lines_id_].second[0])+".jpg", cv_img);
+      if(this->layer_param_.phase()==TRAIN)
+        cv::imwrite(std::to_string(lines_[lines_id_].second[0])+".jpg", cv_img);
     }
     // Apply transformations (mirror, crop...) to the image
     int offset = this->prefetch_data_.offset(item_id);
