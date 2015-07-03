@@ -336,8 +336,8 @@ void ImageDataMultLabelLayer<Dtype>::InternalThreadEntry() {
       cv_img = img_resized;
       // we assume lines_ contain [(pid, class)]
       // KKK
-      if(this->layer_param_.phase()==TRAIN)
-        cv::imwrite(std::to_string(lines_[lines_id_].second[0])+".jpg", cv_img);
+      // if(this->layer_param_.phase()==TRAIN)
+      //  cv::imwrite(std::to_string(lines_[lines_id_].second[0])+".jpg", cv_img);
     }
     // Apply transformations (mirror, crop...) to the image
     int offset = this->prefetch_data_.offset(item_id);
@@ -365,7 +365,7 @@ void ImageDataMultLabelLayer<Dtype>::InternalThreadEntry() {
   }
   // FIXME hack to get first batch of resized jpgs
   // KKK
-  CHECK(false);
+  // CHECK(false);
   batch_timer.Stop();
   DLOG(INFO) << "Prefetch batch: " << batch_timer.MilliSeconds() << " ms.";
   DLOG(INFO) << "     Read time: " << read_time / 1000 << " ms.";
