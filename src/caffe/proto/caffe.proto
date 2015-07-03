@@ -646,9 +646,12 @@ message ImageDataMultLabelParameter {
   optional string image_location_prefix = 14;
   // when use_bbox is true, the first 4 numbers on the line are bounding
   // coordinates [left, top, width, height]
+  // when we set use_bbox_rotate to true as well, we randomly rotate the bbox
+  // by [-45,+45) degrees
   optional bool use_bbox = 15 [default = false];
+  optional bool use_bbox_rotate = 16 [default = false];
   // use hsv instead of rgb
-  optional bool use_hsv = 16 [default = false];
+  optional bool use_hsv = 17 [default = false];
 }
 // end HYQ
 

@@ -246,11 +246,12 @@ void ImageDataMultLabelLayer<Dtype>::InternalThreadEntry() {
     CHECK_GT(lines_size, lines_id_);
     cv::Mat cv_img = ReadImageToCVMat(root_folder + lines_[lines_id_].first,
         new_height, new_width, is_color);
-    if(this->layer_param_.image_data_mult_label_param().use_hsv())
-        cv::cvtColor(cv_img, cv_img, CV_BGR2HSV);
     CHECK(cv_img.data) << "Could not load " << lines_[lines_id_].first;
     read_time += timer.MicroSeconds();
     timer.Start();
+    // if using hsv channels instead of rgb/gbr
+    if(this->layer_param_.image_data_mult_label_param().use_hsv())
+        cv::cvtColor(cv_img, cv_img, CV_BGR2HSV);
 
     // if using dynamic bounding box, get the crop first
     if(this->layer_param_.image_data_mult_label_param().use_bbox()){
@@ -288,20 +289,6 @@ void ImageDataMultLabelLayer<Dtype>::InternalThreadEntry() {
 
 
       int pid = lines_[lines_id_].second[0];
-      /*
-      LOG(INFO)<< "ID=" << pid << " "
-               << left << " "
-               << top << " "
-               << width << " "
-               << height << " " ;
-      LOG(INFO)<< "ID=" << pid << " "
-               << i_left << " " 
-               << i_top << " " 
-               << i_width << " " 
-               << i_height<< " "  
-               << cv_img.rows<< " "  
-               << cv_img.cols;
-               */
       if(i_width <10 || i_height < 10){
         LOG(INFO) << "Small bounding box!: " << pid;
       }
@@ -310,8 +297,30 @@ void ImageDataMultLabelLayer<Dtype>::InternalThreadEntry() {
 
       // 2.4 crop bounding box
       cv::Mat img_bbox;
-      cv::Rect roi(i_left, i_top, i_width, i_height);
-      img_bbox = cv_img(roi);
+      // if using random rotation
+      if(this->layer_param_.image_data_mult_label_param().use_bbox_rotate()){
+        int angle = rand()%60-30;
+        cv::RotatedRect rrect = RotatedRect(
+                Point2f(i_left + i_width/2, i_top + i_height/2),
+                Size2f(i_width, i_height), 
+                angle
+            );
+        // get the matrix that controls the affine rotation
+        cv::Mat rMat = getRotationMatrix2D(rrect.center, angle, 1.0);
+        cv::Mat rotated;
+        cv::Mat cropped;
+        // rotate original image
+        warpAffine(cv_img, rotated, rMat, cv_img.size(), INTER_CUBIC);
+        // crop the rotated image
+        getRectSubPix(rotated, rrect.size, rrect.center, img_bbox);
+        // do a tranpose on the cropped region
+        if(angle%2==0)
+          transpose(img_bbox, img_bbox);
+      }
+      else{
+        cv::Rect roi(i_left, i_top, i_width, i_height);
+        img_bbox = cv_img(roi);
+      }
 
       // 3. resize to 100x100
       cv::Mat img_resized;
@@ -320,7 +329,8 @@ void ImageDataMultLabelLayer<Dtype>::InternalThreadEntry() {
 
       cv_img = img_resized;
       // we assume lines_ contain [(pid, class)]
-      //cv::imwrite(std::to_string(lines_[lines_id_].second[0])+".jpg", cv_img);
+      // KKK
+      cv::imwrite(std::to_string(lines_[lines_id_].second[0])+".jpg", cv_img);
     }
     // Apply transformations (mirror, crop...) to the image
     int offset = this->prefetch_data_.offset(item_id);
@@ -347,7 +357,8 @@ void ImageDataMultLabelLayer<Dtype>::InternalThreadEntry() {
     }
   }
   // FIXME hack to get first batch of resized jpgs
-  // CHECK(false);
+  // KKK
+  CHECK(false);
   batch_timer.Stop();
   DLOG(INFO) << "Prefetch batch: " << batch_timer.MilliSeconds() << " ms.";
   DLOG(INFO) << "     Read time: " << read_time / 1000 << " ms.";
