@@ -2265,7 +2265,6 @@
 /images/fk3sets_all/p30501274788347candy-orange-people-400x400-imadtgmeyuhqjfwy.jpeg 0.282533872378 0.4175 0.272727272727 0.205 4106 2
 /images/fk3sets_all/c-580010-black-carve-xl-400x400-imaeyeh9shfbsmcr.jpeg 0.244998346561 0.38 0.555555555556 0.2675 4209 2
 /images/fk3sets_all/croton-ssindigo-pepe-m-400x400-imadtssesdaqutw7.jpeg 0.341974431818 0.3325 0.367132867133 0.3175 3825 2
-/images/fk3sets_all/croton-ssindigo-pepe-m-400x400-imadtssesdaqutw7.jpeg 0.712603802448 0.645 0.0034965034965 0.0025 3826 2
 /images/fk3sets_all/monalisablu-t2wear-m-400x400-imads8n4ze65zevz.jpeg 0.343327030255 0.3725 0.292993630573 0.2075 3911 2
 /images/fk3sets_all/pkr1301-denim-arizona-pique-republic-xl-400x400-imadws7kfvzugszc.jpeg 0.369348958333 0.32 0.296666666667 0.22 4406 2
 /images/fk3sets_all/beards01-sayitloud-s-400x400-imadsmckhkerxxny.jpeg 0.283001771907 0.2175 0.435567010309 0.32 4210 2
