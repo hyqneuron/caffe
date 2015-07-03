@@ -647,6 +647,8 @@ message ImageDataMultLabelParameter {
   // when use_bbox is true, the first 4 numbers on the line are bounding
   // coordinates [left, top, width, height]
   optional bool use_bbox = 15 [default = false];
+  // use hsv instead of rgb
+  optional bool use_hsv = 16 [default = false];
 }
 // end HYQ
 

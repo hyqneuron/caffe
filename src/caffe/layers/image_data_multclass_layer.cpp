@@ -1,5 +1,7 @@
 #include <opencv2/core/core.hpp>
 #include "opencv2/opencv.hpp"
+#include "opencv2/highgui/highgui.hpp"
+#include "opencv2/imgproc/imgproc.hpp"
 
 #include <fstream>  // NOLINT(readability/streams)
 #include <iostream>  // NOLINT(readability/streams)
@@ -14,6 +16,7 @@
 #include "caffe/util/math_functions.hpp"
 #include "caffe/util/rng.hpp"
 
+using namespace cv;
 namespace caffe {
 
 
@@ -243,6 +246,8 @@ void ImageDataMultLabelLayer<Dtype>::InternalThreadEntry() {
     CHECK_GT(lines_size, lines_id_);
     cv::Mat cv_img = ReadImageToCVMat(root_folder + lines_[lines_id_].first,
         new_height, new_width, is_color);
+    if(this->layer_param_.image_data_mult_label_param().use_hsv())
+        cv::cvtColor(cv_img, cv_img, CV_BGR2HSV);
     CHECK(cv_img.data) << "Could not load " << lines_[lines_id_].first;
     read_time += timer.MicroSeconds();
     timer.Start();
