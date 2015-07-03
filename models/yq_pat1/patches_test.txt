@@ -349,9 +349,6 @@
 /images/g3c_image_repo/pattern/spot/tumblr_lum49iYnUU1r4reayo1_500.jpg 0.616799304107 0.580310880829 0.183879093199 0.121761658031 5907 3
 /images/g3c_image_repo/pattern/spot/tumblr_lum49iYnUU1r4reayo1_500.jpg 0.558864795291 0.60103626943 0.224181360202 0.246113989637 5908 3
 /images/g3c_image_repo/pattern/spot/tumblr_lum49iYnUU1r4reayo1_500.jpg 0.168436583704 0.256476683938 0.088161209068 0.0984455958549 5909 3
-/images/g3c_image_repo/pattern/spot/spot (35).jpeg 0.434687758937 0.272020725389 0.292929292929 0.163212435233 5910 3
-/images/g3c_image_repo/pattern/spot/spot (35).jpeg 0.394283718533 0.743523316062 0.353535353535 0.173575129534 5911 3
-/images/g3c_image_repo/pattern/spot/spot (35).jpeg 0.36398068823 0.39378238342 0.338383838384 0.163212435233 5912 3
 /images/g3c_image_repo/pattern/spot/Black-Polka-Dot-Halter-Dress.jpg 0.26543889539 0.575129533679 0.206896551724 0.145077720207 5913 3
 /images/g3c_image_repo/pattern/spot/Black-Polka-Dot-Halter-Dress.jpg 0.420611309183 0.160621761658 0.2 0.147668393782 5914 3
 /images/g3c_image_repo/pattern/spot/Black-Polka-Dot-Halter-Dress.jpg 0.603369929873 0.569948186528 0.172413793103 0.137305699482 5915 3
@@ -403,8 +400,6 @@
 /images/g3c_image_repo/pattern/spot/polka-dot-short-sleeves-v-neck-dress-size-m-jenny0811-1207-10-jenny0811%25408.jpg 0.42698865618 0.360103626943 0.220408163265 0.152849740933 5961 3
 /images/g3c_image_repo/pattern/spot/polka-dot-short-sleeves-v-neck-dress-size-m-jenny0811-1207-10-jenny0811%25408.jpg 0.463723350058 0.730569948187 0.281632653061 0.168393782383 5962 3
 /images/g3c_image_repo/pattern/spot/polka-dot-short-sleeves-v-neck-dress-size-m-jenny0811-1207-10-jenny0811%25408.jpg 0.37392743169 0.518134715026 0.302040816327 0.204663212435 5963 3
-/images/g3c_image_repo/pattern/spot/spot (74).jpeg 0.216917318064 0.233160621762 0.157342657343 0.134715025907 5964 3
-/images/g3c_image_repo/pattern/spot/spot (74).jpeg 0.332301933449 0.181347150259 0.230769230769 0.155440414508 5965 3
 /images/g3c_image_repo/pattern/spot/BooHoo-Heide-Black-Polka-Dot-Scarf.jpg 0.332933566914 0.567357512953 0.249027237354 0.178756476684 5966 3
 /images/g3c_image_repo/pattern/spot/BooHoo-Heide-Black-Polka-Dot-Scarf.jpg 0.620871310104 0.593264248705 0.237354085603 0.163212435233 5967 3
 /images/g3c_image_repo/pattern/spot/BooHoo-Heide-Black-Polka-Dot-Scarf.jpg 0.325151465746 0.365284974093 0.252918287938 0.168393782383 5968 3
@@ -413,7 +408,6 @@
 /images/g3c_image_repo/pattern/spot/ms0sEpTKr9EPyoiv2UtC8LA.jpg 0.646691962348 0.577777777778 0.235555555556 0.231111111111 5971 3
 /images/g3c_image_repo/pattern/spot/ms0sEpTKr9EPyoiv2UtC8LA.jpg 0.624469740126 0.191111111111 0.217777777778 0.208888888889 5972 3
 /images/g3c_image_repo/pattern/spot/ms0sEpTKr9EPyoiv2UtC8LA.jpg 0.131136406793 0.133333333333 0.28 0.262222222222 5973 3
-/images/g3c_image_repo/pattern/spot/spot (34).jpeg 0.320151299787 0.251295336788 0.423312883436 0.155440414508 5974 3
 /images/g3c_image_repo/pattern/spot/stock-photo-pin-up-beautiful-girl-in-classic-fashion-polka-dots-dress-posing-grunge-retro-style-117804505.jpg 0.436501076551 0.30829015544 0.207317073171 0.126943005181 5975 3
 /images/g3c_image_repo/pattern/spot/stock-photo-pin-up-beautiful-girl-in-classic-fashion-polka-dots-dress-posing-grunge-retro-style-117804505.jpg 0.52186693021 0.233160621762 0.264227642276 0.137305699482 5976 3
 /images/g3c_image_repo/pattern/spot/stock-photo-pin-up-beautiful-girl-in-classic-fashion-polka-dots-dress-posing-grunge-retro-style-117804505.jpg 0.599102702567 0.645077720207 0.264227642276 0.152849740933 5977 3
@@ -460,11 +454,6 @@
 /images/g3c_image_repo/pattern/spot/ka-dot-backjpg94.jpg 0.193607991536 0.632124352332 0.413333333333 0.189119170984 6018 3
 /images/g3c_image_repo/pattern/spot/ka-dot-backjpg94.jpg 0.373607991536 0.748704663212 0.54 0.19170984456 6019 3
 /images/g3c_image_repo/pattern/spot/ka-dot-backjpg94.jpg 0.0802746582031 0.287564766839 0.466666666667 0.168393782383 6020 3
-/images/g3c_image_repo/pattern/spot/spot (76).jpeg 0.414252239725 0.217616580311 0.453416149068 0.152849740933 6021 3
-/images/g3c_image_repo/pattern/spot/spot (76).jpeg 0.370773978855 0.349740932642 0.242236024845 0.0932642487047 6022 3
-/images/g3c_image_repo/pattern/spot/spot (76).jpeg 0.743444786309 0.39896373057 0.217391304348 0.132124352332 6023 3
-/images/g3c_image_repo/pattern/spot/spot (76).jpeg 0.588165283203 0.582901554404 0.385093167702 0.165803108808 6024 3
-/images/g3c_image_repo/pattern/spot/spot (76).jpeg 0.221705655874 0.414507772021 0.341614906832 0.165803108808 6025 3
 /images/g3c_image_repo/pattern/spot/polka_dots_blue_dress_4.jpg 0.354901950251 0.448186528497 0.11879049676 0.145077720207 6026 3
 /images/g3c_image_repo/pattern/spot/polka_dots_blue_dress_4.jpg 0.428336075521 0.673575129534 0.103671706263 0.147668393782 6027 3
 /images/g3c_image_repo/pattern/spot/polka_dots_blue_dress_4.jpg 0.307385751547 0.375647668394 0.0777537796976 0.103626943005 6028 3
