@@ -21,6 +21,7 @@ layer {
     batch_size: 50
     shuffle: true
     use_bbox:true
+    use_bbox_rotate: true
   }
 }
 layer {

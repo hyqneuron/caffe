@@ -73,6 +73,12 @@ void ImageDataMultLabelLayer<Dtype>::DataLayerSetUp(const vector<Blob<Dtype>*>& 
     lines_.push_back(std::make_pair(prefix+filename, labels));
   }
 
+  // print some data modes
+  if(this->layer_param_.image_data_mult_label_param().use_bbox()){
+    LOG(INFO) << "Using bbox";
+    if(this->layer_param_.image_data_mult_label_param().use_bbox_rotate())
+      LOG(INFO) << "Using bbox_rotate";
+  }
   if (this->layer_param_.image_data_mult_label_param().shuffle()) {
     // randomly shuffle data
     LOG(INFO) << "Shuffling data";
